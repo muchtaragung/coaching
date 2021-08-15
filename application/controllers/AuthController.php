@@ -50,6 +50,7 @@ class AuthController extends CI_Controller {
             
             $data_session = array(
                 'login'    => 'student',
+                'id'       => $auth['id'],
                 'name'     => $auth['name'],
                 'email'    => $auth['email'],
                 'password' => $auth['password']

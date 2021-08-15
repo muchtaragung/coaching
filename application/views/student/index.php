@@ -126,8 +126,8 @@
                 <form action="<?= site_url('student/addgoal') ?>" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="name">Goals</label>
-                            <input type="text" name="name" id="name" class="form-control">
+                            <label for="goal">Goals</label>
+                            <input type="text" name="goal" id="goal" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="due_date">due date</label>

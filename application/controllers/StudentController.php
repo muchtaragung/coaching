@@ -20,6 +20,16 @@ class StudentController extends CI_Controller {
 		$this->load->view('student/index', $data, FALSE);
 	}
 
+	public function addgoal()
+	{
+		$goal['goal'] = $this->input->post('goal');
+		$goal['due_date'] = $this->input->post('due_date');
+		$goal['students_id'] = $this->input->post('students_id');
+
+		$this->StudentModel->storeGoal($goal);
+		redirect('student');
+	}
+
 }
 
 /* End of file StudentController.php */
