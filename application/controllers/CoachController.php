@@ -8,12 +8,24 @@ class CoachController extends CI_Controller {
         parent::__construct();
         $this->load->model('CoachModel');
     }
+
     public function index()
     {
         $data['page_name'] = "Dashboard Coach";
         $data['students'] = $this->CoachModel->allStudents();
-        
+        $data['coaches'] = $this->CoachModel->getCoaches();
         $this->load->view('coach/index', $data, FALSE);
+    }
+
+    public function addStudent()
+    {
+        $student['name'] = $this->input->post('name');
+        $student['email'] = $this->input->post('email');
+        $student['password'] = $this->input->post('password');
+        $student['coach_id'] = $this->input->post('coach');
+
+        $this->CoachModel->storeStudent($student);
+        redirect('coach');
     }
 
 }
