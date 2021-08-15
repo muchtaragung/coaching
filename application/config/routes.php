@@ -53,5 +53,11 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+// auth routes
+$route['login'] = 'AuthController';
+$route['auth'] = 'AuthController/auth';
+$route['logout'] = 'AuthController/logout';
+
+// coach routes
 $route['coach'] = 'CoachController';
 $route['coach/addstudent'] = 'CoachController/addStudent';

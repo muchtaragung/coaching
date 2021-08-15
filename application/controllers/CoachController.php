@@ -7,6 +7,10 @@ class CoachController extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('CoachModel');
+        if ($this->session->userdata('login') != 'coach') {
+            echo '<script>alert("Silahkan Login Untuk Mengakses Halaman ini")</script>';
+            redirect('login','refresh');
+        }
     }
 
     public function index()
