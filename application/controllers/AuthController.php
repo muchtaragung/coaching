@@ -46,7 +46,7 @@ class AuthController extends CI_Controller {
         }
         elseif($studentAuth > 0)
         {
-            $auth = $this->AuthModel->get_masyarakat($where)->row_array();
+            $auth = $this->AuthModel->getStudent($where)->row_array();
             
             $data_session = array(
                 'login'    => 'student',
