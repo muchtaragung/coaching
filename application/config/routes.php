@@ -61,3 +61,6 @@ $route['logout'] = 'AuthController/logout';
 // coach routes
 $route['coach'] = 'CoachController';
 $route['coach/addstudent'] = 'CoachController/addStudent';
+
+// student routes
+$route['student'] = 'StudentController';
