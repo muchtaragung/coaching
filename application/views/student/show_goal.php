@@ -33,10 +33,40 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"><?php $goal->goal ?></h6>
+                            <h6 class="m-0 font-weight-bold text-primary"><?= $goal->goal ?></h6>
                             <a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addActionPlan">Tambah Action Plan</a>
                         </div>
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <?php if (!isset($criteria)): ?>
+                                        <form action="<?= site_url('student/addcriteria') ?>" method="POST">
+                                            <input type="hidden" name="goals_id" id="goals_id" value="<?= $goal->id ?>" class="form-control">
+                                            <div class="row form-group">
+                                                <div class="col-lg-10">
+                                                    <label for="criteria">Success Criteria</label>
+                                                    <input type="text" name="criteria" id="" class="form-control" placeholder="success criteria">
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <button type="submit" class="btn btn-primary form-control">submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    <?php else: ?>
+                                        <form action="<?= site_url('student/addCriteria') ?>">
+                                            <div class="row form-group">
+                                                <div class="col-lg-10">
+                                                    <label for="criteria">Success Criteria</label>
+                                                    <input type="text" name="criteria" id="" class="form-control" value="<?= $criteria->criteria ?>" readonly>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <button type="submit" class="btn btn-primary form-control" disabled>submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    <?php endif ?>
+                                </div>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>

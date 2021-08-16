@@ -31,13 +31,20 @@ class StudentController extends CI_Controller {
 		redirect('student');
 	}
 
-	public function actionPlan($id)
+	public function showGoal($id)
 	{
-		$data['page_name'] = 'Action Plan';
+		$data['page_name'] = 'Your Goals';
 		$data['goal'] = $this->StudentModel->goalByID($id);
 		$data['actions'] = $this->StudentModel->actionPlanByGoalID($id);
 
-		$this->load->view('student/new_action_plan', $data, FALSE);
+		$criteriaCheck = $this->StudentModel->checkCriteria($id);
+
+		if($criteriaCheck > 0)
+		{
+			$data['criteria'] = $this->StudentModel->getCriteria($id);
+		}
+
+		$this->load->view('student/show_goal', $data, FALSE);
 	}
 
 	public function addActionPlan()
@@ -47,7 +54,16 @@ class StudentController extends CI_Controller {
 		$action_plan['goals_id'] = $this->input->post('goals_id');
 
 		$this->StudentModel->storeAction($action_plan);
-		redirect('student/actions/'.$action_plan['goals_id']);
+		redirect('student/goal/'.$action_plan['goals_id']);
+	}
+
+	public function addCriteria()
+	{
+		$criteria['criteria'] = $this->input->post('criteria');
+		$criteria['goals_id'] = $this->input->post('goals_id');
+	
+		$this->StudentModel->storeCriteria($criteria);
+		redirect('student/goal/'.$criteria['goals_id']);
 	}
 }
 
