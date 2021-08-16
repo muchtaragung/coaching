@@ -65,3 +65,6 @@ $route['coach/addstudent'] = 'CoachController/addStudent';
 // student routes
 $route['student'] = 'StudentController';
 $route['student/addgoal'] = 'StudentController/addGoal';
+$route['student/goal/(:any)'] = 'StudentController/showGoal/$1';
+$route['student/actions/(:any)'] = 'StudentController/actionPlan/$1';
+$route['student/addaction'] = 'StudentController/addActionPlan';

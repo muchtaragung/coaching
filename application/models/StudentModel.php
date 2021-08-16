@@ -13,6 +13,22 @@ class StudentModel extends CI_Model {
 		$this->db->insert('goals', $goal);
 	}
 
+	public function goalByID($id)
+	{
+		return $this->db->where('id', $id)->get('goals')->row();
+
+	}
+
+	public function actionPlanByGoalID($id)
+	{
+		return $this->db->where('goals_id', $id)->get('action_plan')->result();
+	}
+
+	public function storeAction($action_plan)
+	{
+		$this->db->insert('action_plan', $action_plan);
+	}
+
 }
 
 /* End of file StudentModel.php */

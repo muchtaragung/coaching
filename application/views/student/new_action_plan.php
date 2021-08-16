@@ -33,8 +33,8 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Table Goals</h6>
-                            <a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addGoal">Tambah Goals</a>
+                            <h6 class="m-0 font-weight-bold text-primary"><?php $goal->goal ?></h6>
+                            <a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addActionPlan">Tambah Action Plan</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -42,8 +42,6 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Goals</th>
-                                            <th>Due Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -51,19 +49,13 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Goals</th>
-                                            <th>Due Date</th>
-                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <?php $i=1; foreach ($goals as $goal): ?>
+                                        <?php $i=1; foreach ($actions as $action): ?>
                                             <tr>
                                                 <td><?php echo $i++ ?></td>
-                                                <td> <?= $goal->goal ?> </td>
-                                                <td> <?= $goal->due_date ?> </td>
-                                                <td>
-                                                    <a href="<?= site_url('student/actions/').$goal->id ?>" class="btn btn-info">Tambah Action Plan</a>
-                                                </td>
+                                                <td> <?= $action->action ?> </td>
                                             </tr>       
                                         <?php endforeach ?>
                                     </tbody>
@@ -113,7 +105,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="addGoal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="addActionPlan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -123,17 +115,16 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form action="<?= site_url('student/addgoal') ?>" method="POST">
+                <form action="<?= site_url('student/addaction') ?>" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="goal">Goals</label>
-                            <input type="text" name="goal" id="goal" class="form-control">
+                            <label for="action">Action Plan</label>
+                            <input type="text" name="action" id="action" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="due_date">due date</label>
-                            <input type="date" name="due_date" id="due_date" class="form-control">
+                            <input type="hidden" name="goals_id" id="goals_id" value="<?= $goal->id ?>" class="form-control">
                         </div>
-                        <input type="hidden" name="students_id" value="<?= $this->session->userdata('id'); ?>" >
+                        <input type="hidden" name="students_id"  >
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="submit">Submit</button>

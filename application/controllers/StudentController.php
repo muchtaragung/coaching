@@ -22,6 +22,7 @@ class StudentController extends CI_Controller {
 
 	public function addgoal()
 	{
+		$data['page_name'] = 'Goal Baru';
 		$goal['goal'] = $this->input->post('goal');
 		$goal['due_date'] = $this->input->post('due_date');
 		$goal['students_id'] = $this->input->post('students_id');
@@ -30,6 +31,24 @@ class StudentController extends CI_Controller {
 		redirect('student');
 	}
 
+	public function actionPlan($id)
+	{
+		$data['page_name'] = 'Action Plan';
+		$data['goal'] = $this->StudentModel->goalByID($id);
+		$data['actions'] = $this->StudentModel->actionPlanByGoalID($id);
+
+		$this->load->view('student/new_action_plan', $data, FALSE);
+	}
+
+	public function addActionPlan()
+	{
+		$action_plan['action'] = $this->input->post('action');
+		$action_plan['nilai']  = 0;
+		$action_plan['goals_id'] = $this->input->post('goals_id');
+
+		$this->StudentModel->storeAction($action_plan);
+		redirect('student/actions/'.$action_plan['goals_id']);
+	}
 }
 
 /* End of file StudentController.php */
