@@ -50,7 +50,7 @@ class CoachController extends CI_Controller {
 		$sess['coach_id']    = $coachID;
 
 		$this->CoachModel->newSession($sess);
-		redirect('coach/student/sessions/'.$studentID);
+		redirect('coach/student/session/'.$studentID);
 	}
 
 }
