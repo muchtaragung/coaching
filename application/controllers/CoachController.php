@@ -16,41 +16,41 @@ class CoachController extends CI_Controller {
     public function index()
     {
         $data['page_name'] = "Dashboard Coach";
-        $data['students'] = $this->CoachModel->allStudents();
+        $data['coachee'] = $this->CoachModel->allCoachee();
         $data['coaches'] = $this->CoachModel->getCoaches();
         $this->load->view('coach/index', $data, FALSE);
     }
 
-    public function addStudent()
+    public function addCoachee()
     {
-        $student['name'] = $this->input->post('name');
-        $student['email'] = $this->input->post('email');
-        $student['password'] = $this->input->post('password');
-        $student['coach_id'] = $this->input->post('coach');
+        $coachee['name'] = $this->input->post('name');
+        $coachee['email'] = $this->input->post('email');
+        $coachee['password'] = $this->input->post('password');
+        $coachee['coach_id'] = $this->input->post('coach');
 
-        $this->CoachModel->storeStudent($student);
+        $this->CoachModel->storeCoachee($coachee);
         redirect('coach');
     }
 
-    public function showStudentSessions($studentID)
+    public function showCoacheeSessions($coacheeID)
     {
-        $data['sessions'] = $this->CoachModel->getStudentSession($studentID);
-		$data['page_name'] = "Student Session";
-		$data['student_id'] = $studentID;
-        $this->load->view('coach/student_sessions', $data, FALSE);
+        $data['sessions'] = $this->CoachModel->getCoacheeSession($coacheeID);
+		$data['page_name'] = "Coachee Session";
+		$data['coachee_id'] = $coacheeID;
+        $this->load->view('coach/coachee_sessions', $data, FALSE);
 	}
 
-	public function addSession($studentID)
+	public function addSession($coacheeID)
 	{
 		$coachID      = $this->session->userdata('id');
-		$totalSession = $this->CoachModel->getTotalSession($studentID,$coachID);
+		$totalSession = $this->CoachModel->getTotalSession($coacheeID,$coachID);
 
 		$sess['session']     = $totalSession + 1;
-		$sess['students_id'] = $studentID;
+		$sess['coachee_id'] = $coacheeID;
 		$sess['coach_id']    = $coachID;
 
 		$this->CoachModel->newSession($sess);
-		redirect('coach/student/session/'.$studentID);
+		redirect('coach/coachee/session/'.$coacheeID);
 	}
 
 }

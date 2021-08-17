@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <?php $this->load->view('student/layouts/head');?>
+    <?php $this->load->view('coachee/layouts/head');?>
 </head>
 
 <body id="page-top">
@@ -11,7 +11,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php $this->load->view('student/layouts/sidebar');?>
+        <?php $this->load->view('coachee/layouts/sidebar');?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -21,7 +21,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php $this->load->view('student/layouts/topbar.php');?>
+                <?php $this->load->view('coachee/layouts/topbar.php');?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -40,7 +40,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <?php if (!isset($criteria)): ?>
-                                        <form action="<?= site_url('student/addcriteria') ?>" method="POST">
+                                        <form action="<?= site_url('coachee/addcriteria') ?>" method="POST">
                                             <input type="hidden" name="goals_id" id="goals_id" value="<?= $goal->id ?>" class="form-control">
                                             <div class="row form-group">
                                                 <div class="col-lg-10">
@@ -53,7 +53,7 @@
                                             </div>
                                         </form>
                                     <?php else: ?>
-                                        <form action="<?= site_url('student/addCriteria') ?>">
+                                        <form action="<?= site_url('coachee/addCriteria') ?>">
                                             <div class="row form-group">
                                                 <div class="col-lg-10">
                                                     <label for="criteria">Success Criteria</label>
@@ -101,7 +101,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <?php $this->load->view('student/layouts/footer'); ?>
+            <?php $this->load->view('coachee/layouts/footer'); ?>
             <!-- End of Footer -->
 
         </div>
@@ -145,7 +145,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form action="<?= site_url('student/addaction') ?>" method="POST">
+                <form action="<?= site_url('coachee/addaction') ?>" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="action">Action Plan</label>
@@ -154,7 +154,7 @@
                         <div class="form-group">
                             <input type="hidden" name="goals_id" id="goals_id" value="<?= $goal->id ?>" class="form-control">
                         </div>
-                        <input type="hidden" name="students_id"  >
+                        <input type="hidden" name="coachee_id"  >
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="submit">Submit</button>
@@ -163,7 +163,7 @@
             </div>
         </div>
     </div>
-    <?php $this->load->view('student/layouts/script'); ?>
+    <?php $this->load->view('coachee/layouts/script'); ?>
 </body>
 
 </html>

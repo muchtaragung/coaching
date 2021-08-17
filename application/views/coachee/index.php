@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <?php $this->load->view('student/layouts/head');?>
+    <?php $this->load->view('coachee/layouts/head');?>
 </head>
 
 <body id="page-top">
@@ -11,7 +11,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php $this->load->view('student/layouts/sidebar');?>
+        <?php $this->load->view('coachee/layouts/sidebar');?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -21,7 +21,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php $this->load->view('student/layouts/topbar.php');?>
+                <?php $this->load->view('coachee/layouts/topbar.php');?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -62,7 +62,7 @@
                                                 <td> <?= $goal->goal ?> </td>
                                                 <td> <?= $goal->due_date ?> </td>
                                                 <td>
-                                                    <a href="<?= site_url('student/goal/').$goal->id ?>" class="btn btn-info">Lihat</a>
+                                                    <a href="<?= site_url('coachee/goal/').$goal->id ?>" class="btn btn-info">Lihat</a>
                                                 </td>
                                             </tr>       
                                         <?php endforeach ?>
@@ -79,7 +79,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <?php $this->load->view('student/layouts/footer'); ?>
+            <?php $this->load->view('coachee/layouts/footer'); ?>
             <!-- End of Footer -->
 
         </div>
@@ -123,7 +123,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form action="<?= site_url('student/addgoal') ?>" method="POST">
+                <form action="<?= site_url('coachee/addgoal') ?>" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="goal">Goals</label>
@@ -133,7 +133,7 @@
                             <label for="due_date">due date</label>
                             <input type="date" name="due_date" id="due_date" class="form-control">
                         </div>
-                        <input type="hidden" name="students_id" value="<?= $this->session->userdata('id'); ?>" >
+                        <input type="hidden" name="coachee_id" value="<?= $this->session->userdata('id'); ?>" >
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="submit">Submit</button>
@@ -142,7 +142,7 @@
             </div>
         </div>
     </div>
-    <?php $this->load->view('student/layouts/script'); ?>
+    <?php $this->load->view('coachee/layouts/script'); ?>
 </body>
 
 </html>

@@ -34,7 +34,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Table Peserta</h6>
-                            <a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addStudent">Tambah Peserta</a>
+                            <a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addCoachee">Tambah Peserta</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -54,13 +54,13 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <?php $i=1; foreach ($students as $student): ?>
+                                        <?php $i=1; foreach ($coachee as $coachee): ?>
                                             <tr>
                                                 <td><?php echo $i++ ?></td>
-                                                <td> <?= $student->name ?> </td>
+                                                <td> <?= $coachee->name ?> </td>
                                                 <td>
-                                                    <a href="<?= site_url('coach/student/').$student->id ?>" class="btn btn-info">Lihat Data</a>
-													<a href="<?= site_url('coach/student/session/').$student->id ?>" class="btn btn-info">Lihat Sesi</a>
+                                                    <a href="<?= site_url('coach/coachee/').$coachee->id ?>" class="btn btn-info">Lihat Data</a>
+													<a href="<?= site_url('coach/coachee/session/').$coachee->id ?>" class="btn btn-info">Lihat Sesi</a>
                                                 </td>
                                             </tr>       
                                         <?php endforeach ?>
@@ -111,7 +111,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="addStudent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="addCoachee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -121,7 +121,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form action="<?= site_url('coach/addstudent') ?>" method="POST">
+                <form action="<?= site_url('coach/addcoachee') ?>" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="name">nama</label>

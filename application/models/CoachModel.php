@@ -3,9 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class CoachModel extends CI_Model {
 
-	public function allStudents()
+	public function allCoachee()
 	{
-		return $this->db->get('students')->result();
+		return $this->db->get('coachee')->result();
 	}
 
 	public function getCoaches()
@@ -13,20 +13,20 @@ class CoachModel extends CI_Model {
 		return $this->db->get('coach')->result();
 	}	
 
-	public function storeStudent($student)
+	public function storeCoachee($coachee)
 	{
-		$this->db->insert('students', $student);
+		$this->db->insert('coachee', $coachee);
 	}
 
-	public function getStudentSession($studentID)
+	public function getCoacheeSession($coacheeID)
 	{
-		return $this->db->where('students_id', $studentID)->get('session')->result();
+		return $this->db->where('coachee_id', $coacheeID)->get('session')->result();
 	}
 
-	public function getTotalSession($studentID,$coachID)
+	public function getTotalSession($coacheeID,$coachID)
 	{
 		$where = array(
-			'students_id' => $studentID,
+			'coachee_id' => $coacheeID,
 			'coach_id' => $coachID
 		);
 

@@ -34,7 +34,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Session</h6>
-                            <a href="<?= site_url('coach/student/session/new/').$student_id?>" class="btn btn-primary float-right">Tambah Sesi</a>
+                            <a href="<?= site_url('coach/coachee/session/new/').$coachee_id?>" class="btn btn-primary float-right">Tambah Sesi</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -59,7 +59,7 @@
                                                 <td><?php echo $i++ ?></td>
                                                 <td> <?= 'Sesi Ke-'.$session->session ?> </td>
                                                 <td>
-                                                    <a href="<?= site_url('coach/student/').$session->students_id ?>" class="btn btn-info">Lihat Data</a>
+                                                    <a href="<?= site_url('coach/coachee/').$session->coachee_id ?>" class="btn btn-info">Lihat Data</a>
                                                 </td>
                                             </tr>       
                                         <?php endforeach ?>
@@ -110,7 +110,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="addStudent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="addCoachee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -120,7 +120,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form action="<?= site_url('coach/addstudent') ?>" method="POST">
+                <form action="<?= site_url('coach/addcoachee') ?>" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="name">nama</label>

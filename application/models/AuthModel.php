@@ -9,9 +9,9 @@ class AuthModel extends CI_Model {
         return $this->db->get_where('coach',$where);
     }
     
-    function getStudent($where)
+    function getCoachee($where)
     {
-        return $this->db->get_where('students',$where);
+        return $this->db->get_where('coachee',$where);
     }
 }
 

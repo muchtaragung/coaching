@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class StudentModel extends CI_Model {
+class CoacheeModel extends CI_Model {
 
 	public function allGoalsByID($id)
 	{
-		return $this->db->where('students_id', $id)->get('goals')->result();
+		return $this->db->where('coachee_id', $id)->get('goals')->result();
 	}
 
 	public function storeGoal($goal)
@@ -44,5 +44,5 @@ class StudentModel extends CI_Model {
 	}
 }
 
-/* End of file StudentModel.php */
-/* Location: ./application/models/StudentModel.php */
+/* End of file CoacheeModel.php */
+/* Location: ./application/models/CoacheeModel.php */

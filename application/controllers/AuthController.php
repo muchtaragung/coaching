@@ -26,7 +26,7 @@ class AuthController extends CI_Controller {
         );
 
         $coachAuth      = $this->AuthModel->getCoach($where)->num_rows();
-        $studentAuth    = $this->AuthModel->getStudent($where)->num_rows();
+        $coacheeAuth    = $this->AuthModel->getCoachee($where)->num_rows();
         
         
         if($coachAuth > 0 ){
@@ -44,12 +44,12 @@ class AuthController extends CI_Controller {
             $this->session->set_flashdata('status', 'login');
             redirect(site_url('coach'));
         }
-        elseif($studentAuth > 0)
+        elseif($coacheeAuth > 0)
         {
-            $auth = $this->AuthModel->getStudent($where)->row_array();
+            $auth = $this->AuthModel->getCoachee($where)->row_array();
             
             $data_session = array(
-                'login'    => 'student',
+                'login'    => 'coachee',
                 'id'       => $auth['id'],
                 'name'     => $auth['name'],
                 'email'    => $auth['email'],
@@ -58,7 +58,7 @@ class AuthController extends CI_Controller {
 
             $this->session->set_userdata($data_session);
             $this->session->set_flashdata('status', 'login');
-            redirect(site_url('student'));
+            redirect(site_url('coachee'));
 
         }else{
             echo 'salah password';

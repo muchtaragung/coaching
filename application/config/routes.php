@@ -60,13 +60,13 @@ $route['logout'] = 'AuthController/logout';
 
 // coach routes
 $route['coach'] = 'CoachController';
-$route['coach/addstudent'] = 'CoachController/addStudent';
-$route['coach/student/session/(:any)'] = 'CoachController/showStudentSessions/$1';
-$route['coach/student/session/new/(:any)'] = 'CoachController/addSession/$1';
+$route['coach/addcoachee'] = 'CoachController/addCoachee';
+$route['coach/coachee/session/(:any)'] = 'CoachController/showCoacheeSessions/$1';
+$route['coach/coachee/session/new/(:any)'] = 'CoachController/addSession/$1';
 
-// student routes
-$route['student'] = 'StudentController';
-$route['student/addgoal'] = 'StudentController/addGoal';
-$route['student/goal/(:any)'] = 'StudentController/showGoal/$1';
-$route['student/addaction'] = 'StudentController/addActionPlan';
-$route['student/addcriteria'] = 'StudentController/addCriteria';
+// coachee routes
+$route['coachee'] = 'CoacheeController';
+$route['coachee/addgoal'] = 'CoacheeController/addGoal';
+$route['coachee/goal/(:any)'] = 'CoacheeController/showGoal/$1';
+$route['coachee/addaction'] = 'CoacheeController/addActionPlan';
+$route['coachee/addcriteria'] = 'CoacheeController/addCriteria';
