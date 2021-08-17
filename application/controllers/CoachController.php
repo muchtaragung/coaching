@@ -32,6 +32,27 @@ class CoachController extends CI_Controller {
         redirect('coach');
     }
 
+    public function showStudentSessions($studentID)
+    {
+        $data['sessions'] = $this->CoachModel->getStudentSession($studentID);
+		$data['page_name'] = "Student Session";
+		$data['student_id'] = $studentID;
+        $this->load->view('coach/student_sessions', $data, FALSE);
+	}
+
+	public function addSession($studentID)
+	{
+		$coachID      = $this->session->userdata('id');
+		$totalSession = $this->CoachModel->getTotalSession($studentID,$coachID);
+
+		$sess['session']     = $totalSession + 1;
+		$sess['students_id'] = $studentID;
+		$sess['coach_id']    = $coachID;
+
+		$this->CoachModel->newSession($sess);
+		redirect('coach/student/sessions'.$studentID);
+	}
+
 }
 
 /* End of file CoachController.php */

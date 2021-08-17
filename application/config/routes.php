@@ -61,6 +61,8 @@ $route['logout'] = 'AuthController/logout';
 // coach routes
 $route['coach'] = 'CoachController';
 $route['coach/addstudent'] = 'CoachController/addStudent';
+$route['coach/student/session/(:any)'] = 'CoachController/showStudentSessions/$1';
+$route['coach/student/session/new/(:any)'] = 'CoachController/addSession/$1';
 
 // student routes
 $route['student'] = 'StudentController';

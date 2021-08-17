@@ -28,13 +28,13 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Session</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Table Peserta</h6>
-                            <a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addStudent">Tambah Peserta</a>
+                            <h6 class="m-0 font-weight-bold text-primary">Session</h6>
+                            <a href="<?= site_url('coach/student/session/new/').$student_id?>" class="btn btn-primary float-right">Tambah Sesi</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -49,18 +49,17 @@
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
+                                            <th>Sesi Ke</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <?php $i=1; foreach ($students as $student): ?>
+                                        <?php $i=1; foreach ($sessions as $session): ?>
                                             <tr>
                                                 <td><?php echo $i++ ?></td>
-                                                <td> <?= $student->name ?> </td>
+                                                <td> <?= 'Sesi Ke-'.$session->session ?> </td>
                                                 <td>
-                                                    <a href="<?= site_url('coach/student/').$student->id ?>" class="btn btn-info">Lihat Data</a>
-													<a href="<?= site_url('coach/student/session/').$student->id ?>" class="btn btn-info">Lihat Sesi</a>
+                                                    <a href="<?= site_url('coach/student/').$session->students_id ?>" class="btn btn-info">Lihat Data</a>
                                                 </td>
                                             </tr>       
                                         <?php endforeach ?>
