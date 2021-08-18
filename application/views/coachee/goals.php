@@ -62,7 +62,7 @@
                                                 <td> <?= $goal->goal ?> </td>
                                                 <td> <?= $goal->due_date ?> </td>
                                                 <td>
-                                                    <a href="<?= site_url('coachee/new_action_plan/').$goal->id ?>" class="btn btn-info">Tambah Action Plan</a>
+                                                    <a href="<?= site_url('coachee/goal/').$goal->id ?>" class="btn btn-info">Lihat Goal</a>
                                                 </td>
                                             </tr>       
                                         <?php endforeach ?>
