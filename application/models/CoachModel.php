@@ -37,6 +37,18 @@ class CoachModel extends CI_Model {
 	{
 		return $this->db->insert('session', $session);
 	}
+
+	public function startSession($sessionID,$session)
+	{
+		
+		return $this->db->where('id',$sessionID)->update('session', $session);
+	}
+
+	public function endSession($sessionID,$session)
+	{
+		
+		return $this->db->where('id',$sessionID)->update('session', $session);
+	}
 }
 
 /* End of file CoachModel.php */

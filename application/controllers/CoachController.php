@@ -53,6 +53,21 @@ class CoachController extends CI_Controller {
 		redirect('coach/coachee/session/'.$coacheeID);
 	}
 
+	public function startSession($sessionID,$coacheeID)
+	{
+		$sess['status'] = 'belum selesai';
+		
+		$this->CoachModel->startSession($sessionID,$sess);
+		redirect('coach/coachee/session/'.$coacheeID);
+	}
+
+	public function endSession($sessionID,$coacheeID)
+	{
+		$sess['status'] = 'selesai';
+		
+		$this->CoachModel->endSession($sessionID,$sess);
+		redirect('coach/coachee/session/'.$coacheeID);
+	}
 }
 
 /* End of file CoachController.php */

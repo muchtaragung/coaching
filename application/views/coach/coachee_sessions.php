@@ -42,25 +42,34 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th></th>
+                                            <th>Sesi Ke</th>
+											<th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Sesi Ke</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         <?php $i=1; foreach ($sessions as $session): ?>
                                             <tr>
                                                 <td><?php echo $i++ ?></td>
                                                 <td> <?= 'Sesi Ke-'.$session->session ?> </td>
+												<td>
+												<?php if($session->status == 'belum mulai'): ?>
+													<a href="" class="btn btn-danger disabled">Belum Dimulai</a>
+												<?php elseif($session->status == 'belum selesai'): ?>
+													<a href="" class="btn btn-primary disabled">Belum Selesai</a>
+												<?php elseif($session->status == 'selesai'):?>
+													<a href="" class="btn btn-success disabled">Selesai</a>
+												<?php endif ?>
+												</td>
                                                 <td>
-                                                    <a href="<?= site_url('coach/coachee/').$session->coachee_id ?>" class="btn btn-info">Lihat Data</a>
-                                                </td>
+												<?php if($session->status == 'belum mulai'): ?>
+													<a href="<?= site_url('coach/coachee/session/start/'.$session->id.'/'.$session->coachee_id)?>" class="btn btn-danger ">Mulai Sesi</a>
+												<?php elseif($session->status == 'belum selesai'): ?>
+													<a href="<?= site_url('coach/coachee/session/end/'.$session->id.'/'.$session->coachee_id)?>" class="btn btn-primary ">Selesaikan Sesi</a>
+												<?php elseif($session->status == 'selesai'):?>
+													<a href="" class="btn btn-success disabled">Sesi Selesai</a>
+												<?php endif ?>
+												</td>
                                             </tr>       
                                         <?php endforeach ?>
                                     </tbody>
