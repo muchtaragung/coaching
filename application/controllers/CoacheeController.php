@@ -61,7 +61,8 @@ class CoacheeController extends CI_Controller {
 		$action_plan['goals_id'] = $this->input->post('goals_id');
 
 		$this->CoacheeModel->storeAction($action_plan);
-		redirect('coachee/goal/'.$action_plan['goals_id']);
+		$this->session->set_flashdata('action_plan','Berhasil Menambahkan Action Plan');
+		redirect('coachee/goal/'.$action_plan['goals_id'],'refresh');
 	}
 
 	public function addCriteria()
@@ -70,7 +71,8 @@ class CoacheeController extends CI_Controller {
 		$criteria['goals_id'] = $this->input->post('goals_id');
 	
 		$this->CoacheeModel->storeCriteria($criteria);
-		redirect('coachee/goal/'.$criteria['goals_id']);
+		$this->session->set_flashdata('criteria','Berhasil Menambahkan Success Criteria');
+		redirect('coachee/goal/'.$criteria['goals_id'],'refresh');
 	}
 }
 

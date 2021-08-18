@@ -29,11 +29,32 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
-
+					<?php if($this->session->flashdata('action_plan')): ?>  
+						<div class="alert alert-success">
+							<a href="#" class="close" data-dismiss="alert">&times;</a>  
+							<strong>Success!</strong> <?php echo $this->session->flashdata('action_plan'); ?>  
+						</div>
+					<?php endif ?>
+					<?php 
+						if(isset($_SESSION['action_plan'])){
+							unset($_SESSION['action_plan']);
+						} 
+					?>
+					<?php if($this->session->flashdata('criteria')):?>
+						<div class="alert alert-success" role="alert">
+							<a href="#" class="close" data-dismiss="alert">&times;</a> 
+							<strong>Success!</strong> <?php echo $this->session->flashdata('criteria'); ?>
+						</div>
+					<?php endif ?>
+					<?php 
+						if(isset($_SESSION['criteria'])){
+							unset($_SESSION['criteria']);
+						} 
+					?>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"><?= $goal->goal ?></h6>
+                            <h6 class="m-0 font-weight-bold text-primary float-left"><?= $goal->goal ?></h6>
                             <a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addActionPlan">Tambah Action Plan</a>
                         </div>
                         <div class="card-body">
