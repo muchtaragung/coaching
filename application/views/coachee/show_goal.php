@@ -92,21 +92,39 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Action</th>
+                                            <th rowspan="2">No</th>
+                                            <th rowspan="2">Action</th>
+											<th colspan="4">Result</th>
                                         </tr>
+										<tr>
+											<th>Berhasil</th>
+											<th>Tidak Berhasil</th>
+											<th>Butuh Waktu Lama</th>
+											<th>Action</th>
+										</tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Goals</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         <?php $i=1; foreach ($actions as $action): ?>
                                             <tr>
                                                 <td><?php echo $i++ ?></td>
                                                 <td> <?= $action->action ?> </td>
+												<?php if($action->result == null):?>
+													<form action="<?= site_url('coachee/saveResult')?>" method="POST">
+														<input type="hidden" name="id" value="<?= $action->id ?>">
+														<input type="hidden" name="goals_id" value="<?= $action->goals_id ?>">
+														<td><input type="radio" name="result" id="" value="berhasil"></td>
+														<td><input type="radio" name="result" id="" value="tidak berhasil"></td>
+														<td><input type="radio" name="result" id="" value="butuh waktu lama"></td>
+														<td><button type="submit" class="btn btn-sm btn-primary">Submit</button></td>
+													</form>
+												<?php else:?>
+													<form>
+														<td><input type="radio" <?php if($action->result == 'berhasil'){?> checked <?php }?> disabled></td>
+														<td><input type="radio" <?php if($action->result == 'tidak berhasil'){?> checked <?php }?> disabled></td>
+														<td><input type="radio" <?php if($action->result == 'butuh waktu lama'){?> checked <?php }?> disabled ></td>
+														<td><button type="submit" class="btn btn-sm btn-secondary disabled">Submit</button></td>
+													</form>
+												<?php endif?>
                                             </tr>       
                                         <?php endforeach ?>
                                     </tbody>

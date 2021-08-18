@@ -74,6 +74,16 @@ class CoacheeController extends CI_Controller {
 		$this->session->set_flashdata('criteria','Berhasil Menambahkan Success Criteria');
 		redirect('coachee/goal/'.$criteria['goals_id'],'refresh');
 	}
+
+	public function updateResult()
+	{
+		$id = $this->input->post('id');
+		$goalsID = $this->input->post('goals_id');
+		$action['result'] = $this->input->post('result');
+
+		$this->CoacheeModel->saveResult($action,$id);
+		redirect('coachee/goal/'.$goalsID,'refresh');
+	}
 }
 
 /* End of file CoacheeController.php */

@@ -70,6 +70,7 @@ $route['coach/coachee/session/new/(:any)']          = 'CoachController/addSessio
 $route['coach/coachee/session/start/(:any)/(:any)'] = 'CoachController/startSession/$1/$2';
 $route['coach/coachee/session/end/(:any)/(:any)']   = 'CoachController/endSession/$1/$2';
 
+
 // coachee routes
 $route['coachee']             = 'CoacheeController';
 $route['coachee/goals']       = 'CoacheeController/allGoals';
@@ -77,4 +78,5 @@ $route['coachee/addgoal']     = 'CoacheeController/addGoal';
 $route['coachee/goal/(:any)'] = 'CoacheeController/showGoal/$1';
 $route['coachee/addaction']   = 'CoacheeController/addActionPlan';
 $route['coachee/addcriteria'] = 'CoacheeController/addCriteria';
+$route['coachee/saveResult']  = 'CoacheeController/updateResult';
 

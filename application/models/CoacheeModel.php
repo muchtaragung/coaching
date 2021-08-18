@@ -47,6 +47,12 @@ class CoacheeModel extends CI_Model {
 	{
 		return $this->db->where('coachee_id', $id)->get('session')->result();
 	}
+
+	public function saveResult($action_plan,$id)
+	{
+		
+		return $this->db->where('id',$id)->update('action_plan', $action_plan);
+	}
 }
 
 /* End of file CoacheeModel.php */
