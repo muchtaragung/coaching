@@ -16,8 +16,15 @@ class CoacheeController extends CI_Controller {
 	public function index()
 	{
 		$data['page_name'] = 'coachee dashboard';
-		$data['goals'] = $this->CoacheeModel->allGoalsByID($this->session->userdata('id'));
+		$data['sessions'] = $this->CoacheeModel->allSessionsByID($this->session->userdata('id'));
 		$this->load->view('coachee/index', $data, FALSE);
+	}
+
+	public function allGoals()
+	{
+		$data['page_name'] = 'coachee dashboard';
+		$data['goals'] = $this->CoacheeModel->allGoalsByID($this->session->userdata('id'));
+		$this->load->view('coachee/goals', $data, FALSE);	
 	}
 
 	public function addgoal()

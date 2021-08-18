@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <?php $this->load->view('coachee/layouts/head');?>
+    <?php $this->load->view('coach/layouts/head');?>
 </head>
 
 <body id="page-top">
@@ -11,7 +11,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php $this->load->view('coachee/layouts/sidebar');?>
+        <?php $this->load->view('coach/layouts/sidebar');?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -21,7 +21,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php $this->load->view('coachee/layouts/topbar.php');?>
+                <?php $this->load->view('coach/layouts/topbar.php');?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -33,7 +33,9 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Sesi Milik Anda</h6>
+                            <h6 class="m-0 font-weight-bold text-primary float-left">Table Peserta</h6>
+							<a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addGoal">Tambah Goals</a>
+
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -41,33 +43,24 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Sesi Ke</th>
-                                            <th>Status</th>
+                                            <th>Nama</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </tfoot>
                                     <tbody>
-                                        <?php $i=1; foreach ($sessions as $session): ?>
+                                        <?php $i=1; foreach ($students as $student): ?>
                                             <tr>
                                                 <td><?php echo $i++ ?></td>
-                                                <td> <?= $session->session ?> </td>
-												<td>
-													<?php if($session->status == 'belum mulai'): ?>
-														<a href="" class="btn btn-danger disabled">Sesi Belum Dimulai</a>
-													<?php elseif($session->status == 'belum selesai'): ?>
-														<a href="" class="btn btn-primary disabled">Sesi Belum Selesai</a>
-													<?php elseif($session->status == 'selesai'):?>
-														<a href="" class="btn btn-success disabled">Sesi Sudah Selesai</a>
-													<?php endif ?>
-												</td>
+                                                <td> <?= $student->name ?> </td>
                                                 <td>
-												<?php if($session->status == 'belum mulai'): ?>
-													<a href="" class="btn btn-primary disabled">lihat</a>
-												<?php elseif($session->status == 'belum selesai'): ?>
-													<a href="" class="btn btn-primary">lihat</a>
-												<?php elseif($session->status == 'selesai'):?>
-													<a href="" class="btn btn-primary disabled">lihat</a>
-												<?php endif ?>
+                                                    <a href="<?= site_url('coach/student/').$student->id ?>" class="btn btn-info">Lihat Data</a>
                                                 </td>
                                             </tr>       
                                         <?php endforeach ?>
@@ -84,7 +77,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <?php $this->load->view('coachee/layouts/footer'); ?>
+            <?php $this->load->view('coach/layouts/footer'); ?>
             <!-- End of Footer -->
 
         </div>
@@ -118,7 +111,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="addGoal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	<div class="modal fade" id="addGoal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -147,7 +140,8 @@
             </div>
         </div>
     </div>
-    <?php $this->load->view('coachee/layouts/script'); ?>
+
+    <?php $this->load->view('coach/layouts/script'); ?>
 </body>
 
 </html>
