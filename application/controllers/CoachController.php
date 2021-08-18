@@ -68,6 +68,14 @@ class CoachController extends CI_Controller {
 		$this->CoachModel->endSession($sessionID,$sess);
 		redirect('coach/coachee/session/'.$coacheeID);
 	}
+
+	public function showCoacheeGoals($coacheeID)
+	{
+		$data['page_name'] = 'coachee goals';
+		$data['goals'] = $this->CoachModel->allGoalsByID($this->session->userdata('id'));
+		$data['coachee'] = $this->CoachModel->getCoacheeName($data['goals'][0]->coachee_id);
+		$this->load->view('coach/coachee_goals', $data, FALSE);
+	}
 }
 
 /* End of file CoachController.php */

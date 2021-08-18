@@ -46,8 +46,17 @@ class CoachModel extends CI_Model {
 
 	public function endSession($sessionID,$session)
 	{
-		
 		return $this->db->where('id',$sessionID)->update('session', $session);
+	}
+
+	public function getCoacheeName($coacheeID)
+	{
+		return $this->db->where('id' , $coacheeID)->get('coachee')->row();
+	}
+
+	public function allGoalsByID($id)
+	{
+		return $this->db->where('coachee_id', $id)->get('goals')->result();
 	}
 }
 
