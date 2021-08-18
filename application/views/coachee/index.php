@@ -64,7 +64,7 @@
 												<?php if($session->status == 'belum mulai'): ?>
 													<a href="" class="btn btn-primary disabled">lihat</a>
 												<?php elseif($session->status == 'belum selesai'): ?>
-													<a href="" class="btn btn-primary">lihat</a>
+													<a href="<?= site_url('coachee/goals/')?>" class="btn btn-primary">lihat</a>
 												<?php elseif($session->status == 'selesai'):?>
 													<a href="" class="btn btn-primary disabled">lihat</a>
 												<?php endif ?>

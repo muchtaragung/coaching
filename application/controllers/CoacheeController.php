@@ -32,10 +32,10 @@ class CoacheeController extends CI_Controller {
 		$data['page_name'] = 'Goal Baru';
 		$goal['goal'] = $this->input->post('goal');
 		$goal['due_date'] = $this->input->post('due_date');
-		$goal['coachee_id'] = $this->input->post('coachee_id');
+		$goal['coachee_id'] = $this->session->userdata('id');
 
 		$this->CoacheeModel->storeGoal($goal);
-		redirect('coachee');
+		redirect('coachee/goals');
 	}
 
 	public function showGoal($id)

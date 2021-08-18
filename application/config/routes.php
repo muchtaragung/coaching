@@ -66,7 +66,7 @@ $route['coach/coachee/session/new/(:any)'] = 'CoachController/addSession/$1';
 
 // coachee routes
 $route['coachee'] = 'CoacheeController';
-$route['coachee/goals/'] = 'CoacheeController/allGoals';
+$route['coachee/goals'] = 'CoacheeController/allGoals';
 $route['coachee/addgoal'] = 'CoacheeController/addGoal';
 $route['coachee/goal/(:any)'] = 'CoacheeController/showGoal/$1';
 $route['coachee/addaction'] = 'CoacheeController/addActionPlan';
