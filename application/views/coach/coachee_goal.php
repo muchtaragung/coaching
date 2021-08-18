@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <?php $this->load->view('coach/layouts/head');?>
+    <?php $this->load->view('coachee/layouts/head');?>
 </head>
 
 <body id="page-top">
@@ -11,7 +11,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php $this->load->view('coach/layouts/sidebar');?>
+        <?php $this->load->view('coachee/layouts/sidebar');?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -21,20 +21,18 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php $this->load->view('coach/layouts/topbar.php');?>
+                <?php $this->load->view('coachee/layouts/topbar.php');?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
-
+                    <h1 class="h3 mb-4 text-gray-800">Goal : <?= $goal->goal ?></h1>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Table Goals</h6>
-                            <a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addGoal">Tambah Goals</a>
+                            <h4 class="m-0 font-weight-bold text-primary float-left">Success Criteria : <?= $criteria->criteria ?></h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -42,8 +40,6 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Goals</th>
-                                            <th>Due Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -51,19 +47,13 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Goals</th>
-                                            <th>Due Date</th>
-                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <?php $i=1; foreach ($goals as $goal): ?>
+                                        <?php $i=1; foreach ($actions as $action): ?>
                                             <tr>
                                                 <td><?php echo $i++ ?></td>
-                                                <td> <?= $goal->goal ?> </td>
-                                                <td> <?= $goal->due_date ?> </td>
-                                                <td>
-                                                    <a href="<?= site_url('coach/coachee/goal/').$goal->id ?>" class="btn btn-info">Lihat Goal</a>
-                                                </td>
+                                                <td> <?= $action->action ?> </td>
                                             </tr>       
                                         <?php endforeach ?>
                                     </tbody>
@@ -79,7 +69,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <?php $this->load->view('coach/layouts/footer'); ?>
+            <?php $this->load->view('coachee/layouts/footer'); ?>
             <!-- End of Footer -->
 
         </div>
@@ -113,27 +103,26 @@
         </div>
     </div>
 
-    <div class="modal fade" id="addGoal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="addActionPlan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Goals</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Peserta</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form action="<?= site_url('coach/addgoal') ?>" method="POST">
+                <form action="<?= site_url('coachee/addaction') ?>" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="goal">Goals</label>
-                            <input type="text" name="goal" id="goal" class="form-control">
+                            <label for="action">Action Plan</label>
+                            <input type="text" name="action" id="action" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="due_date">due date</label>
-                            <input type="date" name="due_date" id="due_date" class="form-control">
+                            <input type="hidden" name="goals_id" id="goals_id" value="<?= $goal->id ?>" class="form-control">
                         </div>
-                        <input type="hidden" name="students_id" value="<?= $this->session->userdata('id'); ?>" >
+                        <input type="hidden" name="coachee_id"  >
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="submit">Submit</button>
@@ -142,7 +131,7 @@
             </div>
         </div>
     </div>
-    <?php $this->load->view('coach/layouts/script'); ?>
+    <?php $this->load->view('coachee/layouts/script'); ?>
 </body>
 
 </html>

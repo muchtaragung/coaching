@@ -58,6 +58,21 @@ class CoachModel extends CI_Model {
 	{
 		return $this->db->where('coachee_id', $id)->get('goals')->result();
 	}
+
+	public function goalByID($id)
+	{
+		return $this->db->where('id', $id)->get('goals')->row();
+	}
+
+	public function actionPlanByGoalID($id)
+	{
+		return $this->db->where('goals_id', $id)->get('action_plan')->result();
+	}
+
+	public function getCriteria($goalID)
+	{
+		return $this->db->where('goals_id', $goalID)->get('criteria')->row();
+	}
 }
 
 /* End of file CoachModel.php */
