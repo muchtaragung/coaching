@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -80,3 +80,7 @@ $route['coachee/addaction']   = 'CoacheeController/addActionPlan';
 $route['coachee/addcriteria'] = 'CoacheeController/addCriteria';
 $route['coachee/saveResult']  = 'CoacheeController/updateResult';
 
+// admin routes
+$route['admin']       = 'AdminController';
+$route['admin/login'] = 'AdminController/login';
+$route['admin/auth']  = 'AdminController/auth';
