@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <?php $this->load->view('coach/layouts/head') ?>
+    <?php $this->load->view('layouts/head') ?>
 </head>
 
 <body class="bg-gradient-primary">
@@ -24,14 +25,14 @@
                                     </div>
                                     <form action="<?php echo site_url('auth') ?>" method="post">
                                         <div class="form-group">
-                                                <label for="email">email</label>
-                                                <input class="form-control" type="text" name="email" id="email" placeholder ="masukan email">
+                                            <label for="email">email</label>
+                                            <input class="form-control" type="text" name="email" id="email" placeholder="masukan email">
                                         </div>
                                         <div class="form-group">
-                                                <label for="password">Password</label>
-                                                <input class="form-control" type="password" name="password" id="password" placeholder ="masukan password">
+                                            <label for="password">Password</label>
+                                            <input class="form-control" type="password" name="password" id="password" placeholder="masukan password">
                                         </div>
-                                                <input class="form-control btn btn-primary" type="submit" value="masuk">
+                                        <input class="form-control btn btn-primary" type="submit" value="masuk">
                                     </form>
                                     <hr>
                                 </div>
@@ -46,12 +47,13 @@
 
     </div>
 
-    <?php $this->load->view('coach/layouts/script.php') ?>
+    <?php $this->load->view('layouts/script.php') ?>
 
-    <?php if ($this->session->flashdata('status') == 'logout'): ?>
-    <script>
-        swal("Anda Telah Login", "", "success");
-    </script>
+    <?php if ($this->session->flashdata('status') == 'logout') : ?>
+        <script>
+            swal("Anda Telah Login", "", "success");
+        </script>
     <?php endif ?>
 </body>
+
 </html>

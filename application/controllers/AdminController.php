@@ -35,6 +35,7 @@ class AdminController extends CI_Controller
 			$adminData = $this->AdminModel->getAdmin($auth)->row();
 
 			$sessionData['login']    = 'admin';
+			$sessionData['name']     = 'admin';
 			$sessionData['username'] = $adminData->username;
 			$sessionData['password'] = $adminData->password;
 
@@ -61,5 +62,41 @@ class AdminController extends CI_Controller
 		$data['coachs']     = $this->AdminModel->getAllCoach();
 
 		$this->load->view('admin/coach/list', $data);
+	}
+
+	public function addCoach()
+	{
+		$this->checkAuth();
+		$coach['name'] = $this->input->post('name');
+		$coach['email'] = $this->input->post('email');
+		$coach['password'] = $this->input->post('password');
+
+		$this->AdminModel->saveCoach($coach);
+		redirect('admin/coach/list');
+	}
+
+	public function deleteCoach($id)
+	{
+		$this->AdminModel->deleteCoach($id);
+		redirect('admin/coach/list');
+	}
+
+	public function editCoach($id)
+	{
+		$data['page_name'] = 'Edit Coach';
+		$data['coach'] = $this->AdminModel->getCoachByID($id);
+
+		$this->load->view('admin/coach/edit', $data);
+	}
+
+	public function updateCoach()
+	{
+		$id                = $this->input->post('id');
+		$coach['name']     = $this->input->post('name');
+		$coach['email']    = $this->input->post('email');
+		$coach['password'] = $this->input->post('password');
+
+		$this->AdminModel->updateCoach($id, $coach);
+		return redirect('admin/coach/list');
 	}
 }

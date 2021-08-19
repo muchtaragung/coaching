@@ -37,32 +37,26 @@
 							<a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addCoach">Tambah Coach</a>
 						</div>
 						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-									<thead>
-										<tr>
-											<th>No</th>
-											<th>Nama</th>
-											<th>email</th>
-											<th>Action</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php $i = 1;
-										foreach ($coachs as $coach) : ?>
-											<tr>
-												<td><?php echo $i++ ?></td>
-												<td> <?= $coach->name ?> </td>
-												<td><?= $coach->email ?></td>
-												<td>
-													<a href="<?= site_url('admin/coach/edit/') . $coach->id ?>" class="btn btn-info">edit Data</a>
-													<a href="<?= site_url('admin/coach/delete/') . $coach->id ?>" class="btn btn-info">delete Data</a>
-												</td>
-											</tr>
-										<?php endforeach ?>
-									</tbody>
-								</table>
-							</div>
+							<form action="<?= site_url('admin/coach/update') ?>" method="POST">
+								<div class="modal-body">
+									<div class="form-group">
+										<label for="name">nama</label>
+										<input type="hidden" name="id" id="id" class="form-control" value="<?= $coach->id ?>">
+										<input type="text" name="name" id="name" class="form-control" value="<?= $coach->name ?>">
+									</div>
+									<div class="form-group">
+										<label for="email">email</label>
+										<input type="email" name="email" id="email" class="form-control" value="<?= $coach->email ?>">
+									</div>
+									<div class="form-group">
+										<label for="password">password</label>
+										<input type="password" name="password" id="password" class="form-control" value="<?= $coach->password ?>">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-secondary" type="submit">Submit</button>
+								</div>
+							</form>
 						</div>
 					</div>
 
@@ -115,25 +109,7 @@
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<form action="<?= site_url('admin/coach/add') ?>" method="POST">
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="name">nama</label>
-							<input type="text" name="name" id="name" class="form-control">
-						</div>
-						<div class="form-group">
-							<label for="email">email</label>
-							<input type="email" name="email" id="email" class="form-control">
-						</div>
-						<div class="form-group">
-							<label for="password">password</label>
-							<input type="password" name="password" id="password" class="form-control">
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-secondary" type="submit">Submit</button>
-					</div>
-				</form>
+
 			</div>
 		</div>
 	</div>

@@ -63,6 +63,7 @@ $route['coach']                     = 'CoachController';
 $route['coach/addcoachee']          = 'CoachController/addCoachee';
 $route['coach/coachee/(:any)']      = 'CoachController/showCoacheeGoals/$1';
 $route['coach/coachee/goal/(:any)'] = 'CoachController/ShowCoacheGoal/$1';
+$route['coach/coachee/note/add']    = 'CoachController/addNotes';
 
 // coachee session
 $route['coach/coachee/session/(:any)']              = 'CoachController/showCoacheeSessions/$1';
@@ -85,3 +86,7 @@ $route['admin']       = 'AdminController';
 $route['admin/login'] = 'AdminController/login';
 $route['admin/auth']  = 'AdminController/auth';
 $route['admin/coach/list']  = 'AdminController/coachList';
+$route['admin/coach/add']  = 'AdminController/addCoach';
+$route['admin/coach/delete/(:any)']  = 'AdminController/deleteCoach/$1';
+$route['admin/coach/edit/(:any)']  = 'AdminController/editCoach/$1';
+$route['admin/coach/update']  = 'AdminController/updateCoach';

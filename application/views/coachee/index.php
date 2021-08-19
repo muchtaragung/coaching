@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <?php $this->load->view('coachee/layouts/head');?>
+    <?php $this->load->view('layouts/head'); ?>
 </head>
 
 <body id="page-top">
@@ -11,7 +11,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php $this->load->view('coachee/layouts/sidebar');?>
+        <?php $this->load->view('layouts/sidebar'); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -21,7 +21,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php $this->load->view('coachee/layouts/topbar.php');?>
+                <?php $this->load->view('layouts/topbar.php'); ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -47,29 +47,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $i=1; foreach ($sessions as $session): ?>
+                                        <?php $i = 1;
+                                        foreach ($sessions as $session) : ?>
                                             <tr>
                                                 <td><?php echo $i++ ?></td>
                                                 <td> <?= $session->session ?> </td>
-												<td>
-													<?php if($session->status == 'belum mulai'): ?>
-														<a href="" class="btn btn-danger disabled">Sesi Belum Dimulai</a>
-													<?php elseif($session->status == 'belum selesai'): ?>
-														<a href="" class="btn btn-primary disabled">Sesi Belum Selesai</a>
-													<?php elseif($session->status == 'selesai'):?>
-														<a href="" class="btn btn-success disabled">Sesi Sudah Selesai</a>
-													<?php endif ?>
-												</td>
                                                 <td>
-												<?php if($session->status == 'belum mulai'): ?>
-													<a href="" class="btn btn-primary disabled">lihat</a>
-												<?php elseif($session->status == 'belum selesai'): ?>
-													<a href="<?= site_url('coachee/goals/')?>" class="btn btn-primary">lihat</a>
-												<?php elseif($session->status == 'selesai'):?>
-													<a href="" class="btn btn-primary disabled">lihat</a>
-												<?php endif ?>
+                                                    <?php if ($session->status == 'belum mulai') : ?>
+                                                        <a href="" class="btn btn-danger disabled">Sesi Belum Dimulai</a>
+                                                    <?php elseif ($session->status == 'belum selesai') : ?>
+                                                        <a href="" class="btn btn-primary disabled">Sesi Belum Selesai</a>
+                                                    <?php elseif ($session->status == 'selesai') : ?>
+                                                        <a href="" class="btn btn-success disabled">Sesi Sudah Selesai</a>
+                                                    <?php endif ?>
                                                 </td>
-                                            </tr>       
+                                                <td>
+                                                    <?php if ($session->status == 'belum mulai') : ?>
+                                                        <a href="" class="btn btn-primary disabled">lihat</a>
+                                                    <?php elseif ($session->status == 'belum selesai') : ?>
+                                                        <a href="<?= site_url('coachee/goals/') ?>" class="btn btn-primary">lihat</a>
+                                                    <?php elseif ($session->status == 'selesai') : ?>
+                                                        <a href="" class="btn btn-primary disabled">lihat</a>
+                                                    <?php endif ?>
+                                                </td>
+                                            </tr>
                                         <?php endforeach ?>
                                     </tbody>
                                 </table>
@@ -84,7 +85,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <?php $this->load->view('coachee/layouts/footer'); ?>
+            <?php $this->load->view('layouts/footer'); ?>
             <!-- End of Footer -->
 
         </div>
@@ -99,8 +100,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -118,8 +118,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="addGoal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="addGoal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -138,7 +137,7 @@
                             <label for="due_date">due date</label>
                             <input type="date" name="due_date" id="due_date" class="form-control">
                         </div>
-                        <input type="hidden" name="coachee_id" value="<?= $this->session->userdata('id'); ?>" >
+                        <input type="hidden" name="coachee_id" value="<?= $this->session->userdata('id'); ?>">
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="submit">Submit</button>
@@ -147,7 +146,7 @@
             </div>
         </div>
     </div>
-    <?php $this->load->view('coachee/layouts/script'); ?>
+    <?php $this->load->view('layouts/script'); ?>
 </body>
 
 </html>

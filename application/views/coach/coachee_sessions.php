@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <?php $this->load->view('coach/layouts/head');?>
+    <?php $this->load->view('layouts/head'); ?>
 </head>
 
 <body id="page-top">
@@ -11,7 +11,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php $this->load->view('coach/layouts/sidebar');?>
+        <?php $this->load->view('layouts/sidebar'); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -21,7 +21,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php $this->load->view('coach/layouts/topbar.php');?>
+                <?php $this->load->view('layouts/topbar.php'); ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -34,7 +34,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Session</h6>
-                            <a href="<?= site_url('coach/coachee/session/new/').$coachee_id?>" class="btn btn-primary float-right">Tambah Sesi</a>
+                            <a href="<?= site_url('coach/coachee/session/new/') . $coachee_id ?>" class="btn btn-primary float-right">Tambah Sesi</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -43,34 +43,35 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Sesi Ke</th>
-											<th>Status</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $i=1; foreach ($sessions as $session): ?>
+                                        <?php $i = 1;
+                                        foreach ($sessions as $session) : ?>
                                             <tr>
                                                 <td><?php echo $i++ ?></td>
-                                                <td> <?= 'Sesi Ke-'.$session->session ?> </td>
-												<td>
-												<?php if($session->status == 'belum mulai'): ?>
-													<a href="" class="btn btn-danger disabled">Belum Dimulai</a>
-												<?php elseif($session->status == 'belum selesai'): ?>
-													<a href="" class="btn btn-primary disabled">Belum Selesai</a>
-												<?php elseif($session->status == 'selesai'):?>
-													<a href="" class="btn btn-success disabled">Selesai</a>
-												<?php endif ?>
-												</td>
+                                                <td> <?= 'Sesi Ke-' . $session->session ?> </td>
                                                 <td>
-												<?php if($session->status == 'belum mulai'): ?>
-													<a href="<?= site_url('coach/coachee/session/start/'.$session->id.'/'.$session->coachee_id)?>" class="btn btn-danger ">Mulai Sesi</a>
-												<?php elseif($session->status == 'belum selesai'): ?>
-													<a href="<?= site_url('coach/coachee/session/end/'.$session->id.'/'.$session->coachee_id)?>" class="btn btn-primary ">Selesaikan Sesi</a>
-												<?php elseif($session->status == 'selesai'):?>
-													<a href="" class="btn btn-success disabled">Sesi Selesai</a>
-												<?php endif ?>
-												</td>
-                                            </tr>       
+                                                    <?php if ($session->status == 'belum mulai') : ?>
+                                                        <a href="" class="btn btn-danger disabled">Belum Dimulai</a>
+                                                    <?php elseif ($session->status == 'belum selesai') : ?>
+                                                        <a href="" class="btn btn-primary disabled">Belum Selesai</a>
+                                                    <?php elseif ($session->status == 'selesai') : ?>
+                                                        <a href="" class="btn btn-success disabled">Selesai</a>
+                                                    <?php endif ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($session->status == 'belum mulai') : ?>
+                                                        <a href="<?= site_url('coach/coachee/session/start/' . $session->id . '/' . $session->coachee_id) ?>" class="btn btn-danger ">Mulai Sesi</a>
+                                                    <?php elseif ($session->status == 'belum selesai') : ?>
+                                                        <a href="<?= site_url('coach/coachee/session/end/' . $session->id . '/' . $session->coachee_id) ?>" class="btn btn-primary ">Selesaikan Sesi</a>
+                                                    <?php elseif ($session->status == 'selesai') : ?>
+                                                        <a href="" class="btn btn-success disabled">Sesi Selesai</a>
+                                                    <?php endif ?>
+                                                </td>
+                                            </tr>
                                         <?php endforeach ?>
                                     </tbody>
                                 </table>
@@ -85,7 +86,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <?php $this->load->view('coach/layouts/footer'); ?>
+            <?php $this->load->view('layouts/footer'); ?>
             <!-- End of Footer -->
 
         </div>
@@ -100,8 +101,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -119,8 +119,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="addCoachee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="addCoachee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -146,7 +145,7 @@
                         <div class="form-group">
                             <label for="coach">coach</label>
                             <select name="coach" id="" class="form-control">
-                                <?php foreach ($coaches as $coach): ?>
+                                <?php foreach ($coaches as $coach) : ?>
                                     <option value="<?= $coach->id ?>"><?= $coach->name ?></option>
                                 <?php endforeach ?>
                             </select>
@@ -159,7 +158,7 @@
             </div>
         </div>
     </div>
-    <?php $this->load->view('coach/layouts/script'); ?>
+    <?php $this->load->view('layouts/script'); ?>
 </body>
 
 </html>
