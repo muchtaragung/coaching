@@ -35,6 +35,7 @@ class AdminController extends CI_Controller
 			$adminData = $this->AdminModel->getAdmin($auth)->row();
 
 			$sessionData['login']    = 'admin';
+			$sessionData['name']     = 'admin';
 			$sessionData['username'] = $adminData->username;
 			$sessionData['password'] = $adminData->password;
 
