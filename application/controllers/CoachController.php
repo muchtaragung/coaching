@@ -80,13 +80,14 @@ class CoachController extends CI_Controller {
 	public function ShowCoacheGoal($goalID)
 	{
 		$data['page_name'] = 'Goal';
-		$data['goal'] = $this->CoachModel->goalByID($goalID);
-		$data['actions'] = $this->CoachModel->actionPlanByGoalID($goalID);
-		$data['criteria'] = $this->CoachModel->getCriteria($goalID);
-
-
+		$data['goal']      = $this->CoachModel->goalByID($goalID);
+		$data['actions']   = $this->CoachModel->actionPlanByGoalID($goalID);
+		$data['criteria']  = $this->CoachModel->getCriteria($goalID);
+		$data['notes']     = $this->CoachModel->getGoalsNotes($data['goal']->id);
+		
 		$this->load->view('coach/coachee_goal', $data, FALSE);
 	}
+
 }
 
 /* End of file CoachController.php */
