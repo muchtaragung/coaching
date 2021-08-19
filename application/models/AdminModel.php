@@ -7,6 +7,11 @@ class AdminModel extends CI_Model
 	{
 		return $this->db->get_where('admin', $where);
 	}
+
+	function getAllCoach()
+	{
+		return $this->db->get('coach')->result();
+	}
 }
 
 /* End of file AuthModel.php */
