@@ -73,4 +73,29 @@ class AdminController extends CI_Controller
 		$this->AdminModel->saveCoach($coach);
 		redirect('admin/coach/list');
 	}
+
+	public function deleteCoach($id)
+	{
+		$this->AdminModel->deleteCoach($id);
+		redirect('admin/coach/list');
+	}
+
+	public function editCoach($id)
+	{
+		$data['page_name'] = 'Edit Coach';
+		$data['coach'] = $this->AdminModel->getCoachByID($id);
+
+		$this->load->view('admin/coach/edit', $data);
+	}
+
+	public function updateCoach()
+	{
+		$id                = $this->input->post('id');
+		$coach['name']     = $this->input->post('name');
+		$coach['email']    = $this->input->post('email');
+		$coach['password'] = $this->input->post('id');
+
+		$this->AdminModel->updateCoach($id, $coach);
+		return redirect('admin/coach/list');
+	}
 }

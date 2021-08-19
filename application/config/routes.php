@@ -86,3 +86,6 @@ $route['admin/login'] = 'AdminController/login';
 $route['admin/auth']  = 'AdminController/auth';
 $route['admin/coach/list']  = 'AdminController/coachList';
 $route['admin/coach/add']  = 'AdminController/addCoach';
+$route['admin/coach/delete/(:any)']  = 'AdminController/deleteCoach/$1';
+$route['admin/coach/edit/(:any)']  = 'AdminController/editCoach/$1';
+$route['admin/coach/update']  = 'AdminController/updateCoach';

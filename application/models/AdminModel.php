@@ -17,6 +17,21 @@ class AdminModel extends CI_Model
 	{
 		return $this->db->insert('coach', $coach);
 	}
+
+	public function deleteCoach($id)
+	{
+		return $this->db->where('id', $id)->delete('coach');
+	}
+
+	public function getCoachByID($id)
+	{
+		return $this->db->where('id', $id)->get('coach')->row();
+	}
+
+	public function updateCoach($id, $coach)
+	{
+		return $this->db->where('id', $id)->update('coach', $coach);
+	}
 }
 
 /* End of file AuthModel.php */
