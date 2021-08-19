@@ -53,4 +53,13 @@ class AdminController extends CI_Controller
 
 		$this->load->view('admin/index.php', $data, FALSE);
 	}
+
+	public function coachList()
+	{
+		$this->checkAuth();
+		$data['page_name'] = 'Coach List';
+		$data['coachs']     = $this->AdminModel->getAllCoach();
+
+		$this->load->view('admin/coach/list', $data);
+	}
 }

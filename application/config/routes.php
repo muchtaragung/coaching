@@ -84,3 +84,4 @@ $route['coachee/saveResult']  = 'CoacheeController/updateResult';
 $route['admin']       = 'AdminController';
 $route['admin/login'] = 'AdminController/login';
 $route['admin/auth']  = 'AdminController/auth';
+$route['admin/coach/list']  = 'AdminController/coachList';
