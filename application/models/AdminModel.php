@@ -3,14 +3,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class AdminModel extends CI_Model
 {
-	function getAdmin($where)
+	public function getAdmin($where)
 	{
 		return $this->db->get_where('admin', $where);
 	}
 
-	function getAllCoach()
+	public function getAllCoach()
 	{
 		return $this->db->get('coach')->result();
+	}
+
+	public function saveCoach($coach)
+	{
+		return $this->db->insert('coach', $coach);
 	}
 }
 

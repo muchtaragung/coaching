@@ -28,7 +28,7 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">Coach</h1>
+					<h1 class="h3 mb-4 text-gray-800">Coacha</h1>
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
@@ -106,11 +106,11 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="addCoachee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="addCoach" tabindex="-1" role="dialog" aria-labelledby="addCoach" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Tambah Peserta</h5>
+					<h5 class="modal-title" id="addCoach">Tambah Peserta</h5>
 					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>

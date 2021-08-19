@@ -62,4 +62,15 @@ class AdminController extends CI_Controller
 
 		$this->load->view('admin/coach/list', $data);
 	}
+
+	public function addCoach()
+	{
+		$this->checkAuth();
+		$coach['name'] = $this->input->post('name');
+		$coach['email'] = $this->input->post('email');
+		$coach['password'] = $this->input->post('password');
+
+		$this->AdminModel->saveCoach($coach);
+		redirect('admin/coach/list');
+	}
 }
