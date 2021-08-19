@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class CoachModel extends CI_Model {
+class CoachModel extends CI_Model
+{
 
 	public function allCoachee()
 	{
@@ -11,7 +12,7 @@ class CoachModel extends CI_Model {
 	public function getCoaches()
 	{
 		return $this->db->get('coach')->result();
-	}	
+	}
 
 	public function storeCoachee($coachee)
 	{
@@ -23,7 +24,7 @@ class CoachModel extends CI_Model {
 		return $this->db->where('coachee_id', $coacheeID)->get('session')->result();
 	}
 
-	public function getTotalSession($coacheeID,$coachID)
+	public function getTotalSession($coacheeID, $coachID)
 	{
 		$where = array(
 			'coachee_id' => $coacheeID,
@@ -38,20 +39,20 @@ class CoachModel extends CI_Model {
 		return $this->db->insert('session', $session);
 	}
 
-	public function startSession($sessionID,$session)
+	public function startSession($sessionID, $session)
 	{
-		
-		return $this->db->where('id',$sessionID)->update('session', $session);
+
+		return $this->db->where('id', $sessionID)->update('session', $session);
 	}
 
-	public function endSession($sessionID,$session)
+	public function endSession($sessionID, $session)
 	{
-		return $this->db->where('id',$sessionID)->update('session', $session);
+		return $this->db->where('id', $sessionID)->update('session', $session);
 	}
 
 	public function getCoacheeName($coacheeID)
 	{
-		return $this->db->where('id' , $coacheeID)->get('coachee')->row();
+		return $this->db->where('id', $coacheeID)->get('coachee')->row();
 	}
 
 	public function allGoalsByID($id)
@@ -76,7 +77,12 @@ class CoachModel extends CI_Model {
 
 	public function getGoalsNotes($goalID)
 	{
-		$this->db->where('goals_id', $goalID)->get('notes')->result();
+		return $this->db->where('goals_id', $goalID)->get('notes')->result();
+	}
+
+	public function saveGoalsNotes($notes)
+	{
+		return $this->db->insert('notes', $notes);
 	}
 }
 

@@ -1,16 +1,17 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class CoacheeController extends CI_Controller {
+class CoacheeController extends CI_Controller
+{
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('CoacheeModel');
 		if ($this->session->userdata('login') != 'coachee') {
-            echo '<script>alert("Silahkan Login Untuk Mengakses Halaman ini")</script>';
-            redirect('login','refresh');
-        }
+			echo '<script>alert("Silahkan Login Untuk Mengakses Halaman ini")</script>';
+			redirect('login', 'refresh');
+		}
 	}
 
 	public function index()
@@ -24,7 +25,7 @@ class CoacheeController extends CI_Controller {
 	{
 		$data['page_name'] = 'coachee dashboard';
 		$data['goals'] = $this->CoacheeModel->allGoalsByID($this->session->userdata('id'));
-		$this->load->view('coachee/goals', $data, FALSE);	
+		$this->load->view('coachee/goals', $data, FALSE);
 	}
 
 	public function addgoal()
@@ -46,8 +47,7 @@ class CoacheeController extends CI_Controller {
 
 		$criteriaCheck = $this->CoacheeModel->checkCriteria($id);
 
-		if($criteriaCheck > 0)
-		{
+		if ($criteriaCheck > 0) {
 			$data['criteria'] = $this->CoacheeModel->getCriteria($id);
 		}
 
@@ -61,18 +61,18 @@ class CoacheeController extends CI_Controller {
 		$action_plan['goals_id'] = $this->input->post('goals_id');
 
 		$this->CoacheeModel->storeAction($action_plan);
-		$this->session->set_flashdata('action_plan','Berhasil Menambahkan Action Plan');
-		redirect('coachee/goal/'.$action_plan['goals_id'],'refresh');
+		$this->session->set_flashdata('action_plan', 'Berhasil Menambahkan Action Plan');
+		redirect('coachee/goal/' . $action_plan['goals_id'], 'refresh');
 	}
 
 	public function addCriteria()
 	{
 		$criteria['criteria'] = $this->input->post('criteria');
 		$criteria['goals_id'] = $this->input->post('goals_id');
-	
+
 		$this->CoacheeModel->storeCriteria($criteria);
-		$this->session->set_flashdata('criteria','Berhasil Menambahkan Success Criteria');
-		redirect('coachee/goal/'.$criteria['goals_id'],'refresh');
+		$this->session->set_flashdata('criteria', 'Berhasil Menambahkan Success Criteria');
+		redirect('coachee/goal/' . $criteria['goals_id'], 'refresh');
 	}
 
 	public function updateResult()
@@ -81,8 +81,8 @@ class CoacheeController extends CI_Controller {
 		$goalsID = $this->input->post('goals_id');
 		$action['result'] = $this->input->post('result');
 
-		$this->CoacheeModel->saveResult($action,$id);
-		redirect('coachee/goal/'.$goalsID,'refresh');
+		$this->CoacheeModel->saveResult($action, $id);
+		redirect('coachee/goal/' . $goalsID, 'refresh');
 	}
 }
 
