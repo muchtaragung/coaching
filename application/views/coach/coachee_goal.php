@@ -36,24 +36,29 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Action</th>
+                                            <th rowspan="2">No</th>
+                                            <th rowspan="2">Action</th>
+											<th colspan="3">Result</th>
                                         </tr>
+										<tr>
+											<th>Berhasil</th>
+											<th>Tidak Berhasil</th>
+											<th>Butuh Waktu Lama</th>
+										</tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Goals</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         <?php $i=1; foreach ($actions as $action): ?>
                                             <tr>
-                                                <td><?php echo $i++ ?></td>
-                                                <td> <?= $action->action ?> </td>
+												<td><?= $i++ ?></td>
+												<td><?= $action->action ?></td>
+												<form>
+													<td><input type="radio" <?php if($action->result == 'berhasil'){?> checked <?php }?> disabled></td>
+													<td><input type="radio" <?php if($action->result == 'tidak berhasil'){?> checked <?php }?> disabled></td>
+													<td><input type="radio" <?php if($action->result == 'butuh waktu lama'){?> checked <?php }?> disabled ></td>
+												</form>
                                             </tr>       
                                         <?php endforeach ?>
                                     </tbody>
