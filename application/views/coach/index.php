@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <?php $this->load->view('coach/layouts/head');?>
+    <?php $this->load->view('layouts/head'); ?>
 </head>
 
 <body id="page-top">
@@ -11,7 +11,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php $this->load->view('coach/layouts/sidebar');?>
+        <?php $this->load->view('layouts/sidebar'); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -21,7 +21,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php $this->load->view('coach/layouts/topbar.php');?>
+                <?php $this->load->view('layouts/topbar.php'); ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -54,15 +54,16 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <?php $i=1; foreach ($coachee as $coachee): ?>
+                                        <?php $i = 1;
+                                        foreach ($coachee as $coachee) : ?>
                                             <tr>
                                                 <td><?php echo $i++ ?></td>
                                                 <td> <?= $coachee->name ?> </td>
                                                 <td>
-                                                    <a href="<?= site_url('coach/coachee/').$coachee->id ?>" class="btn btn-info">Lihat Data</a>
-													<a href="<?= site_url('coach/coachee/session/').$coachee->id ?>" class="btn btn-info">Lihat Sesi</a>
+                                                    <a href="<?= site_url('coach/coachee/') . $coachee->id ?>" class="btn btn-info">Lihat Data</a>
+                                                    <a href="<?= site_url('coach/coachee/session/') . $coachee->id ?>" class="btn btn-info">Lihat Sesi</a>
                                                 </td>
-                                            </tr>       
+                                            </tr>
                                         <?php endforeach ?>
                                     </tbody>
                                 </table>
@@ -77,7 +78,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <?php $this->load->view('coach/layouts/footer'); ?>
+            <?php $this->load->view('layouts/footer'); ?>
             <!-- End of Footer -->
 
         </div>
@@ -92,8 +93,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -111,8 +111,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="addCoachee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="addCoachee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -138,7 +137,7 @@
                         <div class="form-group">
                             <label for="coach">coach</label>
                             <select name="coach" id="" class="form-control">
-                                <?php foreach ($coaches as $coach): ?>
+                                <?php foreach ($coaches as $coach) : ?>
                                     <option value="<?= $coach->id ?>"><?= $coach->name ?></option>
                                 <?php endforeach ?>
                             </select>
@@ -151,7 +150,7 @@
             </div>
         </div>
     </div>
-    <?php $this->load->view('coach/layouts/script'); ?>
+    <?php $this->load->view('layouts/script'); ?>
 </body>
 
 </html>

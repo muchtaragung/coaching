@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<?php $this->load->view('coach/layouts/head') ?>
+	<?php $this->load->view('layouts/head') ?>
 </head>
 
 <body class="bg-gradient-primary">
@@ -59,7 +59,7 @@
 
 	</div>
 
-	<?php $this->load->view('coach/layouts/script.php') ?>
+	<?php $this->load->view('layouts/script.php') ?>
 
 	<?php if ($this->session->flashdata('status') == 'logout') : ?>
 		<script>

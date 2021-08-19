@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <?php $this->load->view('coach/layouts/head');?>
+    <?php $this->load->view('layouts/head'); ?>
 </head>
 
 <body id="page-top">
@@ -11,7 +11,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php $this->load->view('coach/layouts/sidebar');?>
+        <?php $this->load->view('layouts/sidebar'); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -21,7 +21,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php $this->load->view('coach/layouts/topbar.php');?>
+                <?php $this->load->view('layouts/topbar.php'); ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -56,15 +56,16 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <?php $i=1; foreach ($goals as $goal): ?>
+                                        <?php $i = 1;
+                                        foreach ($goals as $goal) : ?>
                                             <tr>
                                                 <td><?php echo $i++ ?></td>
                                                 <td> <?= $goal->goal ?> </td>
                                                 <td> <?= $goal->due_date ?> </td>
                                                 <td>
-                                                    <a href="<?= site_url('coach/coachee/goal/').$goal->id ?>" class="btn btn-info">Lihat Goal</a>
+                                                    <a href="<?= site_url('coach/coachee/goal/') . $goal->id ?>" class="btn btn-info">Lihat Goal</a>
                                                 </td>
-                                            </tr>       
+                                            </tr>
                                         <?php endforeach ?>
                                     </tbody>
                                 </table>
@@ -79,7 +80,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <?php $this->load->view('coach/layouts/footer'); ?>
+            <?php $this->load->view('layouts/footer'); ?>
             <!-- End of Footer -->
 
         </div>
@@ -94,8 +95,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -113,8 +113,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="addGoal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="addGoal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -133,7 +132,7 @@
                             <label for="due_date">due date</label>
                             <input type="date" name="due_date" id="due_date" class="form-control">
                         </div>
-                        <input type="hidden" name="students_id" value="<?= $this->session->userdata('id'); ?>" >
+                        <input type="hidden" name="students_id" value="<?= $this->session->userdata('id'); ?>">
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="submit">Submit</button>
@@ -142,7 +141,7 @@
             </div>
         </div>
     </div>
-    <?php $this->load->view('coach/layouts/script'); ?>
+    <?php $this->load->view('layouts/script'); ?>
 </body>
 
 </html>

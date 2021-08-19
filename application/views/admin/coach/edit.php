@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<?php $this->load->view('admin/layouts/head'); ?>
+	<?php $this->load->view('layouts/head'); ?>
 </head>
 
 <body id="page-top">
@@ -11,7 +11,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<?php $this->load->view('admin/layouts/sidebar'); ?>
+		<?php $this->load->view('layouts/sidebar'); ?>
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
@@ -21,7 +21,7 @@
 			<div id="content">
 
 				<!-- Topbar -->
-				<?php $this->load->view('admin/layouts/topbar.php'); ?>
+				<?php $this->load->view('layouts/topbar.php'); ?>
 				<!-- End of Topbar -->
 
 				<!-- Begin Page Content -->
@@ -67,7 +67,7 @@
 			<!-- End of Main Content -->
 
 			<!-- Footer -->
-			<?php $this->load->view('admin/layouts/footer'); ?>
+			<?php $this->load->view('layouts/footer'); ?>
 			<!-- End of Footer -->
 
 		</div>
@@ -113,7 +113,7 @@
 			</div>
 		</div>
 	</div>
-	<?php $this->load->view('admin/layouts/script'); ?>
+	<?php $this->load->view('layouts/script'); ?>
 </body>
 
 </html>
