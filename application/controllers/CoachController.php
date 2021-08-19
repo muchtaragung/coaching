@@ -47,8 +47,9 @@ class CoachController extends CI_Controller
 		$totalSession = $this->CoachModel->getTotalSession($coacheeID, $coachID);
 
 		$sess['session']     = $totalSession + 1;
-		$sess['coachee_id'] = $coacheeID;
+		$sess['coachee_id']  = $coacheeID;
 		$sess['coach_id']    = $coachID;
+		$sess['status']      = 'belum mulai';
 
 		$this->CoachModel->newSession($sess);
 		redirect('coach/coachee/session/' . $coacheeID);
