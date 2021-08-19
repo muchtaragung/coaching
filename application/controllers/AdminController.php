@@ -93,7 +93,7 @@ class AdminController extends CI_Controller
 		$id                = $this->input->post('id');
 		$coach['name']     = $this->input->post('name');
 		$coach['email']    = $this->input->post('email');
-		$coach['password'] = $this->input->post('id');
+		$coach['password'] = $this->input->post('password');
 
 		$this->AdminModel->updateCoach($id, $coach);
 		return redirect('admin/coach/list');
