@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class CoacheeModel extends CI_Model {
+class CoacheeModel extends CI_Model
+{
 
 	public function allGoalsByID($id)
 	{
@@ -48,10 +49,10 @@ class CoacheeModel extends CI_Model {
 		return $this->db->where('coachee_id', $id)->get('session')->result();
 	}
 
-	public function saveResult($action_plan,$id)
+	public function saveResult($action_plan, $id)
 	{
-		
-		return $this->db->where('id',$id)->update('action_plan', $action_plan);
+
+		return $this->db->where('id', $id)->update('action_plan', $action_plan);
 	}
 }
 

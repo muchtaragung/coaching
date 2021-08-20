@@ -74,8 +74,8 @@ class CoachController extends CI_Controller
 	public function showCoacheeGoals($coacheeID)
 	{
 		$data['page_name'] = 'coachee goals';
-		$data['goals'] = $this->CoachModel->allGoalsByID($this->session->userdata('id'));
-		$data['coachee'] = $this->CoachModel->getCoacheeName($data['goals'][0]->coachee_id);
+		$data['goals'] = $this->CoachModel->allGoalsByID($coacheeID);
+		$data['coachee'] = $this->CoachModel->getCoacheeName($coacheeID);
 		$this->load->view('coach/coachee_goals', $data, FALSE);
 	}
 
@@ -98,6 +98,16 @@ class CoachController extends CI_Controller
 		$this->CoachModel->saveGoalsNotes($notes);
 		redirect('coach/coachee/goal/' . $notes['goals_id']);
 	}
+
+	// public function penilaianSesi($sessionID, $coacheeId)
+	// {
+	// 	$coachID = $this->session->userdata('id');
+
+	// 	$data['session'] = $this->CoachModel->getSessionByID($sessionID);
+	// 	$data['coachee'] = $this->CoachModel->getCoacheeByID($coacheeId);
+
+	// 	$
+	// }
 }
 
 /* End of file CoachController.php */
