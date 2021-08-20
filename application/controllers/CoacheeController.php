@@ -57,7 +57,7 @@ class CoacheeController extends CI_Controller
 	public function addActionPlan()
 	{
 		$action_plan['action'] = $this->input->post('action');
-		$action_plan['nilai']  = 0;
+		$action_plan['result']  = null;
 		$action_plan['goals_id'] = $this->input->post('goals_id');
 
 		$this->CoacheeModel->storeAction($action_plan);
