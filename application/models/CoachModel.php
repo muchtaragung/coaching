@@ -84,6 +84,11 @@ class CoachModel extends CI_Model
 	{
 		return $this->db->insert('notes', $notes);
 	}
+
+	public function getSessionByID($sessionID)
+	{
+		return $this->db->where('id', $sessionID)->get('session')->row();
+	}
 }
 
 /* End of file CoachModel.php */

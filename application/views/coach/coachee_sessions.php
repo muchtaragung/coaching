@@ -69,6 +69,11 @@
                                                         <a href="<?= site_url('coach/coachee/session/end/' . $session->id . '/' . $session->coachee_id) ?>" class="btn btn-primary ">Selesaikan Sesi</a>
                                                     <?php elseif ($session->status == 'selesai') : ?>
                                                         <a href="" class="btn btn-success disabled">Sesi Selesai</a>
+                                                        <?php if ($report > 0): ?>
+                                                            <a href="<?= site_url('coach/coachee/session/report/save') ?>">Cetak Laporan</a>
+                                                        <?php else: ?>
+                                                            <a href="<?= site_url('coach/coachee/session/report/create') ?>">Buat Laporan</a>
+                                                        <?php endif ?>
                                                     <?php endif ?>
                                                 </td>
                                             </tr>
