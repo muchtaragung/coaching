@@ -120,45 +120,6 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="addCoachee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Tambah Peserta</h5>
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<form action="<?= site_url('coach/addcoachee') ?>" method="POST">
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="name">nama</label>
-							<input type="text" name="name" id="name" class="form-control">
-						</div>
-						<div class="form-group">
-							<label for="email">email</label>
-							<input type="email" name="email" id="email" class="form-control">
-						</div>
-						<div class="form-group">
-							<label for="password">password</label>
-							<input type="password" name="password" id="password" class="form-control">
-						</div>
-						<div class="form-group">
-							<label for="coach">coach</label>
-							<select name="coach" id="" class="form-control">
-								<?php foreach ($coaches as $coach) : ?>
-									<option value="<?= $coach->id ?>"><?= $coach->name ?></option>
-								<?php endforeach ?>
-							</select>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-secondary" type="submit">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
 	<?php $this->load->view('layouts/script'); ?>
 	<script>
 		function addSession(link) {
