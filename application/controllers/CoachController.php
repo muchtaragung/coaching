@@ -27,7 +27,7 @@ class CoachController extends CI_Controller
 		$coachee['name'] = $this->input->post('name');
 		$coachee['email'] = $this->input->post('email');
 		$coachee['password'] = $this->input->post('password');
-		$coachee['coach_id'] = $this->input->post('coach');
+		$coachee['coach_id'] = $this->session->userdata('id');
 
 		$this->CoachModel->storeCoachee($coachee);
 		redirect('coach');
@@ -58,7 +58,7 @@ class CoachController extends CI_Controller
 	public function startSession($sessionID, $coacheeID)
 	{
 		$sess['status'] = 'belum selesai';
-
+		$sess['start_time'] = date('Y-m-d H:i:s');
 		$this->CoachModel->startSession($sessionID, $sess);
 		redirect('coach/coachee/session/' . $coacheeID);
 	}
@@ -66,6 +66,7 @@ class CoachController extends CI_Controller
 	public function endSession($sessionID, $coacheeID)
 	{
 		$sess['status'] = 'selesai';
+		$sess['end_time'] = date('Y-m-d H:i:s');
 
 		$this->CoachModel->endSession($sessionID, $sess);
 		redirect('coach/coachee/session/' . $coacheeID);
