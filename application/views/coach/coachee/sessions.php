@@ -34,9 +34,8 @@
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
 							<h6 class="m-0 font-weight-bold text-primary float-left">Session</h6>
-							<a href="<?= site_url('coach/coachee/session/new/') . $coachee_id ?>" class="btn btn-primary float-right ml-2">Tambah Sesi</a>
-							<a href="<?= site_url('coach/coachee/' . $coachee_id) ?>" class="btn btn-primary float-right ml-2">Lihat Data Coachee</a>
-
+							<button onclick="addSession('<?= site_url('coach/coachee/session/new/' . $coachee_id) ?>')" class="btn btn-primary float-right	mx-1">Tambah Sesi</button>
+							<a href="<?= site_url('coach/coachee/') . $coachee_id ?>" class="btn btn-primary float-right mx-1">Lihat Data</a>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -66,9 +65,9 @@
 												</td>
 												<td>
 													<?php if ($session->status == 'belum mulai') : ?>
-														<a href="<?= site_url('coach/coachee/session/start/' . $session->id . '/' . $session->coachee_id) ?>" class="btn btn-danger ">Mulai Sesi</a>
+														<button onclick=" confirmStart('<?= site_url('coach/coachee/session/start/' . $session->id . '/' . $session->coachee_id) ?>')" class="btn btn-danger">Mulai Sesi</button>
 													<?php elseif ($session->status == 'belum selesai') : ?>
-														<a href="<?= site_url('coach/coachee/session/end/' . $session->id . '/' . $session->coachee_id) ?>" class="btn btn-primary ">Selesaikan Sesi</a>
+														<button onclick=" confirmEnd('<?= site_url('coach/coachee/session/end/' . $session->id . '/' . $session->coachee_id) ?>')" class="btn btn-primary">Selesaikan Sesi</button>
 													<?php elseif ($session->status == 'selesai') : ?>
 														<a href="" class="btn btn-success disabled">Selesai</a>
 													<?php endif ?>
@@ -161,6 +160,67 @@
 		</div>
 	</div>
 	<?php $this->load->view('layouts/script'); ?>
+	<script>
+		function addSession(link) {
+			Swal.fire({
+				title: 'Apakah Anda Ingin Menambah Sesi',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					Swal.fire(
+						'Berhasil!',
+						'Berhasil Menambahkan Sesi',
+						'success'
+					);
+					window.location.replace(link)
+				}
+			})
+		}
+
+		function confirmEnd(link) {
+			Swal.fire({
+				title: 'Apakah Anda Ingin Mengakhiri Sesi',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					Swal.fire(
+						'Berhasil!',
+						'Berhasil Mengakhiri Sesi',
+						'success'
+					);
+					window.location.replace(link)
+				}
+			})
+		}
+
+		function confirmStart(link) {
+			Swal.fire({
+				title: 'Apakah Anda Ingin Memulai Sesi',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					Swal.fire(
+						'Berhasil!',
+						'Berhasil Memulai Sesi',
+						'success'
+					);
+					window.location.replace(link)
+				}
+			})
+		}
+	</script>
 </body>
 
 </html>
