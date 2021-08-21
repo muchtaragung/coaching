@@ -151,6 +151,17 @@
 		</div>
 	</div>
 	<?php $this->load->view('layouts/script'); ?>
+
+	<?php if ($this->session->flashdata('status') == 'login') : ?>
+		<script>
+			Swal.fire(
+				'Selamat Datang',
+				'Anda Telah Login',
+				'success'
+			)
+		</script>
+	<?php endif ?>
 </body>
+
 
 </html>

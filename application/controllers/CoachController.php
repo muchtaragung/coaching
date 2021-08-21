@@ -99,15 +99,16 @@ class CoachController extends CI_Controller
 		redirect('coach/coachee/goal/' . $notes['goals_id']);
 	}
 
-	// public function penilaianSesi($sessionID, $coacheeId)
-	// {
-	// 	$coachID = $this->session->userdata('id');
+	public function penilaianSesi($sessionID, $coacheeId)
+	{
+		$coachID = $this->session->userdata('id');
 
-	// 	$data['session'] = $this->CoachModel->getSessionByID($sessionID);
-	// 	$data['coachee'] = $this->CoachModel->getCoacheeByID($coacheeId);
+		$data['session'] = $this->CoachModel->getSessionByID($sessionID);
+		$data['coachee'] = $this->CoachModel->getCoacheeByID($coacheeId);
+		$data['coach']   = $this->CoachModel->getCoachByID($coachID);
 
-	// 	$
-	// }
+		var_dump($data);
+	}
 }
 
 /* End of file CoachController.php */
