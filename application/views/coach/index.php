@@ -46,13 +46,6 @@
 											<th>Action</th>
 										</tr>
 									</thead>
-									<tfoot>
-										<tr>
-											<th>No</th>
-											<th>Nama</th>
-											<th>Action</th>
-										</tr>
-									</tfoot>
 									<tbody>
 										<?php $i = 1;
 										foreach ($coachee as $coachee) : ?>
@@ -133,14 +126,6 @@
 						<div class="form-group">
 							<label for="password">password</label>
 							<input type="password" name="password" id="password" class="form-control">
-						</div>
-						<div class="form-group">
-							<label for="coach">coach</label>
-							<select name="coach" id="" class="form-control">
-								<?php foreach ($coaches as $coach) : ?>
-									<option value="<?= $coach->id ?>"><?= $coach->name ?></option>
-								<?php endforeach ?>
-							</select>
 						</div>
 					</div>
 					<div class="modal-footer">

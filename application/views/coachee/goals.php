@@ -47,14 +47,6 @@
 											<th>Action</th>
 										</tr>
 									</thead>
-									<tfoot>
-										<tr>
-											<th>No</th>
-											<th>Goals</th>
-											<th>Due Date</th>
-											<th>Action</th>
-										</tr>
-									</tfoot>
 									<tbody>
 										<?php $i = 1;
 										foreach ($goals as $goal) : ?>
