@@ -33,8 +33,10 @@
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Session</h6>
-							<a href="<?= site_url('coach/coachee/session/new/') . $coachee_id ?>" class="btn btn-primary float-right">Tambah Sesi</a>
+							<h6 class="m-0 font-weight-bold text-primary float-left">Session</h6>
+							<a href="<?= site_url('coach/coachee/session/new/') . $coachee_id ?>" class="btn btn-primary float-right ml-2">Tambah Sesi</a>
+							<a href="<?= site_url('coach/coachee/' . $coachee_id) ?>" class="btn btn-primary float-right ml-2">Lihat Data Coachee</a>
+
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">

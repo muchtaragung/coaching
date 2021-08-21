@@ -53,7 +53,6 @@
 												<td><?php echo $i++ ?></td>
 												<td> <?= $coachee->name ?> </td>
 												<td>
-													<a href="<?= site_url('coach/coachee/') . $coachee->id ?>" class="btn btn-info">Lihat Data</a>
 													<a href="<?= site_url('coach/coachee/session/') . $coachee->id ?>" class="btn btn-info">Lihat Sesi</a>
 												</td>
 											</tr>
