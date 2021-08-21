@@ -57,9 +57,9 @@
 												<td><?= $i++ ?></td>
 												<td><?= $action->action ?></td>
 												<form>
-													<td><input type="radio" <?php if ($action->result == 'berhasil') { ?> checked <?php } ?> disabled></td>
-													<td><input type="radio" <?php if ($action->result == 'tidak berhasil') { ?> checked <?php } ?> disabled></td>
-													<td><input type="radio" <?php if ($action->result == 'butuh waktu lama') { ?> checked <?php } ?> disabled></td>
+													<td><?php if ($action->result == 'berhasil') { ?> <h2>✓</h2> <?php } ?></td>
+													<td> <?php if ($action->result == 'tidak berhasil') { ?> <h2>✓</h2> <?php } ?></td>
+													<td> <?php if ($action->result == 'butuh waktu lama') { ?> <h2>✓</h2> <?php } ?></td>
 												</form>
 											</tr>
 										<?php endforeach ?>

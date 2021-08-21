@@ -38,7 +38,7 @@ class CoachController extends CI_Controller
 		$data['sessions'] = $this->CoachModel->getCoacheeSession($coacheeID);
 		$data['page_name'] = "Coachee Session";
 		$data['coachee_id'] = $coacheeID;
-		$this->load->view('coach/coachee_sessions', $data, FALSE);
+		$this->load->view('coach/coachee/sessions', $data, FALSE);
 	}
 
 	public function addSession($coacheeID)
@@ -76,7 +76,7 @@ class CoachController extends CI_Controller
 		$data['page_name'] = 'coachee goals';
 		$data['goals'] = $this->CoachModel->allGoalsByID($coacheeID);
 		$data['coachee'] = $this->CoachModel->getCoacheeName($coacheeID);
-		$this->load->view('coach/coachee_goals', $data, FALSE);
+		$this->load->view('coach/coachee/goals', $data, FALSE);
 	}
 
 	public function ShowCoacheGoal($goalID)
@@ -87,7 +87,7 @@ class CoachController extends CI_Controller
 		$data['criteria']  = $this->CoachModel->getCriteria($goalID);
 		$data['notes']     = $this->CoachModel->getGoalsNotes($data['goal']->id);
 
-		$this->load->view('coach/coachee_goal', $data, FALSE);
+		$this->load->view('coach/coachee/goal', $data, FALSE);
 	}
 
 	public function addNotes()
