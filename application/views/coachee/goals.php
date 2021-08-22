@@ -99,7 +99,7 @@
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="goal">Goals</label>
-							<input type="text" name="goal" id="goal" class="form-control">
+							<textarea name="goal" id="" cols="30" rows="10" class="form-control"></textarea>
 						</div>
 						<div class="form-group">
 							<label for="due_date">due date</label>
