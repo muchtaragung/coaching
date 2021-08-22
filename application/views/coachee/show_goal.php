@@ -56,6 +56,7 @@
 						<div class="card-header py-3">
 							<h6 class="m-0 font-weight-bold text-primary float-left"><?= $goal->goal ?></h6>
 							<a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addActionPlan">Tambah Action Plan</a>
+							<button onclick="endGoal('<?= site_url('coachee/endGoal/' . $goal->id) ?>')" class="btn btn-primary float-right mx-2">Selesaikan Goal</button>
 						</div>
 						<div class="card-body">
 							<div class="row">
@@ -200,6 +201,28 @@
 		</div>
 	</div>
 	<?php $this->load->view('layouts/script'); ?>
+	<script>
+		function endGoal(link) {
+			Swal.fire({
+				title: 'Apakah Anda Menyelesaikan Goal Ini',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					Swal.fire(
+						'Berhasil!',
+						'Berhasil Menyelesaikan Goal',
+						'success'
+					);
+					window.location.replace(link)
+				}
+			})
+		}
+		s
+	</script>
 </body>
 
 </html>

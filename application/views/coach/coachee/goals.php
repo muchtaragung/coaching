@@ -43,6 +43,7 @@
 											<th>No</th>
 											<th>Goals</th>
 											<th>Due Date</th>
+											<th>Status</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -53,6 +54,11 @@
 												<td><?php echo $i++ ?></td>
 												<td> <?= $goal->goal ?> </td>
 												<td> <?= $goal->due_date ?> </td>
+												<?php if ($goal->status == 'selesai') : ?>
+													<td><button class="btn btn-success disabled">Selesai</button></td>
+												<?php else : ?>
+													<td><button class="btn btn-primary disabled">Belum Selesai</button></td>
+												<?php endif ?>
 												<td>
 													<a href="<?= site_url('coach/coachee/goal/') . $goal->id ?>" class="btn btn-info">Lihat Goal</a>
 												</td>

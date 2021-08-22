@@ -75,13 +75,14 @@ $route['coach/coachee/session/save-penilaian']          = 'CoachController/saveP
 
 
 // coachee routes
-$route['coachee']             = 'CoacheeController';
-$route['coachee/goals']       = 'CoacheeController/allGoals';
-$route['coachee/addgoal']     = 'CoacheeController/addGoal';
-$route['coachee/goal/(:any)'] = 'CoacheeController/showGoal/$1';
-$route['coachee/addaction']   = 'CoacheeController/addActionPlan';
-$route['coachee/addcriteria'] = 'CoacheeController/addCriteria';
-$route['coachee/saveResult']  = 'CoacheeController/updateResult';
+$route['coachee']                = 'CoacheeController';
+$route['coachee/goals']          = 'CoacheeController/allGoals';
+$route['coachee/addgoal']        = 'CoacheeController/addGoal';
+$route['coachee/goal/(:any)']    = 'CoacheeController/showGoal/$1';
+$route['coachee/addaction']      = 'CoacheeController/addActionPlan';
+$route['coachee/addcriteria']    = 'CoacheeController/addCriteria';
+$route['coachee/saveResult']     = 'CoacheeController/updateResult';
+$route['coachee/endGoal/(:num)'] = 'CoacheeController/endGoal/$1';
 
 // admin routes
 $route['admin']       = 'AdminController';
