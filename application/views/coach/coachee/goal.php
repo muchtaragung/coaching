@@ -198,6 +198,15 @@
 			)
 		</script>
 	<?php endif ?>
+
+	<?php if ($this->session->flashdata('milestone') == 'ada') : ?>
+		<script>
+			Swal.fire(
+				'',
+				'Milestone Sudah Ada',
+			)
+		</script>
+	<?php endif ?>
 </body>
 
 </html>

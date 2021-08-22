@@ -137,8 +137,13 @@ class CoachController extends CI_Controller
 	{
 		$data['page_name'] = 'Milestone';
 		$data['goal'] = $this->CoachModel->goalByID($goalID);
-		$data['coachee'] = $this->CoachModel->getCoacheeByID($data['goal']->id);
+		$data['checkMilestone'] = $this->CoachModel->checkMilestone($goalID);
 
+		$data['coachee'] = $this->CoachModel->getCoacheeByID($data['goal']->id);
+		if ($data['checkMilestone'] > 0) {
+			$this->session->set_flashdata('milestone', 'ada');
+			redirect('coach/coachee/goal/' . $goalID);
+		}
 		$this->load->view('coach/milestone', $data);
 	}
 
