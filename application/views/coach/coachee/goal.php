@@ -29,11 +29,15 @@
 
 					<!-- Page Heading -->
 					<h1 class="h3 mb-4 text-gray-800">Goal : <?= $goal->goal ?></h1>
+					<h1 class="h3 mb-4 text-gray-800">Status : <?= $goal->status ?></h1>
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
 							<h4 class="m-0 font-weight-bold text-primary float-left">Success Criteria : <?= $criteria->criteria ?></h4>
 							<a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addNote">Tambah Notes</a>
+							<?php if ($goal->status == 'selesai') : ?>
+								<a href="<?= site_url('coachee/goal/') . $goal->id ?>" class="btn btn-info">Penilaian Milestone</a>
+							<?php endif ?>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">

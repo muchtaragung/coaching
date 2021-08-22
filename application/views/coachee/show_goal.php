@@ -28,35 +28,28 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
+					<h1 class="h3 mb-4 text-gray-800">Goal : <?= $goal->goal ?></h1>
+					<h1 class="h3 mb-4 text-gray-800">Status : <?= $goal->status ?></h1>
 					<?php if ($this->session->flashdata('action_plan')) : ?>
 						<div class="alert alert-success">
 							<a href="#" class="close" data-dismiss="alert">&times;</a>
 							<strong>Success!</strong> <?php echo $this->session->flashdata('action_plan'); ?>
 						</div>
 					<?php endif ?>
-					<?php
-					if (isset($_SESSION['action_plan'])) {
-						unset($_SESSION['action_plan']);
-					}
-					?>
 					<?php if ($this->session->flashdata('criteria')) : ?>
 						<div class="alert alert-success" role="alert">
 							<a href="#" class="close" data-dismiss="alert">&times;</a>
 							<strong>Success!</strong> <?php echo $this->session->flashdata('criteria'); ?>
 						</div>
 					<?php endif ?>
-					<?php
-					if (isset($_SESSION['criteria'])) {
-						unset($_SESSION['criteria']);
-					}
-					?>
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
 							<h6 class="m-0 font-weight-bold text-primary float-left"><?= $goal->goal ?></h6>
 							<a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addActionPlan">Tambah Action Plan</a>
-							<button onclick="endGoal('<?= site_url('coachee/endGoal/' . $goal->id) ?>')" class="btn btn-primary float-right mx-2">Selesaikan Goal</button>
+							<?php if ($goal->status == 'belum selesai') : ?>
+								<button onclick="endGoal('<?= site_url('coachee/endGoal/' . $goal->id) ?>')" class="btn btn-primary float-right mx-2">Selesaikan Goal</button>
+							<?php endif ?>
 						</div>
 						<div class="card-body">
 							<div class="row">
