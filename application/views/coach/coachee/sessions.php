@@ -193,6 +193,15 @@
 			)
 		</script>
 	<?php endif ?>
+
+	<?php if ($this->session->flashdata('penilaian') == 'ada') : ?>
+		<script>
+			Swal.fire(
+				'',
+				'Penilaian Sudah Ada',
+			)
+		</script>
+	<?php endif ?>
 </body>
 
 </html>
