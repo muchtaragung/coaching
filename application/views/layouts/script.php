@@ -14,3 +14,6 @@
 
 <!-- Page level custom scripts -->
 <script src="<?= base_url('assets/') ?>js/demo/datatables-demo.js"></script>
+
+<!-- Sweet Alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

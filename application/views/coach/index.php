@@ -46,13 +46,6 @@
 											<th>Action</th>
 										</tr>
 									</thead>
-									<tfoot>
-										<tr>
-											<th>No</th>
-											<th>Nama</th>
-											<th>Action</th>
-										</tr>
-									</tfoot>
 									<tbody>
 										<?php $i = 1;
 										foreach ($coachee as $coachee) : ?>
@@ -60,7 +53,6 @@
 												<td><?php echo $i++ ?></td>
 												<td> <?= $coachee->name ?> </td>
 												<td>
-													<a href="<?= site_url('coach/coachee/') . $coachee->id ?>" class="btn btn-info">Lihat Data</a>
 													<a href="<?= site_url('coach/coachee/session/') . $coachee->id ?>" class="btn btn-info">Lihat Sesi</a>
 												</td>
 											</tr>
@@ -134,14 +126,6 @@
 							<label for="password">password</label>
 							<input type="password" name="password" id="password" class="form-control">
 						</div>
-						<div class="form-group">
-							<label for="coach">coach</label>
-							<select name="coach" id="" class="form-control">
-								<?php foreach ($coaches as $coach) : ?>
-									<option value="<?= $coach->id ?>"><?= $coach->name ?></option>
-								<?php endforeach ?>
-							</select>
-						</div>
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-secondary" type="submit">Submit</button>
@@ -151,6 +135,17 @@
 		</div>
 	</div>
 	<?php $this->load->view('layouts/script'); ?>
+
+	<?php if ($this->session->flashdata('status') == 'login') : ?>
+		<script>
+			Swal.fire(
+				'Selamat Datang',
+				'Anda Telah Login',
+				'success'
+			)
+		</script>
+	<?php endif ?>
 </body>
+
 
 </html>

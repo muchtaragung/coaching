@@ -44,23 +44,21 @@
 											<th>No</th>
 											<th>Goals</th>
 											<th>Due Date</th>
+											<th>Status</th>
 											<th>Action</th>
 										</tr>
 									</thead>
-									<tfoot>
-										<tr>
-											<th>No</th>
-											<th>Goals</th>
-											<th>Due Date</th>
-											<th>Action</th>
-										</tr>
-									</tfoot>
 									<tbody>
 										<?php $i = 1;
 										foreach ($goals as $goal) : ?>
 											<tr>
 												<td><?php echo $i++ ?></td>
 												<td> <?= $goal->goal ?> </td>
+												<?php if ($goal->status == 'selesai') : ?>
+													<td><button class="btn btn-success disabled">Selesai</button></td>
+												<?php else : ?>
+													<td><button class="btn btn-primary disabled">Belum Selesai</button></td>
+												<?php endif ?>
 												<td> <?= $goal->due_date ?> </td>
 												<td>
 													<a href="<?= site_url('coachee/goal/') . $goal->id ?>" class="btn btn-info">Lihat Goal</a>
@@ -107,7 +105,7 @@
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="goal">Goals</label>
-							<input type="text" name="goal" id="goal" class="form-control">
+							<textarea name="goal" id="" cols="30" rows="10" class="form-control"></textarea>
 						</div>
 						<div class="form-group">
 							<label for="due_date">due date</label>

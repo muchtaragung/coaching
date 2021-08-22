@@ -29,11 +29,15 @@
 
 					<!-- Page Heading -->
 					<h1 class="h3 mb-4 text-gray-800">Goal : <?= $goal->goal ?></h1>
+					<h1 class="h3 mb-4 text-gray-800">Status : <?= $goal->status ?></h1>
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
 							<h4 class="m-0 font-weight-bold text-primary float-left">Success Criteria : <?= $criteria->criteria ?></h4>
 							<a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addNote">Tambah Notes</a>
+							<?php if ($goal->status == 'selesai') : ?>
+								<a href="<?= site_url('coach/coachee/goal/milestone/add/' . $goal->id)  ?>" class="btn btn-primary float-right mr-2">Penilaian Milestone</a>
+							<?php endif ?>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -57,9 +61,9 @@
 												<td><?= $i++ ?></td>
 												<td><?= $action->action ?></td>
 												<form>
-													<td><input type="radio" <?php if ($action->result == 'berhasil') { ?> checked <?php } ?> disabled></td>
-													<td><input type="radio" <?php if ($action->result == 'tidak berhasil') { ?> checked <?php } ?> disabled></td>
-													<td><input type="radio" <?php if ($action->result == 'butuh waktu lama') { ?> checked <?php } ?> disabled></td>
+													<td><?php if ($action->result == 'berhasil') { ?> <h2>✓</h2> <?php } ?></td>
+													<td> <?php if ($action->result == 'tidak berhasil') { ?> <h2>✓</h2> <?php } ?></td>
+													<td> <?php if ($action->result == 'butuh waktu lama') { ?> <h2>✓</h2> <?php } ?></td>
 												</form>
 											</tr>
 										<?php endforeach ?>
@@ -185,6 +189,24 @@
 		</div>
 	</div>
 	<?php $this->load->view('layouts/script'); ?>
+	<?php if ($this->session->flashdata('milestone') == 'add') : ?>
+		<script>
+			Swal.fire(
+				'Sukses',
+				'Milestone Telah Di Tambahkan',
+				'success'
+			)
+		</script>
+	<?php endif ?>
+
+	<?php if ($this->session->flashdata('milestone') == 'ada') : ?>
+		<script>
+			Swal.fire(
+				'',
+				'Milestone Sudah Ada',
+			)
+		</script>
+	<?php endif ?>
 </body>
 
 </html>

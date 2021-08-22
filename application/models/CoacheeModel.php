@@ -51,8 +51,12 @@ class CoacheeModel extends CI_Model
 
 	public function saveResult($action_plan, $id)
 	{
-
 		return $this->db->where('id', $id)->update('action_plan', $action_plan);
+	}
+
+	public function endGoal($goal, $goalID)
+	{
+		return $this->db->where('id', $goalID)->update('goals', $goal);
 	}
 }
 

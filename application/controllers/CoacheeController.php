@@ -84,6 +84,14 @@ class CoacheeController extends CI_Controller
 		$this->CoacheeModel->saveResult($action, $id);
 		redirect('coachee/goal/' . $goalsID, 'refresh');
 	}
+
+	public function endGoal($goalID)
+	{
+		$goal['status'] = 'selesai';
+
+		$this->CoacheeModel->endGoal($goal, $goalID);
+		redirect('coachee/goals/', 'refresh');
+	}
 }
 
 /* End of file CoacheeController.php */

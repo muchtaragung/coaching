@@ -33,8 +33,9 @@
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Session</h6>
-							<a href="<?= site_url('coach/coachee/session/new/') . $coachee_id ?>" class="btn btn-primary float-right">Tambah Sesi</a>
+							<h6 class="m-0 font-weight-bold text-primary float-left">Session</h6>
+							<button onclick="addSession('<?= site_url('coach/coachee/session/new/' . $coachee_id) ?>')" class="btn btn-primary float-right	mx-1">Tambah Sesi</button>
+							<a href="<?= site_url('coach/coachee/') . $coachee_id ?>" class="btn btn-primary float-right mx-1">Lihat Data</a>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -64,11 +65,12 @@
 												</td>
 												<td>
 													<?php if ($session->status == 'belum mulai') : ?>
-														<a href="<?= site_url('coach/coachee/session/start/' . $session->id . '/' . $session->coachee_id) ?>" class="btn btn-danger ">Mulai Sesi</a>
+														<button onclick=" confirmStart('<?= site_url('coach/coachee/session/start/' . $session->id . '/' . $session->coachee_id) ?>')" class="btn btn-danger">Mulai Sesi</button>
 													<?php elseif ($session->status == 'belum selesai') : ?>
-														<a href="<?= site_url('coach/coachee/session/end/' . $session->id . '/' . $session->coachee_id) ?>" class="btn btn-primary ">Selesaikan Sesi</a>
+														<button onclick=" confirmEnd('<?= site_url('coach/coachee/session/end/' . $session->id . '/' . $session->coachee_id) ?>')" class="btn btn-primary">Selesaikan Sesi</button>
 													<?php elseif ($session->status == 'selesai') : ?>
-														<a href="" class="btn btn-success disabled">Selesai</a>
+														<a href="" class="btn btn-secondary disabled">Selesai</a>
+														<a href="<?= site_url('coach/coachee/session/penilaian/' . $session->id . '/' . $coachee_id) ?>" class="btn btn-primary">Penilaian</a>
 													<?php endif ?>
 												</td>
 											</tr>
@@ -119,46 +121,87 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="addCoachee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Tambah Peserta</h5>
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<form action="<?= site_url('coach/addcoachee') ?>" method="POST">
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="name">nama</label>
-							<input type="text" name="name" id="name" class="form-control">
-						</div>
-						<div class="form-group">
-							<label for="email">email</label>
-							<input type="email" name="email" id="email" class="form-control">
-						</div>
-						<div class="form-group">
-							<label for="password">password</label>
-							<input type="password" name="password" id="password" class="form-control">
-						</div>
-						<div class="form-group">
-							<label for="coach">coach</label>
-							<select name="coach" id="" class="form-control">
-								<?php foreach ($coaches as $coach) : ?>
-									<option value="<?= $coach->id ?>"><?= $coach->name ?></option>
-								<?php endforeach ?>
-							</select>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-secondary" type="submit">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
 	<?php $this->load->view('layouts/script'); ?>
+	<script>
+		function addSession(link) {
+			Swal.fire({
+				title: 'Apakah Anda Ingin Menambah Sesi',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					Swal.fire(
+						'Berhasil!',
+						'Berhasil Menambahkan Sesi',
+						'success'
+					);
+					window.location.replace(link)
+				}
+			})
+		}
+
+		function confirmEnd(link) {
+			Swal.fire({
+				title: 'Apakah Anda Ingin Mengakhiri Sesi',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					Swal.fire(
+						'Berhasil!',
+						'Berhasil Mengakhiri Sesi',
+						'success'
+					);
+					window.location.replace(link)
+				}
+			})
+		}
+
+		function confirmStart(link) {
+			Swal.fire({
+				title: 'Apakah Anda Ingin Memulai Sesi',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					Swal.fire(
+						'Berhasil!',
+						'Berhasil Memulai Sesi',
+						'success'
+					);
+					window.location.replace(link)
+				}
+			})
+		}
+	</script>
+
+	<?php if ($this->session->flashdata('penilaian') == 'save') : ?>
+		<script>
+			Swal.fire(
+				'',
+				'Sukses Menyimpan Penilaian',
+				'success'
+			)
+		</script>
+	<?php endif ?>
+
+	<?php if ($this->session->flashdata('penilaian') == 'ada') : ?>
+		<script>
+			Swal.fire(
+				'',
+				'Penilaian Sudah Ada',
+			)
+		</script>
+	<?php endif ?>
 </body>
 
 </html>

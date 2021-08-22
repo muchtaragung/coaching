@@ -59,27 +59,32 @@ $route['auth']   = 'AuthController/auth';
 $route['logout'] = 'AuthController/logout';
 
 // coach routes
-$route['coach']                     = 'CoachController';
-$route['coach/addcoachee']          = 'CoachController/addCoachee';
-$route['coach/coachee/(:any)']      = 'CoachController/showCoacheeGoals/$1';
-$route['coach/coachee/goal/(:any)'] = 'CoachController/ShowCoacheGoal/$1';
-$route['coach/coachee/note/add']    = 'CoachController/addNotes';
+$route['coach']                                   = 'CoachController';
+$route['coach/addcoachee']                        = 'CoachController/addCoachee';
+$route['coach/coachee/(:num)']                    = 'CoachController/showCoacheeGoals/$1';
+$route['coach/coachee/goal/(:num)']               = 'CoachController/ShowCoacheGoal/$1';
+$route['coach/coachee/note/add']                  = 'CoachController/addNotes';
+$route['coach/coachee/goal/milestone/add/(:num)'] = 'CoachController/addMilestone/$1';
+$route['coach/coachee/goal/milestone/save']       = 'CoachController/saveMilestone';
 
 // coachee session
-$route['coach/coachee/session/(:any)']              = 'CoachController/showCoacheeSessions/$1';
-$route['coach/coachee/session/new/(:any)']          = 'CoachController/addSession/$1';
-$route['coach/coachee/session/start/(:any)/(:any)'] = 'CoachController/startSession/$1/$2';
-$route['coach/coachee/session/end/(:any)/(:any)']   = 'CoachController/endSession/$1/$2';
+$route['coach/coachee/session/(:num)']                  = 'CoachController/showCoacheeSessions/$1';
+$route['coach/coachee/session/new/(:num)']              = 'CoachController/addSession/$1';
+$route['coach/coachee/session/start/(:num)/(:num)']     = 'CoachController/startSession/$1/$2';
+$route['coach/coachee/session/end/(:num)/(:num)']       = 'CoachController/endSession/$1/$2';
+$route['coach/coachee/session/penilaian/(:num)/(:num)'] = 'CoachController/penilaianSesi/$1/$2';
+$route['coach/coachee/session/save-penilaian']          = 'CoachController/savePenilaian';
 
 
 // coachee routes
-$route['coachee']             = 'CoacheeController';
-$route['coachee/goals']       = 'CoacheeController/allGoals';
-$route['coachee/addgoal']     = 'CoacheeController/addGoal';
-$route['coachee/goal/(:any)'] = 'CoacheeController/showGoal/$1';
-$route['coachee/addaction']   = 'CoacheeController/addActionPlan';
-$route['coachee/addcriteria'] = 'CoacheeController/addCriteria';
-$route['coachee/saveResult']  = 'CoacheeController/updateResult';
+$route['coachee']                = 'CoacheeController';
+$route['coachee/goals']          = 'CoacheeController/allGoals';
+$route['coachee/addgoal']        = 'CoacheeController/addGoal';
+$route['coachee/goal/(:num)']    = 'CoacheeController/showGoal/$1';
+$route['coachee/addaction']      = 'CoacheeController/addActionPlan';
+$route['coachee/addcriteria']    = 'CoacheeController/addCriteria';
+$route['coachee/saveResult']     = 'CoacheeController/updateResult';
+$route['coachee/endGoal/(:num)'] = 'CoacheeController/endGoal/$1';
 
 // admin routes
 $route['admin']       = 'AdminController';
@@ -87,6 +92,6 @@ $route['admin/login'] = 'AdminController/login';
 $route['admin/auth']  = 'AdminController/auth';
 $route['admin/coach/list']  = 'AdminController/coachList';
 $route['admin/coach/add']  = 'AdminController/addCoach';
-$route['admin/coach/delete/(:any)']  = 'AdminController/deleteCoach/$1';
-$route['admin/coach/edit/(:any)']  = 'AdminController/editCoach/$1';
+$route['admin/coach/delete/(:num)']  = 'AdminController/deleteCoach/$1';
+$route['admin/coach/edit/(:num)']  = 'AdminController/editCoach/$1';
 $route['admin/coach/update']  = 'AdminController/updateCoach';

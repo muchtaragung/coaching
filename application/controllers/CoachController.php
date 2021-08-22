@@ -27,7 +27,7 @@ class CoachController extends CI_Controller
 		$coachee['name'] = $this->input->post('name');
 		$coachee['email'] = $this->input->post('email');
 		$coachee['password'] = $this->input->post('password');
-		$coachee['coach_id'] = $this->input->post('coach');
+		$coachee['coach_id'] = $this->session->userdata('id');
 
 		$this->CoachModel->storeCoachee($coachee);
 		redirect('coach');
@@ -38,7 +38,8 @@ class CoachController extends CI_Controller
 		$data['sessions'] = $this->CoachModel->getCoacheeSession($coacheeID);
 		$data['page_name'] = "Coachee Session";
 		$data['coachee_id'] = $coacheeID;
-		$this->load->view('coach/coachee_sessions', $data, FALSE);
+
+		$this->load->view('coach/coachee/sessions', $data, FALSE);
 	}
 
 	public function addSession($coacheeID)
@@ -58,7 +59,7 @@ class CoachController extends CI_Controller
 	public function startSession($sessionID, $coacheeID)
 	{
 		$sess['status'] = 'belum selesai';
-
+		$sess['start_time'] = date('Y-m-d H:i:s');
 		$this->CoachModel->startSession($sessionID, $sess);
 		redirect('coach/coachee/session/' . $coacheeID);
 	}
@@ -66,6 +67,7 @@ class CoachController extends CI_Controller
 	public function endSession($sessionID, $coacheeID)
 	{
 		$sess['status'] = 'selesai';
+		$sess['end_time'] = date('Y-m-d H:i:s');
 
 		$this->CoachModel->endSession($sessionID, $sess);
 		redirect('coach/coachee/session/' . $coacheeID);
@@ -76,7 +78,7 @@ class CoachController extends CI_Controller
 		$data['page_name'] = 'coachee goals';
 		$data['goals'] = $this->CoachModel->allGoalsByID($coacheeID);
 		$data['coachee'] = $this->CoachModel->getCoacheeName($coacheeID);
-		$this->load->view('coach/coachee_goals', $data, FALSE);
+		$this->load->view('coach/coachee/goals', $data, FALSE);
 	}
 
 	public function ShowCoacheGoal($goalID)
@@ -87,7 +89,7 @@ class CoachController extends CI_Controller
 		$data['criteria']  = $this->CoachModel->getCriteria($goalID);
 		$data['notes']     = $this->CoachModel->getGoalsNotes($data['goal']->id);
 
-		$this->load->view('coach/coachee_goal', $data, FALSE);
+		$this->load->view('coach/coachee/goal', $data, FALSE);
 	}
 
 	public function addNotes()
@@ -99,15 +101,64 @@ class CoachController extends CI_Controller
 		redirect('coach/coachee/goal/' . $notes['goals_id']);
 	}
 
-	// public function penilaianSesi($sessionID, $coacheeId)
-	// {
-	// 	$coachID = $this->session->userdata('id');
+	public function penilaianSesi($sessionID, $coacheeId)
+	{
+		$coachID = $this->session->userdata('id');
 
-	// 	$data['session'] = $this->CoachModel->getSessionByID($sessionID);
-	// 	$data['coachee'] = $this->CoachModel->getCoacheeByID($coacheeId);
+		$data['checkPenilaian']  = $this->CoachModel->checkPenilaianBySessionID($sessionID);
+		$data['session']         = $this->CoachModel->getSessionByID($sessionID);
+		$data['coachee']         = $this->CoachModel->getCoacheeByID($coacheeId);
+		$data['coach']           = $this->CoachModel->getCoachByID($coachID);
 
-	// 	$
-	// }
+		if ($data['checkPenilaian'] > 0) {
+			$this->session->set_flashdata('penilaian', 'ada');
+			redirect('coach/coachee/session/' . $coacheeId);
+		}
+
+		$this->load->view('coach/penilaian', $data, FALSE);
+	}
+
+	public function savePenilaian()
+	{
+		$penilaian['coach_id']   = $this->session->userdata['id'];
+		$penilaian['coachee_id'] = $this->input->post('coachee_id');
+		$penilaian['session_id'] = $this->input->post('session_id');
+		$penilaian['komunikasi'] = $this->input->post('komunikasi');
+		$penilaian['kehadiran']  = $this->input->post('kehadiran');
+		$penilaian['effort']     = $this->input->post('effort');
+		$penilaian['komitment']  = $this->input->post('komitment');
+
+		$this->session->set_flashdata('penilaian', 'save');
+		$this->CoachModel->savePenilaian($penilaian);
+		redirect('coach/coachee/session/' . $penilaian['coachee_id']);
+	}
+
+	public function addMilestone($goalID)
+	{
+		$data['page_name'] = 'Milestone';
+		$data['goal'] = $this->CoachModel->goalByID($goalID);
+		$data['checkMilestone'] = $this->CoachModel->checkMilestone($goalID);
+
+		$data['coachee'] = $this->CoachModel->getCoacheeByID($data['goal']->id);
+		if ($data['checkMilestone'] > 0) {
+			$this->session->set_flashdata('milestone', 'ada');
+			redirect('coach/coachee/goal/' . $goalID);
+		}
+		$this->load->view('coach/milestone', $data);
+	}
+
+	public function saveMilestone()
+	{
+		$milestone['coach_id'] = $this->session->userdata('id');
+		$milestone['coachee_id'] = $this->input->post('coachee_id');
+		$milestone['goals_id'] = $this->input->post('goals_id');
+		$milestone['milestone'] = $this->input->post('milestone');
+		$milestone['keterangan'] = $this->input->post('keterangan');
+
+		$this->CoachModel->saveMilestone($milestone);
+		$this->session->set_flashdata('milestone', 'add');
+		redirect('coach/coachee/goal/' . $milestone['goals_id']);
+	}
 }
 
 /* End of file CoachController.php */
