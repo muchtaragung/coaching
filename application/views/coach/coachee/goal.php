@@ -36,7 +36,7 @@
 							<h4 class="m-0 font-weight-bold text-primary float-left">Success Criteria : <?= $criteria->criteria ?></h4>
 							<a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addNote">Tambah Notes</a>
 							<?php if ($goal->status == 'selesai') : ?>
-								<a href="<?= site_url('coachee/goal/') . $goal->id ?>" class="btn btn-info">Penilaian Milestone</a>
+								<a href="<?= site_url('coach/coachee/goal/milestone/add/' . $goal->id)  ?>" class="btn btn-primary float-right mr-2">Penilaian Milestone</a>
 							<?php endif ?>
 						</div>
 						<div class="card-body">
@@ -189,6 +189,15 @@
 		</div>
 	</div>
 	<?php $this->load->view('layouts/script'); ?>
+	<?php if ($this->session->flashdata('milestone') == 'add') : ?>
+		<script>
+			Swal.fire(
+				'Sukses',
+				'Milestone Telah Di Tambahkan',
+				'success'
+			)
+		</script>
+	<?php endif ?>
 </body>
 
 </html>

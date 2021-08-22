@@ -132,6 +132,28 @@ class CoachController extends CI_Controller
 		$this->CoachModel->savePenilaian($penilaian);
 		redirect('coach/coachee/session/' . $penilaian['coachee_id']);
 	}
+
+	public function addMilestone($goalID)
+	{
+		$data['page_name'] = 'Milestone';
+		$data['goal'] = $this->CoachModel->goalByID($goalID);
+		$data['coachee'] = $this->CoachModel->getCoacheeByID($data['goal']->id);
+
+		$this->load->view('coach/milestone', $data);
+	}
+
+	public function saveMilestone()
+	{
+		$milestone['coach_id'] = $this->session->userdata('id');
+		$milestone['coachee_id'] = $this->input->post('coachee_id');
+		$milestone['goals_id'] = $this->input->post('goals_id');
+		$milestone['milestone'] = $this->input->post('milestone');
+		$milestone['keterangan'] = $this->input->post('keterangan');
+
+		$this->CoachModel->saveMilestone($milestone);
+		$this->session->set_flashdata('milestone', 'add');
+		redirect('coach/coachee/goal/' . $milestone['goals_id']);
+	}
 }
 
 /* End of file CoachController.php */
