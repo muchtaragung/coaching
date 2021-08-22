@@ -119,12 +119,10 @@
 														<td><button type="submit" class="btn btn-sm btn-primary">Submit</button></td>
 													</form>
 												<?php else : ?>
-													<form>
-														<td><input type="radio" <?php if ($action->result == 'berhasil') { ?> checked <?php } ?> disabled></td>
-														<td><input type="radio" <?php if ($action->result == 'tidak berhasil') { ?> checked <?php } ?> disabled></td>
-														<td><input type="radio" <?php if ($action->result == 'butuh waktu lama') { ?> checked <?php } ?> disabled></td>
-														<td><button type="submit" class="btn btn-sm btn-secondary disabled">Submit</button></td>
-													</form>
+													<td><?php if ($action->result == 'berhasil') { ?> <h2>✓</h2> <?php } ?></td>
+													<td> <?php if ($action->result == 'tidak berhasil') { ?> <h2>✓</h2> <?php } ?></td>
+													<td> <?php if ($action->result == 'butuh waktu lama') { ?> <h2>✓</h2> <?php } ?></td>
+													<td><button type="submit" class="btn btn-sm btn-secondary disabled">Submit</button></td>
 												<?php endif ?>
 											</tr>
 										<?php endforeach ?>
