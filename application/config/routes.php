@@ -66,10 +66,12 @@ $route['coach/coachee/goal/(:any)'] = 'CoachController/ShowCoacheGoal/$1';
 $route['coach/coachee/note/add']    = 'CoachController/addNotes';
 
 // coachee session
-$route['coach/coachee/session/(:any)']              = 'CoachController/showCoacheeSessions/$1';
-$route['coach/coachee/session/new/(:any)']          = 'CoachController/addSession/$1';
-$route['coach/coachee/session/start/(:any)/(:any)'] = 'CoachController/startSession/$1/$2';
-$route['coach/coachee/session/end/(:any)/(:any)']   = 'CoachController/endSession/$1/$2';
+$route['coach/coachee/session/(:num)']                  = 'CoachController/showCoacheeSessions/$1';
+$route['coach/coachee/session/new/(:any)']              = 'CoachController/addSession/$1';
+$route['coach/coachee/session/start/(:any)/(:any)']     = 'CoachController/startSession/$1/$2';
+$route['coach/coachee/session/end/(:any)/(:any)']       = 'CoachController/endSession/$1/$2';
+$route['coach/coachee/session/penilaian/(:any)/(:any)'] = 'CoachController/penilaianSesi/$1/$2';
+$route['coach/coachee/session/save-penilaian']          = 'CoachController/savePenilaian';
 
 
 // coachee routes

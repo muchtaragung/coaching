@@ -109,6 +109,22 @@ class CoachController extends CI_Controller
 		$data['coach']   = $this->CoachModel->getCoachByID($coachID);
 
 		var_dump($data);
+		$this->load->view('coach/penilaian', $data, FALSE);
+	}
+
+	public function savePenilaian()
+	{
+		$penilaian['coach_id']   = $this->session->userdata['id'];
+		$penilaian['coachee_id'] = $this->input->post('coachee_id');
+		$penilaian['session_id'] = $this->input->post('session_id');
+		$penilaian['komunikasi'] = $this->input->post('komunikasi');
+		$penilaian['kehadiran']  = $this->input->post('kehadiran');
+		$penilaian['effort']     = $this->input->post('effort');
+		$penilaian['komitment']  = $this->input->post('komitment');
+
+		$this->session->set_flashdata('penilaian', 'save');
+		$this->CoachModel->savePenilaian($penilaian);
+		redirect('coach/coachee/session/' . $penilaian['coachee_id']);
 	}
 }
 

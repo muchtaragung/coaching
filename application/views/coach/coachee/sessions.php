@@ -69,7 +69,8 @@
 													<?php elseif ($session->status == 'belum selesai') : ?>
 														<button onclick=" confirmEnd('<?= site_url('coach/coachee/session/end/' . $session->id . '/' . $session->coachee_id) ?>')" class="btn btn-primary">Selesaikan Sesi</button>
 													<?php elseif ($session->status == 'selesai') : ?>
-														<a href="" class="btn btn-success disabled">Selesai</a>
+														<a href="" class="btn btn-secondary disabled">Selesai</a>
+														<a href="<?= site_url('coach/coachee/session/penilaian/' . $session->id . '/' . $coachee_id) ?>" class="btn btn-primary">Penilaian</a>
 													<?php endif ?>
 												</td>
 											</tr>
@@ -182,6 +183,16 @@
 			})
 		}
 	</script>
+
+	<?php if ($this->session->flashdata('penilaian') == 'save') : ?>
+		<script>
+			Swal.fire(
+				'',
+				'Sukses Menyimpan Penilaian',
+				'success'
+			)
+		</script>
+	<?php endif ?>
 </body>
 
 </html>

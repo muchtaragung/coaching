@@ -89,6 +89,21 @@ class CoachModel extends CI_Model
 	{
 		return $this->db->where('id', $sessionID)->get('session')->row();
 	}
+
+	public function getCoacheeByID($coacheeID)
+	{
+		return $this->db->where('id', $coacheeID)->get('coachee')->row();
+	}
+
+	public function getCoachByID($coachID)
+	{
+		return $this->db->where('id', $coachID)->get('coach')->row();
+	}
+
+	public function savePenilaian($penilaian)
+	{
+		return $this->db->insert('penilaian_sesi', $penilaian);
+	}
 }
 
 /* End of file CoachModel.php */
