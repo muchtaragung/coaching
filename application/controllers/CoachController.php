@@ -34,7 +34,7 @@ class CoachController extends CI_Controller
 	{
 		$coachee['name'] = $this->input->post('name');
 		$coachee['email'] = $this->input->post('email');
-		$coachee['password'] = $this->input->post('password');
+		$coachee['password'] = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
 		$coachee['coach_id'] = $this->session->userdata('id');
 		$coachee['company_id'] = $this->input->post('company_id');
 

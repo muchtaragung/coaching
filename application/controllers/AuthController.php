@@ -18,41 +18,41 @@ class AuthController extends CI_Controller
 
 	public function auth()
 	{
-		$email = $this->input->post('email');
+		$email    = $this->input->post('email');
 		$password = $this->input->post('password');
 
 		$where = array(
 			'email' => $email,
-			'password' => $password
 		);
 
 		$coachAuth      = $this->AuthModel->getCoach($where)->num_rows();
 		$coacheeAuth    = $this->AuthModel->getCoachee($where)->num_rows();
 
+		$coach          = $this->AuthModel->getCoach($where)->row();
+		$coachee        = $this->AuthModel->getCoachee($where)->row();
 
-		if ($coachAuth > 0) {
-			$auth = $this->AuthModel->getCoach($where)->row_array();
+		if ($coachAuth > 0 && password_verify($password, $coach->password)) {
 
 			$sessionData = array(
 				'login'    => 'coach',
-				'id'       => $auth['id'],
-				'name'     => $auth['name'],
-				'email'    => $auth['email'],
-				'password' => $auth['password']
+				'id'       => $coach->id,
+				'name'     => $coach->name,
+				'email'    => $coach->email,
+				'password' => $coach->password,
 			);
 
 			$this->session->set_userdata($sessionData);
 			$this->session->set_flashdata('status', 'login');
 			redirect(site_url('coach'));
-		} elseif ($coacheeAuth > 0) {
-			$auth = $this->AuthModel->getCoachee($where)->row_array();
+		} elseif ($coacheeAuth > 0 && password_verify($password, $coachee->password)) {
+
 
 			$data_session = array(
 				'login'    => 'coachee',
-				'id'       => $auth['id'],
-				'name'     => $auth['name'],
-				'email'    => $auth['email'],
-				'password' => $auth['password']
+				'id'       => $coachee->id,
+				'name'     => $coachee->name,
+				'email'    => $coachee->email,
+				'password' => $coachee->password,
 			);
 
 			$this->session->set_userdata($data_session);
