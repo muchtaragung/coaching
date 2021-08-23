@@ -37,24 +37,40 @@
 							<a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addCoach">Tambah Coach</a>
 						</div>
 						<div class="card-body">
-							<form action="<?= site_url('admin/coach/update') ?>" method="POST">
+							<form action="<?= site_url('admin/coachee/update') ?>" method="POST">
 								<div class="modal-body">
 									<div class="form-group">
 										<label for="name">nama</label>
-										<input type="hidden" name="id" id="id" class="form-control" value="<?= $coach->id ?>">
-										<input type="text" name="name" id="name" class="form-control" value="<?= $coach->name ?>">
+										<input type="hidden" name="id" id="id" class="form-control" value="<?= $coachee->id ?>">
+										<input type="text" name="name" id="name" class="form-control" value="<?= $coachee->name ?>">
 									</div>
 									<div class="form-group">
 										<label for="email">email</label>
-										<input type="email" name="email" id="email" class="form-control" value="<?= $coach->email ?>">
+										<input type="email" name="email" id="email" class="form-control" value="<?= $coachee->email ?>">
 									</div>
 									<div class="form-group">
 										<label for="password">password</label>
-										<input type="password" name="password" id="password" class="form-control" value="<?= $coach->password ?>">
+										<input type="password" name="password" id="password" class="form-control" value="<?= $coachee->password ?>">
+									</div>
+									<div class="form-group">
+										<label for="">Coach</label>
+										<select name="coach_id" id="" class="form-control">
+											<?php foreach ($coaches as $coach) : ?>
+												<option value="<?= $coach->id ?>" <?php if ($coachee->coach_id == $coach->id) { ?> selected <?php } ?>><?= $coach->name ?></option>
+											<?php endforeach ?>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="">Perusahaan</label>
+										<select name="company_id" id="" class="form-control">
+											<?php foreach ($companies as $company) : ?>
+												<option value="<?= $company->id ?>" <?php if ($coachee->company_id == $company->id) { ?> selected <?php } ?>><?= $company->name ?></option>
+											<?php endforeach ?>
+										</select>
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button class="btn btn-secondary" type="submit">Submit</button>
+									<button class="btn btn-primary" type="submit">Submit</button>
 								</div>
 							</form>
 						</div>

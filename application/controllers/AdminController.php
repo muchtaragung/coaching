@@ -171,29 +171,33 @@ class AdminController extends CI_Controller
 		redirect('admin/coachee/list/' . $coachee['company_id']);
 	}
 
-	public function deletecoachee($id)
+	public function deleteCoachee($id)
 	{
 		$data['coachee'] = $this->AdminModel->getcoacheeByID($id);
 		$this->AdminModel->deletecoachee($id);
 		redirect('admin/coachee/list/' . $data['coachee']->company_id);
 	}
 
-	public function editcoachee($id)
+	public function editCoachee($id)
 	{
 		$data['page_name'] = 'Edit coachee';
 		$data['coachee'] = $this->AdminModel->getcoacheeByID($id);
+		$data['companies'] = $this->AdminModel->getAllCompany();
+		$data['coaches']   = $this->AdminModel->getAllCoach();
 
 		$this->load->view('admin/coachee/edit', $data);
 	}
 
-	public function updatecoachee()
+	public function updateCoachee()
 	{
-		$id                = $this->input->post('id');
-		$coachee['name']     = $this->input->post('name');
-		$coachee['email']    = $this->input->post('email');
-		$coachee['password'] = $this->input->post('password');
+		$id                    = $this->input->post('id');
+		$coachee['name']       = $this->input->post('name');
+		$coachee['email']      = $this->input->post('email');
+		$coachee['password']   = $this->input->post('password');
+		$coachee['company_id'] = $this->input->post('company_id');
+		$coachee['coach_id']   = $this->input->post('coach_id');
 
 		$this->AdminModel->updatecoachee($id, $coachee);
-		return redirect('admin/coachee/list');
+		return redirect('admin/coachee/list/' . $coachee['company_id']);
 	}
 }
