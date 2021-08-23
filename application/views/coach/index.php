@@ -33,8 +33,7 @@
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Table Peserta</h6>
-							<a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addCoachee">Tambah Peserta</a>
+							<h6 class="m-0 font-weight-bold text-primary">Table Perusahaan</h6>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -42,18 +41,18 @@
 									<thead>
 										<tr>
 											<th>No</th>
-											<th></th>
+											<th>Nama Perusahaan</th>
 											<th>Action</th>
 										</tr>
 									</thead>
 									<tbody>
 										<?php $i = 1;
-										foreach ($coachee as $coachee) : ?>
+										foreach ($companies as $company) : ?>
 											<tr>
 												<td><?php echo $i++ ?></td>
-												<td> <?= $coachee->name ?> </td>
+												<td> <?= $company->name ?> </td>
 												<td>
-													<a href="<?= site_url('coach/coachee/session/') . $coachee->id ?>" class="btn btn-info">Lihat Sesi</a>
+													<a href="<?= site_url('coach/coachee/list/') . $company->id ?>" class="btn btn-info">Lihat Peserta</a>
 												</td>
 											</tr>
 										<?php endforeach ?>
@@ -84,56 +83,6 @@
 		<i class="fas fa-angle-up"></i>
 	</a>
 
-	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="login.html">Logout</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal fade" id="addCoachee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Tambah Peserta</h5>
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<form action="<?= site_url('coach/addcoachee') ?>" method="POST">
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="name">nama</label>
-							<input type="text" name="name" id="name" class="form-control">
-						</div>
-						<div class="form-group">
-							<label for="email">email</label>
-							<input type="email" name="email" id="email" class="form-control">
-						</div>
-						<div class="form-group">
-							<label for="password">password</label>
-							<input type="password" name="password" id="password" class="form-control">
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-secondary" type="submit">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
 	<?php $this->load->view('layouts/script'); ?>
 
 	<?php if ($this->session->flashdata('status') == 'login') : ?>

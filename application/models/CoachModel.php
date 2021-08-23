@@ -119,6 +119,16 @@ class CoachModel extends CI_Model
 	{
 		return $this->db->where('goals_id', $goalID)->get('milestone')->num_rows();
 	}
+
+	public function getCompany()
+	{
+		return $this->db->get('company')->result();
+	}
+
+	public function getCoacheeByCompanyID($CompanyID)
+	{
+		return $this->db->where('company_id', $CompanyID)->get('coachee')->result();
+	}
 }
 
 /* End of file CoachModel.php */

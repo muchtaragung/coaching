@@ -17,9 +17,16 @@ class CoachController extends CI_Controller
 	public function index()
 	{
 		$data['page_name'] = "Dashboard Coach";
-		$data['coachee'] = $this->CoachModel->allCoachee();
-		$data['coaches'] = $this->CoachModel->getCoaches();
+		$data['companies'] = $this->CoachModel->getCompany();
 		$this->load->view('coach/index', $data, FALSE);
+	}
+
+	public function showCoacheeByCompanyID($CompanyID)
+	{
+		$data['page_name'] = "Dashboard Coach";
+		$data['coachee'] = $this->CoachModel->getCoacheeByCompanyID($CompanyID);
+		$data['company_id'] = $CompanyID;
+		$this->load->view('coach/coachee/list', $data, FALSE);
 	}
 
 	public function addCoachee()
@@ -28,9 +35,10 @@ class CoachController extends CI_Controller
 		$coachee['email'] = $this->input->post('email');
 		$coachee['password'] = $this->input->post('password');
 		$coachee['coach_id'] = $this->session->userdata('id');
+		$coachee['company_id'] = $this->input->post('company_id');
 
 		$this->CoachModel->storeCoachee($coachee);
-		redirect('coach');
+		redirect('coach/coachee/list/' . $coachee['company_id']);
 	}
 
 	public function showCoacheeSessions($coacheeID)
