@@ -8,6 +8,7 @@ class CoachController extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('CoachModel');
+		$this->load->library('pdf');
 		if ($this->session->userdata('login') != 'coach') {
 			echo '<script>alert("Silahkan Login Untuk Mengakses Halaman ini")</script>';
 			redirect('login', 'refresh');
@@ -17,9 +18,16 @@ class CoachController extends CI_Controller
 	public function index()
 	{
 		$data['page_name'] = "Dashboard Coach";
-		$data['coachee'] = $this->CoachModel->allCoachee();
-		$data['coaches'] = $this->CoachModel->getCoaches();
+		$data['companies'] = $this->CoachModel->getCompany();
 		$this->load->view('coach/index', $data, FALSE);
+	}
+
+	public function showCoacheeByCompanyID($CompanyID)
+	{
+		$data['page_name'] = "Dashboard Coach";
+		$data['coachee'] = $this->CoachModel->getCoacheeByCompanyID($CompanyID);
+		$data['company_id'] = $CompanyID;
+		$this->load->view('coach/coachee/list', $data, FALSE);
 	}
 
 	public function addCoachee()
@@ -28,9 +36,10 @@ class CoachController extends CI_Controller
 		$coachee['email'] = $this->input->post('email');
 		$coachee['password'] = $this->input->post('password');
 		$coachee['coach_id'] = $this->session->userdata('id');
+		$coachee['company_id'] = $this->input->post('company_id');
 
 		$this->CoachModel->storeCoachee($coachee);
-		redirect('coach');
+		redirect('coach/coachee/list/' . $coachee['company_id']);
 	}
 
 	public function showCoacheeSessions($coacheeID)
@@ -38,6 +47,7 @@ class CoachController extends CI_Controller
 		$data['sessions'] = $this->CoachModel->getCoacheeSession($coacheeID);
 		$data['page_name'] = "Coachee Session";
 		$data['coachee_id'] = $coacheeID;
+
 
 		$this->load->view('coach/coachee/sessions', $data, FALSE);
 	}
@@ -158,6 +168,77 @@ class CoachController extends CI_Controller
 		$this->CoachModel->saveMilestone($milestone);
 		$this->session->set_flashdata('milestone', 'add');
 		redirect('coach/coachee/goal/' . $milestone['goals_id']);
+	}
+
+	public function createReport($sessionID, $coacheeID)
+	{
+		$data['checkReport'] = $this->CoachModel->checkReport($sessionID);
+
+		if ($data['checkReport'] > 0) {
+			$this->session->set_flashdata('report', 'ada');
+			redirect('coach/coachee/session/' . $coacheeID);
+		}
+
+		$data['session']    = $this->CoachModel->getSessionByID($sessionID);
+		$data['penilaian_sesi']  = $this->CoachModel->getPenilaianBySessionID($sessionID);
+		$data['coachee']    = $this->CoachModel->getCoacheeByID($coacheeID);
+		$data['goals']      = $this->CoachModel->getGoalsByCoacheeID($coacheeID);
+		$data['coach']      = $this->CoachModel->getCoachByID($this->session->userdata('id'));
+		for ($i = 0; $i < count($data['goals']); $i++) {
+			$data['action_plan'][$i] = $this->CoachModel->getActionByGoalsID($data['goals'][$i]->id);
+		}
+		for ($i = 0; $i < count($data['goals']); $i++) {
+			$data['success_criteria'][$i] = $this->CoachModel->getCriteriaByGoalsID($data['goals'][$i]->id);
+		}
+		for ($i = 0; $i < count($data['goals']); $i++) {
+			$data['notes'][$i] = $this->CoachModel->getNotesByGoalsID($data['goals'][$i]->id);
+		}
+		for ($i = 0; $i < count($data['goals']); $i++) {
+			$data['milestone'][$i] = $this->CoachModel->getMilestoneByGoalsID($data['goals'][$i]->id);
+		}
+
+		$report['session'] = json_encode($data['session']);
+		$report['penilaian_sesi'] = json_encode($data['penilaian_sesi']);
+		$report['coach'] = json_encode($data['coach']);
+		$report['coachee'] = json_encode($data['coachee']);
+		$report['goals'] = json_encode($data['goals']);
+		$report['action_plan'] = json_encode($data['action_plan']);
+		$report['success_criteria'] = json_encode($data['success_criteria']);
+		$report['notes'] = json_encode($data['notes']);
+		$report['milestone'] = json_encode($data['milestone']);
+		$report['session_id'] = $data['session']->id;
+
+		$this->CoachModel->saveReport($report);
+		return redirect('coach/coachee/session/' . $coacheeID);
+	}
+
+
+	public function showReport($sessionID, $coacheeID)
+	{
+		$data['checkReport'] = $this->CoachModel->checkReport($sessionID);
+
+		if ($data['checkReport'] == 0) {
+			$this->session->set_flashdata('report', 'belum ada');
+			redirect('coach/coachee/session/' . $coacheeID);
+		}
+
+		$report = $this->CoachModel->getReportBySessionID($sessionID);
+
+		$data['coach'] = json_decode($report[0]->coach, true);
+		$data['coachee'] = json_decode($report[0]->coachee, true);
+		$data['session'] = json_decode($report[0]->session, true);
+		$data['penilaian_sesi'] = json_decode($report[0]->penilaian_sesi, true);
+		$data['goals'] = json_decode($report[0]->goals, true);
+		$data['success_criteria'] = json_decode($report[0]->success_criteria, true);
+		$data['action_plan'] = json_decode($report[0]->action_plan, true);
+		$data['notes'] = json_decode($report[0]->notes, true);
+		$data['milestone'] = json_decode($report[0]->milestone, true);
+		$data['session_id'] = json_decode($report[0]->session_id, true);
+
+		// var_dump($data);
+		// die();
+		$this->pdf->setPaper('A4', 'potrait');
+		$this->pdf->load_view('laporan_coach', $data, "laporan-coaching-" . $sessionID);
 	}
 }
 

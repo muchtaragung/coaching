@@ -61,11 +61,13 @@ $route['logout'] = 'AuthController/logout';
 // coach routes
 $route['coach']                                   = 'CoachController';
 $route['coach/addcoachee']                        = 'CoachController/addCoachee';
+$route['coach/coachee/list/(:num)']               = 'CoachController/showCoacheeByCompanyID/$1';
 $route['coach/coachee/(:num)']                    = 'CoachController/showCoacheeGoals/$1';
 $route['coach/coachee/goal/(:num)']               = 'CoachController/ShowCoacheGoal/$1';
 $route['coach/coachee/note/add']                  = 'CoachController/addNotes';
 $route['coach/coachee/goal/milestone/add/(:num)'] = 'CoachController/addMilestone/$1';
 $route['coach/coachee/goal/milestone/save']       = 'CoachController/saveMilestone';
+
 
 // coachee session
 $route['coach/coachee/session/(:num)']                  = 'CoachController/showCoacheeSessions/$1';
@@ -75,7 +77,9 @@ $route['coach/coachee/session/end/(:num)/(:num)']       = 'CoachController/endSe
 $route['coach/coachee/session/penilaian/(:num)/(:num)'] = 'CoachController/penilaianSesi/$1/$2';
 $route['coach/coachee/session/save-penilaian']          = 'CoachController/savePenilaian';
 
-
+// report
+$route['coach/coachee/session/report/create/(:num)/(:num)'] = 'CoachController/createReport/$1/$2';
+$route['coach/coachee/session/report/show/(:num)/(:num)'] = 'CoachController/showReport/$1/$2';
 // coachee routes
 $route['coachee']                = 'CoacheeController';
 $route['coachee/goals']          = 'CoacheeController/allGoals';
@@ -90,8 +94,16 @@ $route['coachee/endGoal/(:num)'] = 'CoacheeController/endGoal/$1';
 $route['admin']       = 'AdminController';
 $route['admin/login'] = 'AdminController/login';
 $route['admin/auth']  = 'AdminController/auth';
+
+// admin coach routes
 $route['admin/coach/list']  = 'AdminController/coachList';
 $route['admin/coach/add']  = 'AdminController/addCoach';
 $route['admin/coach/delete/(:num)']  = 'AdminController/deleteCoach/$1';
 $route['admin/coach/edit/(:num)']  = 'AdminController/editCoach/$1';
 $route['admin/coach/update']  = 'AdminController/updateCoach';
+
+$route['admin/company/list'] = 'AdminController/companyList';
+$route['admin/company/save'] = 'AdminController/saveCompany';
+$route['admin/company/delete/(:num)'] = 'AdminController/deleteCompany/$1';
+$route['admin/company/edit/(:num)'] = 'AdminController/editCompany/$1';
+$route['admin/company/update'] = 'AdminController/updateCompany';

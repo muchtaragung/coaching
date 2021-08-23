@@ -99,4 +99,50 @@ class AdminController extends CI_Controller
 		$this->AdminModel->updateCoach($id, $coach);
 		return redirect('admin/coach/list');
 	}
+
+
+	public function companyList()
+	{
+		$data['page_name'] = 'Company List';
+		$data['companies'] = $this->AdminModel->getAllCompany();
+
+		$this->load->view('admin/company/list', $data);
+	}
+
+	public function saveCompany()
+	{
+		$company['name'] = $this->input->post('name');
+
+		$this->session->set_flashdata('company', 'save');
+
+		$this->AdminModel->saveCompany($company);
+		redirect('admin/company/list');
+	}
+
+	public function deleteCompany($id)
+	{
+		$this->session->set_flashdata('company', 'delete');
+
+		$this->AdminModel->deleteCompany($id);
+		redirect('admin/company/list');
+	}
+
+	public function editCompany($id)
+	{
+		$data['page_name'] = 'Edit Company';
+		$data['company'] = $this->AdminModel->getCompanyByID($id);
+
+		$this->load->view('admin/company/edit', $data);
+	}
+
+	public function updateCompany()
+	{
+		$id                = $this->input->post('id');
+		$company['name']     = $this->input->post('name');
+
+		$this->session->set_flashdata('company', 'update');
+
+		$this->AdminModel->updateCompany($id, $company);
+		return redirect('admin/company/list');
+	}
 }

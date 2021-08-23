@@ -32,6 +32,31 @@ class AdminModel extends CI_Model
 	{
 		return $this->db->where('id', $id)->update('coach', $coach);
 	}
+
+	public function getAllCompany()
+	{
+		return $this->db->get('company')->result();
+	}
+
+	public function saveCompany($company)
+	{
+		return $this->db->insert('company', $company);
+	}
+
+	public function deleteCompany($id)
+	{
+		return $this->db->where('id', $id)->delete('company');
+	}
+
+	public function getCompanyByID($id)
+	{
+		return $this->db->where('id', $id)->get('company')->row();
+	}
+
+	public function updateCompany($id, $company)
+	{
+		return $this->db->where('id', $id)->update('company', $company);
+	}
 }
 
 /* End of file AuthModel.php */
