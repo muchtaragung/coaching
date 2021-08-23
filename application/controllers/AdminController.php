@@ -210,4 +210,14 @@ class AdminController extends CI_Controller
 
 		$this->load->view('admin/goal/list', $data);
 	}
+
+	public function deleteGoal($goalID)
+	{
+		$this->session->set_flashdata('company', 'delete');
+		$data['goal']    = $this->AdminModel->getGoalByID($goalID);
+		$data['coachee'] = $this->AdminModel->getCoacheeByID($data['goal']->coachee_id);
+
+		$this->AdminModel->deleteGoal($goalID);
+		redirect('admin/coachee/goal/' . $data['coachee']->id);
+	}
 }

@@ -87,6 +87,16 @@ class AdminModel extends CI_Model
 	{
 		return $this->db->where('coachee_id', $coacheeID)->get('goals')->result();
 	}
+
+	public function getGoalByID($goalID)
+	{
+		return $this->db->where('id', $goalID)->get('goals')->row();
+	}
+
+	public function deleteGoal($goalID)
+	{
+		return $this->db->where('id', $goalID)->delete('goals');
+	}
 }
 
 /* End of file AuthModel.php */

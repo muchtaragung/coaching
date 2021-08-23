@@ -118,3 +118,4 @@ $route['admin/coachee/edit/(:num)'] = 'AdminController/editCoachee/$1';
 $route['admin/coachee/update'] = 'AdminController/updateCoachee';
 
 $route['admin/coachee/goal/(:num)'] = 'AdminController/goalList/$1';
+$route['admin/coachee/goal/delete/(:num)'] = 'AdminController/deleteGoal/$1';
