@@ -63,11 +63,11 @@
 												</td>
 												<td>
 													<?php if ($session->status == 'belum mulai') : ?>
-														<a href="" class="btn btn-primary disabled">lihat</a>
+														<a href="" class="btn btn-primary disabled">Belum Di Mulai</a>
 													<?php elseif ($session->status == 'belum selesai') : ?>
 														<a href="<?= site_url('coachee/goals/') ?>" class="btn btn-primary">lihat</a>
 													<?php elseif ($session->status == 'selesai') : ?>
-														<a href="" class="btn btn-primary disabled">lihat</a>
+														<a href="<?= site_url('coachee/report/show/' . $session->id) ?>" class="btn btn-primary">Cetak laporan</a>
 													<?php endif ?>
 												</td>
 											</tr>
@@ -153,6 +153,14 @@
 				'Selamat Datang',
 				'Anda Telah Login',
 				'success'
+			)
+		</script>
+	<?php endif ?>
+	<?php if ($this->session->flashdata('report') == 'belum ada') : ?>
+		<script>
+			Swal.fire(
+				'',
+				'Report belum Ada',
 			)
 		</script>
 	<?php endif ?>
