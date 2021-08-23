@@ -32,9 +32,15 @@ class AdminModel extends CI_Model
 	{
 		return $this->db->where('id', $id)->update('coach', $coach);
 	}
+
 	public function getAllCompany()
 	{
 		return $this->db->get('company')->result();
+	}
+
+	public function saveCompany($company)
+	{
+		return $this->db->insert('company', $company);
 	}
 }
 

@@ -99,7 +99,7 @@ $route['admin/coach/edit/(:num)']  = 'AdminController/editCoach/$1';
 $route['admin/coach/update']  = 'AdminController/updateCoach';
 
 $route['admin/company/list'] = 'AdminController/companyList';
-$route['admin/company/add'] = 'AdminController/addCompany';
+$route['admin/company/save'] = 'AdminController/saveCompany';
 $route['admin/company/delete/(:num)'] = 'AdminController/deleteCompany/$1';
 $route['admin/company/edit/(:num)'] = 'AdminController/editCompany/$1';
 $route['admin/company/update'] = 'AdminController/updateCompany';
