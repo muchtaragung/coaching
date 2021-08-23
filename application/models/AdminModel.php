@@ -57,6 +57,11 @@ class AdminModel extends CI_Model
 	{
 		return $this->db->where('id', $id)->update('company', $company);
 	}
+
+	public function getCoacheeByCompanyID($companyID)
+	{
+		return $this->db->where('company_id', $companyID)->get('coachee')->result();
+	}
 }
 
 /* End of file AuthModel.php */

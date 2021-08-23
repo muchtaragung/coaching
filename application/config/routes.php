@@ -110,3 +110,9 @@ $route['admin/company/save'] = 'AdminController/saveCompany';
 $route['admin/company/delete/(:num)'] = 'AdminController/deleteCompany/$1';
 $route['admin/company/edit/(:num)'] = 'AdminController/editCompany/$1';
 $route['admin/company/update'] = 'AdminController/updateCompany';
+
+$route['admin/coachee/list/(:num)'] = 'AdminController/coacheeList/$1';
+$route['admin/coachee/save'] = 'AdminController/saveCompany';
+$route['admin/coachee/delete/(:num)'] = 'AdminController/deleteCompany/$1';
+$route['admin/coachee/edit/(:num)'] = 'AdminController/editCompany/$1';
+$route['admin/coachee/update'] = 'AdminController/updateCompany';

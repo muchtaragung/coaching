@@ -145,4 +145,54 @@ class AdminController extends CI_Controller
 		$this->AdminModel->updateCompany($id, $company);
 		return redirect('admin/company/list');
 	}
+
+	public function coacheeList($companyID)
+	{
+		$this->checkAuth();
+		$data['page_name'] = 'coachee List';
+		$data['coachees']  = $this->AdminModel->getCoacheeByCompanyID($companyID);
+		$data['company']   = $this->AdminModel->getCompanyByID($companyID);
+		$data['companies'] = $this->AdminModel->getAllCompany();
+		$data['coaches']   = $this->AdminModel->getAllCoach();
+
+		$this->load->view('admin/coachee/list', $data);
+	}
+
+	public function addcoachee()
+	{
+		$this->checkAuth();
+		$coachee['name']       = $this->input->post('name');
+		$coachee['email']      = $this->input->post('email');
+		$coachee['password']   = $this->input->post('password');
+		$coachee['company_id'] = $this->input->post('company_id');
+		$coachee['coach_id']   = $this->input->post('coach_id');
+
+		$this->AdminModel->savecoachee($coachee);
+		redirect('admin/coachee/list');
+	}
+
+	public function deletecoachee($id)
+	{
+		$this->AdminModel->deletecoachee($id);
+		redirect('admin/coachee/list');
+	}
+
+	public function editcoachee($id)
+	{
+		$data['page_name'] = 'Edit coachee';
+		$data['coachee'] = $this->AdminModel->getcoacheeByID($id);
+
+		$this->load->view('admin/coachee/edit', $data);
+	}
+
+	public function updatecoachee()
+	{
+		$id                = $this->input->post('id');
+		$coachee['name']     = $this->input->post('name');
+		$coachee['email']    = $this->input->post('email');
+		$coachee['password'] = $this->input->post('password');
+
+		$this->AdminModel->updatecoachee($id, $coachee);
+		return redirect('admin/coachee/list');
+	}
 }
