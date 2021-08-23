@@ -118,4 +118,12 @@ class AdminController extends CI_Controller
 		$this->AdminModel->saveCompany($company);
 		redirect('admin/company/list');
 	}
+
+	public function deleteCompany($id)
+	{
+		$this->session->set_flashdata('company', 'delete');
+
+		$this->AdminModel->deleteCompany($id);
+		redirect('admin/company/list');
+	}
 }

@@ -42,6 +42,11 @@ class AdminModel extends CI_Model
 	{
 		return $this->db->insert('company', $company);
 	}
+
+	public function deleteCompany($id)
+	{
+		return $this->db->where('id', $id)->delete('company');
+	}
 }
 
 /* End of file AuthModel.php */
