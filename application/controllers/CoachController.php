@@ -47,6 +47,7 @@ class CoachController extends CI_Controller
 		$data['page_name'] = "Coachee Session";
 		$data['coachee_id'] = $coacheeID;
 
+
 		$this->load->view('coach/coachee/sessions', $data, FALSE);
 	}
 
@@ -170,6 +171,13 @@ class CoachController extends CI_Controller
 
 	public function createReport($sessionID, $coacheeID)
 	{
+		$data['checkReport'] = $this->CoachModel->checkReport($sessionID);
+
+		if ($data['checkReport'] > 0) {
+			$this->session->set_flashdata('report', 'ada');
+			redirect('coach/coachee/session/' . $coacheeID);
+		}
+
 		$data['session']    = $this->CoachModel->getSessionByID($sessionID);
 		$data['penilaian_sesi']  = $this->CoachModel->getPenilaianBySessionID($sessionID);
 		$data['coachee']    = $this->CoachModel->getCoacheeByID($coacheeID);
