@@ -144,7 +144,8 @@
 				<th>Butuh Waktu Lama</th>
 			</tr>
 
-			<?php for ($j = 0; $j < count($action_plan); $j++) : ?>
+			<?php
+			for ($j = 0; $j < count($action_plan[$i]); $j++) : ?>
 				<tr>
 					<td><?= $action_plan[$i][$j]['action'] ?></td>
 					<td><?php if ($action_plan[$i][$j]['result'] == 'berhasil') {
