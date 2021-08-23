@@ -126,4 +126,23 @@ class AdminController extends CI_Controller
 		$this->AdminModel->deleteCompany($id);
 		redirect('admin/company/list');
 	}
+
+	public function editCompany($id)
+	{
+		$data['page_name'] = 'Edit Company';
+		$data['company'] = $this->AdminModel->getCompanyByID($id);
+
+		$this->load->view('admin/company/edit', $data);
+	}
+
+	public function updateCompany()
+	{
+		$id                = $this->input->post('id');
+		$company['name']     = $this->input->post('name');
+
+		$this->session->set_flashdata('company', 'update');
+
+		$this->AdminModel->updateCompany($id, $company);
+		return redirect('admin/company/list');
+	}
 }
