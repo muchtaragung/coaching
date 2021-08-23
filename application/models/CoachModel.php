@@ -129,6 +129,41 @@ class CoachModel extends CI_Model
 	{
 		return $this->db->where('company_id', $CompanyID)->get('coachee')->result();
 	}
+
+	public function getGoalsByCoacheeID($coacheeID)
+	{
+		return $this->db->where('coachee_id', $coacheeID)->get('goals')->result();
+	}
+
+	public function getActionByGoalsID($goalsID)
+	{
+		return $this->db->where('goals_id', $goalsID)->get('action_plan')->result();
+	}
+
+	public function getCriteriaByGoalsID($goalsID)
+	{
+		return $this->db->where('goals_id', $goalsID)->get('criteria')->result();
+	}
+
+	public function getNotesByGoalsID($goalsID)
+	{
+		return $this->db->where('goals_id', $goalsID)->get('notes')->result();
+	}
+
+	public function getMilestoneByGoalsID($goalsID)
+	{
+		return $this->db->where('goals_id', $goalsID)->get('milestone')->result();
+	}
+
+	public function getPenilaianBySessionID($sessionID)
+	{
+		return $this->db->where('session_id', $sessionID)->get('penilaian_sesi')->result();
+	}
+
+	public function saveReport($report)
+	{
+		return $this->db->insert('report', $report);
+	}
 }
 
 /* End of file CoachModel.php */

@@ -71,6 +71,7 @@
 													<?php elseif ($session->status == 'selesai') : ?>
 														<a href="" class="btn btn-secondary disabled">Selesai</a>
 														<a href="<?= site_url('coach/coachee/session/penilaian/' . $session->id . '/' . $coachee_id) ?>" class="btn btn-primary">Penilaian</a>
+														<a href="<?= site_url('coach/coachee/session/report/create/' . $session->id . '/' . $coachee_id) ?>" class="btn btn-primary">Buat Laporan</a>
 													<?php endif ?>
 												</td>
 											</tr>

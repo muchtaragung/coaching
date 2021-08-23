@@ -61,12 +61,13 @@ $route['logout'] = 'AuthController/logout';
 // coach routes
 $route['coach']                                   = 'CoachController';
 $route['coach/addcoachee']                        = 'CoachController/addCoachee';
-$route['coach/coachee/list/(:num)']                    = 'CoachController/showCoacheeByCompanyID/$1';
-$route['coach/coachee/(:num)']               = 'CoachController/showCoacheeGoals/$1';
+$route['coach/coachee/list/(:num)']               = 'CoachController/showCoacheeByCompanyID/$1';
+$route['coach/coachee/(:num)']                    = 'CoachController/showCoacheeGoals/$1';
 $route['coach/coachee/goal/(:num)']               = 'CoachController/ShowCoacheGoal/$1';
 $route['coach/coachee/note/add']                  = 'CoachController/addNotes';
 $route['coach/coachee/goal/milestone/add/(:num)'] = 'CoachController/addMilestone/$1';
 $route['coach/coachee/goal/milestone/save']       = 'CoachController/saveMilestone';
+
 
 // coachee session
 $route['coach/coachee/session/(:num)']                  = 'CoachController/showCoacheeSessions/$1';
@@ -76,6 +77,8 @@ $route['coach/coachee/session/end/(:num)/(:num)']       = 'CoachController/endSe
 $route['coach/coachee/session/penilaian/(:num)/(:num)'] = 'CoachController/penilaianSesi/$1/$2';
 $route['coach/coachee/session/save-penilaian']          = 'CoachController/savePenilaian';
 
+// report
+$route['coach/coachee/session/report/create/(:num)/(:num)'] = 'CoachController/createReport/$1/$2';
 
 // coachee routes
 $route['coachee']                = 'CoacheeController';

@@ -167,6 +167,41 @@ class CoachController extends CI_Controller
 		$this->session->set_flashdata('milestone', 'add');
 		redirect('coach/coachee/goal/' . $milestone['goals_id']);
 	}
+
+	public function createReport($sessionID, $coacheeID)
+	{
+		$data['session']    = $this->CoachModel->getSessionByID($sessionID);
+		$data['penilaian_sesi']  = $this->CoachModel->getPenilaianBySessionID($sessionID);
+		$data['coachee']    = $this->CoachModel->getCoacheeByID($coacheeID);
+		$data['goals']      = $this->CoachModel->getGoalsByCoacheeID($coacheeID);
+		$data['coach']      = $this->CoachModel->getCoachByID($this->session->userdata('id'));
+		for ($i = 0; $i < count($data['goals']); $i++) {
+			$data['action_plan'][$i] = $this->CoachModel->getActionByGoalsID($data['goals'][$i]->id);
+		}
+		for ($i = 0; $i < count($data['goals']); $i++) {
+			$data['success_criteria'][$i] = $this->CoachModel->getCriteriaByGoalsID($data['goals'][$i]->id);
+		}
+		for ($i = 0; $i < count($data['goals']); $i++) {
+			$data['notes'][$i] = $this->CoachModel->getNotesByGoalsID($data['goals'][$i]->id);
+		}
+		for ($i = 0; $i < count($data['goals']); $i++) {
+			$data['milestone'][$i] = $this->CoachModel->getMilestoneByGoalsID($data['goals'][$i]->id);
+		}
+
+		$report['session'] = json_encode($data['session']);
+		$report['penilaian_sesi'] = json_encode($data['penilaian_sesi']);
+		$report['coach'] = json_encode($data['coach']);
+		$report['coachee'] = json_encode($data['coachee']);
+		$report['goals'] = json_encode($data['goals']);
+		$report['action_plan'] = json_encode($data['action_plan']);
+		$report['success_criteria'] = json_encode($data['success_criteria']);
+		$report['notes'] = json_encode($data['notes']);
+		$report['milestone'] = json_encode($data['milestone']);
+		$report['session_id'] = $data['session']->id;
+
+		$this->CoachModel->saveReport($report);
+		return redirect('coach/coachee/session/' . $report['session_id']);
+	}
 }
 
 /* End of file CoachController.php */
