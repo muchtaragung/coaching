@@ -25,6 +25,12 @@
 				<span>List Coach</span></a>
 		</li>
 
+		<li class="nav-item">
+			<a class="nav-link" href="<?= site_url('admin/company/list') ?>">
+				<i class="fas fa-fw fa-table"></i>
+				<span>List Company</span></a>
+		</li>
+
 	<?php elseif ($this->session->userdata('login') == 'coach') : ?>
 
 		<!-- Nav Item - Dashboard -->
