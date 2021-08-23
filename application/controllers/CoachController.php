@@ -8,6 +8,7 @@ class CoachController extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('CoachModel');
+		$this->load->library('pdf');
 		if ($this->session->userdata('login') != 'coach') {
 			echo '<script>alert("Silahkan Login Untuk Mengakses Halaman ini")</script>';
 			redirect('login', 'refresh');
@@ -208,7 +209,36 @@ class CoachController extends CI_Controller
 		$report['session_id'] = $data['session']->id;
 
 		$this->CoachModel->saveReport($report);
-		return redirect('coach/coachee/session/' . $report['session_id']);
+		return redirect('coach/coachee/session/' . $coacheeID);
+	}
+
+
+	public function showReport($sessionID, $coacheeID)
+	{
+		$data['checkReport'] = $this->CoachModel->checkReport($sessionID);
+
+		if ($data['checkReport'] == 0) {
+			$this->session->set_flashdata('report', 'belum ada');
+			redirect('coach/coachee/session/' . $coacheeID);
+		}
+
+		$report = $this->CoachModel->getReportBySessionID($sessionID);
+
+		$data['coach'] = json_decode($report[0]->coach, true);
+		$data['coachee'] = json_decode($report[0]->coachee, true);
+		$data['session'] = json_decode($report[0]->session, true);
+		$data['penilaian_sesi'] = json_decode($report[0]->penilaian_sesi, true);
+		$data['goals'] = json_decode($report[0]->goals, true);
+		$data['success_criteria'] = json_decode($report[0]->success_criteria, true);
+		$data['action_plan'] = json_decode($report[0]->action_plan, true);
+		$data['notes'] = json_decode($report[0]->notes, true);
+		$data['milestone'] = json_decode($report[0]->milestone, true);
+		$data['session_id'] = json_decode($report[0]->session_id, true);
+
+		// var_dump($data);
+		// die();
+		$this->pdf->setPaper('A4', 'potrait');
+		$this->pdf->load_view('laporan_coach', $data, "laporan-coaching-" . $sessionID);
 	}
 }
 

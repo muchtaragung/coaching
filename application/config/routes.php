@@ -79,7 +79,7 @@ $route['coach/coachee/session/save-penilaian']          = 'CoachController/saveP
 
 // report
 $route['coach/coachee/session/report/create/(:num)/(:num)'] = 'CoachController/createReport/$1/$2';
-
+$route['coach/coachee/session/report/show/(:num)/(:num)'] = 'CoachController/showReport/$1/$2';
 // coachee routes
 $route['coachee']                = 'CoacheeController';
 $route['coachee/goals']          = 'CoacheeController/allGoals';

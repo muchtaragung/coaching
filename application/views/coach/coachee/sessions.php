@@ -72,6 +72,7 @@
 														<a href="" class="btn btn-secondary disabled">Selesai</a>
 														<a href="<?= site_url('coach/coachee/session/penilaian/' . $session->id . '/' . $coachee_id) ?>" class="btn btn-primary">Penilaian</a>
 														<a href="<?= site_url('coach/coachee/session/report/create/' . $session->id . '/' . $coachee_id) ?>" class="btn btn-primary">Buat Laporan</a>
+														<a href="<?= site_url('coach/coachee/session/report/show/' . $session->id . '/' . $coachee_id) ?>" class="btn btn-primary">Cetak laporan</a>
 													<?php endif ?>
 												</td>
 											</tr>
@@ -200,6 +201,24 @@
 			Swal.fire(
 				'',
 				'Penilaian Sudah Ada',
+			)
+		</script>
+	<?php endif ?>
+
+	<?php if ($this->session->flashdata('report') == 'ada') : ?>
+		<script>
+			Swal.fire(
+				'',
+				'Report Sudah Ada',
+			)
+		</script>
+	<?php endif ?>
+
+	<?php if ($this->session->flashdata('report') == 'belum ada') : ?>
+		<script>
+			Swal.fire(
+				'',
+				'Report belum Ada',
 			)
 		</script>
 	<?php endif ?>

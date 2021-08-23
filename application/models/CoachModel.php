@@ -169,6 +169,11 @@ class CoachModel extends CI_Model
 	{
 		return $this->db->where('session_id', $sessionID)->get('report')->num_rows();
 	}
+
+	public function getReportBySessionID($sessionID)
+	{
+		return $this->db->where('session_id', $sessionID)->get('report')->result();
+	}
 }
 
 /* End of file CoachModel.php */
