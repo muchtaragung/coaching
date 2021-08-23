@@ -200,4 +200,14 @@ class AdminController extends CI_Controller
 		$this->AdminModel->updatecoachee($id, $coachee);
 		return redirect('admin/coachee/list/' . $coachee['company_id']);
 	}
+
+	public function goalList($coacheeID)
+	{
+		$this->checkAuth();
+		$data['page_name'] = 'Goal List';
+		$data['coachee'] = $this->AdminModel->getcoacheeByID($coacheeID);
+		$data['goals']   = $this->AdminModel->getGoalByCoacheeID($coacheeID);
+
+		$this->load->view('admin/goal/list', $data);
+	}
 }
