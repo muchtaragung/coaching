@@ -62,6 +62,26 @@ class AdminModel extends CI_Model
 	{
 		return $this->db->where('company_id', $companyID)->get('coachee')->result();
 	}
+
+	public function saveCoachee($coachee)
+	{
+		return $this->db->insert('coachee', $coachee);
+	}
+
+	public function deleteCoachee($id)
+	{
+		return $this->db->where('id', $id)->delete('coachee');
+	}
+
+	public function getCoacheeByID($id)
+	{
+		return $this->db->where('id', $id)->get('coachee')->row();
+	}
+
+	public function updateCoachee($id, $coachee)
+	{
+		return $this->db->where('id', $id)->update('coachee', $coachee);
+	}
 }
 
 /* End of file AuthModel.php */

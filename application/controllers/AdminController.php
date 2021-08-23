@@ -158,7 +158,7 @@ class AdminController extends CI_Controller
 		$this->load->view('admin/coachee/list', $data);
 	}
 
-	public function addcoachee()
+	public function saveCoachee()
 	{
 		$this->checkAuth();
 		$coachee['name']       = $this->input->post('name');
@@ -167,14 +167,15 @@ class AdminController extends CI_Controller
 		$coachee['company_id'] = $this->input->post('company_id');
 		$coachee['coach_id']   = $this->input->post('coach_id');
 
-		$this->AdminModel->savecoachee($coachee);
-		redirect('admin/coachee/list');
+		$this->AdminModel->saveCoachee($coachee);
+		redirect('admin/coachee/list/' . $coachee['company_id']);
 	}
 
 	public function deletecoachee($id)
 	{
+		$data['coachee'] = $this->AdminModel->getcoacheeByID($id);
 		$this->AdminModel->deletecoachee($id);
-		redirect('admin/coachee/list');
+		redirect('admin/coachee/list/' . $data['coachee']->company_id);
 	}
 
 	public function editcoachee($id)

@@ -116,7 +116,7 @@
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<form action="<?= site_url('admin/coachee/add') ?>" method="POST">
+				<form action="<?= site_url('admin/coachee/save') ?>" method="POST">
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="name">Nama</label>
@@ -132,7 +132,7 @@
 						</div>
 						<div class="form-group">
 							<label for="">Coach</label>
-							<select name="coachee_id" id="" class="form-control">
+							<select name="coach_id" id="" class="form-control">
 								<?php foreach ($coaches as $coach) : ?>
 									<option value="<?= $coach->id ?>"><?= $coach->name ?></option>
 								<?php endforeach ?>
