@@ -97,6 +97,11 @@ class AdminModel extends CI_Model
 	{
 		return $this->db->where('id', $goalID)->delete('goals');
 	}
+
+	public function updateGoal($goalID, $goal)
+	{
+		return $this->db->where('id', $goalID)->update('goals', $goal);
+	}
 }
 
 /* End of file AuthModel.php */

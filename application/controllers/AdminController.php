@@ -213,11 +213,32 @@ class AdminController extends CI_Controller
 
 	public function deleteGoal($goalID)
 	{
-		$this->session->set_flashdata('company', 'delete');
 		$data['goal']    = $this->AdminModel->getGoalByID($goalID);
 		$data['coachee'] = $this->AdminModel->getCoacheeByID($data['goal']->coachee_id);
 
+		$this->session->set_flashdata('company', 'delete');
 		$this->AdminModel->deleteGoal($goalID);
-		redirect('admin/coachee/goal/' . $data['coachee']->id);
+		redirect('admin/coachee/goal/list/' . $data['coachee']->id);
+	}
+
+	public function editGoal($goalID)
+	{
+		$data['page_name'] = 'Edit Goal';
+		$data['goal']      = $this->AdminModel->getGoalByID($goalID);
+
+		$this->load->view('admin/goal/edit', $data);
+	}
+
+	public function updateGoal()
+	{
+		$goalID           = $this->input->post('id');
+		$coacheeID        = $this->input->post('coachee_id');
+		$goal['goal']     = $this->input->post('goal');
+		$goal['due_date'] = $this->input->post('due_date');
+		$goal['status']   = $this->input->post('status');
+
+		$this->session->set_flashdata('goal', 'update');
+		$this->AdminModel->updateGoal($goalID, $goal);
+		redirect('admin/coachee/goal/list/' . $coacheeID);
 	}
 }
