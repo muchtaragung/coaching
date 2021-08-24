@@ -241,4 +241,14 @@ class AdminController extends CI_Controller
 		$this->AdminModel->updateGoal($goalID, $goal);
 		redirect('admin/coachee/goal/list/' . $coacheeID);
 	}
+
+	public function showGoal($goalID)
+	{
+		$data['page_name']   = 'Showing Goals';
+		$data['goal']        = $this->AdminModel->getGoalByID($goalID);
+		$data['criteria']    = $this->AdminModel->getCriteriaByGoalID($goalID);
+		$data['actions']     = $this->AdminModel->getActionByGoalID($goalID);
+		$data['notes']       = $this->AdminModel->getNotesByGoalsID($goalID);
+		$this->load->view('admin/goal/show', $data);
+	}
 }

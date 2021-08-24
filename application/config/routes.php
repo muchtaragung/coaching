@@ -121,3 +121,4 @@ $route['admin/coachee/goal/list/(:num)'] = 'AdminController/goalList/$1';
 $route['admin/coachee/goal/delete/(:num)'] = 'AdminController/deleteGoal/$1';
 $route['admin/coachee/goal/edit/(:num)'] = 'AdminController/editGoal/$1';
 $route['admin/coachee/goal/update'] = 'AdminController/updateGoal';
+$route['admin/coachee/goal/show/(:num)'] = 'AdminController/showGoal/$1';
