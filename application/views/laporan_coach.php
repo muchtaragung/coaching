@@ -168,7 +168,7 @@
 				<th>Komentar</th>
 				<th>Result</th>
 			</tr>
-			<?php for ($j = 0; $j < count($notes); $j++) : ?>
+			<?php for ($j = 0; $j < count($notes[$i]); $j++) : ?>
 				<tr>
 					<td><?= $notes[$i][$j]['comment'] ?></td>
 					<td><?= $notes[$i][$j]['result'] ?></td>

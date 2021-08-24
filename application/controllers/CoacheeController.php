@@ -36,6 +36,7 @@ class CoacheeController extends CI_Controller
 		$goal['due_date'] = $this->input->post('due_date');
 		$goal['coachee_id'] = $this->session->userdata('id');
 
+		$this->session->set_flashdata('goal', 'berhasil');
 		$this->CoacheeModel->storeGoal($goal);
 		redirect('coachee/goals');
 	}
@@ -62,7 +63,7 @@ class CoacheeController extends CI_Controller
 		$action_plan['goals_id'] = $this->input->post('goals_id');
 
 		$this->CoacheeModel->storeAction($action_plan);
-		$this->session->set_flashdata('action_plan', 'Berhasil Menambahkan Action Plan');
+		$this->session->set_flashdata('action_plan', 'berhasil');
 		redirect('coachee/goal/' . $action_plan['goals_id'], 'refresh');
 	}
 
@@ -72,7 +73,7 @@ class CoacheeController extends CI_Controller
 		$criteria['goals_id'] = $this->input->post('goals_id');
 
 		$this->CoacheeModel->storeCriteria($criteria);
-		$this->session->set_flashdata('criteria', 'Berhasil Menambahkan Success Criteria');
+		$this->session->set_flashdata('criteria', 'berhasil');
 		redirect('coachee/goal/' . $criteria['goals_id'], 'refresh');
 	}
 
