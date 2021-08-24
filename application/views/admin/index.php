@@ -55,8 +55,8 @@
 												<td> <?= $coachee->name ?> </td>
 												<td><?= $coachee->email ?></td>
 												<td>
-													<a href="<?= site_url('admin/coachee/') . $coachee->id ?>" class="btn btn-info">Lihat Data</a>
-													<a href="<?= site_url('admin/coachee/session/') . $coachee->id ?>" class="btn btn-info">Lihat Sesi</a>
+													<a href="<?= site_url('admin/coachee/') . $coachee->id ?>" class="btn btn-primary">Lihat Data</a>
+													<a href="<?= site_url('admin/coachee/session/') . $coachee->id ?>" class="btn btn-primary">Lihat Sesi</a>
 												</td>
 											</tr>
 										<?php endforeach ?>

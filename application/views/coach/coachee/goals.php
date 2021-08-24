@@ -60,7 +60,7 @@
 													<td><button class="btn btn-primary disabled">Belum Selesai</button></td>
 												<?php endif ?>
 												<td>
-													<a href="<?= site_url('coach/coachee/goal/') . $goal->id ?>" class="btn btn-info">Lihat Goal</a>
+													<a href="<?= site_url('coach/coachee/goal/') . $goal->id ?>" class="btn btn-primary">Lihat Goal</a>
 												</td>
 											</tr>
 										<?php endforeach ?>

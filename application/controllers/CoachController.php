@@ -39,6 +39,7 @@ class CoachController extends CI_Controller
 		$coachee['company_id'] = $this->input->post('company_id');
 
 		$this->CoachModel->storeCoachee($coachee);
+		$this->session->set_flashdata('add coach', 'berhasil');
 		redirect('coach/coachee/list/' . $coachee['company_id']);
 	}
 
@@ -113,6 +114,8 @@ class CoachController extends CI_Controller
 
 	public function penilaianSesi($sessionID, $coacheeId)
 	{
+		$data['page_name'] = 'Penilaian Sesi';
+
 		$coachID = $this->session->userdata('id');
 
 		$data['checkPenilaian']  = $this->CoachModel->checkPenilaianBySessionID($sessionID);
@@ -138,7 +141,7 @@ class CoachController extends CI_Controller
 		$penilaian['effort']     = $this->input->post('effort');
 		$penilaian['komitment']  = $this->input->post('komitment');
 
-		$this->session->set_flashdata('penilaian', 'save');
+		$this->session->set_flashdata('penilaian', 'berhasil');
 		$this->CoachModel->savePenilaian($penilaian);
 		redirect('coach/coachee/session/' . $penilaian['coachee_id']);
 	}
@@ -208,6 +211,7 @@ class CoachController extends CI_Controller
 		$report['milestone'] = json_encode($data['milestone']);
 		$report['session_id'] = $data['session']->id;
 
+		$this->session->set_flashdata('report', 'berhasil');
 		$this->CoachModel->saveReport($report);
 		return redirect('coach/coachee/session/' . $coacheeID);
 	}

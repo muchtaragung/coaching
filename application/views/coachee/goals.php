@@ -61,7 +61,7 @@
 												<?php endif ?>
 												<td> <?= $goal->due_date ?> </td>
 												<td>
-													<a href="<?= site_url('coachee/goal/') . $goal->id ?>" class="btn btn-info">Lihat Goal</a>
+													<a href="<?= site_url('coachee/goal/') . $goal->id ?>" class="btn btn-primary">Lihat Goal</a>
 												</td>
 											</tr>
 										<?php endforeach ?>

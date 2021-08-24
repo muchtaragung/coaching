@@ -52,7 +52,7 @@
 												<td><?php echo $i++ ?></td>
 												<td> <?= $company->name ?> </td>
 												<td>
-													<a href="<?= site_url('coach/coachee/list/') . $company->id ?>" class="btn btn-info">Lihat Peserta</a>
+													<a href="<?= site_url('coach/coachee/list/') . $company->id ?>" class="btn btn-primary">Lihat Peserta</a>
 												</td>
 											</tr>
 										<?php endforeach ?>
