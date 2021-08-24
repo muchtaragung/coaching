@@ -34,7 +34,7 @@
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
 							<h6 class="m-0 font-weight-bold text-primary float-left">Session</h6>
-							<button onclick="addSession('<?= site_url('coach/coachee/session/new/' . $coachee_id) ?>')" class="btn btn-primary float-right	mx-1">Tambah Sesi</button>
+							<button onclick="addSession('<?= site_url('coach/coachee/session/new/' . $coachee_id) ?>')" class="btn btn-success float-right	mx-1">Tambah Sesi</button>
 							<a href="<?= site_url('coach/coachee/') . $coachee_id ?>" class="btn btn-primary float-right mx-1">Lihat Data</a>
 						</div>
 						<div class="card-body">
@@ -65,7 +65,7 @@
 												</td>
 												<td>
 													<?php if ($session->status == 'belum mulai') : ?>
-														<button onclick=" confirmStart('<?= site_url('coach/coachee/session/start/' . $session->id . '/' . $session->coachee_id) ?>')" class="btn btn-danger">Mulai Sesi</button>
+														<button onclick=" confirmStart('<?= site_url('coach/coachee/session/start/' . $session->id . '/' . $session->coachee_id) ?>')" class="btn btn-primary">Mulai Sesi</button>
 													<?php elseif ($session->status == 'belum selesai') : ?>
 														<button onclick=" confirmEnd('<?= site_url('coach/coachee/session/end/' . $session->id . '/' . $session->coachee_id) ?>')" class="btn btn-primary">Selesaikan Sesi</button>
 													<?php elseif ($session->status == 'selesai') : ?>
@@ -116,7 +116,7 @@
 				</div>
 				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
 				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Batalkan</button>
 					<a class="btn btn-primary" href="login.html">Logout</a>
 				</div>
 			</div>

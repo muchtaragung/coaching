@@ -34,7 +34,7 @@
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
 							<h6 class="m-0 font-weight-bold text-primary">Table Peserta</h6>
-							<a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addCoachee">Tambah Peserta</a>
+							<a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#addCoachee">Tambah Peserta</a>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -98,7 +98,7 @@
 				</div>
 				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
 				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Batalkan</button>
 					<a class="btn btn-primary" href="login.html">Logout</a>
 				</div>
 			</div>
@@ -133,7 +133,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-primary" type="submit">Submit</button>
+						<button class="btn btn-success" type="submit">Submit</button>
 					</div>
 				</form>
 			</div>

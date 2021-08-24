@@ -114,7 +114,7 @@
 						<input type="hidden" name="students_id" value="<?= $this->session->userdata('id'); ?>">
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-secondary" type="submit">Submit</button>
+						<button class="btn btn-success" type="submit">Submit</button>
 					</div>
 				</form>
 			</div>
