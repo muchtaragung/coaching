@@ -222,6 +222,26 @@
 			)
 		</script>
 	<?php endif ?>
+
+	<?php if ($this->session->flashdata('penilaian') == 'berhasil') : ?>
+		<script>
+			Swal.fire(
+				'Berhasil',
+				'Berhasil Memberikan Penilaian',
+				'success'
+			)
+		</script>
+	<?php endif ?>
+
+	<?php if ($this->session->flashdata('report') == 'berhasil') : ?>
+		<script>
+			Swal.fire(
+				'Berhasil',
+				'Berhasil Buat Laporan, Siap Di Cetak',
+				'success'
+			)
+		</script>
+	<?php endif ?>
 </body>
 
 </html>
