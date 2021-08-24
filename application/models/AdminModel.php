@@ -132,6 +132,16 @@ class AdminModel extends CI_Model
 	{
 		return $this->db->where('id', $criteriaId)->delete('criteria');
 	}
+
+	public function resetAction($actionID,$action)
+	{
+		return $this->db->where('id', $actionID)->update('action_plan',$action);
+	}
+
+	public function deleteAction($actionID)
+	{
+		return $this->db->where('id', $actionID)->delete('action_plan');
+	}
 }
 
 /* End of file AuthModel.php */

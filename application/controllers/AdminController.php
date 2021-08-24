@@ -279,4 +279,19 @@ class AdminController extends CI_Controller
 		$this->AdminModel->deleteCriteria($criteriaID);
 		redirect('admin/coachee/goal/show/'.$goalID);
 	}
+
+	public function resetAction($actionID,$goalID)
+	{
+		$action['result'] = null;
+		$this->session->set_flashdata('action','Berhasil Mereset Action');
+		$this->AdminModel->resetAction($actionID,$action);
+		redirect('admin/coachee/goal/show/'.$goalID);
+	}
+
+	public function deleteAction($actionID,$goalID)
+	{
+		$this->session->set_flashdata('action','Berhasil Menghapus Action');
+		$this->AdminModel->deleteAction($actionID);
+		redirect('admin/coachee/goal/show/'.$goalID);
+	}
 }

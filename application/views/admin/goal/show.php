@@ -96,8 +96,8 @@
 												<td> <?php if ($action->result == 'tidak berhasil') { ?> <h2>✓</h2> <?php } ?></td>
 												<td> <?php if ($action->result == 'butuh waktu lama') { ?> <h2>✓</h2> <?php } ?></td>
 												<td>
-													<a href="<?= site_url('admin/coachee/action/reset/') . $action->id ?>" class="btn btn-primary">Reset</a>
-													<a href="<?= site_url('admin/coachee/action/delete/') . $action->id ?>" class="btn btn-danger">Hapus</a>
+													<a href="<?= site_url('admin/coachee/action/reset/') . $action->id . '/' . $goal->id ?>" class="btn btn-primary">Reset</a>
+													<a href="<?= site_url('admin/coachee/action/delete/') . $action->id . '/' .$goal->id ?>" class="btn btn-danger">Hapus</a>
 												</td>
 											</tr>
 										<?php endforeach ?>
@@ -228,7 +228,17 @@
 	<script>
 		Swal.fire(
 			'Berhasil',
-			'<?= $this->session->flashdata('criteria')?>',
+			'<?= $this->session->flashdata('criteria') ?>',
+			'success'
+		)
+	</script>
+<?php endif ?>
+
+<?php if ($this->session->flashdata('action')) : ?>
+	<script>
+		Swal.fire(
+			'Berhasil',
+			'<?= $this->session->flashdata('action') ?>',
 			'success'
 		)
 	</script>

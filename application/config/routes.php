@@ -123,7 +123,7 @@ $route['admin/coachee/goal/edit/(:num)'] = 'AdminController/editGoal/$1';
 $route['admin/coachee/goal/update'] = 'AdminController/updateGoal';
 $route['admin/coachee/goal/show/(:num)'] = 'AdminController/showGoal/$1';
 
-$route['admin/coachee/action/reset/(:num)'] = 'AdminController/resetAction/$1';
+$route['admin/coachee/action/reset/(:num)/(:num)'] = 'AdminController/resetAction/$1/$2';
 $route['admin/coachee/action/delete/(:num)/(:num)'] = 'AdminController/deleteAction/$1/$2';
 
 $route['admin/coachee/criteria/update'] = 'AdminController/updateCriteria';
