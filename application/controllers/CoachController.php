@@ -114,6 +114,8 @@ class CoachController extends CI_Controller
 
 	public function penilaianSesi($sessionID, $coacheeId)
 	{
+		$data['page_name'] = 'Penilaian Sesi';
+
 		$coachID = $this->session->userdata('id');
 
 		$data['checkPenilaian']  = $this->CoachModel->checkPenilaianBySessionID($sessionID);
