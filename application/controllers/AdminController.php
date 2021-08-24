@@ -251,4 +251,32 @@ class AdminController extends CI_Controller
 		$data['notes']       = $this->AdminModel->getNotesByGoalsID($goalID);
 		$this->load->view('admin/goal/show', $data);
 	}
+
+	public function saveCriteria()
+	{
+		$criteria['criteria'] = $this->input->post('criteria');
+		$criteria['goals_id']  = $this->input->post('goals_id');
+
+		$this->session->set_flashdata('criteria', 'Berhasil Menyimpan Criteria');
+		$this->AdminModel->saveCriteria($criteria);
+		redirect('admin/coachee/goal/show/' . $criteria['goals_id']);
+	}
+
+	public function updateCriteria()
+	{
+		$criteriaID = $this->input->post('id');
+		$goalID     = $this->input->post('goals_id');
+		$criteria['criteria'] = $this->input->post('criteria');
+
+		$this->session->set_flashdata('criteria','Berhasil Mengupdate Criteria');
+		$this->AdminModel->updateCriteria($criteriaID,$criteria);
+		redirect('admin/coachee/goal/show/'.$goalID);
+	}
+
+	public function deleteCriteria($criteriaID,$goalID)
+	{
+		$this->session->set_flashdata('criteria', 'Berhasil Menghapus Criteria');
+		$this->AdminModel->deleteCriteria($criteriaID);
+		redirect('admin/coachee/goal/show/'.$goalID);
+	}
 }

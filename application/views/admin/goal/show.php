@@ -34,13 +34,14 @@
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
 							<?php if (!isset($criteria)) : ?>
-								<form action="<?= site_url('admin/coachee/criteria/add') ?>" method="POST">
+								<form action="<?= site_url('admin/coachee/criteria/save') ?>" method="POST">
 									<input type="hidden" name="goals_id" id="goals_id" value="<?= $goal->id ?>" class="form-control">
 									<div class="row form-group">
 										<div class="col-lg-12">
 											<label for="criteria">Success Criteria</label>
 										</div>
 										<div class="col-lg-10">
+											<input type="hidden" name="goals_id" value="<?= $goal->id ?>">
 											<input type="text" name="criteria" id="" class="form-control" placeholder="success criteria" required>
 										</div>
 										<div class="col-lg-2">
@@ -49,19 +50,21 @@
 									</div>
 								</form>
 							<?php else : ?>
-								<form action="<?= site_url('admin/coachee/criteria/update') ?>">
+								<form action="<?= site_url('admin/coachee/criteria/update') ?>" method="POST">
 									<div class="row form-group">
 										<div class="col-lg-12">
 											<label for="criteria">Success Criteria</label>
 										</div>
 										<div class="col-lg-10">
+											<input type="hidden" name="id" value="<?= $criteria->id ?>">
+											<input type="hidden" name="goals_id" value="<?= $criteria->goals_id ?>">
 											<input type="text" name="criteria" id="" class="form-control" placeholder="success criteria" value="<?= $criteria->criteria ?>">
 										</div>
 										<div class="col-lg-1">
 											<button type="submit" class="btn btn-primary">Update</button>
 										</div>
 										<div class="col-lg-1">
-											<a class="btn btn-danger">delete</a>
+											<a href="<?= site_url('admin/coachee/criteria/delete/' . $criteria->id . '/' . $goal->id) ?>" class="btn btn-danger">Hapus</a>
 										</div>
 									</div>
 								</form>
@@ -94,7 +97,7 @@
 												<td> <?php if ($action->result == 'butuh waktu lama') { ?> <h2>✓</h2> <?php } ?></td>
 												<td>
 													<a href="<?= site_url('admin/coachee/action/reset/') . $action->id ?>" class="btn btn-primary">Reset</a>
-													<a href="<?= site_url('admin/coachee/action/delete/') . $action->id ?>" class="btn btn-danger">Delete</a>
+													<a href="<?= site_url('admin/coachee/action/delete/') . $action->id ?>" class="btn btn-danger">Hapus</a>
 												</td>
 											</tr>
 										<?php endforeach ?>
@@ -221,5 +224,14 @@
 	<?php $this->load->view('layouts/script'); ?>
 
 </body>
+<?php if ($this->session->flashdata('criteria')) : ?>
+	<script>
+		Swal.fire(
+			'Berhasil',
+			'<?= $this->session->flashdata('criteria')?>',
+			'success'
+		)
+	</script>
+<?php endif ?>
 
 </html>

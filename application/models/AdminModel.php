@@ -117,6 +117,21 @@ class AdminModel extends CI_Model
 	{
 		return $this->db->where('goals_id', $goalID)->get('notes')->result();
 	}
+
+	public function saveCriteria($criteria)
+	{
+		return $this->db->insert('criteria',$criteria);
+	}
+
+	public function updateCriteria($criteriaId,$criteria)
+	{
+		return $this->db->where('id', $criteriaId)->update('criteria',$criteria);
+	}
+
+	public function deleteCriteria($criteriaId)
+	{
+		return $this->db->where('id', $criteriaId)->delete('criteria');
+	}
 }
 
 /* End of file AuthModel.php */
