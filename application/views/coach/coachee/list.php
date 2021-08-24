@@ -55,7 +55,7 @@
 												<td> <?= $coachee->name ?> </td>
 												<td><?= $coachee->email ?></td>
 												<td>
-													<a href="<?= site_url('coach/coachee/session/') . $coachee->id ?>" class="btn btn-info">Lihat Sesi</a>
+													<a href="<?= site_url('coach/coachee/session/') . $coachee->id ?>" class="btn btn-primary">Lihat Sesi</a>
 												</td>
 											</tr>
 										<?php endforeach ?>
@@ -133,7 +133,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-secondary" type="submit">Submit</button>
+						<button class="btn btn-primary" type="submit">Submit</button>
 					</div>
 				</form>
 			</div>
@@ -141,11 +141,11 @@
 	</div>
 	<?php $this->load->view('layouts/script'); ?>
 
-	<?php if ($this->session->flashdata('status') == 'login') : ?>
+	<?php if ($this->session->flashdata('add coach') == 'berhasil') : ?>
 		<script>
 			Swal.fire(
-				'Selamat Datang',
-				'Anda Telah Login',
+				'Berhasil',
+				'Peserta Telah Di Tambahkan',
 				'success'
 			)
 		</script>

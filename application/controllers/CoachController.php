@@ -39,6 +39,7 @@ class CoachController extends CI_Controller
 		$coachee['company_id'] = $this->input->post('company_id');
 
 		$this->CoachModel->storeCoachee($coachee);
+		$this->session->set_flashdata('add coach', 'berhasil');
 		redirect('coach/coachee/list/' . $coachee['company_id']);
 	}
 
