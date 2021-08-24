@@ -108,24 +108,14 @@ class AdminModel extends CI_Model
 		return $this->db->where('goals_id', $goalID)->get('criteria')->row();
 	}
 
-	public function getActionByGoalID($goalID)
-	{
-		return $this->db->where('goals_id', $goalID)->get('action_plan')->result();
-	}
-
-	public function getNotesByGoalsID($goalID)
-	{
-		return $this->db->where('goals_id', $goalID)->get('notes')->result();
-	}
-
 	public function saveCriteria($criteria)
 	{
-		return $this->db->insert('criteria',$criteria);
+		return $this->db->insert('criteria', $criteria);
 	}
 
-	public function updateCriteria($criteriaId,$criteria)
+	public function updateCriteria($criteriaId, $criteria)
 	{
-		return $this->db->where('id', $criteriaId)->update('criteria',$criteria);
+		return $this->db->where('id', $criteriaId)->update('criteria', $criteria);
 	}
 
 	public function deleteCriteria($criteriaId)
@@ -133,15 +123,26 @@ class AdminModel extends CI_Model
 		return $this->db->where('id', $criteriaId)->delete('criteria');
 	}
 
-	public function resetAction($actionID,$action)
+	public function getActionByGoalID($goalID)
 	{
-		return $this->db->where('id', $actionID)->update('action_plan',$action);
+		return $this->db->where('goals_id', $goalID)->get('action_plan')->result();
+	}
+
+	public function resetAction($actionID, $action)
+	{
+		return $this->db->where('id', $actionID)->update('action_plan', $action);
 	}
 
 	public function deleteAction($actionID)
 	{
 		return $this->db->where('id', $actionID)->delete('action_plan');
 	}
+
+	public function getNotesByGoalsID($goalID)
+	{
+		return $this->db->where('goals_id', $goalID)->get('notes')->result();
+	}
+
 }
 
 /* End of file AuthModel.php */
