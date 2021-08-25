@@ -131,6 +131,8 @@ $route['admin/coachee/criteria/save'] = 'AdminController/saveCriteria';
 $route['admin/coachee/criteria/delete/(:num)/(:num)'] = 'AdminController/deleteCriteria/$1/$2';
 
 $route['admin/coachee/notes/delete/(:num)/(:num)'] = 'AdminController/deleteNotes/$1/$2';
+$route['admin/coachee/notes/edit/(:num)'] = 'AdminController/editNotes/$1';
+$route['admin/coachee/notes/update'] = 'AdminController/updateNotes';
 
 //profile admin
 $route['admin/profile'] = 'AdminController/profile';

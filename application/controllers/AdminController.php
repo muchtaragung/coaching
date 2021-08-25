@@ -301,6 +301,27 @@ class AdminController extends CI_Controller
 		redirect('admin/coachee/goal/show/' . $goalID);
 	}
 
+	public function editNotes($notesID)
+	{
+		$data['page_name'] = 'Edit Notes';
+		$data['note']      = $this->AdminModel->getNotesByID($notesID);
+
+		$this->load->view('admin/notes/edit', $data);
+	}
+
+	public function updateNotes()
+	{
+		$notes['comment'] = $this->input->post('comment');
+		$notes['result']  = $this->input->post('result');
+
+		$notesID = $this->input->post('id');
+		$goalID  = $this->input->post('goals_id');
+
+		$this->session->set_flashdata('notes', 'Notes Berhasil di ubah');
+		$this->AdminModel->updateNotes($notesID,$notes);
+		redirect('admin/coachee/goal/show/'.$goalID);
+	}
+
 	//profile
 	public function profile()
 	{
