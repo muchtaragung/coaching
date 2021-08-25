@@ -25,7 +25,7 @@ class CoachController extends CI_Controller
 	public function showCoacheeByCompanyID($CompanyID)
 	{
 		$data['page_name'] = "Dashboard Coach";
-		$data['coachee'] = $this->CoachModel->getCoacheeByCompanyID($CompanyID);
+		$data['coachee'] = $this->CoachModel->getCoacheeByCompanyAndCoachID($CompanyID,$this->session->userdata('id'));
 		$data['company_id'] = $CompanyID;
 		$this->load->view('coach/coachee/list', $data, FALSE);
 	}

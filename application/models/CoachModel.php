@@ -144,6 +144,13 @@ class CoachModel extends CI_Model
 		return $this->db->where('company_id', $CompanyID)->get('coachee')->result();
 	}
 
+	public function getCoacheeByCompanyAndCoachID($CompanyID,$coachID)
+	{
+		$where = array('company_id' => $CompanyID, 'coach_id' => $coachID);
+		return $this->db->where($where)->get('coachee')->result();
+	}
+
+	
 	public function getGoalsByCoacheeID($coacheeID)
 	{
 		return $this->db->where('coachee_id', $coacheeID)->get('goals')->result();
