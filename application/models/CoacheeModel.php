@@ -8,7 +8,21 @@ class CoacheeModel extends CI_Model
 	{
 		return $this->db->where('coachee_id', $id)->get('goals')->result();
 	}
-
+	public function cek_password()
+	{
+		$hasil = $this->db->where('id', $this->session->userdata('id'))->get('coachee');
+		if ($hasil->num_rows() > 0) {
+			return $hasil->row();
+		} else {
+			return array();
+		}
+	}
+	public function update_password($data, $id)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('coachee', $data);
+		return $this->db->affected_rows();
+	}
 	public function storeGoal($goal)
 	{
 		$this->db->insert('goals', $goal);

@@ -122,6 +122,45 @@ class CoacheeController extends CI_Controller
 		$this->pdf->setPaper('A4', 'potrait');
 		$this->pdf->load_view('laporan_coachee', $data, "laporan-coaching-" . $sessionID);
 	}
+
+	//profile
+	public function profile()
+	{
+		$data['page_name'] = 'Profile Coachee';
+		// $data['coachs']     = $this->AdminModel->getAllCoach();
+
+		$this->load->view('coachee/profile/profile', $data);
+	}
+	public function update_password()
+	{
+		$this->form_validation->set_rules('password', 'Password', 'required', array('required' => 'Password tidak boleh kosong!'));
+		$this->form_validation->set_rules('password_baru', 'Password', 'required', array('required' => 'Password tidak boleh kosong!'));
+		$this->form_validation->set_rules('repassword', 'Password', 'required|matches[password_baru]', array(
+			'required' => 'Password tidak boleh kosong!',
+			'matches'     => 'Password tidak sama'
+		));
+		$this->form_validation->set_error_delimiters('<span style="font-size: 10px;color:red">', '</span>');
+		if ($this->form_validation->run() == FALSE) {
+			$this->profile();
+		} else {
+			$pass = htmlspecialchars($this->input->post('password', true));
+			$id = $this->session->userdata('id');
+			$cek_password = $this->CoacheeModel->cek_password();
+
+			if (password_verify($pass, $cek_password->password)) {
+				$pb = password_hash($this->input->post('password_baru', true), PASSWORD_DEFAULT);
+				$data = array(
+					'password' => $pb,
+				);
+				$this->CoacheeModel->update_password($data, $id);
+				$this->session->set_flashdata('pro', 'Password berhasil diubah.');
+				redirect('coachee/profile');
+			} else {
+				$this->session->set_flashdata('error', 'Password yang Anda masukan salah.');
+				redirect('coachee/profile');
+			}
+		}
+	}
 }
 
 /* End of file CoacheeController.php */

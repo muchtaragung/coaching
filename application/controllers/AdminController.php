@@ -26,24 +26,23 @@ class AdminController extends CI_Controller
 
 	public function auth()
 	{
-		$auth['username'] = $this->input->post('username');
-		$auth['password'] = $this->input->post('password');
-
-		$checkAuth = $this->AdminModel->getAdmin($auth)->num_rows();
-
-		if ($checkAuth > 0) {
-			$adminData = $this->AdminModel->getAdmin($auth)->row();
-
-			$sessionData['login']    = 'admin';
-			$sessionData['name']     = 'admin';
-			$sessionData['username'] = $adminData->username;
-			$sessionData['password'] = $adminData->password;
-
-			$this->session->set_userdata($sessionData);
-			redirect('admin');
-		} else {
-			$this->session->set_flashdata('login failed', 'Username Atau Password Salah');
+		$username = htmlspecialchars($this->input->post('username'));
+		$pass = htmlspecialchars($this->input->post('password'));
+		$cek_login = $this->AdminModel->cek_login_admin($username);
+		if ($cek_login == FALSE) {
+			$this->session->set_flashdata('login failed', 'Username yang Anda masukan tidak terdaftar.');
 			redirect('admin/login');
+		} else {
+			if (password_verify($pass, $cek_login->password)) {
+				$this->session->set_userdata('id', $cek_login->id);
+				$this->session->set_userdata('username', $cek_login->username);
+				$this->session->set_userdata('login', 'admin');
+				$this->session->set_userdata('name', 'admin');
+				redirect('admin');
+			} else {
+				$this->session->set_flashdata('login failed', 'Username Atau Password Salah');
+				redirect('admin/login');
+			}
 		}
 	}
 
@@ -268,30 +267,70 @@ class AdminController extends CI_Controller
 		$goalID     = $this->input->post('goals_id');
 		$criteria['criteria'] = $this->input->post('criteria');
 
-		$this->session->set_flashdata('criteria','Berhasil Mengupdate Criteria');
-		$this->AdminModel->updateCriteria($criteriaID,$criteria);
-		redirect('admin/coachee/goal/show/'.$goalID);
+		$this->session->set_flashdata('criteria', 'Berhasil Mengupdate Criteria');
+		$this->AdminModel->updateCriteria($criteriaID, $criteria);
+		redirect('admin/coachee/goal/show/' . $goalID);
 	}
 
-	public function deleteCriteria($criteriaID,$goalID)
+	public function deleteCriteria($criteriaID, $goalID)
 	{
 		$this->session->set_flashdata('criteria', 'Berhasil Menghapus Criteria');
 		$this->AdminModel->deleteCriteria($criteriaID);
-		redirect('admin/coachee/goal/show/'.$goalID);
+		redirect('admin/coachee/goal/show/' . $goalID);
 	}
 
-	public function resetAction($actionID,$goalID)
+	public function resetAction($actionID, $goalID)
 	{
 		$action['result'] = null;
-		$this->session->set_flashdata('action','Berhasil Mereset Action');
-		$this->AdminModel->resetAction($actionID,$action);
-		redirect('admin/coachee/goal/show/'.$goalID);
+		$this->session->set_flashdata('action', 'Berhasil Mereset Action');
+		$this->AdminModel->resetAction($actionID, $action);
+		redirect('admin/coachee/goal/show/' . $goalID);
 	}
 
-	public function deleteAction($actionID,$goalID)
+	public function deleteAction($actionID, $goalID)
 	{
-		$this->session->set_flashdata('action','Berhasil Menghapus Action');
+		$this->session->set_flashdata('action', 'Berhasil Menghapus Action');
 		$this->AdminModel->deleteAction($actionID);
-		redirect('admin/coachee/goal/show/'.$goalID);
+		redirect('admin/coachee/goal/show/' . $goalID);
+	}
+
+	//profile
+	public function profile()
+	{
+		$this->checkAuth();
+		$data['page_name'] = 'Profile Admin';
+		// $data['coachs']     = $this->AdminModel->getAllCoach();
+
+		$this->load->view('admin/profile/profile', $data);
+	}
+	public function update_password()
+	{
+		$this->form_validation->set_rules('password', 'Password', 'required', array('required' => 'Password tidak boleh kosong!'));
+		$this->form_validation->set_rules('password_baru', 'Password', 'required', array('required' => 'Password tidak boleh kosong!'));
+		$this->form_validation->set_rules('repassword', 'Password', 'required|matches[password_baru]', array(
+			'required' => 'Password tidak boleh kosong!',
+			'matches'     => 'Password tidak sama'
+		));
+		$this->form_validation->set_error_delimiters('<span style="font-size: 10px;color:red">', '</span>');
+		if ($this->form_validation->run() == FALSE) {
+			$this->profile();
+		} else {
+			$pass = htmlspecialchars($this->input->post('password', true));
+			$id = $this->session->userdata('id');
+			$cek_password = $this->AdminModel->cek_password();
+
+			if (password_verify($pass, $cek_password->password)) {
+				$pb = password_hash($this->input->post('password_baru', true), PASSWORD_DEFAULT);
+				$data = array(
+					'password' => $pb,
+				);
+				$this->AdminModel->update_password($data, $id);
+				$this->session->set_flashdata('pro', 'Password berhasil diubah.');
+				redirect('admin/profile');
+			} else {
+				$this->session->set_flashdata('error', 'Password yang Anda masukan salah.');
+				redirect('admin/profile');
+			}
+		}
 	}
 }

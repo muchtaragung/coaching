@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class AdminModel extends CI_Model
-{	
+{
 	/**
 	 * mengambil seluruh data admin 
 	 */
@@ -10,7 +10,32 @@ class AdminModel extends CI_Model
 	{
 		return $this->db->get_where('admin', $where);
 	}
-	
+
+	public function cek_login_admin($username)
+	{
+
+		$hasil = $this->db->where('username', $username)->limit(1)->get('admin');
+		if ($hasil->num_rows() > 0) {
+			return $hasil->row();
+		} else {
+			return array();
+		}
+	}
+	public function cek_password()
+	{
+		$hasil = $this->db->where('id', $this->session->userdata('id'))->get('admin');
+		if ($hasil->num_rows() > 0) {
+			return $hasil->row();
+		} else {
+			return array();
+		}
+	}
+	public function update_password($data, $id)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('admin', $data);
+		return $this->db->affected_rows();
+	}
 	/**	
 	 * mengambil seluruh data coach
 	 * mengembalikan data dalam bentuk objek
@@ -86,10 +111,10 @@ class AdminModel extends CI_Model
 	}
 
 	/** 
-	* mengambil data perusahaan sesuai id
-	* memiliki parameter id perusahaan yang akan di ambil
-	* mengembalikan nilai dalam bentuk object
-	*/
+	 * mengambil data perusahaan sesuai id
+	 * memiliki parameter id perusahaan yang akan di ambil
+	 * mengembalikan nilai dalam bentuk object
+	 */
 	public function getCompanyByID($id)
 	{
 		return $this->db->where('id', $id)->get('company')->row();
@@ -264,7 +289,6 @@ class AdminModel extends CI_Model
 	{
 		return $this->db->where('goals_id', $goalID)->get('notes')->result();
 	}
-
 }
 
 /* End of file AuthModel.php */
