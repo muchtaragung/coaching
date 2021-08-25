@@ -8,7 +8,21 @@ class CoachModel extends CI_Model
 	{
 		return $this->db->get('coachee')->result();
 	}
-
+	public function cek_password()
+	{
+		$hasil = $this->db->where('id', $this->session->userdata('id'))->get('coach');
+		if ($hasil->num_rows() > 0) {
+			return $hasil->row();
+		} else {
+			return array();
+		}
+	}
+	public function update_password($data, $id)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('coach', $data);
+		return $this->db->affected_rows();
+	}
 	public function getCoaches()
 	{
 		return $this->db->get('coach')->result();

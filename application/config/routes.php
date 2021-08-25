@@ -117,5 +117,33 @@ $route['admin/coachee/delete/(:num)'] = 'AdminController/deleteCoachee/$1';
 $route['admin/coachee/edit/(:num)'] = 'AdminController/editCoachee/$1';
 $route['admin/coachee/update'] = 'AdminController/updateCoachee';
 
-$route['admin/coachee/goal/(:num)'] = 'AdminController/goalList/$1';
+$route['admin/coachee/goal/list/(:num)'] = 'AdminController/goalList/$1';
 $route['admin/coachee/goal/delete/(:num)'] = 'AdminController/deleteGoal/$1';
+$route['admin/coachee/goal/edit/(:num)'] = 'AdminController/editGoal/$1';
+$route['admin/coachee/goal/update'] = 'AdminController/updateGoal';
+$route['admin/coachee/goal/show/(:num)'] = 'AdminController/showGoal/$1';
+
+$route['admin/coachee/action/reset/(:num)/(:num)'] = 'AdminController/resetAction/$1/$2';
+$route['admin/coachee/action/delete/(:num)/(:num)'] = 'AdminController/deleteAction/$1/$2';
+
+$route['admin/coachee/criteria/update'] = 'AdminController/updateCriteria';
+$route['admin/coachee/criteria/save'] = 'AdminController/saveCriteria';
+$route['admin/coachee/criteria/delete/(:num)/(:num)'] = 'AdminController/deleteCriteria/$1/$2';
+
+$route['admin/coachee/notes/delete/(:num)/(:num)'] = 'AdminController/deleteNotes/$1/$2';
+$route['admin/coachee/notes/edit/(:num)'] = 'AdminController/editNotes/$1';
+$route['admin/coachee/notes/update'] = 'AdminController/updateNotes';
+
+$route['admin/coachee/session/list/(:num)'] = 'AdminController/sessionList/$1';
+
+//profile admin
+$route['admin/profile'] = 'AdminController/profile';
+$route['admin/profile/update'] = 'AdminController/update_password';
+
+//profile coach
+$route['coach/profile'] = 'CoachController/profile';
+$route['coach/profile/update'] = 'CoachController/update_password';
+
+//profile coachee
+$route['coachee/profile'] = 'CoacheeController/profile';
+$route['coachee/profile/update'] = 'CoacheeController/update_password';
