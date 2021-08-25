@@ -322,6 +322,23 @@ class AdminController extends CI_Controller
 		redirect('admin/coachee/goal/show/'.$goalID);
 	}
 
+	public function sessionList($coacheeID)
+	{
+		$data['page_name'] = 'Sesi Peserta'; 
+		$data['sessions']  = $this->AdminModel->getSessionByCoacheeID($coacheeID);
+
+		$this->load->view('admin/session/list', $data);
+	}
+
+	public function deleteSession($sessionID,$coacheeID)
+	{
+		$this->AdminModel->getSessionByID($sessionID);
+
+		$this->session->set_flashdata('session', 'Di Hapus');
+		$this->AdminModel->deleteSession($sessionID);
+		redirect('admin/coachee/session/list/' . $coacheeID);
+	}
+
 	//profile
 	public function profile()
 	{

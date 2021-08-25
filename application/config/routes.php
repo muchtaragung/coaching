@@ -134,6 +134,8 @@ $route['admin/coachee/notes/delete/(:num)/(:num)'] = 'AdminController/deleteNote
 $route['admin/coachee/notes/edit/(:num)'] = 'AdminController/editNotes/$1';
 $route['admin/coachee/notes/update'] = 'AdminController/updateNotes';
 
+$route['admin/coachee/session/list/(:num)'] = 'AdminController/sessionList/$1';
+
 //profile admin
 $route['admin/profile'] = 'AdminController/profile';
 $route['admin/profile/update'] = 'AdminController/update_password';

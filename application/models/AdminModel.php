@@ -318,6 +318,17 @@ class AdminModel extends CI_Model
 	{
 		return $this->db->where('id', $notesID)->update('notes', $notes);
 	}
+
+	/**
+	 * mengambill session bedrasarkan coachee id
+	 * parameter pertama adalah coachee id 
+	 * mengembalikan data dalam bentuk array dan object
+	 */
+	public function getSessionByCoacheeID($coacheeID)
+	{
+		return $this->db->where('coachee_id', $coacheeID)->get('session')->result();
+	}
+	
 }
 
 /* End of file AuthModel.php */

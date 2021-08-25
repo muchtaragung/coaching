@@ -58,6 +58,7 @@
 													<a href="<?= site_url('admin/coachee/edit/') . $coachee->id ?>" class="btn btn-primary">edit Data</a>
 													<a href="<?= site_url('admin/coachee/delete/') . $coachee->id ?>" class="btn btn-primary">delete Data</a>
 													<a href="<?= site_url('admin/coachee/goal/list/') . $coachee->id ?>" class="btn btn-primary">Lihat Goal</a>
+													<a href="<?= site_url('admin/coachee/session/list/') . $coachee->id ?>" class="btn btn-primary">Lihat Sesi</a>
 												</td>
 											</tr>
 										<?php endforeach ?>
