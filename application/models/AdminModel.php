@@ -289,6 +289,15 @@ class AdminModel extends CI_Model
 	{
 		return $this->db->where('goals_id', $goalID)->get('notes')->result();
 	}
+
+	/**
+	 * menghapus notes berdasarkan id
+	 * parameter pertama adalah id notes 
+	 */
+	public function deleteNotes($notesID)
+	{
+		return $this->db->where('id',$notesID)->delete('notes');
+	}
 }
 
 /* End of file AuthModel.php */

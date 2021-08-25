@@ -294,6 +294,13 @@ class AdminController extends CI_Controller
 		redirect('admin/coachee/goal/show/' . $goalID);
 	}
 
+	public function deleteNotes($notesID, $goalID)
+	{
+		$this->session->set_flashdata('notes', 'Berhasil Menghapus Notes');
+		$this->AdminModel->deleteNotes($notesID);
+		redirect('admin/coachee/goal/show/' . $goalID);
+	}
+
 	//profile
 	public function profile()
 	{
