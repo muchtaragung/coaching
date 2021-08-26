@@ -25,7 +25,7 @@ class CoachController extends CI_Controller
 	public function showCoacheeByCompanyID($CompanyID)
 	{
 		$data['page_name'] = "Dashboard Coach";
-		$data['coachee'] = $this->CoachModel->getCoacheeByCompanyID($CompanyID);
+		$data['coachee'] = $this->CoachModel->getCoacheeByCompanyAndCoachID($CompanyID, $this->session->userdata('id'));
 		$data['company_id'] = $CompanyID;
 		$this->load->view('coach/coachee/list', $data, FALSE);
 	}
@@ -82,6 +82,24 @@ class CoachController extends CI_Controller
 
 		$this->CoachModel->endSession($sessionID, $sess);
 		redirect('coach/coachee/session/' . $coacheeID);
+	}
+
+	/**
+	 * menampilkan data dari sesi 
+	 * seperti penilaian dan juga untuk
+	 * mencetak laporan coach
+	 * 
+	 * memiliki parameter id session
+	 */
+	public function showSessionData($sessionID)
+	{
+		$data['page_name'] = 'Data Sesi';
+		$data['session']  = $this->CoachModel->getSessionByID($sessionID);
+		$data['penilaian'] = $this->CoachModel->getPenilaianBySessionID($sessionID);
+		$data['report']    = $this->CoachModel->getReportBySessionID($sessionID);
+		$data['coachee']   = $this->CoachModel->getCoacheeByID($data['session']->coachee_id);
+
+		$this->load->view('coach/coachee/show_session', $data);
 	}
 
 	public function showCoacheeGoals($coacheeID)
@@ -143,7 +161,7 @@ class CoachController extends CI_Controller
 
 		$this->session->set_flashdata('penilaian', 'berhasil');
 		$this->CoachModel->savePenilaian($penilaian);
-		redirect('coach/coachee/session/' . $penilaian['coachee_id']);
+		redirect('coach/coachee/session/show/' . $penilaian['session_id']);
 	}
 
 	public function addMilestone($goalID)
@@ -179,7 +197,7 @@ class CoachController extends CI_Controller
 
 		if ($data['checkReport'] > 0) {
 			$this->session->set_flashdata('report', 'ada');
-			redirect('coach/coachee/session/' . $coacheeID);
+			redirect('coach/coachee/session/show' . $sessionID);
 		}
 
 		$data['session']    = $this->CoachModel->getSessionByID($sessionID);
@@ -213,7 +231,7 @@ class CoachController extends CI_Controller
 
 		$this->session->set_flashdata('report', 'berhasil');
 		$this->CoachModel->saveReport($report);
-		return redirect('coach/coachee/session/' . $coacheeID);
+		return redirect('coach/coachee/session/show/' . $report['session_id']);
 	}
 
 

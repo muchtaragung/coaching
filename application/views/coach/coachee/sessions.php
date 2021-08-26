@@ -69,10 +69,7 @@
 													<?php elseif ($session->status == 'belum selesai') : ?>
 														<button onclick=" confirmEnd('<?= site_url('coach/coachee/session/end/' . $session->id . '/' . $session->coachee_id) ?>')" class="btn btn-primary">Selesaikan Sesi</button>
 													<?php elseif ($session->status == 'selesai') : ?>
-														<a href="" class="btn btn-secondary disabled">Selesai</a>
-														<a href="<?= site_url('coach/coachee/session/penilaian/' . $session->id . '/' . $coachee_id) ?>" class="btn btn-primary">Penilaian</a>
-														<a href="<?= site_url('coach/coachee/session/report/create/' . $session->id . '/' . $coachee_id) ?>" class="btn btn-primary">Buat Laporan</a>
-														<a href="<?= site_url('coach/coachee/session/report/show/' . $session->id . '/' . $coachee_id) ?>" class="btn btn-primary">Cetak laporan</a>
+														<a href="<?= site_url('coach/coachee/session/show/' . $session->id) ?>" class="btn btn-primary">Lihat Data Sesi</a>
 													<?php endif ?>
 												</td>
 											</tr>
@@ -205,24 +202,6 @@
 		</script>
 	<?php endif ?>
 
-	<?php if ($this->session->flashdata('report') == 'ada') : ?>
-		<script>
-			Swal.fire(
-				'',
-				'Report Sudah Ada',
-			)
-		</script>
-	<?php endif ?>
-
-	<?php if ($this->session->flashdata('report') == 'belum ada') : ?>
-		<script>
-			Swal.fire(
-				'',
-				'Report belum Ada',
-			)
-		</script>
-	<?php endif ?>
-
 	<?php if ($this->session->flashdata('penilaian') == 'berhasil') : ?>
 		<script>
 			Swal.fire(
@@ -233,15 +212,7 @@
 		</script>
 	<?php endif ?>
 
-	<?php if ($this->session->flashdata('report') == 'berhasil') : ?>
-		<script>
-			Swal.fire(
-				'Berhasil',
-				'Berhasil Buat Laporan, Siap Di Cetak',
-				'success'
-			)
-		</script>
-	<?php endif ?>
+
 </body>
 
 </html>

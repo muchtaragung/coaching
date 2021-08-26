@@ -71,6 +71,7 @@ $route['coach/coachee/goal/milestone/save']       = 'CoachController/saveMilesto
 
 // coachee session
 $route['coach/coachee/session/(:num)']                  = 'CoachController/showCoacheeSessions/$1';
+$route['coach/coachee/session/show/(:num)']				= 'CoachController/showSessionData/$1';
 $route['coach/coachee/session/new/(:num)']              = 'CoachController/addSession/$1';
 $route['coach/coachee/session/start/(:num)/(:num)']     = 'CoachController/startSession/$1/$2';
 $route['coach/coachee/session/end/(:num)/(:num)']       = 'CoachController/endSession/$1/$2';

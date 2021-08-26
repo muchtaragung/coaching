@@ -74,44 +74,44 @@
 				<td>Komunikasi Dan Respon</td>
 				<td>:</td>
 				<td>
-					<?php if ($penilaian_sesi[0]['komunikasi'] == '1') { ?> buruk <?php } ?>
-					<?php if ($penilaian_sesi[0]['komunikasi'] == '2') { ?> sedikit buruk <?php } ?>
-					<?php if ($penilaian_sesi[0]['komunikasi'] == '3') { ?> cukup <?php } ?>
-					<?php if ($penilaian_sesi[0]['komunikasi'] == '4') { ?> cukup baik <?php } ?>
-					<?php if ($penilaian_sesi[0]['komunikasi'] == '5') { ?> baik <?php } ?>
+					<?php if ($penilaian_sesi['komunikasi'] == '1') { ?> 1 <?php } ?>
+					<?php if ($penilaian_sesi['komunikasi'] == '2') { ?> 2 <?php } ?>
+					<?php if ($penilaian_sesi['komunikasi'] == '3') { ?> 3 <?php } ?>
+					<?php if ($penilaian_sesi['komunikasi'] == '4') { ?> 4 <?php } ?>
+					<?php if ($penilaian_sesi['komunikasi'] == '5') { ?> 5 <?php } ?>
 				</td>
 			</tr>
 			<tr>
 				<td>Kehadiran Setiap Sesi </td>
 				<td>:</td>
 				<td>
-					<?php if ($penilaian_sesi[0]['kehadiran'] == '1') { ?> buruk <?php } ?>
-					<?php if ($penilaian_sesi[0]['kehadiran'] == '2') { ?> sedikit buruk <?php } ?>
-					<?php if ($penilaian_sesi[0]['kehadiran'] == '3') { ?> cukup <?php } ?>
-					<?php if ($penilaian_sesi[0]['kehadiran'] == '4') { ?> cukup baik <?php } ?>
-					<?php if ($penilaian_sesi[0]['kehadiran'] == '5') { ?> baik <?php } ?>
+					<?php if ($penilaian_sesi['kehadiran'] == '1') { ?> 1 <?php } ?>
+					<?php if ($penilaian_sesi['kehadiran'] == '2') { ?> 2 <?php } ?>
+					<?php if ($penilaian_sesi['kehadiran'] == '3') { ?> 3 <?php } ?>
+					<?php if ($penilaian_sesi['kehadiran'] == '4') { ?> 4 <?php } ?>
+					<?php if ($penilaian_sesi['kehadiran'] == '5') { ?> 5 <?php } ?>
 				</td>
 			</tr>
 			<tr>
 				<td>Effort Proses Coaching </td>
 				<td>:</td>
 				<td>
-					<?php if ($penilaian_sesi[0]['effort'] == '1') { ?> buruk <?php } ?>
-					<?php if ($penilaian_sesi[0]['effort'] == '2') { ?> sedikit buruk <?php } ?>
-					<?php if ($penilaian_sesi[0]['effort'] == '3') { ?> cukup <?php } ?>
-					<?php if ($penilaian_sesi[0]['effort'] == '4') { ?> cukup baik <?php } ?>
-					<?php if ($penilaian_sesi[0]['effort'] == '5') { ?> baik <?php } ?>
+					<?php if ($penilaian_sesi['effort'] == '1') { ?> 1 <?php } ?>
+					<?php if ($penilaian_sesi['effort'] == '2') { ?> 2 <?php } ?>
+					<?php if ($penilaian_sesi['effort'] == '3') { ?> 3 <?php } ?>
+					<?php if ($penilaian_sesi['effort'] == '4') { ?> 4 <?php } ?>
+					<?php if ($penilaian_sesi['effort'] == '5') { ?> 5 <?php } ?>
 				</td>
 			</tr>
 			<tr>
 				<td>Komitment Melakukan Action Plan</td>
 				<td>:</td>
 				<td>
-					<?php if ($penilaian_sesi[0]['komitment'] == '1') { ?> buruk <?php } ?>
-					<?php if ($penilaian_sesi[0]['komitment'] == '2') { ?> sedikit buruk <?php } ?>
-					<?php if ($penilaian_sesi[0]['komitment'] == '3') { ?> cukup <?php } ?>
-					<?php if ($penilaian_sesi[0]['komitment'] == '4') { ?> cukup baik <?php } ?>
-					<?php if ($penilaian_sesi[0]['komitment'] == '5') { ?> baik <?php } ?>
+					<?php if ($penilaian_sesi['komitment'] == '1') { ?> 1 <?php } ?>
+					<?php if ($penilaian_sesi['komitment'] == '2') { ?> 2 <?php } ?>
+					<?php if ($penilaian_sesi['komitment'] == '3') { ?> 3 <?php } ?>
+					<?php if ($penilaian_sesi['komitment'] == '4') { ?> 4 <?php } ?>
+					<?php if ($penilaian_sesi['komitment'] == '5') { ?> 5 <?php } ?>
 				</td>
 			</tr>
 

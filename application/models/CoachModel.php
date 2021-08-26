@@ -4,10 +4,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class CoachModel extends CI_Model
 {
 
-	public function allCoachee()
-	{
-		return $this->db->get('coachee')->result();
-	}
+	/**	
+	 * fungsi untuk mengecek password 
+	 * yang digunakan untuk mereset password
+	 */
 	public function cek_password()
 	{
 		$hasil = $this->db->where('id', $this->session->userdata('id'))->get('coach');
@@ -17,22 +17,64 @@ class CoachModel extends CI_Model
 			return array();
 		}
 	}
+
+	/**
+	 * fungsi untuk mengupdate password
+	 * atau mereset password
+	 */
 	public function update_password($data, $id)
 	{
 		$this->db->where('id', $id);
 		$this->db->update('coach', $data);
 		return $this->db->affected_rows();
 	}
+
+	/**
+	 * mengambil semua data coach
+	 * mengembalikan data array dan object
+	 */
 	public function getCoaches()
 	{
 		return $this->db->get('coach')->result();
 	}
 
+	/**
+	 * mengambil semua data coachee
+	 * mengembalikan data array dan object
+	 */
+	public function allCoachee()
+	{
+		return $this->db->get('coachee')->result();
+	}
+
+	/**
+	 * menyimpan data coachee
+	 */
 	public function storeCoachee($coachee)
 	{
 		$this->db->insert('coachee', $coachee);
 	}
 
+	public function getCoacheeName($coacheeID)
+	{
+		return $this->db->where('id', $coacheeID)->get('coachee')->row();
+	}
+
+	public function getCoacheeByCompanyID($CompanyID)
+	{
+		return $this->db->where('company_id', $CompanyID)->get('coachee')->result();
+	}
+
+	public function getCoacheeByCompanyAndCoachID($CompanyID, $coachID)
+	{
+		$where = array('company_id' => $CompanyID, 'coach_id' => $coachID);
+		return $this->db->where($where)->get('coachee')->result();
+	}
+
+	/**
+	 * mengambil data session dari coachee
+	 * mengembalikan data array dan objects
+	 */
 	public function getCoacheeSession($coacheeID)
 	{
 		return $this->db->where('coachee_id', $coacheeID)->get('session')->result();
@@ -64,11 +106,6 @@ class CoachModel extends CI_Model
 		return $this->db->where('id', $sessionID)->update('session', $session);
 	}
 
-	public function getCoacheeName($coacheeID)
-	{
-		return $this->db->where('id', $coacheeID)->get('coachee')->row();
-	}
-
 	public function allGoalsByID($id)
 	{
 		return $this->db->where('coachee_id', $id)->get('goals')->result();
@@ -77,6 +114,11 @@ class CoachModel extends CI_Model
 	public function goalByID($id)
 	{
 		return $this->db->where('id', $id)->get('goals')->row();
+	}
+
+	public function getGoalsByCoacheeID($coacheeID)
+	{
+		return $this->db->where('coachee_id', $coacheeID)->get('goals')->result();
 	}
 
 	public function actionPlanByGoalID($id)
@@ -139,16 +181,6 @@ class CoachModel extends CI_Model
 		return $this->db->get('company')->result();
 	}
 
-	public function getCoacheeByCompanyID($CompanyID)
-	{
-		return $this->db->where('company_id', $CompanyID)->get('coachee')->result();
-	}
-
-	public function getGoalsByCoacheeID($coacheeID)
-	{
-		return $this->db->where('coachee_id', $coacheeID)->get('goals')->result();
-	}
-
 	public function getActionByGoalsID($goalsID)
 	{
 		return $this->db->where('goals_id', $goalsID)->get('action_plan')->result();
@@ -171,7 +203,7 @@ class CoachModel extends CI_Model
 
 	public function getPenilaianBySessionID($sessionID)
 	{
-		return $this->db->where('session_id', $sessionID)->get('penilaian_sesi')->result();
+		return $this->db->where('session_id', $sessionID)->get('penilaian_sesi')->row();
 	}
 
 	public function saveReport($report)
