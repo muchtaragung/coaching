@@ -56,7 +56,7 @@
 												<td><?= $coachee->email ?></td>
 												<td>
 													<a href="<?= site_url('admin/coachee/edit/') . $coachee->id ?>" class="btn btn-primary">edit Data</a>
-													<a href="<?= site_url('admin/coachee/delete/') . $coachee->id ?>" class="btn btn-primary">delete Data</a>
+													<button onclick=" confirmDelete('<?= site_url('admin/coachee/delete/') . $coachee->id ?>')" class="btn btn-danger">Hapus Peserta</button>
 													<a href="<?= site_url('admin/coachee/goal/list/') . $coachee->id ?>" class="btn btn-primary">Lihat Goal</a>
 													<a href="<?= site_url('admin/coachee/session/list/') . $coachee->id ?>" class="btn btn-primary">Lihat Sesi</a>
 												</td>
@@ -89,24 +89,6 @@
 		<i class="fas fa-angle-up"></i>
 	</a>
 
-	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button" data-dismiss="modal">Batalkan</button>
-					<a class="btn btn-primary" href="<?= site_url('login') ?>">Logout</a>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<div class="modal fade" id="addCoachee" tabindex="-1" role="dialog" aria-labelledby="addCoachee" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -159,6 +141,23 @@
 			)
 		</script>
 	<?php endif ?>
+
+	<script>
+		function confirmDelete(link) {
+			Swal.fire({
+				title: 'Apakah Anda Ingin Menghapus Coachee',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					window.location.replace(link)
+				}
+			})
+		}
+	</script>
 </body>
 
 </html>
