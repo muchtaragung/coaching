@@ -8,6 +8,7 @@ class AdminController extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('AdminModel');
+		$this->load->library('form_validation');
 	}
 
 	public function checkAuth()

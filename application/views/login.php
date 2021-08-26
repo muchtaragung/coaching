@@ -23,6 +23,11 @@
 									<div class="text-center">
 										<h1 class="h4 text-gray-900 mb-4">Silahkan Login</h1>
 									</div>
+									<?php if ($this->session->flashdata('regis') != null) { ?>
+										<div class="alert alert-success" role="alert">
+											<?php echo $this->session->flashdata('regis'); ?>
+										</div>
+									<?php } ?>
 									<form action="<?php echo site_url('auth') ?>" method="post">
 										<div class="form-group">
 											<label for="email">Email</label>
@@ -35,6 +40,9 @@
 										<input class="form-control btn btn-primary" type="submit" value="masuk">
 									</form>
 									<hr>
+									<div class="row">
+										<p><a href="<?php echo site_url('auth/lupa_password') ?>">Lupa Password</a></p>
+									</div>
 								</div>
 							</div>
 						</div>

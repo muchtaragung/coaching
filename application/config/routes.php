@@ -141,3 +141,10 @@ $route['coach/profile/update'] = 'CoachController/update_password';
 //profile coachee
 $route['coachee/profile'] = 'CoacheeController/profile';
 $route['coachee/profile/update'] = 'CoacheeController/update_password';
+
+//lupa password
+$route['auth/lupa_password']   = 'AuthController/forget';
+$route['auth/lupa_password/send_email'] = 'AuthController/lupaPassword';
+$route['auth/reset_password/(:any)']   = 'AuthController/reset_password/$1';
+$route['auth/password_baru/(:any)']   = 'AuthController/inputPassword/$1';
+$route['auth/reset_password']   = 'AuthController/reset_password';

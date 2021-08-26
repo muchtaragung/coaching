@@ -8,6 +8,7 @@ class CoachController extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('CoachModel');
+		$this->load->library('form_validation');
 		$this->load->library('pdf');
 		if ($this->session->userdata('login') != 'coach') {
 			echo '<script>alert("Silahkan Login Untuk Mengakses Halaman ini")</script>';

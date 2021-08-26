@@ -47,6 +47,7 @@
 										<input class="form-control btn btn-primary" type="submit" value="masuk">
 									</form>
 									<hr>
+									
 								</div>
 							</div>
 						</div>
