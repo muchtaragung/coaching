@@ -122,6 +122,31 @@ class AdminController extends CI_Controller
 
 	public function deleteCompany($id)
 	{
+		// mengambil data yang di perlukan
+		$data['company'] = $this->AdminModel->getCompanyByID($id);
+		$data['coachee'] = $this->AdminModel->getCoacheeByCompanyID($data['company']->id);
+
+		foreach ($data['coachee'] as $coachee) {
+			$data['goals']   = $this->AdminModel->getGoalByCoacheeID($coachee->id);
+			$data['sessions']  = $this->AdminModel->getSessionByCoacheeID($coachee->id);
+
+			// perulangan untuk menghapus semua goals dan turunannya
+			foreach ($data['goals'] as $goal) {
+				$this->AdminModel->deleteGoal($goal->id);
+				$this->AdminModel->deleteCriteriaByGoalID($goal->id);
+				$this->AdminModel->deleteActionByGoalId($goal->id);
+				$this->AdminModel->deleteNotesByGoalID($goal->id);
+				$this->AdminModel->deleteMilestoneByGoalID($goal->id);
+			}
+
+			// perulangan untuk mengahpus semua sesi dan turunannya
+			foreach ($data['sessions'] as $sesi) {
+				$this->AdminModel->deleteSession($sesi->id);
+				$this->AdminModel->deletePenilaianBySessionID($sesi->id);
+				$this->AdminModel->deleteReportBySessionID($sesi->id);
+			}
+		}
+
 		$this->session->set_flashdata('company', 'Berhasil Menghapus Data Perusahaan');
 
 		$this->AdminModel->deleteCompany($id);
