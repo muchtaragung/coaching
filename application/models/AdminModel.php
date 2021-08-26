@@ -296,7 +296,7 @@ class AdminModel extends CI_Model
 	 */
 	public function deleteNotes($notesID)
 	{
-		return $this->db->where('id',$notesID)->delete('notes');
+		return $this->db->where('id', $notesID)->delete('notes');
 	}
 
 	/**
@@ -306,7 +306,7 @@ class AdminModel extends CI_Model
 	 */
 	public function getNotesByID($notesID)
 	{
-		return $this->db->where('id',$notesID)->get('notes')->row();
+		return $this->db->where('id', $notesID)->get('notes')->row();
 	}
 
 	/**
@@ -328,8 +328,56 @@ class AdminModel extends CI_Model
 	{
 		return $this->db->where('coachee_id', $coacheeID)->get('session')->result();
 	}
-	
+
+	/**
+	 * mengambil session sesuai id
+	 * parameter pertama id session
+	 * mengembalikan object
+	 */
+	public function getSessionByID($sessionID)
+	{
+		return $this->db->where('id', $sessionID)->get('session')->row();
+	}
+
+	/**
+	 * mengambil penilaian sesuai id sesseion
+	 * parameter pertama id session
+	 * mengembalikan object
+	 */
+	public function getPenilaianBySessionID($sessionID)
+	{
+		return $this->db->where('session_id', $sessionID)->get('penilaian_sesi')->row();
+	}
+
+	/**
+	 * mengambil report sesuai id session
+	 * parameter pertama id session
+	 * mengembalikan object
+	 */
+	public function getReportBySessionID($sessionID)
+	{
+		return $this->db->where('session_id', $sessionID)->get('report')->row();
+	}
+
+	/**
+	 * menghapus report sesuai id 
+	 * parameter pertama id report
+	 */
+	public function deleteReport($id)
+	{
+		return $this->db->where('id', $id)->delete('report');
+	}
+
+	/**
+	 * menghapus penilaian
+	 * parameter pertama id 
+	 * mengembalikan object
+	 */
+	public function deletePenilaian($id)
+	{
+		return $this->db->where('id', $id)->delete('penilaian_sesi');
+	}
 }
 
-/* End of file AuthModel.php */
-/* Location: ./application/models/AuthModel.php */
+/* End of file AdminiModel.php */
+/* Location: ./application/models/AdminModel.php */

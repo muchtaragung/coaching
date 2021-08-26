@@ -343,12 +343,43 @@ class AdminController extends CI_Controller
 		redirect('admin/coachee/session/list/' . $coacheeID);
 	}
 
+	public function showSessionData($sessionID)
+	{
+		$data['page_name'] = 'Data Sesi';
+		$data['session']  = $this->AdminModel->getSessionByID($sessionID);
+		$data['penilaian'] = $this->AdminModel->getPenilaianBySessionID($sessionID);
+		$data['report']    = $this->AdminModel->getReportBySessionID($sessionID);
+		$data['coachee']   = $this->AdminModel->getCoacheeByID($data['session']->coachee_id);
+
+		$this->load->view('admin/session/show', $data);
+	}
+
+	/**
+	 * menghapus report
+	 */
+	public function deleteReport($reportID, $sessionID)
+	{
+		$this->session->set_flashdata('report', 'Laporan Berhasil Di Hapus');
+		$this->AdminModel->deleteReport($reportID);
+		redirect('admin/coachee/session/show/' . $sessionID);
+	}
+
+	/**
+	 * menghapus penilaian
+	 */
+	public function deletePenilaian($id, $sessionID)
+	{
+		$this->session->set_flashdata('penilaian', 'Penilaian Berhasil Di Hapus');
+		$this->AdminModel->deletePenilaian($id);
+		redirect('admin/coachee/session/show/' . $sessionID);
+	}
+
 	//profile
 	public function profile()
 	{
 		$this->checkAuth();
 		$data['page_name'] = 'Profile Admin';
-		// $data['coachs']     = $this->AdminModel->getAllCoach();
+		$data['coachs']    = $this->AdminModel->getAllCoach();
 
 		$this->load->view('admin/profile/profile', $data);
 	}
