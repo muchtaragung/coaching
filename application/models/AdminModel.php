@@ -320,6 +320,25 @@ class AdminModel extends CI_Model
 	}
 
 	/**
+	 * mengambil milestone berdasar goal id
+	 * parameter pertama menggunakan goal id
+	 * mengembalikan data dalam bentuk object
+	 */
+	public function getMilestoneGoalID($goalID)
+	{
+		return $this->db->where('goals_id', $goalID)->get('milestone')->row();
+	}
+
+	/**
+	 * menghapus milestone 
+	 * parameter pertama milestone id
+	 */
+	public function deleteMilestone($milestoneID)
+	{
+		return $this->db->where('id', $milestoneID)->delete('milestone');
+	}
+
+	/**
 	 * mengambill session bedrasarkan coachee id
 	 * parameter pertama adalah coachee id 
 	 * mengembalikan data dalam bentuk array dan object

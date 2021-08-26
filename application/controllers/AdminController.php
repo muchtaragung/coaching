@@ -326,6 +326,22 @@ class AdminController extends CI_Controller
 		redirect('admin/coachee/goal/show/' . $goalID);
 	}
 
+	public function showMilestone($goalID)
+	{
+		$data['page_name'] = 'Milestone';
+		$data['milestone'] = $this->AdminModel->getMilestoneGoalID($goalID);
+		$data['goal']      = $this->AdminModel->getGoalByID($data['milestone']->goals_id);
+
+		$this->load->view('admin/milestone/show', $data);
+	}
+
+	public function deleteMilestone($milestoneID, $goalID)
+	{
+		$this->session->set_flashdata('milestone', 'Milestone Berhasil Dihapus');
+		$this->AdminModel->deleteMilestone($milestoneID);
+		redirect('admin/coachee/milestone/show/' . $goalID);
+	}
+
 	public function sessionList($coacheeID)
 	{
 		$data['page_name'] = 'Sesi Peserta';
