@@ -79,7 +79,7 @@ class CoachModel extends CI_Model
 	{
 		return $this->db->where('coachee_id', $coacheeID)->get('session')->result();
 	}
-	
+
 	public function getTotalSession($coacheeID, $coachID)
 	{
 		$where = array(
@@ -203,7 +203,7 @@ class CoachModel extends CI_Model
 
 	public function getPenilaianBySessionID($sessionID)
 	{
-		return $this->db->where('session_id', $sessionID)->get('penilaian_sesi')->result();
+		return $this->db->where('session_id', $sessionID)->get('penilaian_sesi')->row();
 	}
 
 	public function saveReport($report)
