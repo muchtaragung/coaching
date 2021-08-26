@@ -150,11 +150,11 @@
 	</div>
 	<?php $this->load->view('layouts/script'); ?>
 
-	<?php if ($this->session->flashdata('goal') == 'update') : ?>
+	<?php if ($this->session->flashdata('coachee')) : ?>
 		<script>
 			Swal.fire(
 				'Berhasil',
-				'Goal Telah Di Edit',
+				'<?= $this->session->flashdata('coachee') ?>',
 				'success'
 			)
 		</script>

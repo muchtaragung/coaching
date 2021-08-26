@@ -129,6 +129,15 @@
 		</div>
 	</div>
 	<?php $this->load->view('layouts/script'); ?>
+	<?php if ($this->session->flashdata('company')) : ?>
+		<script>
+			Swal.fire(
+				'Berhasil',
+				'<?= $this->session->flashdata('company') ?>',
+				'success'
+			)
+		</script>
+	<?php endif ?>
 </body>
 
 </html>
