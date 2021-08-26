@@ -33,7 +33,7 @@ class AdminController extends CI_Controller
 			$this->session->set_flashdata('login failed', 'Username yang Anda masukan tidak terdaftar.');
 			redirect('admin/login');
 		} else {
-			if ($pass == $cek_login->password) {
+			if (password_verify($pass, $cek_login->password)) {
 				$this->session->set_userdata('id', $cek_login->id);
 				$this->session->set_userdata('username', $cek_login->username);
 				$this->session->set_userdata('login', 'admin');
