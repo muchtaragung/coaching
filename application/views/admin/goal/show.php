@@ -50,8 +50,9 @@
 									</div>
 								</form>
 							<?php else : ?>
-								<div class="row form-group">
-									<form action="<?= site_url('admin/coachee/criteria/update') ?>" method="POST">
+								<form action="<?= site_url('admin/coachee/criteria/update') ?>" method="POST">
+									<input type="hidden" name="goals_id" id="goals_id" value="<?= $goal->id ?>" class="form-control">
+									<div class="row form-group">
 										<div class="col-lg-12">
 											<label for="criteria">Success Criteria</label>
 										</div>
@@ -63,11 +64,11 @@
 										<div class="col-lg-1">
 											<button type="submit" class="btn btn-primary">Update</button>
 										</div>
-									</form>
-									<div class="col-lg-1">
-										<button onclick=" confirmDelete('<?= site_url('admin/coachee/criteria/delete/' . $criteria->id . '/' . $goal->id) ?>','criteria')" class="btn btn-danger">Hapus</button>
+										<div class="col-lg-1">
+											<a onclick=" confirmDelete('<?= site_url('admin/coachee/criteria/delete/' . $criteria->id . '/' . $goal->id) ?>','criteria')" class="btn btn-danger">Hapus</a>
+										</div>
 									</div>
-								</div>
+								</form>
 							<?php endif ?>
 						</div>
 						<div class="card-body">
@@ -147,7 +148,6 @@
 											<div class="col mr-2">
 												<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Action</div>
 												<div class="h5 mb-0 font-weight-bold">
-													<a href="<?= site_url('admin/coachee/notes/delete/' . $note->id . '/' . $goal->id) ?>" class="btn btn-danger w-100 my-1">Delete</a>
 													<button onclick=" confirmDelete('<?= site_url('admin/coachee/notes/delete/' . $note->id . '/' . $goal->id) ?>', 'notes')" class="btn btn-danger">Hapus</button>
 													<a href="<?= site_url('admin/coachee/notes/edit/' . $note->id) ?>" class="btn btn-primary w-100 my-1">Edit</a>
 												</div>
