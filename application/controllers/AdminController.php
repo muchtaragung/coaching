@@ -174,9 +174,31 @@ class AdminController extends CI_Controller
 
 	public function deleteCoachee($id)
 	{
+		// mengambil data yang di perlukan
 		$data['coachee'] = $this->AdminModel->getcoacheeByID($id);
+		$data['goals']   = $this->AdminModel->getGoalByCoacheeID($id);
+		$data['sessions']  = $this->AdminModel->getSessionByCoacheeID($id);
+
 		$this->session->set_flashdata('coachee', 'Berhasil Menghapus Data Coachee');
+
 		$this->AdminModel->deletecoachee($id);
+
+		// perulangan untuk menghapus semua goals dan turunannya
+		foreach ($data['goals'] as $goal) {
+			$this->AdminModel->deleteGoal($goal->id);
+			$this->AdminModel->deleteCriteriaByGoalID($goal->id);
+			$this->AdminModel->deleteActionByGoalId($goal->id);
+			$this->AdminModel->deleteNotesByGoalID($goal->id);
+			$this->AdminModel->deleteMilestoneByGoalID($goal->id);
+		}
+
+		// perulangan untuk mengahpus semua sesi dan turunannya
+		foreach ($data['sessions'] as $sesi) {
+			$this->AdminModel->deleteSession($sesi->id);
+			$this->AdminModel->deletePenilaianBySessionID($sesi->id);
+			$this->AdminModel->deleteReportBySessionID($sesi->id);
+		}
+
 		redirect('admin/coachee/list/' . $data['coachee']->company_id);
 	}
 
@@ -220,7 +242,13 @@ class AdminController extends CI_Controller
 		$data['coachee'] = $this->AdminModel->getCoacheeByID($data['goal']->coachee_id);
 
 		$this->session->set_flashdata('goal', 'Berhasil Menghapus Goal');
+
 		$this->AdminModel->deleteGoal($goalID);
+		$this->AdminModel->deleteCriteriaByGoalID($goalID);
+		$this->AdminModel->deleteActionByGoalId($goalID);
+		$this->AdminModel->deleteNotesByGoalID($goalID);
+		$this->AdminModel->deleteMilestoneByGoalID($goalID);
+
 		redirect('admin/coachee/goal/list/' . $data['coachee']->id);
 	}
 

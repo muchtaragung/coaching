@@ -253,6 +253,15 @@ class AdminModel extends CI_Model
 	}
 
 	/**
+	 * menghapus criteria
+	 * parameter pertama adalah id criteria yang akan di hapus
+	 */
+	public function deleteCriteriaByGoalID($goalID)
+	{
+		return $this->db->where('goals_id', $goalID)->delete('criteria');
+	}
+
+	/**
 	 * mengambil action_plan sesuai goal
 	 * parameter pertama adalah id goal
 	 * mengembalikan data dalam bentuk array dan object
@@ -282,6 +291,15 @@ class AdminModel extends CI_Model
 	}
 
 	/**
+	 * menghapus action plan berdasar goalID
+	 * parameter pertama adalah id goals
+	 */
+	public function deleteActionByGoalID($goalID)
+	{
+		return $this->db->where('goals_id', $goalID)->delete('action_plan');
+	}
+
+	/**
 	 * mengambil notes (komentar, result) sesuai goal
 	 * parameter kedua adalah id goal
 	 */
@@ -297,6 +315,15 @@ class AdminModel extends CI_Model
 	public function deleteNotes($notesID)
 	{
 		return $this->db->where('id', $notesID)->delete('notes');
+	}
+
+	/**
+	 * menghapus notes berdasarkan id
+	 * parameter pertama adalah id notes 
+	 */
+	public function deleteNotesByGoalID($goalID)
+	{
+		return $this->db->where('goals_id', $goalID)->delete('notes');
 	}
 
 	/**
@@ -339,6 +366,15 @@ class AdminModel extends CI_Model
 	}
 
 	/**
+	 * menghapus milestone berdasar goal id
+	 * parameter pertama goal id
+	 */
+	public function deleteMilestoneByGoalID($goalID)
+	{
+		return $this->db->where('goals_id', $goalID)->delete('milestone');
+	}
+
+	/**
 	 * mengambill session bedrasarkan coachee id
 	 * parameter pertama adalah coachee id 
 	 * mengembalikan data dalam bentuk array dan object
@@ -358,6 +394,14 @@ class AdminModel extends CI_Model
 		return $this->db->where('id', $sessionID)->get('session')->row();
 	}
 
+	/**	
+	 * menghapus sesi
+	 */
+	public function deleteSession($sessionID)
+	{
+		return $this->db->where('id', $sessionID)->delete('session');
+	}
+
 	/**
 	 * mengambil penilaian sesuai id sesseion
 	 * parameter pertama id session
@@ -366,6 +410,24 @@ class AdminModel extends CI_Model
 	public function getPenilaianBySessionID($sessionID)
 	{
 		return $this->db->where('session_id', $sessionID)->get('penilaian_sesi')->row();
+	}
+
+	/**
+	 * menghapus penilaian
+	 * parameter pertama id 
+	 * mengembalikan object
+	 */
+	public function deletePenilaian($id)
+	{
+		return $this->db->where('id', $id)->delete('penilaian_sesi');
+	}
+
+	/**
+	 * menghapus penilaian berdasarkan id sesi
+	 */
+	public function deletePenilaianBySessionID($sessionID)
+	{
+		return $this->db->where('session_id', $sessionID)->delete('penilaian_sesi');
 	}
 
 	/**
@@ -387,14 +449,13 @@ class AdminModel extends CI_Model
 		return $this->db->where('id', $id)->delete('report');
 	}
 
-	/**
-	 * menghapus penilaian
-	 * parameter pertama id 
-	 * mengembalikan object
+	/**	
+	 * menghapus report berdasar id session
 	 */
-	public function deletePenilaian($id)
+
+	public function deleteReportBySessionID($sessionID)
 	{
-		return $this->db->where('id', $id)->delete('penilaian_sesi');
+		return $this->db->where('session_id', $sessionID)->delete('report');
 	}
 }
 
