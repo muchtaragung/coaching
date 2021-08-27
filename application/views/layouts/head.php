@@ -16,3 +16,4 @@
 <!-- Custom styles for this page -->
 <link href="<?= base_url('assets/') ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="<?= base_url('assets/') ?>vendor/select2/select2.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
