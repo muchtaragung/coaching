@@ -289,6 +289,46 @@ class AdminModel extends CI_Model
 	{
 		return $this->db->where('goals_id', $goalID)->get('notes')->result();
 	}
+
+	/**
+	 * menghapus notes berdasarkan id
+	 * parameter pertama adalah id notes 
+	 */
+	public function deleteNotes($notesID)
+	{
+		return $this->db->where('id',$notesID)->delete('notes');
+	}
+
+	/**
+	 * mengambil data notes sesuai id
+	 * parameter pertama adalah notes id
+	 * mengembalikan data dalam bentuk object
+	 */
+	public function getNotesByID($notesID)
+	{
+		return $this->db->where('id',$notesID)->get('notes')->row();
+	}
+
+	/**
+	 * mengupdate notes bedrasarkan notes id
+	 * parameter pertama adalah notes id 
+	 * parameter kedua data yang akan di masukkan dalam bentuk array
+	 */
+	public function updateNotes($notesID, $notes)
+	{
+		return $this->db->where('id', $notesID)->update('notes', $notes);
+	}
+
+	/**
+	 * mengambill session bedrasarkan coachee id
+	 * parameter pertama adalah coachee id 
+	 * mengembalikan data dalam bentuk array dan object
+	 */
+	public function getSessionByCoacheeID($coacheeID)
+	{
+		return $this->db->where('coachee_id', $coacheeID)->get('session')->result();
+	}
+	
 }
 
 /* End of file AuthModel.php */

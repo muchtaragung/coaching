@@ -94,6 +94,16 @@
 	</a>
 
 	<?php $this->load->view('layouts/script'); ?>
+
+	<?php if ($this->session->flashdata('goal')) : ?>
+		<script>
+			Swal.fire(
+				'Berhasil',
+				'<?= $this->session->flashdata('goal') ?>',
+				'success'
+			)
+		</script>
+	<?php endif ?>
 </body>
 
 </html>

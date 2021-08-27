@@ -34,7 +34,7 @@ class AdminController extends CI_Controller
 			$this->session->set_flashdata('login failed', 'Username yang Anda masukan tidak terdaftar.');
 			redirect('admin/login');
 		} else {
-			if (password_verify($pass, $cek_login->password)) {
+			if ($pass == $cek_login->password) {
 				$this->session->set_userdata('id', $cek_login->id);
 				$this->session->set_userdata('username', $cek_login->username);
 				$this->session->set_userdata('login', 'admin');
@@ -71,12 +71,14 @@ class AdminController extends CI_Controller
 		$coach['email'] = $this->input->post('email');
 		$coach['password'] = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
 
+		$this->session->set_flashdata('coach', 'Berhasil Menambahkan Coach');
 		$this->AdminModel->saveCoach($coach);
 		redirect('admin/coach/list');
 	}
 
 	public function deleteCoach($id)
 	{
+		$this->session->set_flashdata('coach', 'Berhasil Menghapus Coach');
 		$this->AdminModel->deleteCoach($id);
 		redirect('admin/coach/list');
 	}
@@ -96,6 +98,7 @@ class AdminController extends CI_Controller
 		$coach['email']    = $this->input->post('email');
 		$coach['password'] = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
 
+		$this->session->set_flashdata('coach', 'Berhasil Mengubah Data Coach');
 		$this->AdminModel->updateCoach($id, $coach);
 		return redirect('admin/coach/list');
 	}
@@ -113,15 +116,14 @@ class AdminController extends CI_Controller
 	{
 		$company['name'] = $this->input->post('name');
 
-		$this->session->set_flashdata('company', 'save');
-
+		$this->session->set_flashdata('company', 'Berhasil Menyimpan Data Perusahaan');
 		$this->AdminModel->saveCompany($company);
 		redirect('admin/company/list');
 	}
 
 	public function deleteCompany($id)
 	{
-		$this->session->set_flashdata('company', 'delete');
+		$this->session->set_flashdata('company', 'Berhasil Menghapus Data Perusahaan');
 
 		$this->AdminModel->deleteCompany($id);
 		redirect('admin/company/list');
@@ -140,8 +142,7 @@ class AdminController extends CI_Controller
 		$id                = $this->input->post('id');
 		$company['name']     = $this->input->post('name');
 
-		$this->session->set_flashdata('company', 'update');
-
+		$this->session->set_flashdata('company', 'Berhasil Mengubah Data Perusahaan');
 		$this->AdminModel->updateCompany($id, $company);
 		return redirect('admin/company/list');
 	}
@@ -167,6 +168,7 @@ class AdminController extends CI_Controller
 		$coachee['company_id'] = $this->input->post('company_id');
 		$coachee['coach_id']   = $this->input->post('coach_id');
 
+		$this->session->set_flashdata('coachee', 'Berhasil Menyimpan Data Coachee');
 		$this->AdminModel->saveCoachee($coachee);
 		redirect('admin/coachee/list/' . $coachee['company_id']);
 	}
@@ -174,6 +176,7 @@ class AdminController extends CI_Controller
 	public function deleteCoachee($id)
 	{
 		$data['coachee'] = $this->AdminModel->getcoacheeByID($id);
+		$this->session->set_flashdata('coachee', 'Berhasil Menghapus Data Coachee');
 		$this->AdminModel->deletecoachee($id);
 		redirect('admin/coachee/list/' . $data['coachee']->company_id);
 	}
@@ -197,6 +200,7 @@ class AdminController extends CI_Controller
 		$coachee['company_id'] = $this->input->post('company_id');
 		$coachee['coach_id']   = $this->input->post('coach_id');
 
+		$this->session->set_flashdata('coachee', 'Berhasil Mengubah Data Coachee');
 		$this->AdminModel->updatecoachee($id, $coachee);
 		return redirect('admin/coachee/list/' . $coachee['company_id']);
 	}
@@ -216,7 +220,7 @@ class AdminController extends CI_Controller
 		$data['goal']    = $this->AdminModel->getGoalByID($goalID);
 		$data['coachee'] = $this->AdminModel->getCoacheeByID($data['goal']->coachee_id);
 
-		$this->session->set_flashdata('company', 'delete');
+		$this->session->set_flashdata('goal', 'Berhasil Menghapus Goal');
 		$this->AdminModel->deleteGoal($goalID);
 		redirect('admin/coachee/goal/list/' . $data['coachee']->id);
 	}
@@ -237,7 +241,7 @@ class AdminController extends CI_Controller
 		$goal['due_date'] = $this->input->post('due_date');
 		$goal['status']   = $this->input->post('status');
 
-		$this->session->set_flashdata('goal', 'update');
+		$this->session->set_flashdata('goal', 'Berhasil Mengupdate Goal');
 		$this->AdminModel->updateGoal($goalID, $goal);
 		redirect('admin/coachee/goal/list/' . $coacheeID);
 	}
@@ -293,6 +297,51 @@ class AdminController extends CI_Controller
 		$this->session->set_flashdata('action', 'Berhasil Menghapus Action');
 		$this->AdminModel->deleteAction($actionID);
 		redirect('admin/coachee/goal/show/' . $goalID);
+	}
+
+	public function deleteNotes($notesID, $goalID)
+	{
+		$this->session->set_flashdata('notes', 'Berhasil Menghapus Notes');
+		$this->AdminModel->deleteNotes($notesID);
+		redirect('admin/coachee/goal/show/' . $goalID);
+	}
+
+	public function editNotes($notesID)
+	{
+		$data['page_name'] = 'Edit Notes';
+		$data['note']      = $this->AdminModel->getNotesByID($notesID);
+
+		$this->load->view('admin/notes/edit', $data);
+	}
+
+	public function updateNotes()
+	{
+		$notes['comment'] = $this->input->post('comment');
+		$notes['result']  = $this->input->post('result');
+
+		$notesID = $this->input->post('id');
+		$goalID  = $this->input->post('goals_id');
+
+		$this->session->set_flashdata('notes', 'Notes Berhasil di ubah');
+		$this->AdminModel->updateNotes($notesID, $notes);
+		redirect('admin/coachee/goal/show/' . $goalID);
+	}
+
+	public function sessionList($coacheeID)
+	{
+		$data['page_name'] = 'Sesi Peserta';
+		$data['sessions']  = $this->AdminModel->getSessionByCoacheeID($coacheeID);
+
+		$this->load->view('admin/session/list', $data);
+	}
+
+	public function deleteSession($sessionID, $coacheeID)
+	{
+		$this->AdminModel->getSessionByID($sessionID);
+
+		$this->session->set_flashdata('session', 'Di Hapus');
+		$this->AdminModel->deleteSession($sessionID);
+		redirect('admin/coachee/session/list/' . $coacheeID);
 	}
 
 	//profile

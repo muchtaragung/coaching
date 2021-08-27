@@ -97,7 +97,7 @@
 												<td> <?php if ($action->result == 'butuh waktu lama') { ?> <h2>✓</h2> <?php } ?></td>
 												<td>
 													<a href="<?= site_url('admin/coachee/action/reset/') . $action->id . '/' . $goal->id ?>" class="btn btn-primary">Reset</a>
-													<a href="<?= site_url('admin/coachee/action/delete/') . $action->id . '/' .$goal->id ?>" class="btn btn-danger">Hapus</a>
+													<a href="<?= site_url('admin/coachee/action/delete/') . $action->id . '/' . $goal->id ?>" class="btn btn-danger">Hapus</a>
 												</td>
 											</tr>
 										<?php endforeach ?>
@@ -109,7 +109,7 @@
 
 					<?php foreach ($notes as $note) : ?>
 						<div class="row mb-3">
-							<div class="col-lg-6">
+							<div class="col-lg-5">
 								<div class="card border-left-primary shadow h-100 py-2">
 									<div class="card-body">
 										<div class="row no-gutters align-items-center">
@@ -123,7 +123,7 @@
 								</div>
 							</div>
 
-							<div class="col-lg-6">
+							<div class="col-lg-5">
 								<div class="card">
 									<div class="card border-left-success shadow h-100 py-2">
 										<div class="card-body">
@@ -131,6 +131,22 @@
 												<div class="col mr-2">
 													<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Result</div>
 													<div class="h5 mb-0 font-weight-bold text-gray-800"><?= $note->result ?></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-lg-2">
+								<div class="card border-left-seccondary shadow h-100 py-2">
+									<div class="card-body">
+										<div class="row no-gutters align-items-center">
+											<div class="col mr-2">
+												<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Action</div>
+												<div class="h5 mb-0 font-weight-bold">
+													<a href="<?= site_url('admin/coachee/notes/delete/' . $note->id . '/' . $goal->id) ?>" class="btn btn-danger w-100 my-1">Delete</a>
+													<a href="<?= site_url('admin/coachee/notes/edit/' . $note->id ) ?>" class="btn btn-primary w-100 my-1">Edit</a>
 												</div>
 											</div>
 										</div>
@@ -160,67 +176,7 @@
 		<i class="fas fa-angle-up"></i>
 	</a>
 
-	<div class="modal fade" id="addNotes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Tambah Notes</h5>
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<form action="<?= site_url('coach/coachee/save-notes') ?>" method="POST">
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="comment">Komentar</label>
-							<textarea name="comment" id="comment" class="form-control" id="" cols="30" rows="10"></textarea>
-						</div>
-						<div class="form-group">
-							<label for="result">Result</label>
-							<textarea name="result" id="result" class="form-control" id="" cols="30" rows="10"></textarea>
-						</div>
-						<div class="form-group">
-							<input type="hidden" name="goals_id" id="goals_id" value="<?= $goal->id ?>">
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-secondary" type="submit">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
 
-	<div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Tambah Notes</h5>
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<form action="<?= site_url('coach/coachee/note/add') ?>" method="POST">
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="comment">Komentar</label>
-							<textarea name="comment" id="comment" class="form-control" id="" cols="30" rows="10"></textarea>
-						</div>
-						<div class="form-group">
-							<label for="result">Result</label>
-							<textarea name="result" id="result" class="form-control" id="" cols="30" rows="10"></textarea>
-						</div>
-						<div class="form-group">
-							<input type="hidden" name="goals_id" id="goals_id" value="<?= $goal->id ?>">
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-success" type="submit">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
 	<?php $this->load->view('layouts/script'); ?>
 
 </body>
@@ -239,6 +195,16 @@
 		Swal.fire(
 			'Berhasil',
 			'<?= $this->session->flashdata('action') ?>',
+			'success'
+		)
+	</script>
+<?php endif ?>
+
+<?php if ($this->session->flashdata('notes')) : ?>
+	<script>
+		Swal.fire(
+			'Berhasil',
+			'<?= $this->session->flashdata('notes') ?>',
 			'success'
 		)
 	</script>

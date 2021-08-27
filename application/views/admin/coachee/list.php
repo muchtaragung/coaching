@@ -58,6 +58,7 @@
 													<a href="<?= site_url('admin/coachee/edit/') . $coachee->id ?>" class="btn btn-primary">edit Data</a>
 													<a href="<?= site_url('admin/coachee/delete/') . $coachee->id ?>" class="btn btn-primary">delete Data</a>
 													<a href="<?= site_url('admin/coachee/goal/list/') . $coachee->id ?>" class="btn btn-primary">Lihat Goal</a>
+													<a href="<?= site_url('admin/coachee/session/list/') . $coachee->id ?>" class="btn btn-primary">Lihat Sesi</a>
 												</td>
 											</tr>
 										<?php endforeach ?>
@@ -149,11 +150,11 @@
 	</div>
 	<?php $this->load->view('layouts/script'); ?>
 
-	<?php if ($this->session->flashdata('goal') == 'update') : ?>
+	<?php if ($this->session->flashdata('coachee')) : ?>
 		<script>
 			Swal.fire(
 				'Berhasil',
-				'Goal Telah Di Edit',
+				'<?= $this->session->flashdata('coachee') ?>',
 				'success'
 			)
 		</script>

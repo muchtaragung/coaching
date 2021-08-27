@@ -71,6 +71,7 @@ $route['coach/coachee/goal/milestone/save']       = 'CoachController/saveMilesto
 
 // coachee session
 $route['coach/coachee/session/(:num)']                  = 'CoachController/showCoacheeSessions/$1';
+$route['coach/coachee/session/show/(:num)']				= 'CoachController/showSessionData/$1';
 $route['coach/coachee/session/new/(:num)']              = 'CoachController/addSession/$1';
 $route['coach/coachee/session/start/(:num)/(:num)']     = 'CoachController/startSession/$1/$2';
 $route['coach/coachee/session/end/(:num)/(:num)']       = 'CoachController/endSession/$1/$2';
@@ -129,6 +130,12 @@ $route['admin/coachee/action/delete/(:num)/(:num)'] = 'AdminController/deleteAct
 $route['admin/coachee/criteria/update'] = 'AdminController/updateCriteria';
 $route['admin/coachee/criteria/save'] = 'AdminController/saveCriteria';
 $route['admin/coachee/criteria/delete/(:num)/(:num)'] = 'AdminController/deleteCriteria/$1/$2';
+
+$route['admin/coachee/notes/delete/(:num)/(:num)'] = 'AdminController/deleteNotes/$1/$2';
+$route['admin/coachee/notes/edit/(:num)'] = 'AdminController/editNotes/$1';
+$route['admin/coachee/notes/update'] = 'AdminController/updateNotes';
+
+$route['admin/coachee/session/list/(:num)'] = 'AdminController/sessionList/$1';
 
 //profile admin
 $route['admin/profile'] = 'AdminController/profile';
