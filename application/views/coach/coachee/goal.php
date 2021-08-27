@@ -171,14 +171,14 @@
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="comment">Komentar</label>
-							<textarea name="comment" id="comment" class="form-control" id="" cols="30" rows="10"></textarea>
+							<textarea name="comment" id="comment" class="form-control" id="" cols="30" rows="10" required></textarea>
 						</div>
 						<div class="form-group">
 							<label for="result">Result</label>
-							<textarea name="result" id="result" class="form-control" id="" cols="30" rows="10"></textarea>
+							<textarea name="result" id="result" class="form-control" id="" cols="30" rows="10" required></textarea>
 						</div>
 						<div class="form-group">
-							<input type="hidden" name="goals_id" id="goals_id" value="<?= $goal->id ?>">
+							<input type="hidden" name="goals_id" id="goals_id" value="<?= $goal->id ?>" required>
 						</div>
 					</div>
 					<div class="modal-footer">
