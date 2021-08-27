@@ -123,6 +123,7 @@
 							<label for="">Coach</label>
 							<select id="select2" name="coach_id" id="" class="form-control" required>
 								<?php foreach ($coaches as $coach) : ?>
+									<option disabled selected value=""></option>
 									<option value="<?= $coach->id ?>"><?= $coach->name ?></option>
 								<?php endforeach ?>
 							</select>
