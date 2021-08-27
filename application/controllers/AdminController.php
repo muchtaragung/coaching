@@ -131,6 +131,7 @@ class AdminController extends CI_Controller
 			$data['goals']   = $this->AdminModel->getGoalByCoacheeID($coachee->id);
 			$data['sessions']  = $this->AdminModel->getSessionByCoacheeID($coachee->id);
 
+			$this->AdminModel->deleteCoachee($coachee->id);
 			// perulangan untuk menghapus semua goals dan turunannya
 			foreach ($data['goals'] as $goal) {
 				$this->AdminModel->deleteGoal($goal->id);
