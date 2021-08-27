@@ -35,8 +35,10 @@
 						<div class="card-header py-3">
 							<h6 class="m-0 font-weight-bold text-primary float-left"><?= $goal->goal ?></h6>
 							<?php if ($goal->status == 'belum selesai') : ?>
-								<a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addActionPlan">Tambah Action Plan</a>
-								<button onclick="endGoal('<?= site_url('coachee/endGoal/' . $goal->id) ?>')" class="btn btn-success float-right mx-2">Selesaikan Goal</button>
+								<?php if (isset($criteria)) : ?>
+									<a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addActionPlan">Tambah Action Plan</a>
+									<button onclick="endGoal('<?= site_url('coachee/endGoal/' . $goal->id) ?>')" class="btn btn-success float-right mx-2">Selesaikan Goal</button>
+								<?php endif ?>
 							<?php endif ?>
 						</div>
 						<div class="card-body">
