@@ -42,19 +42,19 @@
 									<div class="form-group">
 										<label for="name">nama</label>
 										<input type="hidden" name="id" id="id" class="form-control" value="<?= $coachee->id ?>">
-										<input type="text" name="name" id="name" class="form-control" value="<?= $coachee->name ?>">
+										<input type="text" name="name" id="name" class="form-control" value="<?= $coachee->name ?>" required>
 									</div>
 									<div class="form-group">
 										<label for="email">email</label>
-										<input type="email" name="email" id="email" class="form-control" value="<?= $coachee->email ?>">
+										<input type="email" name="email" id="email" class="form-control" value="<?= $coachee->email ?>" required>
 									</div>
 									<div class="form-group">
 										<label for="password">password</label>
-										<input type="password" name="password" id="password" class="form-control" value="<?= $coachee->password ?>">
+										<input type="password" name="password" id="password" class="form-control" value="<?= $coachee->password ?>" required>
 									</div>
 									<div class="form-group">
 										<label for="">Coach</label>
-										<select name="coach_id" id="" class="form-control">
+										<select id="select2" name="coach_id" id="" class="form-control" required>
 											<?php foreach ($coaches as $coach) : ?>
 												<option value="<?= $coach->id ?>" <?php if ($coachee->coach_id == $coach->id) { ?> selected <?php } ?>><?= $coach->name ?></option>
 											<?php endforeach ?>
@@ -62,7 +62,7 @@
 									</div>
 									<div class="form-group">
 										<label for="">Perusahaan</label>
-										<select name="company_id" id="" class="form-control">
+										<select id="select2" name="company_id" id="" class="form-control" required>
 											<?php foreach ($companies as $company) : ?>
 												<option value="<?= $company->id ?>" <?php if ($coachee->company_id == $company->id) { ?> selected <?php } ?>><?= $company->name ?></option>
 											<?php endforeach ?>

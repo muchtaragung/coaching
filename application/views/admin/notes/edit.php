@@ -45,11 +45,11 @@
 									</div>
 									<div class="form-group">
 										<label for="comment">Komentar</label>
-										<textarea name="comment" id="" cols="30" rows="3" class="form-control"><?= $note->comment ?></textarea>
+										<textarea name="comment" id="" cols="30" rows="3" class="form-control" required><?= $note->comment ?></textarea>
 									</div>
 									<div class="form-group">
 										<label for="result">Result</label>
-										<textarea name="result" id="" cols="30" rows="3" class="form-control"><?= $note->result ?></textarea>
+										<textarea name="result" id="" cols="30" rows="3" class="form-control" required><?= $note->result ?></textarea>
 									</div>
 								</div>
 								<div class="modal-footer">

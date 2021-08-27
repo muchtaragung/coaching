@@ -43,15 +43,15 @@
 								</div>
 								<div class="form-group">
 									<label for="">Goal</label>
-									<textarea name="goal" id="" cols="30" rows="3" class="form-control"><?= $goal->goal ?></textarea>
+									<textarea name="goal" id="" cols="30" rows="3" class="form-control" required><?= $goal->goal ?></textarea>
 								</div>
 								<div class="form-group">
 									<label for="">Due Date</label>
-									<input type="date" name="due_date" value="<?= $goal->due_date ?>" class="form-control">
+									<input type="date" name="due_date" value="<?= $goal->due_date ?>" class="form-control" required>
 								</div>
 								<div class="form-group">
 									<label for="">status</label>
-									<select name="status" id="" class="form-control">
+									<select id="select2" name="status" id="" class="form-control">
 										<option value="belum selesai" <?php if ($goal->status == 'belum selesai') : ?> selected <?php endif ?>>Belum Selesai</option>
 										<option value="selesai" <?php if ($goal->status == 'selesai') : ?> selected <?php endif ?>>Selesai</option>
 									</select>
