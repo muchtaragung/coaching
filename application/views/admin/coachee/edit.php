@@ -50,7 +50,7 @@
 									</div>
 									<div class="form-group">
 										<label for="password">password</label>
-										<input type="password" name="password" id="password" class="form-control" value="<?= $coachee->password ?>" required>
+										<input type="password" name="password" id="password" class="form-control" required>
 									</div>
 									<div class="form-group">
 										<label for="">Coach</label>
