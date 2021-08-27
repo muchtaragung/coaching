@@ -10,6 +10,7 @@ class CoachController extends CI_Controller
 		$this->load->model('CoachModel');
 		$this->load->library('form_validation');
 		$this->load->library('pdf');
+		date_default_timezone_set('Asia/Jakarta');
 		if ($this->session->userdata('login') != 'coach') {
 			echo '<script>alert("Silahkan Login Untuk Mengakses Halaman ini")</script>';
 			redirect('login', 'refresh');
