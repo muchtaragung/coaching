@@ -92,7 +92,7 @@
 														<span class="icon text-white-50">
 															<i class="fas fa-print"></i>
 														</span>
-														<span class="text">Batu Laporan</span>
+														<span class="text">Buat Laporan</span>
 													</a>
 												<?php endif ?>
 											<?php endif ?>
