@@ -5,8 +5,12 @@
 		<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
 			<i class="fa fa-bars"></i>
 		</button>
+
 	</form>
 
+	<button onclick="window.history.back();" class="btn btn-link rounded-circle mr-3">
+		<i class="fa fa-arrow-left"></i>
+	</button>
 	<!-- Topbar Navbar -->
 	<ul class="navbar-nav ml-auto">
 
