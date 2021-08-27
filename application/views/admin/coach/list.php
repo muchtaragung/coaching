@@ -56,7 +56,7 @@
 												<td><?= $coach->email ?></td>
 												<td>
 													<a href="<?= site_url('admin/coach/edit/') . $coach->id ?>" class="btn btn-primary">edit Data</a>
-													<a href="<?= site_url('admin/coach/delete/') . $coach->id ?>" class="btn btn-primary">delete Data</a>
+													<button onclick=" confirmDelete('<?= site_url('admin/coach/delete/') . $coach->id ?>')" class="btn btn-danger">Hapus Coach</button>
 												</td>
 											</tr>
 										<?php endforeach ?>
@@ -130,6 +130,23 @@
 			)
 		</script>
 	<?php endif ?>
+
+	<script>
+		function confirmDelete(link) {
+			Swal.fire({
+				title: 'Apakah Anda Ingin Menghapus Coach',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					window.location.replace(link)
+				}
+			})
+		}
+	</script>
 </body>
 
 </html>

@@ -51,6 +51,7 @@
 								</form>
 							<?php else : ?>
 								<form action="<?= site_url('admin/coachee/criteria/update') ?>" method="POST">
+									<input type="hidden" name="goals_id" id="goals_id" value="<?= $goal->id ?>" class="form-control">
 									<div class="row form-group">
 										<div class="col-lg-12">
 											<label for="criteria">Success Criteria</label>
@@ -64,7 +65,7 @@
 											<button type="submit" class="btn btn-primary">Update</button>
 										</div>
 										<div class="col-lg-1">
-											<a href="<?= site_url('admin/coachee/criteria/delete/' . $criteria->id . '/' . $goal->id) ?>" class="btn btn-danger">Hapus</a>
+											<a onclick=" confirmDelete('<?= site_url('admin/coachee/criteria/delete/' . $criteria->id . '/' . $goal->id) ?>','criteria')" class="btn btn-danger">Hapus</a>
 										</div>
 									</div>
 								</form>
@@ -96,8 +97,10 @@
 												<td> <?php if ($action->result == 'tidak berhasil') { ?> <h2>✓</h2> <?php } ?></td>
 												<td> <?php if ($action->result == 'butuh waktu lama') { ?> <h2>✓</h2> <?php } ?></td>
 												<td>
-													<a href="<?= site_url('admin/coachee/action/reset/') . $action->id . '/' . $goal->id ?>" class="btn btn-primary">Reset</a>
-													<a href="<?= site_url('admin/coachee/action/delete/') . $action->id . '/' . $goal->id ?>" class="btn btn-danger">Hapus</a>
+													<button onclick=" confirmReset('<?= site_url('admin/coachee/action/reset/') . $action->id . '/' . $goal->id ?>')" class="btn btn-danger">Hapus</button>
+													<button onclick=" confirmDelete('<?= site_url('admin/coachee/notes/delete/' . $note->id . '/' . $goal->id) ?>', 'delete')" class="btn btn-danger">Hapus</button>
+
+
 												</td>
 											</tr>
 										<?php endforeach ?>
@@ -145,8 +148,8 @@
 											<div class="col mr-2">
 												<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Action</div>
 												<div class="h5 mb-0 font-weight-bold">
-													<a href="<?= site_url('admin/coachee/notes/delete/' . $note->id . '/' . $goal->id) ?>" class="btn btn-danger w-100 my-1">Delete</a>
-													<a href="<?= site_url('admin/coachee/notes/edit/' . $note->id ) ?>" class="btn btn-primary w-100 my-1">Edit</a>
+													<button onclick=" confirmDelete('<?= site_url('admin/coachee/notes/delete/' . $note->id . '/' . $goal->id) ?>', 'notes')" class="btn btn-danger">Hapus</button>
+													<a href="<?= site_url('admin/coachee/notes/edit/' . $note->id) ?>" class="btn btn-primary w-100 my-1">Edit</a>
 												</div>
 											</div>
 										</div>
@@ -209,5 +212,22 @@
 		)
 	</script>
 <?php endif ?>
+
+<script>
+	function confirmDelete(link, category) {
+		Swal.fire({
+			title: 'Apakah Anda Ingin Menghapus ' + category,
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Ya'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				window.location.replace(link)
+			}
+		})
+	}
+</script>
 
 </html>

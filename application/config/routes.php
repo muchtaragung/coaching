@@ -135,7 +135,13 @@ $route['admin/coachee/notes/delete/(:num)/(:num)'] = 'AdminController/deleteNote
 $route['admin/coachee/notes/edit/(:num)'] = 'AdminController/editNotes/$1';
 $route['admin/coachee/notes/update'] = 'AdminController/updateNotes';
 
+$route['admin/coachee/milestone/show/(:num)'] = 'AdminController/showMilestone/$1';
+$route['admin/coachee/milestone/delete/(:num)/(:num)'] = 'AdminController/deleteMilestone/$1/$2';
+
 $route['admin/coachee/session/list/(:num)'] = 'AdminController/sessionList/$1';
+$route['admin/coachee/session/show/(:num)'] = 'AdminController/showSessionData/$1';
+$route['admin/coachee/session/laporan/delete/(:num)/(:num)'] = 'AdminController/deleteReport/$1/$2';
+$route['admin/coachee/session/penilaian/delete/(:num)/(:num)'] = 'AdminController/deletePenilaian/$1/$2';
 
 //profile admin
 $route['admin/profile'] = 'AdminController/profile';

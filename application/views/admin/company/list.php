@@ -33,7 +33,7 @@
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Table Company</h6>
+							<h6 class="m-0 font-weight-bold text-primary">Table Perusahaan</h6>
 							<a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addCompany">Tambah Perusahaan</a>
 						</div>
 						<div class="card-body">
@@ -53,8 +53,8 @@
 												<td><?php echo $i++ ?></td>
 												<td> <?= $company->name ?> </td>
 												<td>
-													<a href="<?= site_url('admin/company/edit/') . $company->id ?>" class="btn btn-primary">edit Data</a>
-													<a href="<?= site_url('admin/company/delete/') . $company->id ?>" class="btn btn-primary">delete Data</a>
+													<a href="<?= site_url('admin/company/edit/') . $company->id ?>" class="btn btn-primary">edit Perusahaan</a>
+													<button onclick=" confirmDelete('<?= site_url('admin/company/delete/') . $company->id ?>')" class="btn btn-danger">Hapus Perusahaan</button>
 													<a href="<?= site_url('admin/coachee/list/') . $company->id ?>" class="btn btn-primary">Lihat Peserta</a>
 												</td>
 											</tr>
@@ -86,30 +86,11 @@
 		<i class="fas fa-angle-up"></i>
 	</a>
 
-	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button" data-dismiss="modal">Batalkan</button>
-					<a class="btn btn-primary" href="<?= site_url('login') ?>">Logout</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<div class="modal fade" id="addCompany" tabindex="-1" role="dialog" aria-labelledby="addCompany" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="addCompany">Tambah Peserta</h5>
+					<h5 class="modal-title" id="addCompany">Tambah Perusahaan</h5>
 					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
@@ -138,6 +119,23 @@
 			)
 		</script>
 	<?php endif ?>
+
+	<script>
+		function confirmDelete(link) {
+			Swal.fire({
+				title: 'Apakah Anda Ingin Menghapus Perusahaan',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					window.location.replace(link)
+				}
+			})
+		}
+	</script>
 </body>
 
 </html>
