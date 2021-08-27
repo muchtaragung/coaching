@@ -50,7 +50,8 @@
 									</div>
 									<div class="form-group">
 										<label for="password">password</label>
-										<input type="password" name="password" id="password" class="form-control" required>
+										<input type="password" name="password" id="password" class="form-control">
+										<input type="hidden" name="old_password" value="<?= $coach->password ?>">
 									</div>
 								</div>
 								<div class="modal-footer">

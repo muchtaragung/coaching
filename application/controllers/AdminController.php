@@ -103,7 +103,11 @@ class AdminController extends CI_Controller
 		$id                = $this->input->post('id');
 		$coach['name']     = $this->input->post('name');
 		$coach['email']    = $this->input->post('email');
-		$coach['password'] = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+		if ($this->input->post('password') == null) {
+			$coach['password'] = $this->input->post('old_password');
+		} else {
+			$coach['password']   = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+		}
 
 		$this->session->set_flashdata('coach', 'Berhasil Mengubah Data Coach');
 		$this->AdminModel->updateCoach($id, $coach);
@@ -259,7 +263,11 @@ class AdminController extends CI_Controller
 		$id                    = $this->input->post('id');
 		$coachee['name']       = $this->input->post('name');
 		$coachee['email']      = $this->input->post('email');
-		$coachee['password']   = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+		if ($this->input->post('password') == null) {
+			$coachee['password'] = $this->input->post('old_password');
+		} else {
+			$coachee['password']   = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+		}
 		$coachee['company_id'] = $this->input->post('company_id');
 		$coachee['coach_id']   = $this->input->post('coach_id');
 

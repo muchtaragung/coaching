@@ -50,7 +50,8 @@
 									</div>
 									<div class="form-group">
 										<label for="password">password</label>
-										<input type="password" name="password" id="password" class="form-control" required>
+										<input type="password" name="password" id="password" class="form-control">
+										<input type="hidden" name="old_password" value="<?= $coachee->password ?>">
 									</div>
 									<div class="form-group">
 										<label for="">Coach</label>
@@ -81,7 +82,7 @@
 
 			</div>
 			<!-- End of Main Content -->
-			
+
 			<!-- Footer -->
 			<?php $this->load->view('layouts/footer'); ?>
 			<!-- End of Footer -->
