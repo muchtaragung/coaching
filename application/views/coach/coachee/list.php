@@ -106,15 +106,15 @@
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="name">nama</label>
-							<input type="text" name="name" id="name" class="form-control">
+							<input type="text" name="name" required id="name" class="form-control">
 						</div>
 						<div class="form-group">
 							<label for="email">email</label>
-							<input type="email" name="email" id="email" class="form-control">
+							<input type="email" name="email" required id="email" class="form-control">
 						</div>
 						<div class="form-group">
 							<label for="password">password</label>
-							<input type="password" name="password" id="password" class="form-control">
+							<input type="password" name="password" required id="password" class="form-control">
 						</div>
 						<div class="form-group">
 							<input type="hidden" name="company_id" value="<?= $company_id ?>">
