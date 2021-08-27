@@ -54,7 +54,7 @@
 									</div>
 									<div class="form-group">
 										<label for="">Coach</label>
-										<select id="select2" name="coach_id" id="" class="form-control" required>
+										<select id="select2" name="coach_id" id="" class="form-control select2" required>
 											<?php foreach ($coaches as $coach) : ?>
 												<option value="<?= $coach->id ?>" <?php if ($coachee->coach_id == $coach->id) { ?> selected <?php } ?>><?= $coach->name ?></option>
 											<?php endforeach ?>
@@ -81,7 +81,7 @@
 
 			</div>
 			<!-- End of Main Content -->
-
+			
 			<!-- Footer -->
 			<?php $this->load->view('layouts/footer'); ?>
 			<!-- End of Footer -->

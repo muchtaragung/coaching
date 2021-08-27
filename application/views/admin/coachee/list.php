@@ -123,6 +123,7 @@
 							<label for="">Coach</label>
 							<select id="select2" name="coach_id" id="" class="form-control" required>
 								<?php foreach ($coaches as $coach) : ?>
+									<option disabled selected value=""></option>
 									<option value="<?= $coach->id ?>"><?= $coach->name ?></option>
 								<?php endforeach ?>
 							</select>
@@ -136,8 +137,15 @@
 			</div>
 		</div>
 	</div>
-	<?php $this->load->view('layouts/script'); ?>
 
+	<?php $this->load->view('layouts/script'); ?>
+	<script>
+		$(document).ready(function() {
+			$("#select2").select2({
+				dropdownParent: $("#addCoachee")
+			});
+		});
+	</script>
 	<?php if ($this->session->flashdata('coachee')) : ?>
 		<script>
 			Swal.fire(
