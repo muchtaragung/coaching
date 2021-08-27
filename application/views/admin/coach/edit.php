@@ -42,15 +42,15 @@
 									<div class="form-group">
 										<label for="name">nama</label>
 										<input type="hidden" name="id" id="id" class="form-control" value="<?= $coach->id ?>">
-										<input type="text" name="name" id="name" class="form-control" value="<?= $coach->name ?>">
+										<input type="text" name="name" id="name" class="form-control" value="<?= $coach->name ?>" required>
 									</div>
 									<div class="form-group">
 										<label for="email">email</label>
-										<input type="email" name="email" id="email" class="form-control" value="<?= $coach->email ?>">
+										<input type="email" name="email" id="email" class="form-control" value="<?= $coach->email ?>" required>
 									</div>
 									<div class="form-group">
 										<label for="password">password</label>
-										<input type="password" name="password" id="password" class="form-control" value="<?= $coach->password ?>">
+										<input type="password" name="password" id="password" class="form-control" required>
 									</div>
 								</div>
 								<div class="modal-footer">

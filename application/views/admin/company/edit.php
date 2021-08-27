@@ -40,8 +40,8 @@
 								<div class="modal-body">
 									<div class="form-group">
 										<label for="name">nama</label>
-										<input type="hidden" name="id" id="id" class="form-control" value="<?= $company->id ?>">
-										<input type="text" name="name" id="name" class="form-control" value="<?= $company->name ?>">
+										<input type="hidden" name="id" id="id" class="form-control" value="<?= $company->id ?>" required>
+										<input type="text" name="name" id="name" class="form-control" value="<?= $company->name ?>" required>
 									</div>
 								</div>
 								<div class="modal-footer">

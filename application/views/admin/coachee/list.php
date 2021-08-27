@@ -103,19 +103,19 @@
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="name">Nama</label>
-							<input type="text" name="name" id="name" class="form-control">
+							<input type="text" name="name" id="name" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label for="email">Email</label>
-							<input type="email" name="email" id="email" class="form-control">
+							<input type="email" name="email" id="email" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label for="password">Password</label>
-							<input type="password" name="password" id="password" class="form-control">
+							<input type="password" name="password" id="password" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label for="">Coach</label>
-							<select name="coach_id" id="" class="form-control">
+							<select id="select2" name="coach_id" id="" class="form-control" required>
 								<?php foreach ($coaches as $coach) : ?>
 									<option value="<?= $coach->id ?>"><?= $coach->name ?></option>
 								<?php endforeach ?>
