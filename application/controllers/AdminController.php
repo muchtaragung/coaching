@@ -66,14 +66,21 @@ class AdminController extends CI_Controller
 
 	public function addCoach()
 	{
-		$this->checkAuth();
-		$coach['name'] = $this->input->post('name');
-		$coach['email'] = $this->input->post('email');
-		$coach['password'] = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[coach.email]');
+		$this->form_validation->set_error_delimiters('<span style="font-size: 10px;color:red">', '</span>');
+		if ($this->form_validation->run() == FALSE) {
+			$this->session->set_flashdata('error', 'Email sudah digunakan');
+			redirect('admin/coach/list');
+		} else {
+			$this->checkAuth();
+			$coach['name'] = $this->input->post('name');
+			$coach['email'] = $this->input->post('email');
+			$coach['password'] = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
 
-		$this->session->set_flashdata('coach', 'Berhasil Menambahkan Coach');
-		$this->AdminModel->saveCoach($coach);
-		redirect('admin/coach/list');
+			$this->session->set_flashdata('coach', 'Berhasil Menambahkan Coach');
+			$this->AdminModel->saveCoach($coach);
+			redirect('admin/coach/list');
+		}
 	}
 
 	public function deleteCoach($id)
@@ -187,16 +194,24 @@ class AdminController extends CI_Controller
 
 	public function saveCoachee()
 	{
-		$this->checkAuth();
-		$coachee['name']       = $this->input->post('name');
-		$coachee['email']      = $this->input->post('email');
-		$coachee['password']   = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
-		$coachee['company_id'] = $this->input->post('company_id');
-		$coachee['coach_id']   = $this->input->post('coach_id');
+		$id = $this->input->post('id');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[coachee.email]');
+		$this->form_validation->set_error_delimiters('<span style="font-size: 10px;color:red">', '</span>');
+		if ($this->form_validation->run() == FALSE) {
+			$this->session->set_flashdata('error', 'Email sudah digunakan');
+			redirect('admin/coachee/list/' . $id);
+		} else {
+			$this->checkAuth();
+			$coachee['name']       = $this->input->post('name');
+			$coachee['email']      = $this->input->post('email');
+			$coachee['password']   = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+			$coachee['company_id'] = $this->input->post('company_id');
+			$coachee['coach_id']   = $this->input->post('coach_id');
 
-		$this->session->set_flashdata('coachee', 'Berhasil Menyimpan Data Coachee');
-		$this->AdminModel->saveCoachee($coachee);
-		redirect('admin/coachee/list/' . $coachee['company_id']);
+			$this->session->set_flashdata('coachee', 'Berhasil Menyimpan Data Coachee');
+			$this->AdminModel->saveCoachee($coachee);
+			redirect('admin/coachee/list/' . $coachee['company_id']);
+		}
 	}
 
 	public function deleteCoachee($id)

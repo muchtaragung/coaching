@@ -33,15 +33,23 @@ class CoachController extends CI_Controller
 
 	public function addCoachee()
 	{
-		$coachee['name'] = $this->input->post('name');
-		$coachee['email'] = $this->input->post('email');
-		$coachee['password'] = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
-		$coachee['coach_id'] = $this->session->userdata('id');
-		$coachee['company_id'] = $this->input->post('company_id');
+		$id = $this->input->post('id');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[coachee.email]');
+		$this->form_validation->set_error_delimiters('<span style="font-size: 10px;color:red">', '</span>');
+		if ($this->form_validation->run() == FALSE) {
+			$this->session->set_flashdata('error', 'Email sudah digunakan');
+			redirect('coach/coachee/list/' . $id);
+		} else {
+			$coachee['name'] = $this->input->post('name');
+			$coachee['email'] = $this->input->post('email');
+			$coachee['password'] = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+			$coachee['coach_id'] = $this->session->userdata('id');
+			$coachee['company_id'] = $this->input->post('company_id');
 
-		$this->CoachModel->storeCoachee($coachee);
-		$this->session->set_flashdata('add coach', 'berhasil');
-		redirect('coach/coachee/list/' . $coachee['company_id']);
+			$this->CoachModel->storeCoachee($coachee);
+			$this->session->set_flashdata('add coach', 'berhasil');
+			redirect('coach/coachee/list/' . $coachee['company_id']);
+		}
 	}
 
 	public function showCoacheeSessions($coacheeID)

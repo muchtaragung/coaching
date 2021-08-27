@@ -34,6 +34,11 @@
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
 							<h6 class="m-0 font-weight-bold text-primary">Table Peserta</h6>
+							<?php if ($this->session->flashdata('error') != null) { ?>
+								<div class="alert alert-danger" role="alert">
+									<?php echo $this->session->flashdata('error'); ?>
+								</div>
+							<?php } ?>
 							<a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#addCoachee">Tambah Peserta</a>
 						</div>
 						<div class="card-body">
@@ -115,6 +120,7 @@
 					</button>
 				</div>
 				<form action="<?= site_url('coach/addcoachee') ?>" method="POST">
+					<input type="hidden" name="id" value="<?php echo $this->uri->segment('4') ?>">
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="name">nama</label>
@@ -133,7 +139,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-success" type="submit">Submit</button>
+						<button class="btn btn-primary" type="submit">Submit</button>
 					</div>
 				</form>
 			</div>

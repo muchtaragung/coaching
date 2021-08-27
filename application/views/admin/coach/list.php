@@ -28,12 +28,17 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">Coacha</h1>
+					<h1 class="h3 mb-4 text-gray-800">Coach</h1>
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
 							<h6 class="m-0 font-weight-bold text-primary">Table Coach</h6>
+							<?php if ($this->session->flashdata('error') != null) { ?>
+								<div class="alert alert-danger" role="alert">
+									<?php echo $this->session->flashdata('error'); ?>
+								</div>
+							<?php } ?>
 							<a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addCoach">Tambah Coach</a>
 						</div>
 						<div class="card-body">
@@ -113,7 +118,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-secondary" type="submit">Submit</button>
+						<button class="btn btn-primary" type="submit">Submit</button>
 					</div>
 				</form>
 			</div>

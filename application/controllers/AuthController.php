@@ -88,6 +88,7 @@ class AuthController extends CI_Controller
 	}
 	public function lupaPassword()
 	{
+		
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 		$this->form_validation->set_error_delimiters('<span style="font-size: 10px;color:red">', '</span>');
 		if ($this->form_validation->run() == FALSE) {
