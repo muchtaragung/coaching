@@ -105,11 +105,11 @@
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="goal">Goals</label>
-							<textarea name="goal" id="" cols="30" rows="10" class="form-control"></textarea>
+							<textarea name="goal" id="" cols="30" rows="10" class="form-control" required></textarea>
 						</div>
 						<div class="form-group">
 							<label for="due_date">due date</label>
-							<input type="date" name="due_date" id="due_date" class="form-control">
+							<input type="date" name="due_date" id="due_date" class="form-control" required>
 						</div>
 						<input type="hidden" name="students_id" value="<?= $this->session->userdata('id'); ?>">
 					</div>
