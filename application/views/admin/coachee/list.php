@@ -136,8 +136,15 @@
 			</div>
 		</div>
 	</div>
-	<?php $this->load->view('layouts/script'); ?>
 
+	<?php $this->load->view('layouts/script'); ?>
+	<script>
+		$(document).ready(function() {
+			$("#select2").select2({
+				dropdownParent: $("#addCoachee")
+			});
+		});
+	</script>
 	<?php if ($this->session->flashdata('coachee')) : ?>
 		<script>
 			Swal.fire(
