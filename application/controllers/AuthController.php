@@ -141,7 +141,7 @@ class AuthController extends CI_Controller
 			$this->email->set_newline("\r\n");
 			$this->email->from($config['smtp_user']);
 			$this->email->to($email);
-			$this->email->subject('Email verifikasi'); //subjek email
+			$this->email->subject('Reset Password Akun Coaching'); //subjek email
 			$this->email->message($message);
 			if (!$this->email->send()) {
 				$this->session->set_flashdata('error', 'Gagal mengirim email');
