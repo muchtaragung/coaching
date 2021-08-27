@@ -108,16 +108,17 @@ class AuthController extends CI_Controller
 
 			//build token   
 			$this->load->library('email'); //panggil library email codeigniter
-			$config = array(
-				'protocol' => 'smtp',
-				'smtp_host' => 'ssl://smtp.googlemail.com',
-				'smtp_port' => 465,
-				'smtp_user' => 'moneytypeq@gmail.com', //alamat email gmail
-				'smtp_pass' => 'Money12p', //password email 
-				'mailtype' => 'html',
-				'charset' => 'iso-8859-1',
-				'wordwrap' => TRUE
-			);
+			$config = [
+				'mailtype'  => 'html',
+				'charset'   => 'utf-8',
+				'protocol'  => 'mail',
+				'smtp_host' => 'mail.korporaconsulting.com',
+				'smtp_user' => 'demoaplikasi@korporaconsulting.com',  // Email gmail
+				'smtp_pass'   => 'Demoaplikasi',  // Password gmail
+				'smtp_port'   => 465,
+				'crlf'    => "\r\n",
+				'newline' => "\r\n"
+			];
 			$token = $this->AuthModel->insertToken($userInfo->email);
 			$qstring = $this->base64url_encode($token);
 			$url = site_url() . 'auth/password_baru/' . $qstring;
