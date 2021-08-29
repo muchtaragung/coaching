@@ -93,6 +93,11 @@ $route['coachee/saveResult']      = 'CoacheeController/updateResult';
 $route['coachee/endGoal/(:num)']  = 'CoacheeController/endGoal/$1';
 $route['coachee/update-criteria'] = 'CoacheeController/updateCriteria/$1';
 
+$route['coachee/reset-action/(:num)/(:num)'] = 'CoacheeController/resetAction/$1/$2';
+$route['coachee/delete-action/(:num)/(:num)'] = 'CoacheeController/deleteAction/$1/$2';
+$route['coachee/edit-action/(:num)'] = 'CoacheeController/editAction/$1';
+$route['coachee/update-action'] = 'CoacheeController/updateAction';
+
 $route['coachee/report/show/(:num)'] = 'CoacheeController/showReport/$1';
 
 // admin routes
