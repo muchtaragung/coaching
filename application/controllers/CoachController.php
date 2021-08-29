@@ -267,10 +267,11 @@ class CoachController extends CI_Controller
 		$data['milestone'] = json_decode($report[0]->milestone, true);
 		$data['session_id'] = json_decode($report[0]->session_id, true);
 
-		var_dump($data);
-		die();
+		// var_dump($data);
+		// die();
 		$this->pdf->setPaper('A4', 'potrait');
-		$this->pdf->load_view('laporan_coach', $data, "laporan-coaching-" . $data['coachee']->nama);
+		$file_name = 'Laporan Coaching-' . $data['session']->tanggal_mulai . '-' . $data['coachee']->name;
+		$this->pdf->load_view('laporan_coach', $data, $file_name);
 	}
 
 	//profile

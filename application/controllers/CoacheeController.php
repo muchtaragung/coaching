@@ -120,7 +120,8 @@ class CoacheeController extends CI_Controller
 		// var_dump($data);
 		// die();
 		$this->pdf->setPaper('A4', 'potrait');
-		$this->pdf->load_view('laporan_coachee', $data, "laporan-coaching-" . $sessionID);
+		$file_name = 'Laporan Coaching-' . $data['session']->tanggal_mulai . '-' . $data['coachee']->name;
+		$this->pdf->load_view('laporan_coachee', $data, $file_name);
 	}
 
 	//profile
