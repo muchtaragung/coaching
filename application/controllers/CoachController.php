@@ -270,7 +270,7 @@ class CoachController extends CI_Controller
 		// var_dump($data);
 		// die();
 		$this->pdf->setPaper('A4', 'potrait');
-		$file_name = 'Laporan Coaching-' . $data['session']->tanggal_mulai . '-' . $data['coachee']->name;
+		$file_name = 'Laporan Coaching-' . $data['coachee']['name'] . '-' .  $data['session']['start_time'];
 		$this->pdf->load_view('laporan_coach', $data, $file_name);
 	}
 
