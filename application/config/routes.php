@@ -71,7 +71,7 @@ $route['coach/coachee/goal/milestone/save']       = 'CoachController/saveMilesto
 
 // coachee session
 $route['coach/coachee/session/(:num)']                  = 'CoachController/showCoacheeSessions/$1';
-$route['coach/coachee/session/show/(:num)']				= 'CoachController/showSessionData/$1';
+$route['coach/coachee/session/show/(:num)']                = 'CoachController/showSessionData/$1';
 $route['coach/coachee/session/new/(:num)']              = 'CoachController/addSession/$1';
 $route['coach/coachee/session/start/(:num)/(:num)']     = 'CoachController/startSession/$1/$2';
 $route['coach/coachee/session/end/(:num)/(:num)']       = 'CoachController/endSession/$1/$2';
@@ -126,6 +126,8 @@ $route['admin/coachee/goal/show/(:num)'] = 'AdminController/showGoal/$1';
 
 $route['admin/coachee/action/reset/(:num)/(:num)'] = 'AdminController/resetAction/$1/$2';
 $route['admin/coachee/action/delete/(:num)/(:num)'] = 'AdminController/deleteAction/$1/$2';
+$route['admin/coachee/action/edit/(:num)'] = 'AdminController/editAction/$1';
+$route['admin/coachee/action/update'] = 'AdminController/updateAction';
 
 $route['admin/coachee/criteria/update'] = 'AdminController/updateCriteria';
 $route['admin/coachee/criteria/save'] = 'AdminController/saveCriteria';

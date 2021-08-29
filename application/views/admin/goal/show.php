@@ -97,8 +97,9 @@
 												<td> <?php if ($action->result == 'tidak berhasil') { ?> <h2>✓</h2> <?php } ?></td>
 												<td> <?php if ($action->result == 'butuh waktu lama') { ?> <h2>✓</h2> <?php } ?></td>
 												<td>
-													<button onclick=" confirmReset('<?= site_url('admin/coachee/action/reset/') . $action->id . '/' . $goal->id ?>')" class="btn btn-danger">Hapus</button>
-													<button onclick=" confirmDelete('<?= site_url('admin/coachee/notes/delete/' . $note->id . '/' . $goal->id) ?>', 'delete')" class="btn btn-danger">Hapus</button>
+													<button onclick=" confirmReset('<?= site_url('admin/coachee/action/reset/') . $action->id . '/' . $goal->id ?>')" class="btn btn-info">Reset</button>
+													<button onclick=" location.replace('<?= site_url('admin/coachee/action/edit/') . $action->id ?>')" class="btn btn-primary">Edit</button>
+													<button onclick=" confirmDelete('<?= site_url('admin/coachee/action/delete/' . $action->id . '/' . $goal->id) ?>', 'Action Plan')" class="btn btn-danger">Hapus</button>
 
 
 												</td>
@@ -217,6 +218,21 @@
 	function confirmDelete(link, category) {
 		Swal.fire({
 			title: 'Apakah Anda Ingin Menghapus ' + category,
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Ya'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				window.location.replace(link)
+			}
+		})
+	}
+
+	function confirmReset(link) {
+		Swal.fire({
+			title: 'Apakah Anda Ingin Mereset Resultnya',
 			icon: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: '#3085d6',

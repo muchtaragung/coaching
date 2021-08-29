@@ -396,12 +396,47 @@ class AdminController extends CI_Controller
 		redirect('admin/coachee/goal/show/' . $goalID);
 	}
 
+	/**
+	 * Menggedit data action PLan
+	 *
+	 * @param [int] $actionID
+	 * @return void
+	 */
+	public function editAction($actionID)
+	{
+		$this->checkAuth();
+		$data['action'] = $this->AdminModel->getActionByID($actionID);
+
+		$this->load->view('admin/action/edit', $data);
+	}
+
+	/**
+	 * mengupdate data aksi
+	 *
+	 * @return void
+	 */
+	public function updateAction()
+	{
+		$this->checkAuth();
+
+		$ActionID = $this->input->post('id');
+		$goalID   = $this->input->post('goal_id');
+
+		$action['action'] = $this->input->post('action');
+		$action['result'] = $this->input->post('result');
+
+		$this->session->set_flashdata('action', 'Action Plan Berhasil Di Hapus');
+		$this->AdminModel->updateAction($ActionID, $action);
+		redirect('admin/coachee/goal/show/' . $goalID);
+	}
+
 	public function deleteAction($actionID, $goalID)
 	{
 		$this->checkAuth();
 		$this->session->set_flashdata('action', 'Berhasil Menghapus Action');
 		$this->AdminModel->deleteAction($actionID);
-		redirect('admin/coachee/goal/show/' . $goalID);
+
+		// redirect('admin/coachee/goal/show/' . $goalID);
 	}
 
 	public function deleteNotes($notesID, $goalID)
