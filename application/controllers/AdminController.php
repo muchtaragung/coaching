@@ -53,7 +53,7 @@ class AdminController extends CI_Controller
 		$this->checkAuth();
 		$data['page_name'] = "Admin Dashboard";
 
-		$data['perusahaan'] = $this->AdminModel->getNumCompany();
+		$data['company'] = $this->AdminModel->getNumCompany();
 		$data['coach'] = $this->AdminModel->getNumCoach();
 		$data['coachee'] = $this->AdminModel->getNumCoachee();
 

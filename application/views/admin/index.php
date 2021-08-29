@@ -30,38 +30,76 @@
 					<!-- Page Heading -->
 					<h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
 
-					<!-- DataTales Example -->
-					<div class="card shadow mb-4">
-						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Table Peserta</h6>
-							<a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addCoachee">Tambah Peserta</a>
+					<div class="row">
+						<div class="col-xl-4 col-md-8 col-sm-12 mb-4">
+							<div class="card border-left-primary shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+												<h4>
+													Jumlah Perusahaan
+												</h4>
+											</div>
+
+											<div class="h6 mb-0 font-weight-bold text-gray-800">Jumlah Perusahaan : <?= $company ?></div>
+											<a href="<?= site_url('admin/company/list') ?>" class="btn btn-primary btn-icon-split float-right">
+												<span class="icon text-white-50">
+													<i class="fas fa-table"></i>
+												</span>
+												<span class="text">Lihat Perusahaan</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-									<thead>
-										<tr>
-											<th>No</th>
-											<th>Nama</th>
-											<th>email</th>
-											<th>Action</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php $i = 1;
-										foreach ($coachs as $coach) : ?>
-											<tr>
-												<td><?php echo $i++ ?></td>
-												<td> <?= $coachee->name ?> </td>
-												<td><?= $coachee->email ?></td>
-												<td>
-													<a href="<?= site_url('admin/coachee/') . $coachee->id ?>" class="btn btn-primary">Lihat Data</a>
-													<a href="<?= site_url('admin/coachee/session/') . $coachee->id ?>" class="btn btn-primary">Lihat Sesi</a>
-												</td>
-											</tr>
-										<?php endforeach ?>
-									</tbody>
-								</table>
+
+						<div class="col-xl-4 col-md-8 col-sm-12 mb-4">
+							<div class="card border-left-primary shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+												<h4>
+													Jumlah Coach
+												</h4>
+											</div>
+
+											<div class="h6 mb-0 font-weight-bold text-gray-800">Jumlah Coach : <?= $coach ?></div>
+											<a href="<?= site_url('admin/coach/list') ?>" class="btn btn-primary btn-icon-split float-right">
+												<span class="icon text-white-50">
+													<i class="fas fa-table"></i>
+												</span>
+												<span class="text">Lihat Coach</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xl-4 col-md-8 col-sm-12 mb-4">
+							<div class="card border-left-primary shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+												<h4>
+													Jumlah Peserta
+												</h4>
+											</div>
+
+											<div class="h6 mb-0 font-weight-bold text-gray-800">Jumlah Peserta : <?= $coachee ?></div>
+											<a href="<?= site_url('admin/company/list') ?>" class="btn btn-primary btn-icon-split float-right">
+												<span class="icon text-white-50">
+													<i class="fas fa-table"></i>
+												</span>
+												<span class="text">Lihat Perusahaan Untuk Melihat Peserta</span>
+											</a>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

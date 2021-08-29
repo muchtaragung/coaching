@@ -36,6 +36,7 @@ class AdminModel extends CI_Model
 		$this->db->update('admin', $data);
 		return $this->db->affected_rows();
 	}
+
 	/**	
 	 * mengambil seluruh data coach
 	 * mengembalikan data dalam bentuk objek
@@ -43,6 +44,16 @@ class AdminModel extends CI_Model
 	public function getAllCoach()
 	{
 		return $this->db->get('coach')->result();
+	}
+
+	/**
+	 * mengambil jumlah seluruh coach
+	 *
+	 * @return num_rows()
+	 */
+	public function getNumCoach()
+	{
+		return $this->db->get('coach')->num_rows();
 	}
 
 	/**
@@ -110,6 +121,14 @@ class AdminModel extends CI_Model
 		return $this->db->where('id', $id)->delete('company');
 	}
 
+	/**
+	 * Mengambil jumlah dari perusahaan
+	 */
+	public function getNumCompany()
+	{
+		return $this->db->get('company')->num_rows();
+	}
+
 	/** 
 	 * mengambil data perusahaan sesuai id
 	 * memiliki parameter id perusahaan yang akan di ambil
@@ -137,6 +156,16 @@ class AdminModel extends CI_Model
 	public function getCoacheeByCompanyID($companyID)
 	{
 		return $this->db->where('company_id', $companyID)->get('coachee')->result();
+	}
+
+	/**
+	 * mengambil jumlah dari peserta
+	 *
+	 * @return num_rows()
+	 */
+	public function getNumCoachee()
+	{
+		return $this->db->get('coachee')->num_rows();
 	}
 
 	/**
