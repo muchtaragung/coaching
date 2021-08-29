@@ -22,6 +22,7 @@ class AdminController extends CI_Controller
 	public function login()
 	{
 		$data['page_name'] = "Admin Login";
+
 		$this->load->view('admin/login', $data);
 	}
 
@@ -52,6 +53,10 @@ class AdminController extends CI_Controller
 		$this->checkAuth();
 		$data['page_name'] = "Admin Dashboard";
 
+		$data['perusahaan'] = $this->AdminModel->getNumCompany();
+		$data['coach'] = $this->AdminModel->getNumCoach();
+		$data['coachee'] = $this->AdminModel->getNumCoachee();
+
 		$this->load->view('admin/index.php', $data, FALSE);
 	}
 
@@ -66,6 +71,8 @@ class AdminController extends CI_Controller
 
 	public function addCoach()
 	{
+		$this->checkAuth();
+
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[coach.email]');
 		$this->form_validation->set_error_delimiters('<span style="font-size: 10px;color:red">', '</span>');
 		if ($this->form_validation->run() == FALSE) {
@@ -85,6 +92,7 @@ class AdminController extends CI_Controller
 
 	public function deleteCoach($id)
 	{
+		$this->checkAuth();
 		$this->session->set_flashdata('coach', 'Berhasil Menghapus Coach');
 		$this->AdminModel->deleteCoach($id);
 		redirect('admin/coach/list');
@@ -92,6 +100,7 @@ class AdminController extends CI_Controller
 
 	public function editCoach($id)
 	{
+		$this->checkAuth();
 		$data['page_name'] = 'Edit Coach';
 		$data['coach'] = $this->AdminModel->getCoachByID($id);
 
@@ -100,6 +109,7 @@ class AdminController extends CI_Controller
 
 	public function updateCoach()
 	{
+		$this->checkAuth();
 		$id                = $this->input->post('id');
 		$coach['name']     = $this->input->post('name');
 		$coach['email']    = $this->input->post('email');
@@ -117,6 +127,7 @@ class AdminController extends CI_Controller
 
 	public function companyList()
 	{
+		$this->checkAuth();
 		$data['page_name'] = 'Company List';
 		$data['companies'] = $this->AdminModel->getAllCompany();
 
@@ -125,6 +136,7 @@ class AdminController extends CI_Controller
 
 	public function saveCompany()
 	{
+		$this->checkAuth();
 		$company['name'] = $this->input->post('name');
 
 		$this->session->set_flashdata('company', 'Berhasil Menyimpan Data Perusahaan');
@@ -134,6 +146,7 @@ class AdminController extends CI_Controller
 
 	public function deleteCompany($id)
 	{
+		$this->checkAuth();
 		// mengambil data yang di perlukan
 		$data['company'] = $this->AdminModel->getCompanyByID($id);
 		$data['coachee'] = $this->AdminModel->getCoacheeByCompanyID($data['company']->id);
@@ -168,6 +181,7 @@ class AdminController extends CI_Controller
 
 	public function editCompany($id)
 	{
+		$this->checkAuth();
 		$data['page_name'] = 'Edit Company';
 		$data['company'] = $this->AdminModel->getCompanyByID($id);
 
@@ -176,6 +190,7 @@ class AdminController extends CI_Controller
 
 	public function updateCompany()
 	{
+		$this->checkAuth();
 		$id                = $this->input->post('id');
 		$company['name']     = $this->input->post('name');
 
@@ -198,6 +213,7 @@ class AdminController extends CI_Controller
 
 	public function saveCoachee()
 	{
+		$this->checkAuth();
 		$id = $this->input->post('id');
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[coachee.email]');
 		$this->form_validation->set_error_delimiters('<span style="font-size: 10px;color:red">', '</span>');
@@ -220,6 +236,7 @@ class AdminController extends CI_Controller
 
 	public function deleteCoachee($id)
 	{
+		$this->checkAuth();
 		// mengambil data yang di perlukan
 		$data['coachee'] = $this->AdminModel->getcoacheeByID($id);
 		$data['goals']   = $this->AdminModel->getGoalByCoacheeID($id);
@@ -250,6 +267,7 @@ class AdminController extends CI_Controller
 
 	public function editCoachee($id)
 	{
+		$this->checkAuth();
 		$data['page_name'] = 'Edit coachee';
 		$data['coachee'] = $this->AdminModel->getcoacheeByID($id);
 		$data['companies'] = $this->AdminModel->getAllCompany();
@@ -260,6 +278,7 @@ class AdminController extends CI_Controller
 
 	public function updateCoachee()
 	{
+		$this->checkAuth();
 		$id                    = $this->input->post('id');
 		$coachee['name']       = $this->input->post('name');
 		$coachee['email']      = $this->input->post('email');
@@ -288,6 +307,7 @@ class AdminController extends CI_Controller
 
 	public function deleteGoal($goalID)
 	{
+		$this->checkAuth();
 		$data['goal']    = $this->AdminModel->getGoalByID($goalID);
 		$data['coachee'] = $this->AdminModel->getCoacheeByID($data['goal']->coachee_id);
 
@@ -304,6 +324,7 @@ class AdminController extends CI_Controller
 
 	public function editGoal($goalID)
 	{
+		$this->checkAuth();
 		$data['page_name'] = 'Edit Goal';
 		$data['goal']      = $this->AdminModel->getGoalByID($goalID);
 
@@ -312,6 +333,7 @@ class AdminController extends CI_Controller
 
 	public function updateGoal()
 	{
+		$this->checkAuth();
 		$goalID           = $this->input->post('id');
 		$coacheeID        = $this->input->post('coachee_id');
 		$goal['goal']     = $this->input->post('goal');
@@ -325,6 +347,7 @@ class AdminController extends CI_Controller
 
 	public function showGoal($goalID)
 	{
+		$this->checkAuth();
 		$data['page_name']   = 'Showing Goals';
 		$data['goal']        = $this->AdminModel->getGoalByID($goalID);
 		$data['criteria']    = $this->AdminModel->getCriteriaByGoalID($goalID);
@@ -335,6 +358,7 @@ class AdminController extends CI_Controller
 
 	public function saveCriteria()
 	{
+		$this->checkAuth();
 		$criteria['criteria'] = $this->input->post('criteria');
 		$criteria['goals_id']  = $this->input->post('goals_id');
 
@@ -345,6 +369,7 @@ class AdminController extends CI_Controller
 
 	public function updateCriteria()
 	{
+		$this->checkAuth();
 		$criteriaID = $this->input->post('id');
 		$goalID     = $this->input->post('goals_id');
 		$criteria['criteria'] = $this->input->post('criteria');
@@ -356,6 +381,7 @@ class AdminController extends CI_Controller
 
 	public function deleteCriteria($criteriaID, $goalID)
 	{
+		$this->checkAuth();
 		$this->session->set_flashdata('criteria', 'Berhasil Menghapus Criteria');
 		$this->AdminModel->deleteCriteria($criteriaID);
 		redirect('admin/coachee/goal/show/' . $goalID);
@@ -363,6 +389,7 @@ class AdminController extends CI_Controller
 
 	public function resetAction($actionID, $goalID)
 	{
+		$this->checkAuth();
 		$action['result'] = null;
 		$this->session->set_flashdata('action', 'Berhasil Mereset Action');
 		$this->AdminModel->resetAction($actionID, $action);
@@ -371,6 +398,7 @@ class AdminController extends CI_Controller
 
 	public function deleteAction($actionID, $goalID)
 	{
+		$this->checkAuth();
 		$this->session->set_flashdata('action', 'Berhasil Menghapus Action');
 		$this->AdminModel->deleteAction($actionID);
 		redirect('admin/coachee/goal/show/' . $goalID);
@@ -378,6 +406,7 @@ class AdminController extends CI_Controller
 
 	public function deleteNotes($notesID, $goalID)
 	{
+		$this->checkAuth();
 		$this->session->set_flashdata('notes', 'Berhasil Menghapus Notes');
 		$this->AdminModel->deleteNotes($notesID);
 		redirect('admin/coachee/goal/show/' . $goalID);
@@ -385,6 +414,7 @@ class AdminController extends CI_Controller
 
 	public function editNotes($notesID)
 	{
+		$this->checkAuth();
 		$data['page_name'] = 'Edit Notes';
 		$data['note']      = $this->AdminModel->getNotesByID($notesID);
 
@@ -393,6 +423,7 @@ class AdminController extends CI_Controller
 
 	public function updateNotes()
 	{
+		$this->checkAuth();
 		$notes['comment'] = $this->input->post('comment');
 		$notes['result']  = $this->input->post('result');
 
@@ -406,6 +437,7 @@ class AdminController extends CI_Controller
 
 	public function showMilestone($goalID)
 	{
+		$this->checkAuth();
 		$data['page_name'] = 'Milestone';
 		$data['milestone'] = $this->AdminModel->getMilestoneGoalID($goalID);
 		$data['goal']      = $this->AdminModel->getGoalByID($data['milestone']->goals_id);
@@ -415,6 +447,7 @@ class AdminController extends CI_Controller
 
 	public function deleteMilestone($milestoneID, $goalID)
 	{
+		$this->checkAuth();
 		$this->session->set_flashdata('milestone', 'Milestone Berhasil Dihapus');
 		$this->AdminModel->deleteMilestone($milestoneID);
 		redirect('admin/coachee/milestone/show/' . $goalID);
@@ -422,6 +455,7 @@ class AdminController extends CI_Controller
 
 	public function sessionList($coacheeID)
 	{
+		$this->checkAuth();
 		$data['page_name'] = 'Sesi Peserta';
 		$data['sessions']  = $this->AdminModel->getSessionByCoacheeID($coacheeID);
 
@@ -430,6 +464,7 @@ class AdminController extends CI_Controller
 
 	public function deleteSession($sessionID, $coacheeID)
 	{
+		$this->checkAuth();
 		$this->AdminModel->getSessionByID($sessionID);
 
 		$this->session->set_flashdata('session', 'Di Hapus');
@@ -439,6 +474,7 @@ class AdminController extends CI_Controller
 
 	public function showSessionData($sessionID)
 	{
+		$this->checkAuth();
 		$data['page_name'] = 'Data Sesi';
 		$data['session']  = $this->AdminModel->getSessionByID($sessionID);
 		$data['penilaian'] = $this->AdminModel->getPenilaianBySessionID($sessionID);
@@ -453,6 +489,7 @@ class AdminController extends CI_Controller
 	 */
 	public function deleteReport($reportID, $sessionID)
 	{
+		$this->checkAuth();
 		$this->session->set_flashdata('report', 'Laporan Berhasil Di Hapus');
 		$this->AdminModel->deleteReport($reportID);
 		redirect('admin/coachee/session/show/' . $sessionID);
@@ -479,6 +516,7 @@ class AdminController extends CI_Controller
 	}
 	public function update_password()
 	{
+		$this->checkAuth();
 		$this->form_validation->set_rules('password', 'Password', 'required', array('required' => 'Password tidak boleh kosong!'));
 		$this->form_validation->set_rules('password_baru', 'Password', 'required', array('required' => 'Password tidak boleh kosong!'));
 		$this->form_validation->set_rules('repassword', 'Password', 'required|matches[password_baru]', array(
