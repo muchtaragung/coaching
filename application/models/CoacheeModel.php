@@ -58,6 +58,11 @@ class CoacheeModel extends CI_Model
 		return $this->db->insert('criteria', $criteria);
 	}
 
+	public function updateCriteria($criteriaID, $criteria)
+	{
+		return $this->db->where('id', $criteriaID)->update('criteria', $criteria);
+	}
+
 	public function allSessionsByID($id)
 	{
 		return $this->db->where('coachee_id', $id)->get('session')->result();

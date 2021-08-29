@@ -83,14 +83,15 @@ $route['coach/coachee/session/report/create/(:num)/(:num)'] = 'CoachController/c
 $route['coach/coachee/session/report/show/(:num)/(:num)'] = 'CoachController/showReport/$1/$2';
 
 // coachee routes
-$route['coachee']                = 'CoacheeController';
-$route['coachee/goals']          = 'CoacheeController/allGoals';
-$route['coachee/addgoal']        = 'CoacheeController/addGoal';
-$route['coachee/goal/(:num)']    = 'CoacheeController/showGoal/$1';
-$route['coachee/addaction']      = 'CoacheeController/addActionPlan';
-$route['coachee/addcriteria']    = 'CoacheeController/addCriteria';
-$route['coachee/saveResult']     = 'CoacheeController/updateResult';
-$route['coachee/endGoal/(:num)'] = 'CoacheeController/endGoal/$1';
+$route['coachee']                 = 'CoacheeController';
+$route['coachee/goals']           = 'CoacheeController/allGoals';
+$route['coachee/addgoal']         = 'CoacheeController/addGoal';
+$route['coachee/goal/(:num)']     = 'CoacheeController/showGoal/$1';
+$route['coachee/addaction']       = 'CoacheeController/addActionPlan';
+$route['coachee/addcriteria']     = 'CoacheeController/addCriteria';
+$route['coachee/saveResult']      = 'CoacheeController/updateResult';
+$route['coachee/endGoal/(:num)']  = 'CoacheeController/endGoal/$1';
+$route['coachee/update-criteria'] = 'CoacheeController/updateCriteria/$1';
 
 $route['coachee/report/show/(:num)'] = 'CoacheeController/showReport/$1';
 

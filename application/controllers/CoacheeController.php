@@ -77,6 +77,17 @@ class CoacheeController extends CI_Controller
 		redirect('coachee/goal/' . $criteria['goals_id'], 'refresh');
 	}
 
+	public function updateCriteria()
+	{
+		$criteria['criteria'] = $this->input->post('criteria');
+		$id = $this->input->post('criteria_id');
+		$goalID = $this->input->post('goals_id');
+
+		$this->session->set_flashdata('criteria', 'update');
+		$this->CoacheeModel->updateCriteria($id, $criteria);
+		redirect('coachee/goal/' . $goalID, 'refresh');
+	}
+
 	public function updateResult()
 	{
 		$id = $this->input->post('id');
