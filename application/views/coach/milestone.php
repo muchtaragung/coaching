@@ -40,6 +40,7 @@
 								<div class="form-group">
 									<input type="hidden" name="coachee_id" value="<?= $coachee->id ?>">
 									<input type="hidden" name="goals_id" value="<?= $goal->id ?>">
+									<input type="hidden" name="session_id" value="<?= $session->id ?>">
 								</div>
 								<div class="card my-4">
 									<div class="card-header">

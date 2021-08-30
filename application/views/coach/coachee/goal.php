@@ -42,9 +42,6 @@
 						<div class="card-header py-3">
 							<h4 class="m-0 font-weight-bold text-primary float-left">Success Criteria : <?= $criteria->criteria ?></h4>
 							<a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#addNote">Tambah Notes</a>
-							<?php if ($goal->status == 'selesai') : ?>
-								<a href="<?= site_url('coach/coachee/goal/milestone/add/' . $goal->id)  ?>" class="btn btn-primary float-right mr-2">Penilaian Milestone</a>
-							<?php endif ?>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">

@@ -69,7 +69,7 @@
 													<?php elseif ($session->status == 'belum selesai') : ?>
 														<button onclick=" confirmEnd('<?= site_url('coach/coachee/session/end/' . $session->id . '/' . $session->coachee_id) ?>')" class="btn btn-primary">Selesaikan Sesi</button>
 													<?php elseif ($session->status == 'selesai') : ?>
-														<a href="<?= site_url('coach/coachee/session/show/' . $session->id) ?>" class="btn btn-primary">Penilaian Dan Laporan</a>
+														<a href="<?= site_url('coach/coachee/session/show/' . $session->id . '/' . $session->coachee_id) ?>" class="btn btn-primary">Penilaian Dan Laporan</a>
 													<?php endif ?>
 												</td>
 											</tr>

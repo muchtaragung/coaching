@@ -166,9 +166,9 @@ class CoachModel extends CI_Model
 		return $this->db->insert('milestone', $milestone);
 	}
 
-	public function checkMilestone($goalID)
+	public function checkMilestone($where)
 	{
-		return $this->db->where('goals_id', $goalID)->get('milestone')->num_rows();
+		return $this->db->where($where)->get('milestone')->num_rows();
 	}
 
 	public function getCompany()

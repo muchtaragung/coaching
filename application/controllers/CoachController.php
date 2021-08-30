@@ -101,13 +101,14 @@ class CoachController extends CI_Controller
 	 * 
 	 * memiliki parameter id session
 	 */
-	public function showSessionData($sessionID)
+	public function showSessionData($sessionID, $coacheeID)
 	{
 		$data['page_name'] = 'Data Sesi';
-		$data['session']  = $this->CoachModel->getSessionByID($sessionID);
+		$data['session']   = $this->CoachModel->getSessionByID($sessionID);
 		$data['penilaian'] = $this->CoachModel->getPenilaianBySessionID($sessionID);
 		$data['report']    = $this->CoachModel->getReportBySessionID($sessionID);
 		$data['coachee']   = $this->CoachModel->getCoacheeByID($data['session']->coachee_id);
+		$data['goals']     = $this->CoachModel->getGoalsByCoacheeID($coacheeID);
 
 		$this->load->view('coach/coachee/show_session', $data);
 	}
@@ -167,34 +168,41 @@ class CoachController extends CI_Controller
 
 		$this->session->set_flashdata('penilaian', 'berhasil');
 		$this->CoachModel->savePenilaian($penilaian);
-		redirect('coach/coachee/session/show/' . $penilaian['session_id']);
+		redirect('coach/coachee/session/show/' . $penilaian['session_id'] . '/' . $penilaian['coachee_id']);
 	}
 
-	public function addMilestone($goalID)
+	public function addMilestone($goalID, $sessionID)
 	{
 		$data['page_name'] = 'Milestone';
 		$data['goal'] = $this->CoachModel->goalByID($goalID);
-		$data['checkMilestone'] = $this->CoachModel->checkMilestone($goalID);
+		$data['coachee'] = $this->CoachModel->getCoacheeByID($data['goal']->coachee_id);
+		$data['session'] = $this->CoachModel->getSessionByID($sessionID);
 
-		$data['coachee'] = $this->CoachModel->getCoacheeByID($data['goal']->id);
+		// cek data milestone
+		$where = ['goals_id' => $goalID, 'session_id' => $sessionID];
+		$data['checkMilestone'] = $this->CoachModel->checkMilestone($where);
+
+		// jika ada milestonenya maka tidak bisa tambah milestone lagi
 		if ($data['checkMilestone'] > 0) {
-			$this->session->set_flashdata('milestone', 'ada');
-			redirect('coach/coachee/goal/' . $goalID);
+			$this->session->set_flashdata('milestone', 'Milestone Sudah Ada');
+			redirect('coach/coachee/session/show/' . $sessionID . '/' . $data['coachee']->id);
 		}
+
 		$this->load->view('coach/milestone', $data);
 	}
 
 	public function saveMilestone()
 	{
-		$milestone['coach_id'] = $this->session->userdata('id');
-		$milestone['coachee_id'] = $this->input->post('coachee_id');
-		$milestone['goals_id'] = $this->input->post('goals_id');
-		$milestone['milestone'] = $this->input->post('milestone');
-		$milestone['keterangan'] = $this->input->post('keterangan');
+		$milestone['coach_id']    = $this->session->userdata('id');
+		$milestone['coachee_id']  = $this->input->post('coachee_id');
+		$milestone['session_id'] = $this->input->post('session_id');
+		$milestone['goals_id']    = $this->input->post('goals_id');
+		$milestone['milestone']   = $this->input->post('milestone');
+		$milestone['keterangan']  = $this->input->post('keterangan');
 
 		$this->CoachModel->saveMilestone($milestone);
-		$this->session->set_flashdata('milestone', 'add');
-		redirect('coach/coachee/goal/' . $milestone['goals_id']);
+		$this->session->set_flashdata('milestone', 'Berhasil Menambahkan Milestone');
+		redirect('coach/coachee/session/show/' . $milestone['goals_id'] . '/' . $milestone['session_id']);
 	}
 
 	public function createReport($sessionID, $coacheeID)

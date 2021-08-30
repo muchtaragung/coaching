@@ -70,14 +70,15 @@ $route['coach/coachee/goal/milestone/save']       = 'CoachController/saveMilesto
 
 
 // coachee session
-$route['coach/coachee/session/(:num)']                  = 'CoachController/showCoacheeSessions/$1';
-$route['coach/coachee/session/show/(:num)']                = 'CoachController/showSessionData/$1';
-$route['coach/coachee/session/new/(:num)']              = 'CoachController/addSession/$1';
-$route['coach/coachee/session/start/(:num)/(:num)']     = 'CoachController/startSession/$1/$2';
-$route['coach/coachee/session/end/(:num)/(:num)']       = 'CoachController/endSession/$1/$2';
-$route['coach/coachee/session/penilaian/(:num)/(:num)'] = 'CoachController/penilaianSesi/$1/$2';
-$route['coach/coachee/session/save-penilaian']          = 'CoachController/savePenilaian';
-
+$route['coach/coachee/session/(:num)']                      = 'CoachController/showCoacheeSessions/$1';
+$route['coach/coachee/session/show/(:num)/(:num)']          = 'CoachController/showSessionData/$1/$2';
+$route['coach/coachee/session/new/(:num)']                  = 'CoachController/addSession/$1';
+$route['coach/coachee/session/start/(:num)/(:num)']         = 'CoachController/startSession/$1/$2';
+$route['coach/coachee/session/end/(:num)/(:num)']           = 'CoachController/endSession/$1/$2';
+$route['coach/coachee/session/penilaian/(:num)/(:num)']     = 'CoachController/penilaianSesi/$1/$2';
+$route['coach/coachee/session/save-penilaian']              = 'CoachController/savePenilaian';
+$route['coach/coachee/session/milestone/add/(:num)/(:num)'] = 'CoachController/addMilestone/$1/$2';
+$route['coach/coachee/session/milestone/save']              = 'CoachController/saveMilestone';
 // report
 $route['coach/coachee/session/report/create/(:num)/(:num)'] = 'CoachController/createReport/$1/$2';
 $route['coach/coachee/session/report/show/(:num)/(:num)'] = 'CoachController/showReport/$1/$2';
