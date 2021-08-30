@@ -81,14 +81,14 @@
 												</table>
 												<br>
 												<?php if (isset($report[0])) : ?>
-													<a href="<?= site_url('coach/coachee/session/report/show/' . $session->id . '/' . $coachee->id) ?>" class="btn btn-primary btn-icon-split float-right">
+													<a href="<?= site_url('coach/coachee/session/report/show/' . $session->id . '/' . $coachee->id) ?>" class="btn btn-success btn-icon-split float-right">
 														<span class="icon text-white-50">
 															<i class="fas fa-print"></i>
 														</span>
 														<span class="text">Cetak Laporan</span>
 													</a>
 												<?php else : ?>
-													<a href="<?= site_url('coach/coachee/session/report/create/' . $session->id . '/' . $coachee->id) ?>" class="btn btn-info btn-icon-split float-right">
+													<a href="<?= site_url('coach/coachee/session/report/create/' . $session->id . '/' . $coachee->id) ?>" class="btn btn-warning btn-icon-split float-right">
 														<span class="icon text-white-50">
 															<i class="fas fa-print"></i>
 														</span>

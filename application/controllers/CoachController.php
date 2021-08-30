@@ -103,6 +103,7 @@ class CoachController extends CI_Controller
 	 */
 	public function showSessionData($sessionID, $coacheeID)
 	{
+
 		$data['page_name'] = 'Data Sesi';
 		$data['session']   = $this->CoachModel->getSessionByID($sessionID);
 		$data['penilaian'] = $this->CoachModel->getPenilaianBySessionID($sessionID);
@@ -193,6 +194,7 @@ class CoachController extends CI_Controller
 
 	public function saveMilestone()
 	{
+
 		$milestone['coach_id']    = $this->session->userdata('id');
 		$milestone['coachee_id']  = $this->input->post('coachee_id');
 		$milestone['session_id'] = $this->input->post('session_id');
@@ -202,17 +204,12 @@ class CoachController extends CI_Controller
 
 		$this->CoachModel->saveMilestone($milestone);
 		$this->session->set_flashdata('milestone', 'Berhasil Menambahkan Milestone');
-		redirect('coach/coachee/session/show/' . $milestone['goals_id'] . '/' . $milestone['session_id']);
+		redirect('coach/coachee/session/show/' . $milestone['session_id'] . '/' . $milestone['coachee_id']);
 	}
 
 	public function createReport($sessionID, $coacheeID)
 	{
 		$data['checkReport'] = $this->CoachModel->checkReport($sessionID);
-
-		if ($data['checkReport'] > 0) {
-			$this->session->set_flashdata('report', 'ada');
-			redirect('coach/coachee/session/show' . $sessionID);
-		}
 
 		$data['session']    = $this->CoachModel->getSessionByID($sessionID);
 		$data['penilaian_sesi']  = $this->CoachModel->getPenilaianBySessionID($sessionID);
@@ -229,7 +226,8 @@ class CoachController extends CI_Controller
 			$data['notes'][$i] = $this->CoachModel->getNotesByGoalsID($data['goals'][$i]->id);
 		}
 		for ($i = 0; $i < count($data['goals']); $i++) {
-			$data['milestone'][$i] = $this->CoachModel->getMilestoneByGoalsID($data['goals'][$i]->id);
+			$where = ['session_id' => $data['session']->id, 'goals_id' => $data['goals'][$i]->id];
+			$data['milestone'][$i] = $this->CoachModel->getMilestoneWhere($where);
 		}
 
 		$report['session'] = json_encode($data['session']);
@@ -243,9 +241,12 @@ class CoachController extends CI_Controller
 		$report['milestone'] = json_encode($data['milestone']);
 		$report['session_id'] = $data['session']->id;
 
+		// var_dump($data);
+		// var_dump($report);
+		// die();
 		$this->session->set_flashdata('report', 'berhasil');
 		$this->CoachModel->saveReport($report);
-		return redirect('coach/coachee/session/show/' . $report['session_id']);
+		redirect('coach/coachee/session/show/' . $report['session_id'] . '/' . $coacheeID);
 	}
 
 

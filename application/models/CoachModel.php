@@ -196,6 +196,11 @@ class CoachModel extends CI_Model
 		return $this->db->where('goals_id', $goalsID)->get('milestone')->result();
 	}
 
+	public function getMilestoneWhere($where)
+	{
+		return $this->db->where($where)->get('milestone')->result();
+	}
+
 	public function getPenilaianBySessionID($sessionID)
 	{
 		return $this->db->where('session_id', $sessionID)->get('penilaian_sesi')->row();
