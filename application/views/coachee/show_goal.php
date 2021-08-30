@@ -29,8 +29,11 @@
 					<div class="container-fluid">
 
 						<!-- Page Heading -->
-						<h1 class="h3 mb-4 text-gray-800">Goal : <?= $goal->goal ?></h1>
-						<h1 class="h3 mb-4 text-gray-800">Status Goal : <?= $goal->status ?></h1>
+						<h1 class="h3 mb-4 text-gray-800">
+							Goal : <?= $goal->goal ?>
+							<br>
+							<span class="badge badge-pill badge-success">Goal Selesai</span>
+						</h1>
 						<!-- DataTales Example -->
 						<div class="card shadow mb-4">
 							<div class="card-header py-3">
@@ -134,8 +137,11 @@
 					<div class="container-fluid">
 
 						<!-- Page Heading -->
-						<h1 class="h3 mb-4 text-gray-800">Goal : <?= $goal->goal ?></h1>
-						<h1 class="h3 mb-4 text-gray-800">Status Goal : <?= $goal->status ?></h1>
+						<h1 class="h3 mb-4 text-gray-800">
+							Goal : <?= $goal->goal ?>
+							<br>
+							<span class="badge badge-pill badge-secondary">Goal Belum Selesai</span>
+						</h1>
 						<!-- DataTales Example -->
 						<div class="card shadow mb-4">
 							<div class="card-header py-3">
