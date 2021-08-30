@@ -146,15 +146,11 @@ class CoachController extends CI_Controller
 
 		$coachID = $this->session->userdata('id');
 
-		$data['checkPenilaian']  = $this->CoachModel->checkPenilaianBySessionID($sessionID);
 		$data['session']         = $this->CoachModel->getSessionByID($sessionID);
 		$data['coachee']         = $this->CoachModel->getCoacheeByID($coacheeId);
 		$data['coach']           = $this->CoachModel->getCoachByID($coachID);
 
-		if ($data['checkPenilaian'] > 0) {
-			$this->session->set_flashdata('penilaian', 'ada');
-			redirect('coach/coachee/session/' . $coacheeId);
-		}
+
 
 		$this->load->view('coach/penilaian', $data, FALSE);
 	}

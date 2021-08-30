@@ -161,11 +161,6 @@ class CoachModel extends CI_Model
 		return $this->db->insert('penilaian_sesi', $penilaian);
 	}
 
-	public function checkPenilaianBySessionID($sessionID)
-	{
-		return $this->db->where('session_id', $sessionID)->get('penilaian_sesi')->num_rows();
-	}
-
 	public function saveMilestone($milestone)
 	{
 		return $this->db->insert('milestone', $milestone);
