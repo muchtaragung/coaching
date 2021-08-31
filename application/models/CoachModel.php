@@ -191,6 +191,44 @@ class CoachModel extends CI_Model
 		return $this->db->where('goals_id', $goalsID)->get('notes')->result();
 	}
 
+	/**
+	 * menghapus notes berdasarkan id
+	 * parameter pertama adalah id notes 
+	 */
+	public function deleteNotes($notesID)
+	{
+		return $this->db->where('id', $notesID)->delete('notes');
+	}
+
+	/**
+	 * menghapus notes berdasarkan id
+	 * parameter pertama adalah id notes 
+	 */
+	public function deleteNotesByGoalID($goalID)
+	{
+		return $this->db->where('goals_id', $goalID)->delete('notes');
+	}
+
+	/**
+	 * mengambil data notes sesuai id
+	 * parameter pertama adalah notes id
+	 * mengembalikan data dalam bentuk object
+	 */
+	public function getNotesByID($notesID)
+	{
+		return $this->db->where('id', $notesID)->get('notes')->row();
+	}
+
+	/**
+	 * mengupdate notes bedrasarkan notes id
+	 * parameter pertama adalah notes id 
+	 * parameter kedua data yang akan di masukkan dalam bentuk array
+	 */
+	public function updateNotes($notesID, $notes)
+	{
+		return $this->db->where('id', $notesID)->update('notes', $notes);
+	}
+
 	public function getMilestoneByGoalsID($goalsID)
 	{
 		return $this->db->where('goals_id', $goalsID)->get('milestone')->result();

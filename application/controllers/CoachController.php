@@ -142,6 +142,34 @@ class CoachController extends CI_Controller
 		redirect('coach/coachee/goal/' . $notes['goals_id']);
 	}
 
+	public function deleteNotes($notesID, $goalID)
+	{
+		$this->session->set_flashdata('notes', 'Berhasil Menghapus Notes');
+		$this->CoachModel->deleteNotes($notesID);
+		redirect('coach/coachee/goal/' . $goalID);
+	}
+
+	public function editNotes($notesID)
+	{
+		$data['page_name'] = 'Edit Notes';
+		$data['note']      = $this->CoachModel->getNotesByID($notesID);
+
+		$this->load->view('coach/notes/edit', $data);
+	}
+
+	public function updateNotes()
+	{
+		$notes['comment'] = $this->input->post('comment');
+		$notes['result']  = $this->input->post('result');
+
+		$notesID = $this->input->post('id');
+		$goalID  = $this->input->post('goals_id');
+
+		$this->session->set_flashdata('notes', 'Notes Berhasil di ubah');
+		$this->CoachModel->updateNotes($notesID, $notes);
+		redirect('coach/coachee/goal/' . $goalID);
+	}
+
 	public function penilaianSesi($sessionID, $coacheeId)
 	{
 		$data['page_name'] = 'Penilaian Sesi';
