@@ -29,6 +29,8 @@ class CoachController extends CI_Controller
 		$data['page_name'] = "Dashboard Coach";
 		$data['coachee'] = $this->CoachModel->getCoacheeByCompanyAndCoachID($CompanyID, $this->session->userdata('id'));
 		$data['company_id'] = $CompanyID;
+		$data['link'] = site_url('coach');
+
 		$this->load->view('coach/coachee/list', $data, FALSE);
 	}
 
@@ -58,7 +60,8 @@ class CoachController extends CI_Controller
 		$data['sessions'] = $this->CoachModel->getCoacheeSession($coacheeID);
 		$data['page_name'] = "Coachee Session";
 		$data['coachee_id'] = $coacheeID;
-
+		$data['coachee'] = $this->CoachModel->getCoacheeByID($coacheeID);
+		$data['link'] = site_url('coach/coachee/list/' . $data['coachee']->company_id);
 
 		$this->load->view('coach/coachee/sessions', $data, FALSE);
 	}
@@ -129,6 +132,8 @@ class CoachController extends CI_Controller
 		$data['actions']   = $this->CoachModel->actionPlanByGoalID($goalID);
 		$data['criteria']  = $this->CoachModel->getCriteria($goalID);
 		$data['notes']     = $this->CoachModel->getGoalsNotes($data['goal']->id);
+		$data['coachee']   = $this->CoachModel->getCoacheeByID($data['goal']->coachee_id);
+		$data['link'] = site_url('coach/coachee/' . $data['coachee']->company_id);
 
 		$this->load->view('coach/coachee/goal', $data, FALSE);
 	}
