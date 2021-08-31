@@ -33,7 +33,40 @@
 					</div>
 
 					<div class="row">
-
+						<div class="col-xl-7 col-md-8 col-sm-12 mb-4">
+							<div class="card border-left-primary shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+												<h4>
+													Data Penilaian Milestone
+												</h4>
+											</div>
+											<br>
+											<div class="h5 mb-0 font-weight-bold ">List Goal</div>
+											<br>
+											<table class="table">
+												<?php foreach ($goals as $goal) : ?>
+													<tr class="h5 mb-0 text-gray-700">
+														<td class="">
+															<?= $goal->goal ?>
+															<br>
+															<?php if ($goal->status == 'selesai') : ?>
+																<span class="badge badge-pill badge-success">Selesai</span>
+															<?php else : ?>
+																<span class="badge badge-pill badge-secondary">Belum Selesai</span>
+															<?php endif ?>
+														</td>
+														<td><a href="<?= site_url('coach/coachee/session/milestone/add/' . $goal->id . '/' . $session->id) ?>" class="btn btn-sm btn-primary">Milestone</a></td>
+													</tr>
+												<?php endforeach ?>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 						<!-- Earnings (Monthly) Card Example -->
 						<div class="col-xl-5 col-md-8 col-sm-12 mb-4">
 							<div class="card border-left-primary shadow h-100 py-2">
@@ -102,40 +135,6 @@
 							</div>
 						</div>
 
-						<div class="col-xl-7 col-md-8 col-sm-12 mb-4">
-							<div class="card border-left-primary shadow h-100 py-2">
-								<div class="card-body">
-									<div class="row no-gutters align-items-center">
-										<div class="col mr-2">
-											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												<h4>
-													Data Penilaian Milestone
-												</h4>
-											</div>
-											<br>
-											<div class="h5 mb-0 font-weight-bold ">List Goal</div>
-											<br>
-											<table class="table">
-												<?php foreach ($goals as $goal) : ?>
-													<tr class="h5 mb-0 text-gray-700">
-														<td class="">
-															<?= $goal->goal ?>
-															<br>
-															<?php if ($goal->status == 'selesai') : ?>
-																<span class="badge badge-pill badge-success">Selesai</span>
-															<?php else : ?>
-																<span class="badge badge-pill badge-secondary">Belum Selesai</span>
-															<?php endif ?>
-														</td>
-														<td><a href="<?= site_url('coach/coachee/session/milestone/add/' . $goal->id . '/' . $session->id) ?>" class="btn btn-sm btn-primary">Milestone</a></td>
-													</tr>
-												<?php endforeach ?>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
 
 				</div>
