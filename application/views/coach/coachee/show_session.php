@@ -29,7 +29,15 @@
 
 					<!-- Page Heading -->
 					<div class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Data Hasil Penilaian Sesi</h1>
+						<h1 class="h3 mb-0 text-gray-800 float-left">Data Hasil Penilaian Sesi</h1>
+						<?php if (isset($report[0])) : ?>
+							<a href="<?= site_url('coach/coachee/session/report/show/' . $session->id . '/' . $coachee->id) ?>" class="btn btn-success btn-icon-split float-right">
+								<span class="icon text-white-50">
+									<i class="fas fa-print"></i>
+								</span>
+								<span class="text">Cetak Laporan</span>
+							</a>
+						<?php endif ?>
 					</div>
 
 					<div class="row">
@@ -67,6 +75,7 @@
 								</div>
 							</div>
 						</div>
+
 						<!-- Earnings (Monthly) Card Example -->
 						<div class="col-xl-5 col-md-8 col-sm-12 mb-4">
 							<div class="card border-left-primary shadow h-100 py-2">
@@ -113,14 +122,7 @@
 													</tr>
 												</table>
 												<br>
-												<?php if (isset($report[0])) : ?>
-													<a href="<?= site_url('coach/coachee/session/report/show/' . $session->id . '/' . $coachee->id) ?>" class="btn btn-success btn-icon-split float-right">
-														<span class="icon text-white-50">
-															<i class="fas fa-print"></i>
-														</span>
-														<span class="text">Cetak Laporan</span>
-													</a>
-												<?php else : ?>
+												<?php if (!isset($report[0])) : ?>
 													<a href="<?= site_url('coach/coachee/session/report/create/' . $session->id . '/' . $coachee->id) ?>" class="btn btn-warning btn-icon-split float-right">
 														<span class="icon text-white-50">
 															<i class="fas fa-print"></i>
