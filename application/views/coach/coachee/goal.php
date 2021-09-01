@@ -71,9 +71,11 @@
 													<td> <?php if ($action->result == 'butuh waktu lama') { ?> <h2>✓</h2> <?php } ?></td>
 												</form>
 												<td>
-													<button onclick=" confirmReset('<?= site_url('coachee/reset-action/') . $action->id . '/' . $goal->id ?>')" class="btn btn-sm btn-info">Reset</button>
-													<button onclick=" location.replace('<?= site_url('coachee/edit-action/') . $action->id ?>')" class="btn btn-sm btn-primary">Edit</button>
-													<button onclick=" confirmDelete('<?= site_url('coachee/delete-action/' . $action->id . '/' . $goal->id) ?>', 'Action Plan')" class="btn btn-sm btn-danger">Hapus</button>
+													<?php if ($action->result != null) : ?>
+														<button onclick=" confirmReset('<?= site_url('coach/coachee/reset-action/') . $action->id . '/' . $goal->id ?>')" class="btn btn-sm btn-info">Reset</button>
+													<?php endif ?>
+													<button onclick=" location.replace('<?= site_url('coach/coachee/edit-action/') . $action->id ?>')" class="btn btn-sm btn-primary">Edit</button>
+													<button onclick=" confirmDelete('<?= site_url('coach/coachee/delete-action/' . $action->id . '/' . $goal->id) ?>', 'Action Plan')" class="btn btn-sm btn-danger">Hapus</button>
 												</td>
 											</tr>
 										<?php endforeach ?>

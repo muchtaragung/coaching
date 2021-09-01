@@ -133,6 +133,53 @@ class CoachController extends CI_Controller
 		$this->load->view('coach/coachee/goal', $data, FALSE);
 	}
 
+	public function resetAction($actionID, $goalID)
+	{
+		$action['result'] = null;
+		$this->session->set_flashdata('action', 'Berhasil Mereset Action');
+		$this->CoachModel->resetAction($actionID, $action);
+		redirect('coach/coachee/goal/' . $goalID);
+	}
+
+	/**
+	 * Menggedit data action PLan
+	 *
+	 * @param [int] $actionID
+	 * @return void
+	 */
+	public function editAction($actionID)
+	{
+		$data['action'] = $this->CoachModel->getActionByID($actionID);
+
+		$this->load->view('coach/action/edit', $data);
+	}
+
+	/**
+	 * mengupdate data aksi
+	 *
+	 * @return void
+	 */
+	public function updateAction()
+	{
+		$ActionID = $this->input->post('id');
+		$goalID   = $this->input->post('goal_id');
+
+		$action['action'] = $this->input->post('action');
+		$action['result'] = $this->input->post('result');
+
+		$this->session->set_flashdata('action', 'Action Plan Berhasil Di Hapus');
+		$this->CoachModel->updateAction($ActionID, $action);
+		redirect('coach/coachee/goal/' . $goalID);
+	}
+
+	public function deleteAction($actionID, $goalID)
+	{
+		$this->session->set_flashdata('action', 'Berhasil Menghapus Action');
+		$this->CoachModel->deleteAction($actionID);
+
+		redirect('coachee/goal/' . $goalID);
+	}
+
 	public function addNotes()
 	{
 		$notes['comment']  = $this->input->post('comment');

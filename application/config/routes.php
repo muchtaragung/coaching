@@ -92,6 +92,12 @@ $route['coach/coachee/notes/delete/(:num)/(:num)'] = 'CoachController/deleteNote
 $route['coach/coachee/notes/edit/(:num)'] = 'CoachController/editNotes/$1';
 $route['coach/coachee/notes/update'] = 'CoachController/updateNotes';
 
+// coachee acrtion
+$route['coach/coachee/reset-action/(:num)/(:num)'] = 'CoachController/resetAction/$1/$2';
+$route['coach/coachee/delete-action/(:num)/(:num)'] = 'CoachController/deleteAction/$1/$2';
+$route['coach/coachee/edit-action/(:num)'] = 'CoachController/editAction/$1';
+$route['coach/coachee/update-action'] = 'CoachController/updateAction';
+
 // coachee routes
 $route['coachee']                 = 'CoacheeController';
 

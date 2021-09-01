@@ -181,6 +181,48 @@ class CoachModel extends CI_Model
 		return $this->db->where('goals_id', $goalsID)->get('action_plan')->result();
 	}
 
+	/**
+	 * mengambil data action plan sesuai id
+	 *
+	 * @param [int] $actionID
+	 * @return row()
+	 */
+	public function getActionByID($actionID)
+	{
+		return $this->db->where('id', $actionID)->get('action_plan')->row();
+	}
+
+	/**
+	 * mengupdate action plan
+	 *
+	 * @param [int] $actionID
+	 * @param [int] $action
+	 * @return void
+	 */
+	public function updateAction($actionID, $action)
+	{
+		return $this->db->where('id', $actionID)->update('action_plan', $action);
+	}
+
+	/**
+	 * mereset result dari action plan
+	 * parameter pertama adalah id action plan
+	 * parameter kedua adalah data result dalam betuk array
+	 */
+	public function resetAction($actionID, $action)
+	{
+		return $this->db->where('id', $actionID)->update('action_plan', $action);
+	}
+
+	/**
+	 * menghapus action plan
+	 * parameter pertama adalah id action plan
+	 */
+	public function deleteAction($actionID)
+	{
+		return $this->db->where('id', $actionID)->delete('action_plan');
+	}
+
 	public function getCriteriaByGoalsID($goalsID)
 	{
 		return $this->db->where('goals_id', $goalsID)->get('criteria')->result();
