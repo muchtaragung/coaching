@@ -116,9 +116,13 @@ class CoachModel extends CI_Model
 		return $this->db->where('id', $id)->get('goals')->row();
 	}
 
-	public function getGoalsByCoacheeID($coacheeID)
+	public function getGoalsByCoacheeID($coacheeID, $type = '')
 	{
-		return $this->db->where('coachee_id', $coacheeID)->get('goals')->result();
+		if ($type == 'array') {
+			return $this->db->where('coachee_id', $coacheeID)->get('goals')->result_array();
+		} else {
+			return $this->db->where('coachee_id', $coacheeID)->get('goals')->result();
+		}
 	}
 
 	public function cancelGoal($goalID, $goal)
@@ -179,6 +183,11 @@ class CoachModel extends CI_Model
 	public function getCompany()
 	{
 		return $this->db->get('company')->result();
+	}
+
+	public function getCompanyByID($CompanyID)
+	{
+		return $this->db->where('id', $CompanyID)->get('company')->row();
 	}
 
 	public function getActionByGoalsID($goalsID)
@@ -281,6 +290,11 @@ class CoachModel extends CI_Model
 		return $this->db->where('goals_id', $goalsID)->get('milestone')->result();
 	}
 
+	public function getMilestoneByGoalID($goalsID)
+	{
+		return $this->db->where('goals_id', $goalsID)->get('milestone')->result();
+	}
+
 	public function getMilestoneWhere($where)
 	{
 		return $this->db->where($where)->get('milestone')->result();
@@ -289,6 +303,11 @@ class CoachModel extends CI_Model
 	public function getPenilaianBySessionID($sessionID)
 	{
 		return $this->db->where('session_id', $sessionID)->get('penilaian_sesi')->row();
+	}
+
+	public function getPenilaianByCoacheeID($coacheeID)
+	{
+		return $this->db->where('coachee_id', $coacheeID)->get('penilaian_sesi')->result();
 	}
 
 	public function saveReport($report)

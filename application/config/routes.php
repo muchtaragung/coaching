@@ -62,6 +62,8 @@ $route['logout'] = 'AuthController/logout';
 $route['coach']                                   = 'CoachController';
 $route['coach/addcoachee']                        = 'CoachController/addCoachee';
 $route['coach/coachee/list/(:num)']               = 'CoachController/showCoacheeByCompanyID/$1';
+$route['coach/coachee/show/(:num)']               = 'CoachController/detailCoachee/$1';
+
 $route['coach/coachee/(:num)']                    = 'CoachController/showCoacheeGoals/$1';
 $route['coach/coachee/goal/(:num)']               = 'CoachController/ShowCoacheGoal/$1';
 $route['coach/coachee/note/add']                  = 'CoachController/addNotes';

@@ -32,6 +32,23 @@ class CoachController extends CI_Controller
 		$this->load->view('coach/coachee/list', $data, FALSE);
 	}
 
+	public function detailCoachee($coacheeID)
+	{
+		$data['page_name'] = 'Detail Coachee';
+		$data['coachee'] = $this->CoachModel->getCoacheeByID($coacheeID);
+		$data['company'] = $this->CoachModel->getCompanyByID($data['coachee']->company_id);
+		// $data['session'] = $this->CoachModel->getSessionByCoacheeID($coacheeID);
+		$data['history_penilaian'] = $this->CoachModel->getPenilaianByCoacheeID($coacheeID);
+		$data['goals'] = $this->CoachModel->getGoalsByCoacheeID($coacheeID, 'array');
+
+		foreach ($data['goals'] as $goal) {
+			$data['history_milestone'][] = $this->CoachModel->getMilestoneByGoalID($goal['id']);
+		}
+
+		// var_dump($data);
+		$this->load->view('coach/coachee/detail', $data);
+	}
+
 	public function addCoachee()
 	{
 		$id = $this->input->post('id');

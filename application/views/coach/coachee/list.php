@@ -61,6 +61,7 @@
 												<td><?= $coachee->email ?></td>
 												<td>
 													<a href="<?= site_url('coach/coachee/session/') . $coachee->id ?>" class="btn btn-primary">Lihat Sesi</a>
+													<a href="<?= site_url('coach/coachee/show/') . $coachee->id ?>" class="btn btn-primary">Lihat Detail</a>
 												</td>
 											</tr>
 										<?php endforeach ?>
