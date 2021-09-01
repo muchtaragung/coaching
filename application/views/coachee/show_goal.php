@@ -217,7 +217,11 @@
 															<td><input type="radio" name="result" id="" value="tidak berhasil"></td>
 															<td><input type="radio" name="result" id="" value="butuh waktu lama"></td>
 															<?php if ($goal->status == 'belum selesai') : ?>
-																<td><button type="submit" class="btn btn-sm btn-primary">Submit</button></td>
+																<td>
+																	<button type="submit" class="btn btn-sm btn-primary">Submit</button>
+																	<button onclick=" location.replace('<?= site_url('coachee/edit-action/') . $action->id ?>')" class="btn btn-sm btn-primary">Edit</button>
+																	<button onclick=" confirmDelete('<?= site_url('coachee/delete-action/' . $action->id . '/' . $goal->id) ?>', 'Action Plan')" class="btn btn-sm btn-danger">Hapus</button>
+																</td>
 															<?php endif ?>
 														</form>
 													<?php else : ?>
