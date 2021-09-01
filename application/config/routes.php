@@ -68,40 +68,52 @@ $route['coach/coachee/note/add']                  = 'CoachController/addNotes';
 $route['coach/coachee/goal/milestone/add/(:num)'] = 'CoachController/addMilestone/$1';
 $route['coach/coachee/goal/milestone/save']       = 'CoachController/saveMilestone';
 
-
 // coachee session
 $route['coach/coachee/session/(:num)']                      = 'CoachController/showCoacheeSessions/$1';
-$route['coach/coachee/session/show/(:num)/(:num)']          = 'CoachController/showSessionData/$1/$2';
 $route['coach/coachee/session/new/(:num)']                  = 'CoachController/addSession/$1';
 $route['coach/coachee/session/start/(:num)/(:num)']         = 'CoachController/startSession/$1/$2';
 $route['coach/coachee/session/end/(:num)/(:num)']           = 'CoachController/endSession/$1/$2';
+
+// coachee penilaian 
+$route['coach/coachee/session/show/(:num)/(:num)']          = 'CoachController/showSessionData/$1/$2';
 $route['coach/coachee/session/penilaian/(:num)/(:num)']     = 'CoachController/penilaianSesi/$1/$2';
 $route['coach/coachee/session/save-penilaian']              = 'CoachController/savePenilaian';
+
+// coachee milestone
 $route['coach/coachee/session/milestone/add/(:num)/(:num)'] = 'CoachController/addMilestone/$1/$2';
 $route['coach/coachee/session/milestone/save']              = 'CoachController/saveMilestone';
+
 // report
 $route['coach/coachee/session/report/create/(:num)/(:num)'] = 'CoachController/createReport/$1/$2';
 $route['coach/coachee/session/report/show/(:num)/(:num)'] = 'CoachController/showReport/$1/$2';
 
+// notes
 $route['coach/coachee/notes/delete/(:num)/(:num)'] = 'CoachController/deleteNotes/$1/$2';
 $route['coach/coachee/notes/edit/(:num)'] = 'CoachController/editNotes/$1';
 $route['coach/coachee/notes/update'] = 'CoachController/updateNotes';
 
 // coachee routes
 $route['coachee']                 = 'CoacheeController';
+
+// goals
 $route['coachee/goals']           = 'CoacheeController/allGoals';
 $route['coachee/addgoal']         = 'CoacheeController/addGoal';
 $route['coachee/goal/(:num)']     = 'CoacheeController/showGoal/$1';
-$route['coachee/addaction']       = 'CoacheeController/addActionPlan';
-$route['coachee/addcriteria']     = 'CoacheeController/addCriteria';
-$route['coachee/saveResult']      = 'CoacheeController/updateResult';
 $route['coachee/endGoal/(:num)']  = 'CoacheeController/endGoal/$1';
-$route['coachee/update-criteria'] = 'CoacheeController/updateCriteria/$1';
 
+// action plan
+$route['coachee/addaction']       = 'CoacheeController/addActionPlan';
 $route['coachee/reset-action/(:num)/(:num)'] = 'CoacheeController/resetAction/$1/$2';
 $route['coachee/delete-action/(:num)/(:num)'] = 'CoacheeController/deleteAction/$1/$2';
 $route['coachee/edit-action/(:num)'] = 'CoacheeController/editAction/$1';
 $route['coachee/update-action'] = 'CoacheeController/updateAction';
+
+// criteria
+$route['coachee/addcriteria']     = 'CoacheeController/addCriteria';
+$route['coachee/update-criteria'] = 'CoacheeController/updateCriteria/$1';
+
+// result
+$route['coachee/saveResult']      = 'CoacheeController/updateResult';
 
 $route['coachee/report/show/(:num)'] = 'CoacheeController/showReport/$1';
 
