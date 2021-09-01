@@ -133,6 +133,14 @@ class CoachController extends CI_Controller
 		$this->load->view('coach/coachee/goal', $data, FALSE);
 	}
 
+	public function cancelGoal($goalID)
+	{
+		$goal['status'] = 'belum selesai';
+		$this->session->set_flashdata('goal', 'Berhasil Membatalkan status "Selesai" Goal');
+		$this->CoachModel->cancelGoal($goalID, $goal);
+		redirect('coach/coachee/goal/' . $goalID);
+	}
+
 	public function resetAction($actionID, $goalID)
 	{
 		$action['result'] = null;

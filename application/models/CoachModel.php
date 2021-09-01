@@ -121,6 +121,11 @@ class CoachModel extends CI_Model
 		return $this->db->where('coachee_id', $coacheeID)->get('goals')->result();
 	}
 
+	public function cancelGoal($goalID, $goal)
+	{
+		return $this->db->where('id', $goalID)->update('goals', $goal);
+	}
+
 	public function actionPlanByGoalID($id)
 	{
 		return $this->db->where('goals_id', $id)->get('action_plan')->result();

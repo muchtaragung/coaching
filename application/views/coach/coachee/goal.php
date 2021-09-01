@@ -42,6 +42,9 @@
 						<div class="card-header py-3">
 							<h4 class="m-0 font-weight-bold text-primary float-left">Success Criteria : <?= $criteria->criteria ?></h4>
 							<a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#addNote">Tambah Notes</a>
+							<?php if ($goal->status == 'selesai') : ?>
+								<button onclick=" confirmCancel('<?= site_url('coach/coachee/goal/cancel/' . $goal->id) ?>')" class="btn btn-danger float-right mr-2">Batalkan Selesai Goal</button>
+							<?php endif ?>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -265,6 +268,16 @@
 		</script>
 	<?php endif ?>
 
+	<?php if ($this->session->flashdata('goal')) : ?>
+		<script>
+			Swal.fire(
+				'Berhasil',
+				'<?= $this->session->flashdata('goal') ?>',
+				'success'
+			)
+		</script>
+	<?php endif ?>
+
 	<script>
 		function confirmDelete(link, category) {
 			Swal.fire({
@@ -284,6 +297,21 @@
 		function confirmReset(link) {
 			Swal.fire({
 				title: 'Apakah Anda Ingin Mereset Resultnya',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					window.location.replace(link)
+				}
+			})
+		}
+
+		function confirmCancel(link) {
+			Swal.fire({
+				title: 'Apakah anda ingin membatalkan status "Selesai" goal ini?',
 				icon: 'warning',
 				showCancelButton: true,
 				confirmButtonColor: '#3085d6',
