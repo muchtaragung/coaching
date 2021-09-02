@@ -78,7 +78,7 @@
 														<button onclick=" confirmReset('<?= site_url('coach/coachee/reset-action/') . $action->id . '/' . $goal->id ?>')" class="btn btn-sm btn-info">Reset</button>
 													<?php endif ?>
 													<button onclick=" location.replace('<?= site_url('coach/coachee/edit-action/') . $action->id ?>')" class="btn btn-sm btn-primary">Edit</button>
-													<a onclick="confirmDelete('<?= site_url('coach/coachee/delete-action/' . $action->id . '/' . $goal->id) ?>','action plan')">Hapus</a>
+													<a class="btn btn-sm btn-danger" onclick="confirmDelete('<?= site_url('coach/coachee/delete-action/' . $action->id . '/' . $goal->id) ?>','action plan')">Hapus</a>
 												</td>
 											</tr>
 										<?php endforeach ?>
