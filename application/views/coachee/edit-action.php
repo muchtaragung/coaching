@@ -48,6 +48,7 @@
                                 <div class="form-group">
                                     <label for="">status</label>
                                     <select id="select2" name="result" id="" class="form-control">
+                                        <option value=""></option>
                                         <option value="berhasil" <?php if ($action->result == 'berhasil') : ?> selected <?php endif ?>>Berhasil</option>
                                         <option value="tidak berhasil" <?php if ($action->result == 'tidak berhasil') : ?> selected <?php endif ?>>Tidak Berhasil</option>
                                         <option value="butuh waktu lama" <?php if ($action->result == 'butuh waktu lama') : ?> selected <?php endif ?>>Butuh Waktu Lama</option>
