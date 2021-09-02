@@ -60,23 +60,23 @@
 											<label for="" class="col">10</label>
 										</div>
 										<div class="row">
-											<input type="radio" name="milestone" value="1" class="col">
-											<input type="radio" name="milestone" value="2" class="col">
-											<input type="radio" name="milestone" value="3" class="col">
-											<input type="radio" name="milestone" value="4" class="col">
-											<input type="radio" name="milestone" value="5" class="col">
-											<input type="radio" name="milestone" value="6" class="col">
-											<input type="radio" name="milestone" value="7" class="col">
-											<input type="radio" name="milestone" value="8" class="col">
-											<input type="radio" name="milestone" value="9" class="col">
-											<input type="radio" name="milestone" value="10" class="col">
+											<input type="radio" name="milestone" value="1" class="col" required>
+											<input type="radio" name="milestone" value="2" class="col" required>
+											<input type="radio" name="milestone" value="3" class="col" required>
+											<input type="radio" name="milestone" value="4" class="col" required>
+											<input type="radio" name="milestone" value="5" class="col" required>
+											<input type="radio" name="milestone" value="6" class="col" required>
+											<input type="radio" name="milestone" value="7" class="col" required>
+											<input type="radio" name="milestone" value="8" class="col" required>
+											<input type="radio" name="milestone" value="9" class="col" required>
+											<input type="radio" name="milestone" value="10" class="col" required>
 										</div>
 									</div>
 								</div>
 
 								<div class="form-group">
 									<label for="">Keterangan</label>
-									<textarea name="keterangan" id="" cols="30" rows="10" class="form-control"></textarea>
+									<textarea name="keterangan" id="" cols="30" rows="10" class="form-control" required></textarea>
 								</div>
 
 								<div class="form-group">
