@@ -60,10 +60,7 @@
 												<td> <?= $coachee->name ?> </td>
 												<td><?= $coachee->email ?></td>
 												<td>
-													<a href="<?= site_url('admin/coachee/edit/') . $coachee->id ?>" class="btn btn-primary">edit Data</a>
-													<button onclick=" confirmDelete('<?= site_url('admin/coachee/delete/') . $coachee->id ?>')" class="btn btn-danger">Hapus Peserta</button>
-													<a href="<?= site_url('admin/coachee/goal/list/') . $coachee->id ?>" class="btn btn-primary">Lihat Goal</a>
-													<a href="<?= site_url('admin/coachee/session/list/') . $coachee->id ?>" class="btn btn-primary">Lihat Sesi</a>
+													<a href="<?= site_url('admin/coachee/detail/') . $coachee->id ?>" class="btn btn-primary">Detail Coachee</a>
 												</td>
 											</tr>
 										<?php endforeach ?>
@@ -156,22 +153,7 @@
 		</script>
 	<?php endif ?>
 
-	<script>
-		function confirmDelete(link) {
-			Swal.fire({
-				title: 'Apakah Anda Ingin Menghapus Coachee',
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
-				confirmButtonText: 'Ya'
-			}).then((result) => {
-				if (result.isConfirmed) {
-					window.location.replace(link)
-				}
-			})
-		}
-	</script>
+
 </body>
 
 </html>

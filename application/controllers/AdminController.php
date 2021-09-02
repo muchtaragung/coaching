@@ -211,6 +211,23 @@ class AdminController extends CI_Controller
 		$this->load->view('admin/coachee/list', $data);
 	}
 
+	public function detailCoachee($coacheeID)
+	{
+		$data['page_name'] = 'Detail Coachee';
+		$data['coachee'] = $this->AdminModel->getCoacheeByID($coacheeID);
+		$data['company'] = $this->AdminModel->getCompanyByID($data['coachee']->company_id);
+		// $data['session'] = $this->AdminModel->getSessionByCoacheeID($coacheeID);
+		$data['history_penilaian'] = $this->AdminModel->getPenilaianByCoacheeID($coacheeID);
+		$data['goals'] = $this->AdminModel->getGoalsByCoacheeID($coacheeID, 'array');
+
+		foreach ($data['goals'] as $goal) {
+			$data['history_milestone'][] = $this->AdminModel->getMilestoneByGoalID($goal['id']);
+		}
+
+		// var_dump($data);
+		$this->load->view('admin/coachee/detail', $data);
+	}
+
 	public function saveCoachee()
 	{
 		$this->checkAuth();
