@@ -61,7 +61,7 @@
 												<td> <?= $goal->due_date ?> </td>
 												<td>
 													<a href="<?= site_url('admin/coachee/goal/show/') . $goal->id ?>" class="btn btn-primary">Lihat Goal</a>
-													<a href="<?= site_url('admin/coachee/milestone/show/') . $goal->id ?>" class="btn btn-primary">Lihat Milestone</a>
+													<a href="<?= site_url('admin/coachee/milestone/detail/') . $goal->id ?>" class="btn btn-primary">Detail Milestone</a>
 													<a href="<?= site_url('admin/coachee/goal/edit/') . $goal->id ?>" class="btn btn-primary">Edit Goal</a>
 													<a href="<?= site_url('admin/coachee/goal/delete/') . $goal->id ?>" class="btn btn-danger">Delete Goal</a>
 													<button onclick=" confirmDelete('<?= site_url('admin/coachee/goal/delete/') . $goal->id ?>')" class="btn btn-danger">Hapus Goal</button>

@@ -497,6 +497,17 @@ class AdminController extends CI_Controller
 		$this->load->view('admin/milestone/show', $data);
 	}
 
+	public function detailMilestone($goalID)
+	{
+		$data['page_name']         = 'Detail Milestone';
+		$data['goal']              = $this->AdminModel->getGoalByID($goalID);
+		// $data['session']           = $this->AdminModel->getSessionByID($sessionID);
+		$data['history_milestone'] = $this->AdminModel->getMilestoneByGoalID($goalID);
+
+		var_dump($data);
+		$this->load->view('admin/milestone/detail', $data);
+	}
+
 	public function deleteMilestone($milestoneID, $goalID)
 	{
 		$this->checkAuth();
