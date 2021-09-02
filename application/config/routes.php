@@ -84,8 +84,9 @@ $route['coach/coachee/session/penilaian/(:num)/(:num)']     = 'CoachController/p
 $route['coach/coachee/session/save-penilaian']              = 'CoachController/savePenilaian';
 
 // coachee milestone
-$route['coach/coachee/session/milestone/add/(:num)/(:num)'] = 'CoachController/addMilestone/$1/$2';
-$route['coach/coachee/session/milestone/save']              = 'CoachController/saveMilestone';
+$route['coach/coachee/session/milestone/add/(:num)/(:num)']    = 'CoachController/addMilestone/$1/$2';
+$route['coach/coachee/session/milestone/detail/(:num)/(:num)'] = 'CoachController/detailMilestone/$1/$2';
+$route['coach/coachee/session/milestone/save']                 = 'CoachController/saveMilestone';
 
 // report
 $route['coach/coachee/session/report/create/(:num)/(:num)'] = 'CoachController/createReport/$1/$2';

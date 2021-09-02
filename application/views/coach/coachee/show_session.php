@@ -66,7 +66,7 @@
 																<span class="badge badge-pill badge-secondary">Belum Selesai</span>
 															<?php endif ?>
 														</td>
-														<td><a href="<?= site_url('coach/coachee/session/milestone/add/' . $goal->id . '/' . $session->id) ?>" class="btn btn-sm btn-primary">Milestone</a></td>
+														<td><a href="<?= site_url('coach/coachee/session/milestone/detail/' . $goal->id . '/' . $session->id) ?>" class="btn btn-sm btn-primary">Detail Milestone</a></td>
 													</tr>
 												<?php endforeach ?>
 											</table>

@@ -307,6 +307,20 @@ class CoachController extends CI_Controller
 		redirect('coach/coachee/session/show/' . $milestone['session_id'] . '/' . $milestone['coachee_id']);
 	}
 
+	public function detailMilestone($goalID, $sessionID)
+	{
+		$data['page_name']         = 'Detail Milestone';
+		$data['goal']              = $this->CoachModel->goalByID($goalID);
+		$data['session']           = $this->CoachModel->getSessionByID($sessionID);
+		$data['history_milestone'] = $this->CoachModel->getMilestoneByGoalID($goalID);
+
+		$where = ['goals_id' => $goalID, 'session_id' => $sessionID];
+		$data['milestone']         = $this->CoachModel->getMilestoneWhere($where);
+
+		// var_dump($data);
+		$this->load->view('coach/milestone/detail', $data);
+	}
+
 	public function createReport($sessionID, $coacheeID)
 	{
 		$data['checkReport'] = $this->CoachModel->checkReport($sessionID);
