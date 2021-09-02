@@ -220,7 +220,7 @@
 																<td>
 																	<button type="submit" class="btn btn-sm btn-primary">Submit</button>
 																	<button onclick=" location.replace('<?= site_url('coachee/edit-action/') . $action->id ?>')" class="btn btn-sm btn-primary">Edit</button>
-																	<button onclick=" confirmDelete('<?= site_url('coachee/delete-action/' . $action->id . '/' . $goal->id) ?>', 'Action Plan')" class="btn btn-sm btn-danger">Hapus</button>
+																	<a onclick=" confirmDelete('<?= site_url('coachee/delete-action/' . $action->id . '/' . $goal->id) ?>', 'Action Plan')" class="btn btn-sm btn-danger">Hapus</a>
 																</td>
 															<?php endif ?>
 														</form>
