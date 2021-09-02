@@ -195,10 +195,8 @@
                             <?= $penilaian->komunikasi ?>,
                         <?php endforeach ?>
                     ],
-                    backgroundColor: [
-                        'rgb(54, 162, 235)',
-                    ],
-                    borderWidth: 1
+                    borderColor: 'rgb(78, 114, 223)',
+                    borderWidth: 4
                 }]
             },
             options: {
@@ -225,10 +223,8 @@
                             <?= $penilaian->kehadiran ?>,
                         <?php endforeach ?>
                     ],
-                    backgroundColor: [
-                        'rgb(54, 162, 235)',
-                    ],
-                    borderWidth: 1
+                    borderColor: 'rgb(78, 114, 223)',
+                    borderWidth: 4
                 }]
             },
             options: {
@@ -255,10 +251,8 @@
                             <?= $penilaian->effort ?>,
                         <?php endforeach ?>
                     ],
-                    backgroundColor: [
-                        'rgb(54, 162, 235)',
-                    ],
-                    borderWidth: 1
+                    borderColor: 'rgb(78, 114, 223)',
+                    borderWidth: 4
                 }]
             },
             options: {
@@ -285,10 +279,8 @@
                             <?= $penilaian->komitment ?>,
                         <?php endforeach ?>
                     ],
-                    backgroundColor: [
-                        'rgb(54, 162, 235)',
-                    ],
-                    borderWidth: 1
+                    borderColor: 'rgb(78, 114, 223)',
+                    borderWidth: 4
                 }]
             },
             options: {
@@ -318,10 +310,8 @@
                                 <?= $milestone->milestone ?>,
                             <?php endforeach ?>
                         ],
-                        backgroundColor: [
-                            'rgb(54, 162, 235)',
-                        ],
-                        borderWidth: 1
+                        borderColor: 'rgb(78, 114, 223)',
+                        borderWidth: 4
                     }]
                 },
                 options: {

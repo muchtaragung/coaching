@@ -139,10 +139,13 @@
                             <?= $milestone->milestone ?>,
                         <?php endforeach ?>
                     ],
-                    backgroundColor: [
-                        'rgb(54, 162, 235)',
-                    ],
-                    borderWidth: 1
+                    // backgroundColor: [
+                    //     'rgb(54, 162, 235)',
+                    // ],
+                    borderColor: 'rgb(78, 114, 223)',
+                    borderWidth: 1,
+                    tension: 0,
+                    borderWidth: 4
                 }]
             },
             options: {
