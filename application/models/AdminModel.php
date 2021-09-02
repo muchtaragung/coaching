@@ -435,6 +435,11 @@ class AdminModel extends CI_Model
 		return $this->db->where('goals_id', $goalsID)->get('milestone')->result();
 	}
 
+	public function getMilestoneByID($milestoneID)
+	{
+		return $this->db->where('id', $milestoneID)->get('milestone')->row();
+	}
+
 	/**
 	 * menghapus milestone 
 	 * parameter pertama milestone id
@@ -451,6 +456,11 @@ class AdminModel extends CI_Model
 	public function deleteMilestoneByGoalID($goalID)
 	{
 		return $this->db->where('goals_id', $goalID)->delete('milestone');
+	}
+
+	public function updateMilestone($milestoneID, $milestone)
+	{
+		return $this->db->where('id', $milestoneID)->update('milestone', $milestone);
 	}
 
 	/**

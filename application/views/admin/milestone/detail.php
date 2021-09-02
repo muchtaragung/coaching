@@ -68,6 +68,12 @@
                                                         <td><?= $milestone->keterangan ?></td>
                                                     </tr>
                                                 </table>
+
+                                                <button onclick="confirmDelete('<?= site_url('admin/coachee/milestone/delete/' . $milestone->id . '/' . $milestone->goals_id) ?>','Penilaian')" class="btn btn-danger">
+                                                    Hapus Milestone
+                                                </button>
+
+                                                <a href="<?= site_url('admin/coachee/milestone/edit/' . $milestone->id) ?>" class="btn btn-info">Edit Milestone</a>
                                             </div>
                                         </div>
                                     </div>

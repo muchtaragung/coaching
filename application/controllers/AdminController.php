@@ -499,12 +499,13 @@ class AdminController extends CI_Controller
 
 	public function detailMilestone($goalID)
 	{
+		$this->checkAuth();
 		$data['page_name']         = 'Detail Milestone';
 		$data['goal']              = $this->AdminModel->getGoalByID($goalID);
 		// $data['session']           = $this->AdminModel->getSessionByID($sessionID);
 		$data['history_milestone'] = $this->AdminModel->getMilestoneByGoalID($goalID);
 
-		var_dump($data);
+		// var_dump($data);
 		$this->load->view('admin/milestone/detail', $data);
 	}
 
@@ -514,6 +515,29 @@ class AdminController extends CI_Controller
 		$this->session->set_flashdata('milestone', 'Milestone Berhasil Dihapus');
 		$this->AdminModel->deleteMilestone($milestoneID);
 		redirect('admin/coachee/milestone/show/' . $goalID);
+	}
+
+	public function editMilestone($milestoneID)
+	{
+		$this->checkAuth();
+		$data['page_name'] = 'edit milestone';
+		$data['milestone'] = $this->AdminModel->getMilestoneByID($milestoneID);
+
+		// var_dump($data);
+		$this->load->view('admin/milestone/edit', $data);
+	}
+
+	public function updateMilestone()
+	{
+		$this->checkAuth();
+		$milestoneID = $this->input->post('milestone_id');
+		$goalID = $this->input->post('goals_id');
+		$milestone['milestone'] = $this->input->post('milestone');
+		$milestone['keterangan'] = $this->input->post('keterangan');
+
+		$this->session->set_flashdata('milestone', 'Berhasil Mengupdate Milestone');
+		$this->AdminModel->updateMilestone($milestoneID, $milestone);
+		redirect('admin/coachee/milestone/detail/' . $goalID);
 	}
 
 	public function sessionList($coacheeID)
