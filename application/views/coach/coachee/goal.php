@@ -31,6 +31,8 @@
 					<h1 class="h3 mb-4 text-gray-800">
 						Goal : <?= $goal->goal ?>
 						<br>
+						Due Date : <?= $goal->due_date ?>
+						<br>
 						<?php if ($goal->status == 'selesai') : ?>
 							<span class="badge badge-pill badge-success">Goal Selesai</span>
 						<?php else : ?>

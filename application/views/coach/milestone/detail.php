@@ -29,7 +29,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800 float-left">Detail Coachee</h1>
+                        <h1 class="h3 mb-0 text-gray-800 float-left">Detail Milestone</h1>
                     </div>
 
                     <div class="row">

@@ -77,7 +77,7 @@
                         <div class="col-lg-6">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Komunikasi Chart</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Komunikasi Dan Respon Sebelum Coaching</h6>
                                 </div>
                                 <div class="card-body">
                                     <canvas id="komunikasiChart"></canvas>
@@ -87,7 +87,7 @@
                         <div class="col-lg-6">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">kehadiran Chart</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Kehadiran Tiap Sesi</h6>
                                 </div>
                                 <div class="card-body">
                                     <canvas id="kehadiranChart"></canvas>
@@ -97,7 +97,7 @@
                         <div class="col-lg-6">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">effort Chart</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Effort Proses Coaching</h6>
                                 </div>
                                 <div class="card-body">
                                     <canvas id="effortChart"></canvas>
@@ -107,7 +107,7 @@
                         <div class="col-lg-6">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">komitment Chart</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Komitment Melakukan Action Plans</h6>
                                 </div>
                                 <div class="card-body">
                                     <canvas id="komitmentChart"></canvas>
@@ -118,7 +118,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800 float-left">Penilaian Persesi</h1>
+                        <h1 class="h3 mb-0 text-gray-800 float-left">Milestone Goal</h1>
                     </div>
 
                     <div class="row">
