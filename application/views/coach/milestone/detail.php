@@ -56,7 +56,7 @@
                                                     Milestone belum ada
                                                 </div>
                                                 <br>
-                                                <a href="" class="btn btn-success">Tambah Milestone</a>
+                                                <a href="<?= site_url('coach/coachee/session/milestone/add/' . $goal->id . '/' . $session->id) ?>" class="btn btn-success">Tambah Milestone</a>
                                             <?php else : ?>
                                                 <table class="h6 text-dark">
                                                     <tr>
@@ -155,6 +155,15 @@
         });
     </script>
 
+    <?php if ($this->session->flashdata('milestone')) : ?>
+        <script>
+            Swal.fire(
+                'Berhasil',
+                '<?= $this->session->flashdata('milestone') ?>',
+                'success'
+            )
+        </script>
+    <?php endif ?>
 </body>
 
 

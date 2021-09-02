@@ -283,11 +283,6 @@ class CoachController extends CI_Controller
 		$where = ['goals_id' => $goalID, 'session_id' => $sessionID];
 		$data['checkMilestone'] = $this->CoachModel->checkMilestone($where);
 
-		// jika ada milestonenya maka tidak bisa tambah milestone lagi
-		if ($data['checkMilestone'] > 0) {
-			$this->session->set_flashdata('milestone', 'Milestone Sudah Ada');
-			redirect('coach/coachee/session/show/' . $sessionID . '/' . $data['coachee']->id);
-		}
 
 		$this->load->view('coach/milestone', $data);
 	}
@@ -304,7 +299,7 @@ class CoachController extends CI_Controller
 
 		$this->CoachModel->saveMilestone($milestone);
 		$this->session->set_flashdata('milestone', 'Berhasil Menambahkan Milestone');
-		redirect('coach/coachee/session/show/' . $milestone['session_id'] . '/' . $milestone['coachee_id']);
+		redirect('coach/coachee/session/milestone/detail/' . $milestone['goals_id'] . '/' . $milestone['session_id']);
 	}
 
 	public function detailMilestone($goalID, $sessionID)

@@ -172,14 +172,7 @@
 		</script>
 	<?php endif ?>
 
-	<?php if ($this->session->flashdata('milestone')) : ?>
-		<script>
-			Swal.fire(
-				'',
-				'<?= $this->session->flashdata('milestone') ?>',
-			)
-		</script>
-	<?php endif ?>
+
 </body>
 
 
