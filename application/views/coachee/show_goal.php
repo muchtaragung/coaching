@@ -221,7 +221,7 @@
 															<?php if ($goal->status == 'belum selesai') : ?>
 																<td>
 																	<button type="submit" class="btn btn-sm btn-primary">Submit</button>
-																	<button onclick=" location.replace('<?= site_url('coachee/edit-action/') . $action->id ?>')" class="btn btn-sm btn-primary">Edit</button>
+																	<a onclick=" location.replace('<?= site_url('coachee/edit-action/') . $action->id ?>')" class="btn btn-sm btn-primary">Edit</a>
 																	<a class="btn btn-sm btn-danger" onclick=" confirmDelete('<?= site_url('coachee/delete-action/' . $action->id . '/' . $goal->id) ?>', 'Action Plan')">Hapus</a>
 																</td>
 															<?php endif ?>
@@ -232,7 +232,7 @@
 														<td> <?php if ($action->result == 'butuh waktu lama') { ?> <h2>✓</h2> <?php } ?></td>
 														<td>
 															<button onclick=" confirmReset('<?= site_url('coachee/reset-action/') . $action->id . '/' . $goal->id ?>')" class="btn btn-sm btn-info">Reset</button>
-															<button onclick=" location.replace('<?= site_url('coachee/edit-action/') . $action->id ?>')" class="btn btn-sm btn-primary">Edit</button>
+															<a onclick=" location.replace('<?= site_url('coachee/edit-action/') . $action->id ?>')" class="btn btn-sm btn-primary">Edit</a>
 															<button class="btn btn-sm btn-danger" onclick=" confirmDelete('<?= site_url('coachee/delete-action/' . $action->id . '/' . $goal->id) ?>', 'Action Plan')">Hapus</button>
 														</td>
 													<?php endif ?>
