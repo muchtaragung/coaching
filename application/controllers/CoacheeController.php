@@ -177,7 +177,6 @@ class CoacheeController extends CI_Controller
 
 	public function showReport($sessionID)
 	{
-		$this->checkStatus();
 		$data['checkReport'] = $this->CoacheeModel->checkReport($sessionID);
 
 		if ($data['checkReport'] == 0) {
