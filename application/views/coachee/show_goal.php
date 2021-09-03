@@ -142,6 +142,8 @@
 						<h1 class="h3 mb-4 text-gray-800">
 							Goal : <?= $goal->goal ?>
 							<br>
+							Due Date : <?= $goal->due_date ?>
+							<br>
 							<span class="badge badge-pill badge-secondary">Goal Belum Selesai</span>
 						</h1>
 						<!-- DataTales Example -->
