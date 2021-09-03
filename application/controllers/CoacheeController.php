@@ -208,7 +208,6 @@ class CoacheeController extends CI_Controller
 	//profile
 	public function profile()
 	{
-		$this->checkStatus();
 		$data['page_name'] = 'Profile Coachee';
 		// $data['coachs']     = $this->AdminModel->getAllCoach();
 
@@ -216,7 +215,6 @@ class CoacheeController extends CI_Controller
 	}
 	public function update_password()
 	{
-		$this->checkStatus();
 		$this->form_validation->set_rules('password', 'Password', 'required', array('required' => 'Password tidak boleh kosong!'));
 		$this->form_validation->set_rules('password_baru', 'Password', 'required', array('required' => 'Password tidak boleh kosong!'));
 		$this->form_validation->set_rules('repassword', 'Password', 'required|matches[password_baru]', array(
