@@ -222,7 +222,7 @@
 																<td>
 																	<button type="submit" class="btn btn-sm btn-primary">Submit</button>
 																	<a onclick=" location.replace('<?= site_url('coachee/edit-action/') . $action->id ?>')" class="btn btn-sm btn-primary">Edit</a>
-																	<a class="btn btn-sm btn-danger" onclick=" confirmDelete('<?= site_url('coachee/delete-action/' . $action->id . '/' . $goal->id) ?>', 'Action Plan')">Hapus</a>
+																	<!-- <a class="btn btn-sm btn-danger" onclick=" confirmDelete('<?= site_url('coachee/delete-action/' . $action->id . '/' . $goal->id) ?>', 'Action Plan')">Hapus</a> -->
 																</td>
 															<?php endif ?>
 														</form>
@@ -233,7 +233,7 @@
 														<td>
 															<button onclick=" confirmReset('<?= site_url('coachee/reset-action/') . $action->id . '/' . $goal->id ?>')" class="btn btn-sm btn-info">Reset</button>
 															<a onclick=" location.replace('<?= site_url('coachee/edit-action/') . $action->id ?>')" class="btn btn-sm btn-primary">Edit</a>
-															<button class="btn btn-sm btn-danger" onclick=" confirmDelete('<?= site_url('coachee/delete-action/' . $action->id . '/' . $goal->id) ?>', 'Action Plan')">Hapus</button>
+															<!-- <button class="btn btn-sm btn-danger" onclick=" confirmDelete('<?= site_url('coachee/delete-action/' . $action->id . '/' . $goal->id) ?>', 'Action Plan')">Hapus</button> -->
 														</td>
 													<?php endif ?>
 												</tr>
