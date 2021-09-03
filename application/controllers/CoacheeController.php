@@ -8,11 +8,21 @@ class CoacheeController extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('CoacheeModel');
+
 		if ($this->session->userdata('login') != 'coachee') {
 			echo '<script>alert("Silahkan Login Untuk Mengakses Halaman ini")</script>';
 			redirect('login', 'refresh');
 		}
 		$this->load->library('pdf');
+	}
+
+	public function checkStatus()
+	{
+		$coachee_data = $this->CoacheeModel->getCoacheeByID($this->session->userdata('id'));
+		if ($coachee_data->status == 0) {
+			echo '<script>alert("Sesi Anda Belum Di Mulai")</script>';
+			redirect('coachee', 'refresh');
+		}
 	}
 
 	public function index()
@@ -24,6 +34,7 @@ class CoacheeController extends CI_Controller
 
 	public function allGoals()
 	{
+		$this->checkStatus();
 		$data['page_name'] = 'coachee dashboard';
 		$data['goals'] = $this->CoacheeModel->allGoalsByID($this->session->userdata('id'));
 		$this->load->view('coachee/goals', $data, FALSE);
@@ -31,6 +42,7 @@ class CoacheeController extends CI_Controller
 
 	public function addgoal()
 	{
+		$this->checkStatus();
 		$data['page_name'] = 'Goal Baru';
 		$goal['goal'] = $this->input->post('goal');
 		$goal['due_date'] = $this->input->post('due_date');
@@ -43,6 +55,7 @@ class CoacheeController extends CI_Controller
 
 	public function showGoal($id)
 	{
+		$this->checkStatus();
 		$data['page_name'] = 'Your Goals';
 		$data['goal'] = $this->CoacheeModel->goalByID($id);
 		$data['actions'] = $this->CoacheeModel->actionPlanByGoalID($id);
@@ -58,6 +71,7 @@ class CoacheeController extends CI_Controller
 
 	public function addActionPlan()
 	{
+		$this->checkStatus();
 		$action_plan['action'] = $this->input->post('action');
 		$action_plan['result']  = null;
 		$action_plan['goals_id'] = $this->input->post('goals_id');
@@ -69,6 +83,7 @@ class CoacheeController extends CI_Controller
 
 	public function addCriteria()
 	{
+		$this->checkStatus();
 		$criteria['criteria'] = $this->input->post('criteria');
 		$criteria['goals_id'] = $this->input->post('goals_id');
 
@@ -79,6 +94,7 @@ class CoacheeController extends CI_Controller
 
 	public function updateCriteria()
 	{
+		$this->checkStatus();
 		$criteria['criteria'] = $this->input->post('criteria');
 		$id = $this->input->post('criteria_id');
 		$goalID = $this->input->post('goals_id');
@@ -90,6 +106,7 @@ class CoacheeController extends CI_Controller
 
 	public function updateResult()
 	{
+		$this->checkStatus();
 		$id = $this->input->post('id');
 		$goalsID = $this->input->post('goals_id');
 		$action['result'] = $this->input->post('result');
@@ -100,6 +117,7 @@ class CoacheeController extends CI_Controller
 
 	public function endGoal($goalID)
 	{
+		$this->checkStatus();
 		$goal['status'] = 'selesai';
 
 		$this->CoacheeModel->endGoal($goal, $goalID);
@@ -108,6 +126,7 @@ class CoacheeController extends CI_Controller
 
 	public function resetAction($actionID, $goalID)
 	{
+		$this->checkStatus();
 		$action['result'] = null;
 		$this->session->set_flashdata('action', 'Berhasil Mereset Action');
 		$this->CoacheeModel->resetAction($actionID, $action);
@@ -122,6 +141,7 @@ class CoacheeController extends CI_Controller
 	 */
 	public function editAction($actionID)
 	{
+		$this->checkStatus();
 		$data['action'] = $this->CoacheeModel->getActionByID($actionID);
 
 		$this->load->view('coachee/edit-action', $data);
@@ -134,6 +154,7 @@ class CoacheeController extends CI_Controller
 	 */
 	public function updateAction()
 	{
+		$this->checkStatus();
 		$ActionID = $this->input->post('id');
 		$goalID   = $this->input->post('goal_id');
 
@@ -147,6 +168,7 @@ class CoacheeController extends CI_Controller
 
 	public function deleteAction($actionID, $goalID)
 	{
+		$this->checkStatus();
 		$this->session->set_flashdata('action', 'Berhasil Menghapus Action');
 		$this->CoacheeModel->deleteAction($actionID);
 
@@ -155,6 +177,7 @@ class CoacheeController extends CI_Controller
 
 	public function showReport($sessionID)
 	{
+		$this->checkStatus();
 		$data['checkReport'] = $this->CoacheeModel->checkReport($sessionID);
 
 		if ($data['checkReport'] == 0) {
@@ -185,6 +208,7 @@ class CoacheeController extends CI_Controller
 	//profile
 	public function profile()
 	{
+		$this->checkStatus();
 		$data['page_name'] = 'Profile Coachee';
 		// $data['coachs']     = $this->AdminModel->getAllCoach();
 
@@ -192,6 +216,7 @@ class CoacheeController extends CI_Controller
 	}
 	public function update_password()
 	{
+		$this->checkStatus();
 		$this->form_validation->set_rules('password', 'Password', 'required', array('required' => 'Password tidak boleh kosong!'));
 		$this->form_validation->set_rules('password_baru', 'Password', 'required', array('required' => 'Password tidak boleh kosong!'));
 		$this->form_validation->set_rules('repassword', 'Password', 'required|matches[password_baru]', array(

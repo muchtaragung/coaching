@@ -95,14 +95,17 @@ class CoachModel extends CI_Model
 		return $this->db->insert('session', $session);
 	}
 
-	public function startSession($sessionID, $session)
+	public function startSession($sessionID, $session, $coacheeID)
 	{
-
+		$set = ['status' => 1];
+		$this->db->where('id', $coacheeID)->update('coachee', $set);
 		return $this->db->where('id', $sessionID)->update('session', $session);
 	}
 
-	public function endSession($sessionID, $session)
+	public function endSession($sessionID, $session, $coacheeID)
 	{
+		$set = ['status' => 0];
+		$this->db->where('id', $coacheeID)->update('coachee', $set);
 		return $this->db->where('id', $sessionID)->update('session', $session);
 	}
 

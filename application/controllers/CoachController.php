@@ -98,7 +98,7 @@ class CoachController extends CI_Controller
 	{
 		$sess['status'] = 'belum selesai';
 		$sess['start_time'] = date('Y-m-d H:i:s');
-		$this->CoachModel->startSession($sessionID, $sess);
+		$this->CoachModel->startSession($sessionID, $sess, $coacheeID);
 		redirect('coach/coachee/session/' . $coacheeID);
 	}
 
@@ -107,7 +107,7 @@ class CoachController extends CI_Controller
 		$sess['status'] = 'selesai';
 		$sess['end_time'] = date('Y-m-d H:i:s');
 
-		$this->CoachModel->endSession($sessionID, $sess);
+		$this->CoachModel->endSession($sessionID, $sess, $coacheeID);
 		redirect('coach/coachee/session/' . $coacheeID);
 	}
 
