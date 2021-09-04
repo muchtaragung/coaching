@@ -28,7 +28,7 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
+					<h1 class="h3 mb-4 text-gray-800">List Peserta</h1>
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
@@ -60,7 +60,7 @@
 												<td> <?= $coachee->name ?> </td>
 												<td><?= $coachee->email ?></td>
 												<td>
-													<a href="<?= site_url('coach/coachee/session/') . $coachee->id ?>" class="btn btn-primary">Lihat Sesi</a>
+													<a href="<?= site_url('coach/coachee/show/') . $coachee->id ?>" class="btn btn-primary">Detail Coachee</a>
 												</td>
 											</tr>
 										<?php endforeach ?>

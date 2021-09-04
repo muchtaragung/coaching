@@ -54,11 +54,11 @@
 											<label for="" class="col">5</label>
 										</div>
 										<div class="row">
-											<input type="radio" name="komunikasi" value="1" class="col">
-											<input type="radio" name="komunikasi" value="2" class="col">
-											<input type="radio" name="komunikasi" value="3" class="col">
-											<input type="radio" name="komunikasi" value="4" class="col">
-											<input type="radio" name="komunikasi" value="5" class="col">
+											<input type="radio" name="komunikasi" value="1" class="col" required>
+											<input type="radio" name="komunikasi" value="2" class="col" required>
+											<input type="radio" name="komunikasi" value="3" class="col" required>
+											<input type="radio" name="komunikasi" value="4" class="col" required>
+											<input type="radio" name="komunikasi" value="5" class="col" required>
 										</div>
 									</div>
 								</div>
@@ -76,11 +76,11 @@
 											<label for="" class="col">5</label>
 										</div>
 										<div class="row">
-											<input type="radio" name="kehadiran" value="1" class="col">
-											<input type="radio" name="kehadiran" value="2" class="col">
-											<input type="radio" name="kehadiran" value="3" class="col">
-											<input type="radio" name="kehadiran" value="4" class="col">
-											<input type="radio" name="kehadiran" value="5" class="col">
+											<input type="radio" name="kehadiran" value="1" class="col" required>
+											<input type="radio" name="kehadiran" value="2" class="col" required>
+											<input type="radio" name="kehadiran" value="3" class="col" required>
+											<input type="radio" name="kehadiran" value="4" class="col" required>
+											<input type="radio" name="kehadiran" value="5" class="col" required>
 										</div>
 									</div>
 								</div>
@@ -98,11 +98,11 @@
 											<label for="" class="col">5</label>
 										</div>
 										<div class="row">
-											<input type="radio" name="effort" value="1" class="col">
-											<input type="radio" name="effort" value="2" class="col">
-											<input type="radio" name="effort" value="3" class="col">
-											<input type="radio" name="effort" value="4" class="col">
-											<input type="radio" name="effort" value="5" class="col">
+											<input type="radio" name="effort" value="1" class="col" required>
+											<input type="radio" name="effort" value="2" class="col" required>
+											<input type="radio" name="effort" value="3" class="col" required>
+											<input type="radio" name="effort" value="4" class="col" required>
+											<input type="radio" name="effort" value="5" class="col" required>
 										</div>
 									</div>
 								</div>
@@ -120,11 +120,11 @@
 											<label for="" class="col">5</label>
 										</div>
 										<div class="row">
-											<input type="radio" name="komitment" value="1" class="col">
-											<input type="radio" name="komitment" value="2" class="col">
-											<input type="radio" name="komitment" value="3" class="col">
-											<input type="radio" name="komitment" value="4" class="col">
-											<input type="radio" name="komitment" value="5" class="col">
+											<input type="radio" name="komitment" value="1" class="col" required>
+											<input type="radio" name="komitment" value="2" class="col" required>
+											<input type="radio" name="komitment" value="3" class="col" required>
+											<input type="radio" name="komitment" value="4" class="col" required>
+											<input type="radio" name="komitment" value="5" class="col" required>
 										</div>
 									</div>
 								</div>

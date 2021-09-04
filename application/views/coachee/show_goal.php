@@ -32,6 +32,8 @@
 						<h1 class="h3 mb-4 text-gray-800">
 							Goal : <?= $goal->goal ?>
 							<br>
+							Due Date : <?= $goal->due_date ?>
+							<br>
 							<span class="badge badge-pill badge-success">Goal Selesai</span>
 						</h1>
 						<!-- DataTales Example -->
@@ -140,6 +142,8 @@
 						<h1 class="h3 mb-4 text-gray-800">
 							Goal : <?= $goal->goal ?>
 							<br>
+							Due Date : <?= $goal->due_date ?>
+							<br>
 							<span class="badge badge-pill badge-secondary">Goal Belum Selesai</span>
 						</h1>
 						<!-- DataTales Example -->
@@ -217,7 +221,11 @@
 															<td><input type="radio" name="result" id="" value="tidak berhasil"></td>
 															<td><input type="radio" name="result" id="" value="butuh waktu lama"></td>
 															<?php if ($goal->status == 'belum selesai') : ?>
-																<td><button type="submit" class="btn btn-sm btn-primary">Submit</button></td>
+																<td>
+																	<button type="submit" class="btn btn-sm btn-primary">Submit</button>
+																	<a onclick=" location.replace('<?= site_url('coachee/edit-action/') . $action->id ?>')" class="btn btn-sm btn-primary">Edit</a>
+																	<!-- <a class="btn btn-sm btn-danger" onclick=" confirmDelete('<?= site_url('coachee/delete-action/' . $action->id . '/' . $goal->id) ?>', 'Action Plan')">Hapus</a> -->
+																</td>
 															<?php endif ?>
 														</form>
 													<?php else : ?>
@@ -226,8 +234,8 @@
 														<td> <?php if ($action->result == 'butuh waktu lama') { ?> <h2>✓</h2> <?php } ?></td>
 														<td>
 															<button onclick=" confirmReset('<?= site_url('coachee/reset-action/') . $action->id . '/' . $goal->id ?>')" class="btn btn-sm btn-info">Reset</button>
-															<button onclick=" location.replace('<?= site_url('coachee/edit-action/') . $action->id ?>')" class="btn btn-sm btn-primary">Edit</button>
-															<button onclick=" confirmDelete('<?= site_url('coachee/delete-action/' . $action->id . '/' . $goal->id) ?>', 'Action Plan')" class="btn btn-sm btn-danger">Hapus</button>
+															<a onclick=" location.replace('<?= site_url('coachee/edit-action/') . $action->id ?>')" class="btn btn-sm btn-primary">Edit</a>
+															<!-- <button class="btn btn-sm btn-danger" onclick=" confirmDelete('<?= site_url('coachee/delete-action/' . $action->id . '/' . $goal->id) ?>', 'Action Plan')">Hapus</button> -->
 														</td>
 													<?php endif ?>
 												</tr>

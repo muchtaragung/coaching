@@ -36,7 +36,7 @@
                             <h6 class="m-0 font-weight-bold text-primary">Edit Action Plan</h6>
                         </div>
                         <div class="card-body">
-                            <form action="<?= site_url('coachee/update-action') ?>" method="POST">
+                            <form action="<?= site_url('coach/coachee/update-action') ?>" method="POST">
                                 <div class="form-group">
                                     <input type="hidden" name="id" value="<?= $action->id ?>">
                                     <input type="hidden" name='goal_id' value="<?= $action->goals_id ?>">

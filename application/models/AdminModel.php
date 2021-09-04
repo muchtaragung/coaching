@@ -216,6 +216,22 @@ class AdminModel extends CI_Model
 	}
 
 	/**
+	 * mengambil data goals berdasat id coachee
+	 *
+	 * @param int $coacheeID
+	 * @param string $type
+	 * @return void
+	 */
+	public function getGoalsByCoacheeID($coacheeID, $type = '')
+	{
+		if ($type == 'array') {
+			return $this->db->where('coachee_id', $coacheeID)->get('goals')->result_array();
+		} else {
+			return $this->db->where('coachee_id', $coacheeID)->get('goals')->result();
+		}
+	}
+
+	/**
 	 * mengambil data goal sesuai id
 	 * parameter pertama id dari goal
 	 */
@@ -409,6 +425,22 @@ class AdminModel extends CI_Model
 	}
 
 	/**
+	 * mengambil data milestone dan goal
+	 *
+	 * @param int $goalsID
+	 * @return void
+	 */
+	public function getMilestoneByGoalID($goalsID)
+	{
+		return $this->db->where('goals_id', $goalsID)->get('milestone')->result();
+	}
+
+	public function getMilestoneByID($milestoneID)
+	{
+		return $this->db->where('id', $milestoneID)->get('milestone')->row();
+	}
+
+	/**
 	 * menghapus milestone 
 	 * parameter pertama milestone id
 	 */
@@ -424,6 +456,11 @@ class AdminModel extends CI_Model
 	public function deleteMilestoneByGoalID($goalID)
 	{
 		return $this->db->where('goals_id', $goalID)->delete('milestone');
+	}
+
+	public function updateMilestone($milestoneID, $milestone)
+	{
+		return $this->db->where('id', $milestoneID)->update('milestone', $milestone);
 	}
 
 	/**
@@ -462,6 +499,17 @@ class AdminModel extends CI_Model
 	public function getPenilaianBySessionID($sessionID)
 	{
 		return $this->db->where('session_id', $sessionID)->get('penilaian_sesi')->row();
+	}
+
+	/**
+	 * mengambil data penilaian sesuai id coachee
+	 *
+	 * @param int $coacheeID
+	 * @return result()
+	 */
+	public function getPenilaianByCoacheeID($coacheeID)
+	{
+		return $this->db->where('coachee_id', $coacheeID)->get('penilaian_sesi')->result();
 	}
 
 	/**

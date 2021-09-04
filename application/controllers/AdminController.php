@@ -211,6 +211,23 @@ class AdminController extends CI_Controller
 		$this->load->view('admin/coachee/list', $data);
 	}
 
+	public function detailCoachee($coacheeID)
+	{
+		$data['page_name'] = 'Detail Coachee';
+		$data['coachee'] = $this->AdminModel->getCoacheeByID($coacheeID);
+		$data['company'] = $this->AdminModel->getCompanyByID($data['coachee']->company_id);
+		// $data['session'] = $this->AdminModel->getSessionByCoacheeID($coacheeID);
+		$data['history_penilaian'] = $this->AdminModel->getPenilaianByCoacheeID($coacheeID);
+		$data['goals'] = $this->AdminModel->getGoalsByCoacheeID($coacheeID, 'array');
+
+		foreach ($data['goals'] as $goal) {
+			$data['history_milestone'][] = $this->AdminModel->getMilestoneByGoalID($goal['id']);
+		}
+
+		// var_dump($data);
+		$this->load->view('admin/coachee/detail', $data);
+	}
+
 	public function saveCoachee()
 	{
 		$this->checkAuth();
@@ -436,7 +453,7 @@ class AdminController extends CI_Controller
 		$this->session->set_flashdata('action', 'Berhasil Menghapus Action');
 		$this->AdminModel->deleteAction($actionID);
 
-		// redirect('admin/coachee/goal/show/' . $goalID);
+		redirect('admin/coacshee/goal/show/' . $goalID);
 	}
 
 	public function deleteNotes($notesID, $goalID)
@@ -480,12 +497,47 @@ class AdminController extends CI_Controller
 		$this->load->view('admin/milestone/show', $data);
 	}
 
+	public function detailMilestone($goalID)
+	{
+		$this->checkAuth();
+		$data['page_name']         = 'Detail Milestone';
+		$data['goal']              = $this->AdminModel->getGoalByID($goalID);
+		// $data['session']           = $this->AdminModel->getSessionByID($sessionID);
+		$data['history_milestone'] = $this->AdminModel->getMilestoneByGoalID($goalID);
+
+		// var_dump($data);
+		$this->load->view('admin/milestone/detail', $data);
+	}
+
 	public function deleteMilestone($milestoneID, $goalID)
 	{
 		$this->checkAuth();
 		$this->session->set_flashdata('milestone', 'Milestone Berhasil Dihapus');
 		$this->AdminModel->deleteMilestone($milestoneID);
 		redirect('admin/coachee/milestone/show/' . $goalID);
+	}
+
+	public function editMilestone($milestoneID)
+	{
+		$this->checkAuth();
+		$data['page_name'] = 'edit milestone';
+		$data['milestone'] = $this->AdminModel->getMilestoneByID($milestoneID);
+
+		// var_dump($data);
+		$this->load->view('admin/milestone/edit', $data);
+	}
+
+	public function updateMilestone()
+	{
+		$this->checkAuth();
+		$milestoneID = $this->input->post('milestone_id');
+		$goalID = $this->input->post('goals_id');
+		$milestone['milestone'] = $this->input->post('milestone');
+		$milestone['keterangan'] = $this->input->post('keterangan');
+
+		$this->session->set_flashdata('milestone', 'Berhasil Mengupdate Milestone');
+		$this->AdminModel->updateMilestone($milestoneID, $milestone);
+		redirect('admin/coachee/milestone/detail/' . $goalID);
 	}
 
 	public function sessionList($coacheeID)

@@ -28,7 +28,7 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
+					<h1 class="h3 mb-4 text-gray-800">List Goals</h1>
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
@@ -43,8 +43,8 @@
 										<tr>
 											<th>No</th>
 											<th>Goals</th>
-											<th>Due Date</th>
 											<th>Status</th>
+											<th>Due Date</th>
 											<th>Action</th>
 										</tr>
 									</thead>

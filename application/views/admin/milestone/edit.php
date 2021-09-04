@@ -28,19 +28,18 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">Penilaian Milestone</h1>
+					<h1 class="h3 mb-4 text-gray-800">Edit Milestone</h1>
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h4 class="m-0 font-weight-bold text-primary float-left">Goal : <?= $goal->goal ?></h4>
+							<h4 class="m-0 font-weight-bold text-primary float-left">Edit Milestone</h4>
 						</div>
 						<div class="card-body">
-							<form action="<?= site_url('coach/coachee/goal/milestone/save') ?>" method="POST" class="text-center">
+							<form action="<?= site_url('admin/coachee/milestone/update') ?>" method="POST" class="text-center">
 								<div class="form-group">
-									<input type="hidden" name="coachee_id" value="<?= $coachee->id ?>">
-									<input type="hidden" name="goals_id" value="<?= $goal->id ?>">
-									<input type="hidden" name="session_id" value="<?= $session->id ?>">
+									<input type="hidden" name="milestone_id" value="<?= $milestone->id ?>">
+									<input type="hidden" name="goals_id" value="<?= $milestone->goals_id ?>">
 								</div>
 								<div class="card my-4">
 									<div class="card-header">
@@ -60,23 +59,23 @@
 											<label for="" class="col">10</label>
 										</div>
 										<div class="row">
-											<input type="radio" name="milestone" value="1" class="col" required>
-											<input type="radio" name="milestone" value="2" class="col" required>
-											<input type="radio" name="milestone" value="3" class="col" required>
-											<input type="radio" name="milestone" value="4" class="col" required>
-											<input type="radio" name="milestone" value="5" class="col" required>
-											<input type="radio" name="milestone" value="6" class="col" required>
-											<input type="radio" name="milestone" value="7" class="col" required>
-											<input type="radio" name="milestone" value="8" class="col" required>
-											<input type="radio" name="milestone" value="9" class="col" required>
-											<input type="radio" name="milestone" value="10" class="col" required>
+											<input type="radio" name="milestone" value="1" class="col" <?php if ($milestone->milestone == '1') : ?> checked <?php endif ?> required>
+											<input type="radio" name="milestone" value="2" class="col" <?php if ($milestone->milestone == '2') : ?> checked <?php endif ?> required>
+											<input type="radio" name="milestone" value="3" class="col" <?php if ($milestone->milestone == '3') : ?> checked <?php endif ?> required>
+											<input type="radio" name="milestone" value="4" class="col" <?php if ($milestone->milestone == '4') : ?> checked <?php endif ?> required>
+											<input type="radio" name="milestone" value="5" class="col" <?php if ($milestone->milestone == '5') : ?> checked <?php endif ?> required>
+											<input type="radio" name="milestone" value="6" class="col" <?php if ($milestone->milestone == '6') : ?> checked <?php endif ?> required>
+											<input type="radio" name="milestone" value="7" class="col" <?php if ($milestone->milestone == '7') : ?> checked <?php endif ?> required>
+											<input type="radio" name="milestone" value="8" class="col" <?php if ($milestone->milestone == '8') : ?> checked <?php endif ?> required>
+											<input type="radio" name="milestone" value="9" class="col" <?php if ($milestone->milestone == '9') : ?> checked <?php endif ?> required>
+											<input type="radio" name="milestone" value="10" class="col" <?php if ($milestone->milestone == '10') : ?> checked <?php endif ?> required>
 										</div>
 									</div>
 								</div>
 
 								<div class="form-group">
 									<label for="">Keterangan</label>
-									<textarea name="keterangan" id="" cols="30" rows="10" class="form-control" required></textarea>
+									<textarea name="keterangan" id="" cols="30" rows="10" class="form-control" required><?= $milestone->keterangan ?></textarea>
 								</div>
 
 								<div class="form-group">

@@ -34,6 +34,23 @@ class CoachController extends CI_Controller
 		$this->load->view('coach/coachee/list', $data, FALSE);
 	}
 
+	public function detailCoachee($coacheeID)
+	{
+		$data['page_name'] = 'Detail Coachee';
+		$data['coachee'] = $this->CoachModel->getCoacheeByID($coacheeID);
+		$data['company'] = $this->CoachModel->getCompanyByID($data['coachee']->company_id);
+		// $data['session'] = $this->CoachModel->getSessionByCoacheeID($coacheeID);
+		$data['history_penilaian'] = $this->CoachModel->getPenilaianByCoacheeID($coacheeID);
+		$data['goals'] = $this->CoachModel->getGoalsByCoacheeID($coacheeID, 'array');
+
+		foreach ($data['goals'] as $goal) {
+			$data['history_milestone'][] = $this->CoachModel->getMilestoneByGoalID($goal['id']);
+		}
+
+		// var_dump($data);
+		$this->load->view('coach/coachee/detail', $data);
+	}
+
 	public function addCoachee()
 	{
 		$id = $this->input->post('id');
@@ -84,7 +101,7 @@ class CoachController extends CI_Controller
 	{
 		$sess['status'] = 'belum selesai';
 		$sess['start_time'] = date('Y-m-d H:i:s');
-		$this->CoachModel->startSession($sessionID, $sess);
+		$this->CoachModel->startSession($sessionID, $sess, $coacheeID);
 		redirect('coach/coachee/session/' . $coacheeID);
 	}
 
@@ -93,7 +110,7 @@ class CoachController extends CI_Controller
 		$sess['status'] = 'selesai';
 		$sess['end_time'] = date('Y-m-d H:i:s');
 
-		$this->CoachModel->endSession($sessionID, $sess);
+		$this->CoachModel->endSession($sessionID, $sess, $coacheeID);
 		redirect('coach/coachee/session/' . $coacheeID);
 	}
 
@@ -138,6 +155,61 @@ class CoachController extends CI_Controller
 		$this->load->view('coach/coachee/goal', $data, FALSE);
 	}
 
+	public function cancelGoal($goalID)
+	{
+		$goal['status'] = 'belum selesai';
+		$this->session->set_flashdata('goal', 'Berhasil Membatalkan status "Selesai" Goal');
+		$this->CoachModel->cancelGoal($goalID, $goal);
+		redirect('coach/coachee/goal/' . $goalID);
+	}
+
+	public function resetAction($actionID, $goalID)
+	{
+		$action['result'] = null;
+		$this->session->set_flashdata('action', 'Berhasil Mereset Action');
+		$this->CoachModel->resetAction($actionID, $action);
+		redirect('coach/coachee/goal/' . $goalID);
+	}
+
+	/**
+	 * Menggedit data action PLan
+	 *
+	 * @param [int] $actionID
+	 * @return void
+	 */
+	public function editAction($actionID)
+	{
+		$data['action'] = $this->CoachModel->getActionByID($actionID);
+
+		$this->load->view('coach/action/edit', $data);
+	}
+
+	/**
+	 * mengupdate data aksi
+	 *
+	 * @return void
+	 */
+	public function updateAction()
+	{
+		$ActionID = $this->input->post('id');
+		$goalID   = $this->input->post('goal_id');
+
+		$action['action'] = $this->input->post('action');
+		$action['result'] = $this->input->post('result');
+
+		$this->session->set_flashdata('action', 'Action Plan Berhasil Di Hapus');
+		$this->CoachModel->updateAction($ActionID, $action);
+		redirect('coach/coachee/goal/' . $goalID);
+	}
+
+	public function deleteAction($actionID, $goalID)
+	{
+		$this->session->set_flashdata('action', 'Berhasil Menghapus Action');
+		$this->CoachModel->deleteAction($actionID);
+
+		redirect('coachee/goal/' . $goalID);
+	}
+
 	public function addNotes()
 	{
 		$notes['comment']  = $this->input->post('comment');
@@ -145,6 +217,34 @@ class CoachController extends CI_Controller
 		$notes['goals_id'] = $this->input->post('goals_id');
 		$this->CoachModel->saveGoalsNotes($notes);
 		redirect('coach/coachee/goal/' . $notes['goals_id']);
+	}
+
+	public function deleteNotes($notesID, $goalID)
+	{
+		$this->session->set_flashdata('notes', 'Berhasil Menghapus Notes');
+		$this->CoachModel->deleteNotes($notesID);
+		redirect('coach/coachee/goal/' . $goalID);
+	}
+
+	public function editNotes($notesID)
+	{
+		$data['page_name'] = 'Edit Notes';
+		$data['note']      = $this->CoachModel->getNotesByID($notesID);
+
+		$this->load->view('coach/notes/edit', $data);
+	}
+
+	public function updateNotes()
+	{
+		$notes['comment'] = $this->input->post('comment');
+		$notes['result']  = $this->input->post('result');
+
+		$notesID = $this->input->post('id');
+		$goalID  = $this->input->post('goals_id');
+
+		$this->session->set_flashdata('notes', 'Notes Berhasil di ubah');
+		$this->CoachModel->updateNotes($notesID, $notes);
+		redirect('coach/coachee/goal/' . $goalID);
 	}
 
 	public function penilaianSesi($sessionID, $coacheeId)
@@ -188,11 +288,6 @@ class CoachController extends CI_Controller
 		$where = ['goals_id' => $goalID, 'session_id' => $sessionID];
 		$data['checkMilestone'] = $this->CoachModel->checkMilestone($where);
 
-		// jika ada milestonenya maka tidak bisa tambah milestone lagi
-		if ($data['checkMilestone'] > 0) {
-			$this->session->set_flashdata('milestone', 'Milestone Sudah Ada');
-			redirect('coach/coachee/session/show/' . $sessionID . '/' . $data['coachee']->id);
-		}
 
 		$this->load->view('coach/milestone', $data);
 	}
@@ -209,7 +304,21 @@ class CoachController extends CI_Controller
 
 		$this->CoachModel->saveMilestone($milestone);
 		$this->session->set_flashdata('milestone', 'Berhasil Menambahkan Milestone');
-		redirect('coach/coachee/session/show/' . $milestone['session_id'] . '/' . $milestone['coachee_id']);
+		redirect('coach/coachee/session/milestone/detail/' . $milestone['goals_id'] . '/' . $milestone['session_id']);
+	}
+
+	public function detailMilestone($goalID, $sessionID)
+	{
+		$data['page_name']         = 'Detail Milestone';
+		$data['goal']              = $this->CoachModel->goalByID($goalID);
+		$data['session']           = $this->CoachModel->getSessionByID($sessionID);
+		$data['history_milestone'] = $this->CoachModel->getMilestoneByGoalID($goalID);
+
+		$where = ['goals_id' => $goalID, 'session_id' => $sessionID];
+		$data['milestone']         = $this->CoachModel->getMilestoneWhere($where);
+
+		// var_dump($data);
+		$this->load->view('coach/milestone/detail', $data);
 	}
 
 	public function createReport($sessionID, $coacheeID)

@@ -95,14 +95,17 @@ class CoachModel extends CI_Model
 		return $this->db->insert('session', $session);
 	}
 
-	public function startSession($sessionID, $session)
+	public function startSession($sessionID, $session, $coacheeID)
 	{
-
+		$set = ['status' => 1];
+		$this->db->where('id', $coacheeID)->update('coachee', $set);
 		return $this->db->where('id', $sessionID)->update('session', $session);
 	}
 
-	public function endSession($sessionID, $session)
+	public function endSession($sessionID, $session, $coacheeID)
 	{
+		$set = ['status' => 0];
+		$this->db->where('id', $coacheeID)->update('coachee', $set);
 		return $this->db->where('id', $sessionID)->update('session', $session);
 	}
 
@@ -116,9 +119,18 @@ class CoachModel extends CI_Model
 		return $this->db->where('id', $id)->get('goals')->row();
 	}
 
-	public function getGoalsByCoacheeID($coacheeID)
+	public function getGoalsByCoacheeID($coacheeID, $type = '')
 	{
-		return $this->db->where('coachee_id', $coacheeID)->get('goals')->result();
+		if ($type == 'array') {
+			return $this->db->where('coachee_id', $coacheeID)->get('goals')->result_array();
+		} else {
+			return $this->db->where('coachee_id', $coacheeID)->get('goals')->result();
+		}
+	}
+
+	public function cancelGoal($goalID, $goal)
+	{
+		return $this->db->where('id', $goalID)->update('goals', $goal);
 	}
 
 	public function actionPlanByGoalID($id)
@@ -176,9 +188,56 @@ class CoachModel extends CI_Model
 		return $this->db->get('company')->result();
 	}
 
+	public function getCompanyByID($CompanyID)
+	{
+		return $this->db->where('id', $CompanyID)->get('company')->row();
+	}
+
 	public function getActionByGoalsID($goalsID)
 	{
 		return $this->db->where('goals_id', $goalsID)->get('action_plan')->result();
+	}
+
+	/**
+	 * mengambil data action plan sesuai id
+	 *
+	 * @param [int] $actionID
+	 * @return row()
+	 */
+	public function getActionByID($actionID)
+	{
+		return $this->db->where('id', $actionID)->get('action_plan')->row();
+	}
+
+	/**
+	 * mengupdate action plan
+	 *
+	 * @param [int] $actionID
+	 * @param [int] $action
+	 * @return void
+	 */
+	public function updateAction($actionID, $action)
+	{
+		return $this->db->where('id', $actionID)->update('action_plan', $action);
+	}
+
+	/**
+	 * mereset result dari action plan
+	 * parameter pertama adalah id action plan
+	 * parameter kedua adalah data result dalam betuk array
+	 */
+	public function resetAction($actionID, $action)
+	{
+		return $this->db->where('id', $actionID)->update('action_plan', $action);
+	}
+
+	/**
+	 * menghapus action plan
+	 * parameter pertama adalah id action plan
+	 */
+	public function deleteAction($actionID)
+	{
+		return $this->db->where('id', $actionID)->delete('action_plan');
 	}
 
 	public function getCriteriaByGoalsID($goalsID)
@@ -191,7 +250,50 @@ class CoachModel extends CI_Model
 		return $this->db->where('goals_id', $goalsID)->get('notes')->result();
 	}
 
+	/**
+	 * menghapus notes berdasarkan id
+	 * parameter pertama adalah id notes 
+	 */
+	public function deleteNotes($notesID)
+	{
+		return $this->db->where('id', $notesID)->delete('notes');
+	}
+
+	/**
+	 * menghapus notes berdasarkan id
+	 * parameter pertama adalah id notes 
+	 */
+	public function deleteNotesByGoalID($goalID)
+	{
+		return $this->db->where('goals_id', $goalID)->delete('notes');
+	}
+
+	/**
+	 * mengambil data notes sesuai id
+	 * parameter pertama adalah notes id
+	 * mengembalikan data dalam bentuk object
+	 */
+	public function getNotesByID($notesID)
+	{
+		return $this->db->where('id', $notesID)->get('notes')->row();
+	}
+
+	/**
+	 * mengupdate notes bedrasarkan notes id
+	 * parameter pertama adalah notes id 
+	 * parameter kedua data yang akan di masukkan dalam bentuk array
+	 */
+	public function updateNotes($notesID, $notes)
+	{
+		return $this->db->where('id', $notesID)->update('notes', $notes);
+	}
+
 	public function getMilestoneByGoalsID($goalsID)
+	{
+		return $this->db->where('goals_id', $goalsID)->get('milestone')->result();
+	}
+
+	public function getMilestoneByGoalID($goalsID)
 	{
 		return $this->db->where('goals_id', $goalsID)->get('milestone')->result();
 	}
@@ -204,6 +306,11 @@ class CoachModel extends CI_Model
 	public function getPenilaianBySessionID($sessionID)
 	{
 		return $this->db->where('session_id', $sessionID)->get('penilaian_sesi')->row();
+	}
+
+	public function getPenilaianByCoacheeID($coacheeID)
+	{
+		return $this->db->where('coachee_id', $coacheeID)->get('penilaian_sesi')->result();
 	}
 
 	public function saveReport($report)
