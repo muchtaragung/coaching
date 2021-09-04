@@ -50,7 +50,7 @@ class CoacheeController extends CI_Controller
 
 		$this->session->set_flashdata('goal', 'berhasil');
 		$this->CoacheeModel->storeGoal($goal);
-		redirect('coachee/goals');
+		redirect('coachee/goals', 'refresh');
 	}
 
 	public function showGoal($id)
@@ -130,7 +130,7 @@ class CoacheeController extends CI_Controller
 		$action['result'] = null;
 		$this->session->set_flashdata('action', 'Berhasil Mereset Action');
 		$this->CoacheeModel->resetAction($actionID, $action);
-		redirect('coachee/goal/' . $goalID);
+		redirect('coachee/goal/' . $goalID, 'refresh');
 	}
 
 	/**
@@ -163,7 +163,7 @@ class CoacheeController extends CI_Controller
 
 		$this->session->set_flashdata('action', 'Action Plan Berhasil Di Hapus');
 		$this->CoacheeModel->updateAction($ActionID, $action);
-		redirect('coachee/goal/' . $goalID);
+		redirect('coachee/goal/' . $goalID, 'refresh');
 	}
 
 	public function deleteAction($actionID, $goalID)
@@ -172,7 +172,7 @@ class CoacheeController extends CI_Controller
 		$this->session->set_flashdata('action', 'Berhasil Menghapus Action');
 		$this->CoacheeModel->deleteAction($actionID);
 
-		redirect('coachee/goal/' . $goalID);
+		redirect('coachee/goal/' . $goalID, 'refresh');
 	}
 
 	public function showReport($sessionID)
@@ -181,7 +181,7 @@ class CoacheeController extends CI_Controller
 
 		if ($data['checkReport'] == 0) {
 			$this->session->set_flashdata('report', 'belum ada');
-			redirect('coachee');
+			redirect('coachee', 'refresh');
 		}
 
 		$report = $this->CoacheeModel->getReportBySessionID($sessionID);
@@ -235,10 +235,10 @@ class CoacheeController extends CI_Controller
 				);
 				$this->CoacheeModel->update_password($data, $id);
 				$this->session->set_flashdata('pro', 'Password berhasil diubah.');
-				redirect('coachee/profile');
+				redirect('coachee/profile', 'refresh');
 			} else {
 				$this->session->set_flashdata('error', 'Password yang Anda masukan salah.');
-				redirect('coachee/profile');
+				redirect('coachee/profile', 'refresh');
 			}
 		}
 	}

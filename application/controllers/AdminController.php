@@ -33,17 +33,17 @@ class AdminController extends CI_Controller
 		$cek_login = $this->AdminModel->cek_login_admin($username);
 		if ($cek_login == FALSE) {
 			$this->session->set_flashdata('login failed', 'Username yang Anda masukan tidak terdaftar.');
-			redirect('admin/login');
+			redirect('admin/login', 'refresh');
 		} else {
 			if (password_verify($pass, $cek_login->password)) {
 				$this->session->set_userdata('id', $cek_login->id);
 				$this->session->set_userdata('username', $cek_login->username);
 				$this->session->set_userdata('login', 'admin');
 				$this->session->set_userdata('name', 'admin');
-				redirect('admin');
+				redirect('admin', 'refresh');
 			} else {
 				$this->session->set_flashdata('login failed', 'Username Atau Password Salah');
-				redirect('admin/login');
+				redirect('admin/login', 'refresh');
 			}
 		}
 	}
@@ -77,7 +77,7 @@ class AdminController extends CI_Controller
 		$this->form_validation->set_error_delimiters('<span style="font-size: 10px;color:red">', '</span>');
 		if ($this->form_validation->run() == FALSE) {
 			$this->session->set_flashdata('error', 'Email sudah digunakan');
-			redirect('admin/coach/list');
+			redirect('admin/coach/list', 'refresh');
 		} else {
 			$this->checkAuth();
 			$coach['name'] = $this->input->post('name');
@@ -86,7 +86,7 @@ class AdminController extends CI_Controller
 
 			$this->session->set_flashdata('coach', 'Berhasil Menambahkan Coach');
 			$this->AdminModel->saveCoach($coach);
-			redirect('admin/coach/list');
+			redirect('admin/coach/list', 'refresh');
 		}
 	}
 
@@ -95,7 +95,7 @@ class AdminController extends CI_Controller
 		$this->checkAuth();
 		$this->session->set_flashdata('coach', 'Berhasil Menghapus Coach');
 		$this->AdminModel->deleteCoach($id);
-		redirect('admin/coach/list');
+		redirect('admin/coach/list', 'refresh');
 	}
 
 	public function editCoach($id)
@@ -121,7 +121,7 @@ class AdminController extends CI_Controller
 
 		$this->session->set_flashdata('coach', 'Berhasil Mengubah Data Coach');
 		$this->AdminModel->updateCoach($id, $coach);
-		return redirect('admin/coach/list');
+		return redirect('admin/coach/list', 'refresh');
 	}
 
 
@@ -141,7 +141,7 @@ class AdminController extends CI_Controller
 
 		$this->session->set_flashdata('company', 'Berhasil Menyimpan Data Perusahaan');
 		$this->AdminModel->saveCompany($company);
-		redirect('admin/company/list');
+		redirect('admin/company/list', 'refresh');
 	}
 
 	public function deleteCompany($id)
@@ -176,7 +176,7 @@ class AdminController extends CI_Controller
 		$this->session->set_flashdata('company', 'Berhasil Menghapus Data Perusahaan');
 
 		$this->AdminModel->deleteCompany($id);
-		redirect('admin/company/list');
+		redirect('admin/company/list', 'refresh');
 	}
 
 	public function editCompany($id)
@@ -196,7 +196,7 @@ class AdminController extends CI_Controller
 
 		$this->session->set_flashdata('company', 'Berhasil Mengubah Data Perusahaan');
 		$this->AdminModel->updateCompany($id, $company);
-		return redirect('admin/company/list');
+		return redirect('admin/company/list', 'refresh');
 	}
 
 	public function coacheeList($companyID)
@@ -236,7 +236,7 @@ class AdminController extends CI_Controller
 		$this->form_validation->set_error_delimiters('<span style="font-size: 10px;color:red">', '</span>');
 		if ($this->form_validation->run() == FALSE) {
 			$this->session->set_flashdata('error', 'Email sudah digunakan');
-			redirect('admin/coachee/list/' . $id);
+			redirect('admin/coachee/list/' . $id, 'refresh');
 		} else {
 			$this->checkAuth();
 			$coachee['name']       = $this->input->post('name');
@@ -247,7 +247,7 @@ class AdminController extends CI_Controller
 
 			$this->session->set_flashdata('coachee', 'Berhasil Menyimpan Data Coachee');
 			$this->AdminModel->saveCoachee($coachee);
-			redirect('admin/coachee/list/' . $coachee['company_id']);
+			redirect('admin/coachee/list/' . $coachee['company_id'], 'refresh');
 		}
 	}
 
@@ -279,7 +279,7 @@ class AdminController extends CI_Controller
 			$this->AdminModel->deleteReportBySessionID($sesi->id);
 		}
 
-		redirect('admin/coachee/list/' . $data['coachee']->company_id);
+		redirect('admin/coachee/list/' . $data['coachee']->company_id, 'refresh');
 	}
 
 	public function editCoachee($id)
@@ -309,7 +309,7 @@ class AdminController extends CI_Controller
 
 		$this->session->set_flashdata('coachee', 'Berhasil Mengubah Data Coachee');
 		$this->AdminModel->updatecoachee($id, $coachee);
-		return redirect('admin/coachee/list/' . $coachee['company_id']);
+		return redirect('admin/coachee/list/' . $coachee['company_id'], 'refresh');
 	}
 
 	public function goalList($coacheeID)
@@ -336,7 +336,7 @@ class AdminController extends CI_Controller
 		$this->AdminModel->deleteNotesByGoalID($goalID);
 		$this->AdminModel->deleteMilestoneByGoalID($goalID);
 
-		redirect('admin/coachee/goal/list/' . $data['coachee']->id);
+		redirect('admin/coachee/goal/list/' . $data['coachee']->id, 'refresh');
 	}
 
 	public function editGoal($goalID)
@@ -359,7 +359,7 @@ class AdminController extends CI_Controller
 
 		$this->session->set_flashdata('goal', 'Berhasil Mengupdate Goal');
 		$this->AdminModel->updateGoal($goalID, $goal);
-		redirect('admin/coachee/goal/list/' . $coacheeID);
+		redirect('admin/coachee/goal/list/' . $coacheeID, 'refresh');
 	}
 
 	public function showGoal($goalID)
@@ -381,7 +381,7 @@ class AdminController extends CI_Controller
 
 		$this->session->set_flashdata('criteria', 'Berhasil Menyimpan Criteria');
 		$this->AdminModel->saveCriteria($criteria);
-		redirect('admin/coachee/goal/show/' . $criteria['goals_id']);
+		redirect('admin/coachee/goal/show/' . $criteria['goals_id'], 'refresh');
 	}
 
 	public function updateCriteria()
@@ -393,7 +393,7 @@ class AdminController extends CI_Controller
 
 		$this->session->set_flashdata('criteria', 'Berhasil Mengupdate Criteria');
 		$this->AdminModel->updateCriteria($criteriaID, $criteria);
-		redirect('admin/coachee/goal/show/' . $goalID);
+		redirect('admin/coachee/goal/show/' . $goalID, 'refresh');
 	}
 
 	public function deleteCriteria($criteriaID, $goalID)
@@ -401,7 +401,7 @@ class AdminController extends CI_Controller
 		$this->checkAuth();
 		$this->session->set_flashdata('criteria', 'Berhasil Menghapus Criteria');
 		$this->AdminModel->deleteCriteria($criteriaID);
-		redirect('admin/coachee/goal/show/' . $goalID);
+		redirect('admin/coachee/goal/show/' . $goalID, 'refresh');
 	}
 
 	public function resetAction($actionID, $goalID)
@@ -410,7 +410,7 @@ class AdminController extends CI_Controller
 		$action['result'] = null;
 		$this->session->set_flashdata('action', 'Berhasil Mereset Action');
 		$this->AdminModel->resetAction($actionID, $action);
-		redirect('admin/coachee/goal/show/' . $goalID);
+		redirect('admin/coachee/goal/show/' . $goalID, 'refresh');
 	}
 
 	/**
@@ -444,7 +444,7 @@ class AdminController extends CI_Controller
 
 		$this->session->set_flashdata('action', 'Action Plan Berhasil Di Hapus');
 		$this->AdminModel->updateAction($ActionID, $action);
-		redirect('admin/coachee/goal/show/' . $goalID);
+		redirect('admin/coachee/goal/show/' . $goalID, 'refresh');
 	}
 
 	public function deleteAction($actionID, $goalID)
@@ -453,7 +453,7 @@ class AdminController extends CI_Controller
 		$this->session->set_flashdata('action', 'Berhasil Menghapus Action');
 		$this->AdminModel->deleteAction($actionID);
 
-		redirect('admin/coacshee/goal/show/' . $goalID);
+		redirect('admin/coacshee/goal/show/' . $goalID, 'refresh');
 	}
 
 	public function deleteNotes($notesID, $goalID)
@@ -461,7 +461,7 @@ class AdminController extends CI_Controller
 		$this->checkAuth();
 		$this->session->set_flashdata('notes', 'Berhasil Menghapus Notes');
 		$this->AdminModel->deleteNotes($notesID);
-		redirect('admin/coachee/goal/show/' . $goalID);
+		redirect('admin/coachee/goal/show/' . $goalID, 'refresh');
 	}
 
 	public function editNotes($notesID)
@@ -484,7 +484,7 @@ class AdminController extends CI_Controller
 
 		$this->session->set_flashdata('notes', 'Notes Berhasil di ubah');
 		$this->AdminModel->updateNotes($notesID, $notes);
-		redirect('admin/coachee/goal/show/' . $goalID);
+		redirect('admin/coachee/goal/show/' . $goalID, 'refresh');
 	}
 
 	public function showMilestone($goalID)
@@ -514,7 +514,7 @@ class AdminController extends CI_Controller
 		$this->checkAuth();
 		$this->session->set_flashdata('milestone', 'Milestone Berhasil Dihapus');
 		$this->AdminModel->deleteMilestone($milestoneID);
-		redirect('admin/coachee/milestone/show/' . $goalID);
+		redirect('admin/coachee/milestone/show/' . $goalID, 'refresh');
 	}
 
 	public function editMilestone($milestoneID)
@@ -537,7 +537,7 @@ class AdminController extends CI_Controller
 
 		$this->session->set_flashdata('milestone', 'Berhasil Mengupdate Milestone');
 		$this->AdminModel->updateMilestone($milestoneID, $milestone);
-		redirect('admin/coachee/milestone/detail/' . $goalID);
+		redirect('admin/coachee/milestone/detail/' . $goalID, 'refresh');
 	}
 
 	public function sessionList($coacheeID)
@@ -556,7 +556,7 @@ class AdminController extends CI_Controller
 
 		$this->session->set_flashdata('session', 'Di Hapus');
 		$this->AdminModel->deleteSession($sessionID);
-		redirect('admin/coachee/session/list/' . $coacheeID);
+		redirect('admin/coachee/session/list/' . $coacheeID, 'refresh');
 	}
 
 	public function showSessionData($sessionID)
@@ -579,7 +579,7 @@ class AdminController extends CI_Controller
 		$this->checkAuth();
 		$this->session->set_flashdata('report', 'Laporan Berhasil Di Hapus');
 		$this->AdminModel->deleteReport($reportID);
-		redirect('admin/coachee/session/show/' . $sessionID);
+		redirect('admin/coachee/session/show/' . $sessionID, 'refresh');
 	}
 
 	/**
@@ -589,7 +589,7 @@ class AdminController extends CI_Controller
 	{
 		$this->session->set_flashdata('penilaian', 'Penilaian Berhasil Di Hapus');
 		$this->AdminModel->deletePenilaian($id);
-		redirect('admin/coachee/session/show/' . $sessionID);
+		redirect('admin/coachee/session/show/' . $sessionID, 'refresh');
 	}
 
 	//profile
@@ -625,10 +625,10 @@ class AdminController extends CI_Controller
 				);
 				$this->AdminModel->update_password($data, $id);
 				$this->session->set_flashdata('pro', 'Password berhasil diubah.');
-				redirect('admin/profile');
+				redirect('admin/profile', 'refresh');
 			} else {
 				$this->session->set_flashdata('error', 'Password yang Anda masukan salah.');
-				redirect('admin/profile');
+				redirect('admin/profile', 'refresh');
 			}
 		}
 	}
