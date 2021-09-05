@@ -11,6 +11,11 @@ class AdminController extends CI_Controller
 		$this->load->library('form_validation');
 	}
 
+	/**
+	 * mengecek kondisi login admin
+	 *
+	 * @return void
+	 */
 	public function checkAuth()
 	{
 		if ($this->session->userdata('login') != 'admin') {
