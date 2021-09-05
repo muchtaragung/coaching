@@ -637,4 +637,44 @@ class AdminController extends CI_Controller
 			}
 		}
 	}
+
+	public function csvAddCoachee()
+	{
+		$file = $_FILES['csv']['tmp_name'];
+
+		// Medapatkan ekstensi file csv yang akan diimport.
+		$ekstensi  = explode('.', $_FILES['csv']['name']);
+
+		// Tampilkan peringatan jika submit tanpa memilih menambahkan file.
+		if (empty($file)) {
+			echo 'File tidak boleh kosong!';
+		} else {
+			// Validasi apakah file yang diupload benar-benar file csv.
+			if (strtolower(end($ekstensi)) === 'csv' && $_FILES["csv"]["size"] > 0) {
+
+				$i = 0;
+				$handle = fopen($file, "r");
+				while (($row = fgetcsv($handle, 2048))) {
+					$i++;
+					if ($i == 1) continue;
+
+					// Data yang akan disimpan ke dalam databse
+					$coachee['name'] = $row[1];
+					$coachee['email'] = $row[2];
+					$coachee['password'] = password_hash($row[3], PASSWORD_DEFAULT);
+					$coachee['coach_id'] =  $row[4];
+					$coachee['company_id'] = $this->input->post('company_id');
+
+					// Simpan data ke database.
+					$this->AdminModel->saveCoachee($coachee);
+				}
+
+				fclose($handle);
+				$this->session->set_flashdata('coachee', 'Berhasil Menyimpan Data Coachee');
+				redirect('admin/coachee/list/' . $coachee['company_id'], 'refresh');
+			} else {
+				echo 'Format file tidak valid!';
+			}
+		}
+	}
 }

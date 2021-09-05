@@ -152,6 +152,7 @@ $route['admin/coachee/delete/(:num)'] = 'AdminController/deleteCoachee/$1';
 $route['admin/coachee/edit/(:num)'] = 'AdminController/editCoachee/$1';
 $route['admin/coachee/update'] = 'AdminController/updateCoachee';
 $route['admin/coachee/detail/(:num)'] = 'AdminController/detailCoachee/$1';
+$route['admin/coachee/csv-save'] = 'AdminController/csvAddCoachee';
 
 $route['admin/coachee/goal/list/(:num)'] = 'AdminController/goalList/$1';
 $route['admin/coachee/goal/delete/(:num)'] = 'AdminController/deleteGoal/$1';

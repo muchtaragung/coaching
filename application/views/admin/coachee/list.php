@@ -40,6 +40,7 @@
 								</div>
 							<?php } ?>
 							<a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addCoachee">Tambah Peserta</a>
+							<a href="" class="btn btn-info float-right mr-2" data-toggle="modal" data-target="#uploadCsv">Upload CSV</a>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -135,6 +136,32 @@
 		</div>
 	</div>
 
+	<div class="modal fade" id="uploadCsv" tabindex="-1" role="dialog" aria-labelledby="uploadCsv" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="uploadCsv">Tambah Peserta</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<form action="<?= site_url('admin/coachee/csv-save') ?>" method="POST" enctype="multipart/form-data">
+					<div class="modal-body">
+						<input type="hidden" name="id" value="<?php echo $this->uri->segment('4') ?>">
+
+						<div class="form-group">
+							<label for="">CSV</label>
+							<input type="file" name="csv" required accept=".csv">
+							<input type="hidden" name="company_id" value="<?= $company->id ?>">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary" type="submit">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 	<?php $this->load->view('layouts/script'); ?>
 	<script>
 		$(document).ready(function() {
