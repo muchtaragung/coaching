@@ -46,17 +46,16 @@
 								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 									<thead>
 										<tr>
-											<th>No</th>
+											<th>id</th>
 											<th>Nama</th>
 											<th>email</th>
 											<th>Action</th>
 										</tr>
 									</thead>
 									<tbody>
-										<?php $i = 1;
-										foreach ($coachs as $coach) : ?>
+										<?php foreach ($coachs as $coach) : ?>
 											<tr>
-												<td><?php echo $i++ ?></td>
+												<td><?= $coach->id ?></td>
 												<td> <?= $coach->name ?> </td>
 												<td><?= $coach->email ?></td>
 												<td>

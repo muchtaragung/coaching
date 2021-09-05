@@ -58,6 +58,11 @@
 
                                                 <table class="h6 text-dark">
                                                     <tr>
+                                                        <td>Id</td>
+                                                        <td>:</td>
+                                                        <td><?= $milestone->id ?></td>
+                                                    </tr>
+                                                    <tr>
                                                         <td>Milestone </td>
                                                         <td>:</td>
                                                         <td><?= $milestone->milestone ?></td>

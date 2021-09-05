@@ -54,7 +54,7 @@
 									<input type="hidden" name="goals_id" id="goals_id" value="<?= $goal->id ?>" class="form-control">
 									<div class="row form-group">
 										<div class="col-lg-12">
-											<label for="criteria">Success Criteria</label>
+											<label for="criteria">Success Criteria id : <?= $criteria->id ?></label>
 										</div>
 										<div class="col-lg-10">
 											<input type="hidden" name="id" value="<?= $criteria->id ?>">
@@ -76,7 +76,7 @@
 								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 									<thead>
 										<tr>
-											<th rowspan="2">No</th>
+											<th rowspan="2">id</th>
 											<th rowspan="2">Action Plans</th>
 											<th colspan="3">Result</th>
 											<th rowspan="2">Action</th>
@@ -88,10 +88,9 @@
 										</tr>
 									</thead>
 									<tbody>
-										<?php $i = 1 ?>
 										<?php foreach ($actions as $action) : ?>
 											<tr>
-												<td><?= $i++ ?></td>
+												<td><?= $action->id ?></td>
 												<td><?= $action->action ?></td>
 												<td><?php if ($action->result == 'berhasil') { ?> <h2>✓</h2> <?php } ?></td>
 												<td> <?php if ($action->result == 'tidak berhasil') { ?> <h2>✓</h2> <?php } ?></td>
@@ -115,6 +114,9 @@
 						<div class="row mb-3">
 							<div class="col-lg-5">
 								<div class="card border-left-primary shadow h-100 py-2">
+									<div class="card-head">
+										<?= $note->id ?>
+									</div>
 									<div class="card-body">
 										<div class="row no-gutters align-items-center">
 											<div class="col mr-2">
@@ -130,6 +132,9 @@
 							<div class="col-lg-5">
 								<div class="card">
 									<div class="card border-left-success shadow h-100 py-2">
+										<div class="card-head">
+											<?= $note->id ?>
+										</div>
 										<div class="card-body">
 											<div class="row no-gutters align-items-center">
 												<div class="col mr-2">

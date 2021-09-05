@@ -41,7 +41,7 @@
 								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 									<thead>
 										<tr>
-											<th>No</th>
+											<th>id</th>
 											<th>Nama</th>
 											<th>Action</th>
 										</tr>
@@ -50,7 +50,7 @@
 										<?php $i = 1;
 										foreach ($companies as $company) : ?>
 											<tr>
-												<td><?php echo $i++ ?></td>
+												<td><?= $company->id ?></td>
 												<td> <?= $company->name ?> </td>
 												<td>
 													<a href="<?= site_url('admin/company/edit/') . $company->id ?>" class="btn btn-primary">edit Perusahaan</a>

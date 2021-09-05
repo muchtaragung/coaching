@@ -47,10 +47,9 @@
 										</tr>
 									</thead>
 									<tbody>
-										<?php $i = 1;
-										foreach ($sessions as $session) : ?>
+										<?php foreach ($sessions as $session) : ?>
 											<tr>
-												<td><?php echo $i++ ?></td>
+												<td><?= $session->id  ?></td>
 												<td> <?= 'Sesi Ke-' . $session->session ?> </td>
 												<td>
 													<?php if ($session->status == 'belum mulai') : ?>

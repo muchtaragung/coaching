@@ -40,7 +40,7 @@
 								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 									<thead>
 										<tr>
-											<th>No</th>
+											<th>id</th>
 											<th>Goals</th>
 											<th>Due Date</th>
 											<th>Status</th>
@@ -48,10 +48,9 @@
 										</tr>
 									</thead>
 									<tbody>
-										<?php $i = 1;
-										foreach ($goals as $goal) : ?>
+										<?php foreach ($goals as $goal) : ?>
 											<tr>
-												<td><?php echo $i++ ?></td>
+												<td><?= $goal->id ?></td>
 												<td> <?= $goal->goal ?> </td>
 												<?php if ($goal->status == 'selesai') : ?>
 													<td><button class="btn btn-success disabled">Selesai</button></td>

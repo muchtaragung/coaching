@@ -43,6 +43,11 @@
                                             </div>
                                             <table class="h6 text-dark">
                                                 <tr>
+                                                    <td>id</td>
+                                                    <td>:</td>
+                                                    <td><?= $coachee->id ?></td>
+                                                </tr>
+                                                <tr>
                                                     <td>Nama</td>
                                                     <td>:</td>
                                                     <td><?= $coachee->name ?></td>

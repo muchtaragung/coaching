@@ -46,7 +46,7 @@
 								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 									<thead>
 										<tr>
-											<th>No</th>
+											<th>id</th>
 											<th>Nama</th>
 											<th>email</th>
 											<th>Action</th>
@@ -56,7 +56,7 @@
 										<?php $i = 1;
 										foreach ($coachees as $coachee) : ?>
 											<tr>
-												<td><?php echo $i++ ?></td>
+												<td><?= $coachee->id ?></td>
 												<td> <?= $coachee->name ?> </td>
 												<td><?= $coachee->email ?></td>
 												<td>

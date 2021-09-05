@@ -51,6 +51,13 @@
 												<table class="">
 													<tr class="h5 mb-0 text-gray-800">
 														<td class="font-weight-bold">
+															id
+														</td>
+														<td>:</td>
+														<td><?= $penilaian->id ?></td>
+													</tr>
+													<tr class="h5 mb-0 text-gray-800">
+														<td class="font-weight-bold">
 															Komunikasi Dan Respon
 														</td>
 														<td>:</td>
