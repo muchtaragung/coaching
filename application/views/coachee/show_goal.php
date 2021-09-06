@@ -195,16 +195,15 @@
 										<thead>
 											<tr>
 												<th rowspan="2">No</th>
+												<th rowspan="2">Action Plan</th>
+												<th colspan="3">Result</th>
+												<th rowspan="2">Keterangan</th>
 												<th rowspan="2">Action</th>
-												<th colspan="4">Result</th>
 											</tr>
 											<tr>
 												<th>Berhasil</th>
 												<th>Tidak Berhasil</th>
 												<th>Butuh Waktu Lama</th>
-												<?php if ($goal->status == 'belum selesai') : ?>
-													<th>Action</th>
-												<?php endif ?>
 											</tr>
 										</thead>
 										<tbody>
@@ -220,6 +219,8 @@
 															<td><input type="radio" name="result" id="" value="berhasil"></td>
 															<td><input type="radio" name="result" id="" value="tidak berhasil"></td>
 															<td><input type="radio" name="result" id="" value="butuh waktu lama"></td>
+															<td><?= $action->keterangan ?></td>
+
 															<?php if ($goal->status == 'belum selesai') : ?>
 																<td>
 																	<button type="submit" class="btn btn-sm btn-primary">Submit</button>
@@ -232,6 +233,7 @@
 														<td><?php if ($action->result == 'berhasil') { ?> <h2>✓</h2> <?php } ?></td>
 														<td> <?php if ($action->result == 'tidak berhasil') { ?> <h2>✓</h2> <?php } ?></td>
 														<td> <?php if ($action->result == 'butuh waktu lama') { ?> <h2>✓</h2> <?php } ?></td>
+														<td><?= $action->keterangan ?></td>
 														<td>
 															<button onclick=" confirmReset('<?= site_url('coachee/reset-action/') . $action->id . '/' . $goal->id ?>')" class="btn btn-sm btn-info">Reset</button>
 															<a onclick=" location.replace('<?= site_url('coachee/edit-action/') . $action->id ?>')" class="btn btn-sm btn-primary">Edit</a>

@@ -77,8 +77,9 @@
 									<thead>
 										<tr>
 											<th rowspan="2">id</th>
-											<th rowspan="2">Action Plans</th>
+											<th rowspan="2">Action Plan</th>
 											<th colspan="3">Result</th>
+											<th rowspan="2">Keterangan</th>
 											<th rowspan="2">Action</th>
 										</tr>
 										<tr>
@@ -95,6 +96,7 @@
 												<td><?php if ($action->result == 'berhasil') { ?> <h2>✓</h2> <?php } ?></td>
 												<td> <?php if ($action->result == 'tidak berhasil') { ?> <h2>✓</h2> <?php } ?></td>
 												<td> <?php if ($action->result == 'butuh waktu lama') { ?> <h2>✓</h2> <?php } ?></td>
+												<td><?= $action->keterangan ?></td>
 												<td>
 													<button onclick=" confirmReset('<?= site_url('admin/coachee/action/reset/') . $action->id . '/' . $goal->id ?>')" class="btn btn-info">Reset</button>
 													<button onclick=" location.replace('<?= site_url('admin/coachee/action/edit/') . $action->id ?>')" class="btn btn-primary">Edit</button>

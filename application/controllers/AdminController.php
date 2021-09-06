@@ -446,6 +446,7 @@ class AdminController extends CI_Controller
 
 		$action['action'] = $this->input->post('action');
 		$action['result'] = $this->input->post('result');
+		$action['keterangan'] = $this->input->post('keterangan');
 
 		$this->session->set_flashdata('action', 'Action Plan Berhasil Di Hapus');
 		$this->AdminModel->updateAction($ActionID, $action);
