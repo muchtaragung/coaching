@@ -83,31 +83,24 @@
 			<h4 class="float-left">Goal : <?= $goals[$i]['goal'] ?></h4>
 			<h4 class="float-right">Due Date : <?= $goals[$i]['due_date'] ?></h4>
 			<h4>Success Criteria : <?= $success_criteria[$i][0]['criteria'] ?></h4>
+			<h4>Status Goal : <?= $goals[$i]['status'] ?></h4>
 		</div>
 
 		<table border="1">
 			<tr>
-				<th rowspan="2">Action Plan</th>
-				<th colspan="3">Result</th>
-			</tr>
-			<tr>
-				<th>Berhasil</th>
-				<th>Tidak Berhasil</th>
-				<th>Butuh Waktu Lama</th>
+				<th>Action Plan</th>
+				<th>Result</th>
+				<th>Keterangan</th>
 			</tr>
 
-			<?php for ($j = 0; $j < count($action_plan[$i]); $j++) : ?>
+			<?php
+			for ($j = 0; $j < count($action_plan[$i]); $j++) : ?>
 				<tr style="text-align: center;">
 					<td><?= $action_plan[$i][$j]['action'] ?></td>
-					<td><?php if ($action_plan[$i][$j]['result'] == 'berhasil') {
-							echo "Berhasil";
-						} ?></td>
-					<td> <?php if ($action_plan[$i][$j]['result'] == 'tidak berhasil') {
-								echo "Tidak Berhasil";
-							} ?></td>
-					<td> <?php if ($action_plan[$i][$j]['result'] == 'butuh waktu lama') {
-								echo "Butuh Waktu Lama";
-							} ?></td>
+					<td>
+						<?= $action_plan[$i][$j]['result'] ?>
+					</td>
+					<td><?= $action_plan[$i][$j]['keterangan'] ?></td>
 				</tr>
 			<?php endfor ?>
 		</table>

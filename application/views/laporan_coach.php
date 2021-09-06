@@ -120,7 +120,7 @@
 	<br>
 	<hr>
 	<br>
-
+	<br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<div class="row">
 		<h2>Goals</h2>
 	</div>
@@ -134,28 +134,19 @@
 
 		<table border="1">
 			<tr>
-				<th rowspan="2">Action Plan</th>
-				<th colspan="3">Result</th>
-			</tr>
-			<tr>
-				<th>Berhasil</th>
-				<th>Tidak Berhasil</th>
-				<th>Butuh Waktu Lama</th>
+				<th>Action Plan</th>
+				<th>Result</th>
+				<th>Keterangan</th>
 			</tr>
 
 			<?php
 			for ($j = 0; $j < count($action_plan[$i]); $j++) : ?>
 				<tr style="text-align: center;">
 					<td><?= $action_plan[$i][$j]['action'] ?></td>
-					<td><?php if ($action_plan[$i][$j]['result'] == 'berhasil') {
-							echo "v";
-						} ?></td>
-					<td> <?php if ($action_plan[$i][$j]['result'] == 'tidak berhasil') {
-								echo "v";
-							} ?></td>
-					<td> <?php if ($action_plan[$i][$j]['result'] == 'butuh waktu lama') {
-								echo "v";
-							} ?></td>
+					<td>
+						<?= $action_plan[$i][$j]['result'] ?>
+					</td>
+					<td><?= $action_plan[$i][$j]['keterangan'] ?></td>
 				</tr>
 			<?php endfor ?>
 		</table>
