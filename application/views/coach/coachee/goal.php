@@ -54,14 +54,15 @@
 									<thead>
 										<tr>
 											<th rowspan="2">No</th>
+											<th rowspan="2">Action Plan</th>
+											<th colspan="3">Result</th>
+											<th rowspan="2">Keterangan</th>
 											<th rowspan="2">Action</th>
-											<th colspan="4">Result</th>
 										</tr>
 										<tr>
 											<th>Berhasil</th>
 											<th>Tidak Berhasil</th>
 											<th>Butuh Waktu Lama</th>
-											<th>Action</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -75,6 +76,7 @@
 													<td> <?php if ($action->result == 'tidak berhasil') { ?> <h2>✓</h2> <?php } ?></td>
 													<td> <?php if ($action->result == 'butuh waktu lama') { ?> <h2>✓</h2> <?php } ?></td>
 												</form>
+												<td><?= $action->keterangan ?></td>
 												<td>
 													<?php if ($action->result != null) : ?>
 														<button onclick=" confirmReset('<?= site_url('coach/coachee/reset-action/') . $action->id . '/' . $goal->id ?>')" class="btn btn-sm btn-info">Reset</button>

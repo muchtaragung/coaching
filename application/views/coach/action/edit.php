@@ -55,6 +55,9 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <textarea name="keterangan" id="" cols="30" rows="10" class="form-control"><?= $action->keterangan ?></textarea>
+                                </div>
+                                <div class="form-group">
                                     <button type="submit" class="btn btn-success float-right">Submit</button>
                                 </div>
                             </form>
