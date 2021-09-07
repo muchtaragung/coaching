@@ -37,6 +37,7 @@ class CoacheeController extends CI_Controller
 		$this->checkStatus();
 		$data['page_name'] = 'coachee dashboard';
 		$data['goals'] = $this->CoacheeModel->allGoalsByID($this->session->userdata('id'));
+		$data['link'] = site_url('coachee');
 		$this->load->view('coachee/goals', $data, FALSE);
 	}
 
@@ -59,6 +60,7 @@ class CoacheeController extends CI_Controller
 		$data['page_name'] = 'Your Goals';
 		$data['goal'] = $this->CoacheeModel->goalByID($id);
 		$data['actions'] = $this->CoacheeModel->actionPlanByGoalID($id);
+		$data['link'] = site_url('coachee/goals');
 
 		$criteriaCheck = $this->CoacheeModel->checkCriteria($id);
 
@@ -143,6 +145,7 @@ class CoacheeController extends CI_Controller
 	{
 		$this->checkStatus();
 		$data['action'] = $this->CoacheeModel->getActionByID($actionID);
+		$data['link'] = site_url('coachee/goal/' . $data['action']->goals_id);
 
 		$this->load->view('coachee/edit-action', $data);
 	}
