@@ -28,7 +28,7 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">Coacha</h1>
+					<h1 class="h3 mb-4 text-gray-800">List Goal</h1>
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
@@ -62,7 +62,6 @@
 													<a href="<?= site_url('admin/coachee/goal/show/') . $goal->id ?>" class="btn btn-primary">Lihat Goal</a>
 													<a href="<?= site_url('admin/coachee/milestone/detail/') . $goal->id ?>" class="btn btn-primary">Detail Milestone</a>
 													<a href="<?= site_url('admin/coachee/goal/edit/') . $goal->id ?>" class="btn btn-primary">Edit Goal</a>
-													<a href="<?= site_url('admin/coachee/goal/delete/') . $goal->id ?>" class="btn btn-danger">Delete Goal</a>
 													<button onclick=" confirmDelete('<?= site_url('admin/coachee/goal/delete/') . $goal->id ?>')" class="btn btn-danger">Hapus Goal</button>
 												</td>
 											</tr>
