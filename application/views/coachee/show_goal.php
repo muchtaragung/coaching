@@ -144,7 +144,23 @@
 							<br>
 							Due Date : <?= $goal->due_date ?>
 							<br>
-							<span class="badge badge-pill badge-secondary">Goal Belum Selesai</span>
+							<?php
+							$tanggal = strtotime($goal->due_date);
+							$sekarang    = time(); // Waktu sekarang
+							$diff   = $sekarang - $tanggal;
+							$hasil = floor($diff);
+							?>
+							<?php if ($hasil < 0) : ?>
+								<span class="badge badge-pill badge-secondary"><?= "Sisa Due Date  " . abs(ceil($hasil / (60 * 60 * 24))) . ' Hari' ?></span>
+							<?php else : ?>
+								<span class="badge badge-pill badge-danger"><?= "Goal Terlewat " . ceil($hasil / (60 * 60 * 24)) . ' Hari'; ?></span>
+							<?php endif ?>
+							<br>
+							<?php if ($goal->status == 'selesai') : ?>
+								<span class="badge badge-pill badge-success">Goal Selesai</span>
+							<?php else : ?>
+								<span class="badge badge-pill badge-secondary">Goal Belum Selesai</span>
+							<?php endif ?>
 						</h1>
 						<!-- DataTales Example -->
 						<div class="card shadow mb-4">
