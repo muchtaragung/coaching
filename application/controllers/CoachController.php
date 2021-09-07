@@ -42,6 +42,7 @@ class CoachController extends CI_Controller
 		// $data['session'] = $this->CoachModel->getSessionByCoacheeID($coacheeID);
 		$data['history_penilaian'] = $this->CoachModel->getPenilaianByCoacheeID($coacheeID);
 		$data['goals'] = $this->CoachModel->getGoalsByCoacheeID($coacheeID, 'array');
+		$data['link'] = site_url('coach/coachee/list/' . $data['company']->id);
 
 		foreach ($data['goals'] as $goal) {
 			$data['history_milestone'][] = $this->CoachModel->getMilestoneByGoalID($goal['id']);
@@ -78,7 +79,7 @@ class CoachController extends CI_Controller
 		$data['page_name'] = "Coachee Session";
 		$data['coachee_id'] = $coacheeID;
 		$data['coachee'] = $this->CoachModel->getCoacheeByID($coacheeID);
-		$data['link'] = site_url('coach/coachee/list/' . $data['coachee']->company_id);
+		$data['link'] = site_url('coach/coachee/show/' . $data['coachee_id']);
 
 		$this->load->view('coach/coachee/sessions', $data, FALSE);
 	}
@@ -130,6 +131,7 @@ class CoachController extends CI_Controller
 		$data['report']    = $this->CoachModel->getReportBySessionID($sessionID);
 		$data['coachee']   = $this->CoachModel->getCoacheeByID($data['session']->coachee_id);
 		$data['goals']     = $this->CoachModel->getGoalsByCoacheeID($coacheeID);
+		$data['link']      = site_url('/coach/coachee/session/' . $data['coachee']->id);
 
 		$this->load->view('coach/coachee/show_session', $data);
 	}
@@ -139,6 +141,7 @@ class CoachController extends CI_Controller
 		$data['page_name'] = 'coachee goals';
 		$data['goals'] = $this->CoachModel->allGoalsByID($coacheeID);
 		$data['coachee'] = $this->CoachModel->getCoacheeName($coacheeID);
+		$data['link']      = site_url('/coach/coachee/session/' . $data['coachee']->id);
 		$this->load->view('coach/coachee/goals', $data, FALSE);
 	}
 
@@ -150,7 +153,7 @@ class CoachController extends CI_Controller
 		$data['criteria']  = $this->CoachModel->getCriteria($goalID);
 		$data['notes']     = $this->CoachModel->getGoalsNotes($data['goal']->id);
 		$data['coachee']   = $this->CoachModel->getCoacheeByID($data['goal']->coachee_id);
-		$data['link'] = site_url('coach/coachee/' . $data['coachee']->company_id);
+		$data['link'] = site_url('coach/coachee/' . $data['coachee']->id);
 
 		$this->load->view('coach/coachee/goal', $data, FALSE);
 	}
@@ -180,6 +183,7 @@ class CoachController extends CI_Controller
 	public function editAction($actionID)
 	{
 		$data['action'] = $this->CoachModel->getActionByID($actionID);
+		$data['link'] = site_url('coach/coachee/goal/' . $data['action']->goals_id);
 
 		$this->load->view('coach/action/edit', $data);
 	}
@@ -231,6 +235,7 @@ class CoachController extends CI_Controller
 	{
 		$data['page_name'] = 'Edit Notes';
 		$data['note']      = $this->CoachModel->getNotesByID($notesID);
+		$data['link'] = site_url('coach/coachee/goal/' . $data['note']->goals_id);
 
 		$this->load->view('coach/notes/edit', $data);
 	}
@@ -258,7 +263,7 @@ class CoachController extends CI_Controller
 		$data['coachee']         = $this->CoachModel->getCoacheeByID($coacheeId);
 		$data['coach']           = $this->CoachModel->getCoachByID($coachID);
 
-
+		$data['link']            = site_url('coach/coachee/session/show/' . $sessionID . '/' . $coacheeId);
 
 		$this->load->view('coach/penilaian', $data, FALSE);
 	}
@@ -288,6 +293,7 @@ class CoachController extends CI_Controller
 		// cek data milestone
 		$where = ['goals_id' => $goalID, 'session_id' => $sessionID];
 		$data['checkMilestone'] = $this->CoachModel->checkMilestone($where);
+		$data['link']            = site_url('coach/coachee/session/show/' . $sessionID . '/' . $data['goal']->coachee_id);
 
 
 		$this->load->view('coach/milestone', $data);
@@ -317,6 +323,7 @@ class CoachController extends CI_Controller
 
 		$where = ['goals_id' => $goalID, 'session_id' => $sessionID];
 		$data['milestone']         = $this->CoachModel->getMilestoneWhere($where);
+		$data['link']            = site_url('coach/coachee/session/show/' . $sessionID . '/' . $data['goal']->coachee_id);
 
 		// var_dump($data);
 		$this->load->view('coach/milestone/detail', $data);
