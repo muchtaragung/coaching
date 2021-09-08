@@ -9,6 +9,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="<?= base_url(); ?>assets/jswal/sweetalert2.all.min.js"></script>
+	<link href="<?= base_url('assets/') ?>css/sb-admin-2.min.css" rel="stylesheet">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -81,7 +82,7 @@
 			grid-template-columns: 7% 93%;
 			margin: 25px 0;
 			padding: 5px 0;
-			border-bottom: 2px solid #223a76;
+			border-bottom: 2px solid #4e73df;
 		}
 
 		.login-content .input-div.one {
@@ -89,7 +90,7 @@
 		}
 
 		.i {
-			color: #223a76;
+			color: #4e73df;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -121,7 +122,7 @@
 			bottom: -2px;
 			width: 0%;
 			height: 2px;
-			background-color: #223a76;
+			background-color: #4e73df;
 			transition: .4s;
 		}
 
@@ -144,7 +145,7 @@
 		}
 
 		.input-div.focus>.i>i {
-			color: #223a76;
+			color: #4e73df;
 		}
 
 		.input-div>div>input {
@@ -170,13 +171,13 @@
 			display: block;
 			text-align: right;
 			text-decoration: none;
-			color: #223a76;
+			color: #4e73df;
 			font-size: 0.9rem;
 			transition: .3s;
 		}
 
 		a:hover {
-			color: #223a76;
+			color: #4e73df;
 		}
 
 		.btn {
@@ -186,7 +187,7 @@
 			border-radius: 25px;
 			outline: none;
 			border: none;
-			background-image: linear-gradient(to right, #223a76, #223a76, #223a76);
+			background-image: linear-gradient(to right, #4e73df 10%, #224abe 100%);
 			background-size: 200%;
 			font-size: 1.2rem;
 			color: #fff;
@@ -243,7 +244,7 @@
 	</style>
 	<div class="flash-data" data-flashdata="<?= $this->session->flashdata('login'); ?>"></div>
 
-	<img class="wave" src="<?= base_url('assets/img/login-bg-1.png') ?>">
+	<img class="wave" src="<?= base_url('assets/img/login-bg-1.svg') ?>">
 	<div class="container">
 		<div class="img">
 			<img src="<?= base_url('assets/img/login-bg-2.svg') ?>">
@@ -271,12 +272,12 @@
 					</div>
 				</div>
 
-				<input type="submit" id="login" class="btn" value="Login" name="submit">
+				<input type="submit" id="login" class="btn btn-primary" value="Login" name="submit">
 				<center>
 					<a style="Margin-top: 0;Margin-bottom: 20px;font-family: avenir,sans-serif;font-size: 16px;line-height: 24px;text-align: center;" lang="x-size-16" href="<?php echo base_url(); ?>lupapassword">Lupa Password ?</a>
 				</center>
 				<p class="size-16" style="Margin-top: 0;Margin-bottom: 20px;font-family: avenir,sans-serif;font-size: 16px;line-height: 24px;text-align: center;" lang="x-size-16"><span class="font-avenir">
-						<font color="#14215b"> &copy;2021 Coaching App<br>v.2.0.0</font>
+						<font color="#4e73df"> &copy;2021 Coaching App<br>v.2.0.0</font>
 					</span></p>
 
 			</form>
