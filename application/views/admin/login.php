@@ -29,7 +29,7 @@
 											</div>
 										<?php endif ?>
 									</div>
-									<form action="<?php echo site_url('admin/auth') ?>" method="post">
+									<form action="<?php echo site_url('admin/autentikasi') ?>" method="post">
 										<div class="form-group">
 											<label for="username">Username Admin</label>
 											<input class="form-control" type="text" name="username" id="username" placeholder="Email Admin">

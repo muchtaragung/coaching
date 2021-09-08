@@ -131,7 +131,7 @@ $route['coachee/report/show/(:num)'] = 'CoacheeController/showReport/$1';
 // admin routes
 $route['admin']       = 'AdminController';
 $route['admin/login'] = 'AdminController/login';
-$route['admin/auth']  = 'AdminController/auth';
+$route['admin/autentikasi']  = 'AdminController/auth';
 
 // admin coach routes
 $route['admin/coach/list']  = 'AdminController/coachList';
