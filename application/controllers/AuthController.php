@@ -8,6 +8,7 @@ class AuthController extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('AuthModel');
+		$this->load->model('AdminModel');
 		$this->load->library('form_validation');
 	}
 
