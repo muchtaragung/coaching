@@ -88,7 +88,7 @@ class AuthController extends CI_Controller
 	}
 	public function lupaPassword()
 	{
-		
+
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 		$this->form_validation->set_error_delimiters('<span style="font-size: 10px;color:red">', '</span>');
 		if ($this->form_validation->run() == FALSE) {
@@ -210,6 +210,28 @@ class AuthController extends CI_Controller
 	public function base64url_decode($data)
 	{
 		return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
+	}
+
+	public function admin_auth()
+	{
+		$username = htmlspecialchars($this->input->post('username'));
+		$pass = htmlspecialchars($this->input->post('password'));
+		$cek_login = $this->AdminModel->cek_login_admin($username);
+		if ($cek_login == FALSE) {
+			$this->session->set_flashdata('login failed', 'Username yang Anda masukan tidak terdaftar.');
+			redirect('admin/login', 'refresh');
+		} else {
+			if (password_verify($pass, $cek_login->password)) {
+				$this->session->set_userdata('id', $cek_login->id);
+				$this->session->set_userdata('username', $cek_login->username);
+				$this->session->set_userdata('login', 'admin');
+				$this->session->set_userdata('name', 'admin');
+				redirect('admin', 'refresh');
+			} else {
+				$this->session->set_flashdata('login failed', 'Username Atau Password Salah');
+				redirect('admin/login', 'refresh');
+			}
+		}
 	}
 }
 
