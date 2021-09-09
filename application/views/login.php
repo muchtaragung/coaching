@@ -251,7 +251,7 @@
 		</div>
 		<div class="login-content">
 			<form action="<?= site_url('auth'); ?>" method="post">
-				<img width="300px" height="auto" src="<?= base_url('assets/img/login-head.png') ?>">
+				<img width="300px" height="auto" src="<?= base_url('assets/img/login-head.png') ?>" class="mb-4">
 
 				<div class="input-div one">
 					<div class="i">
