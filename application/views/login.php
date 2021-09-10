@@ -274,7 +274,7 @@
 
 				<input type="submit" id="login" class="btn btn-primary" value="Login" name="submit">
 				<center>
-					<a style="Margin-top: 0;Margin-bottom: 20px;font-family: avenir,sans-serif;font-size: 16px;line-height: 24px;text-align: center;" lang="x-size-16" href="<?php echo base_url(); ?>lupapassword">Lupa Password ?</a>
+					<a style="Margin-top: 0;Margin-bottom: 20px;font-family: avenir,sans-serif;font-size: 16px;line-height: 24px;text-align: center;" lang="x-size-16" href="<?php echo site_url('auth/lupa_password'); ?>">Lupa Password ?</a>
 				</center>
 				<p class="size-16" style="Margin-top: 0;Margin-bottom: 20px;font-family: avenir,sans-serif;font-size: 16px;line-height: 24px;text-align: center;" lang="x-size-16"><span class="font-avenir">
 						<font color="#4e73df"> &copy;2021 Coaching App<br>v.2.0.0</font>
