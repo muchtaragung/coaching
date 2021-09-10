@@ -55,6 +55,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+								<label for="">Keterangan</label>
+
                                     <textarea name="keterangan" id="" cols="30" rows="10" class="form-control"><?= $action->keterangan ?></textarea>
                                 </div>
                                 <div class="form-group">
