@@ -24,6 +24,7 @@ class AdminController extends CI_Controller
 		}
 	}
 
+	// fungsi login
 	public function login()
 	{
 		$data['page_name'] = "Admin Login";
