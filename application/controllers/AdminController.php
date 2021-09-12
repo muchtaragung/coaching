@@ -24,7 +24,10 @@ class AdminController extends CI_Controller
 		}
 	}
 
-	// fungsi login
+	/**
+	 * fungsi untuk login
+	 * @return void
+	 */
 	public function login()
 	{
 		$data['page_name'] = "Admin Login";
@@ -32,6 +35,11 @@ class AdminController extends CI_Controller
 		$this->load->view('admin/login', $data);
 	}
 
+	/**
+	 * Fungsi untuk autententikasi login admin
+	 *
+	 * @return void
+	 */
 	public function auth()
 	{
 		$username = htmlspecialchars($this->input->post('username'));
@@ -54,6 +62,12 @@ class AdminController extends CI_Controller
 		}
 	}
 
+	/**
+	 * menampilkan dashboard untuk admin
+	 * menampilkan data jumlah dari company, coach, dan coachee
+	 *
+	 * @return void
+	 */
 	public function index()
 	{
 		$this->checkAuth();
@@ -66,6 +80,11 @@ class AdminController extends CI_Controller
 		$this->load->view('admin/index.php', $data, FALSE);
 	}
 
+	/**
+	 * menampilkan list dari coach
+	 *
+	 * @return void
+	 */
 	public function coachList()
 	{
 		$this->checkAuth();
@@ -75,6 +94,12 @@ class AdminController extends CI_Controller
 		$this->load->view('admin/coach/list', $data);
 	}
 
+	/**
+	 * fungsi untuk menambahkan coach
+	 * form nya ada di halaman list coachee
+	 *
+	 * @return void
+	 */
 	public function addCoach()
 	{
 		$this->checkAuth();
