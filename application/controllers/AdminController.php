@@ -24,6 +24,10 @@ class AdminController extends CI_Controller
 		}
 	}
 
+	/**
+	 * fungsi untuk login
+	 * @return void
+	 */
 	public function login()
 	{
 		$data['page_name'] = "Admin Login";
@@ -31,6 +35,11 @@ class AdminController extends CI_Controller
 		$this->load->view('admin/login', $data);
 	}
 
+	/**
+	 * Fungsi untuk autententikasi login admin
+	 *
+	 * @return void
+	 */
 	public function auth()
 	{
 		$username = htmlspecialchars($this->input->post('username'));
@@ -53,6 +62,12 @@ class AdminController extends CI_Controller
 		}
 	}
 
+	/**
+	 * menampilkan dashboard untuk admin
+	 * menampilkan data jumlah dari company, coach, dan coachee
+	 *
+	 * @return void
+	 */
 	public function index()
 	{
 		$this->checkAuth();
@@ -65,6 +80,11 @@ class AdminController extends CI_Controller
 		$this->load->view('admin/index.php', $data, FALSE);
 	}
 
+	/**
+	 * menampilkan list dari coach
+	 *
+	 * @return void
+	 */
 	public function coachList()
 	{
 		$this->checkAuth();
@@ -74,6 +94,12 @@ class AdminController extends CI_Controller
 		$this->load->view('admin/coach/list', $data);
 	}
 
+	/**
+	 * fungsi untuk menambahkan coach
+	 * form nya ada di halaman list coachee
+	 *
+	 * @return void
+	 */
 	public function addCoach()
 	{
 		$this->checkAuth();
@@ -95,6 +121,12 @@ class AdminController extends CI_Controller
 		}
 	}
 
+	/**
+	 * fungsi untuk menghapus coach
+	 *
+	 * @param [int] $id dari coach
+	 * @return void
+	 */
 	public function deleteCoach($id)
 	{
 		$this->checkAuth();
@@ -103,6 +135,12 @@ class AdminController extends CI_Controller
 		redirect('admin/coach/list', 'refresh');
 	}
 
+	/**
+	 * mengambil data coach untuk di edit
+	 *
+	 * @param [int] $id dari coach
+	 * @return void
+	 */
 	public function editCoach($id)
 	{
 		$this->checkAuth();
@@ -112,6 +150,11 @@ class AdminController extends CI_Controller
 		$this->load->view('admin/coach/edit', $data);
 	}
 
+	/**
+	 * mengupdate data coach dari 
+	 *
+	 * @return void
+	 */
 	public function updateCoach()
 	{
 		$this->checkAuth();
@@ -129,7 +172,11 @@ class AdminController extends CI_Controller
 		return redirect('admin/coach/list', 'refresh');
 	}
 
-
+	/**
+	 * mengampilkan list perusahan
+	 *
+	 * @return void
+	 */
 	public function companyList()
 	{
 		$this->checkAuth();
@@ -553,6 +600,28 @@ class AdminController extends CI_Controller
 		$data['sessions']  = $this->AdminModel->getSessionByCoacheeID($coacheeID);
 
 		$this->load->view('admin/session/list', $data);
+	}
+
+	public function editSession($sessionID)
+	{
+		$this->checkAuth();
+		$data['page_name'] = 'Edit Sesi';
+
+		$data['session'] = $this->AdminModel->getSessionByID($sessionID);
+		$this->load->view('admin/session/edit', $data);
+	}
+
+	public function updateSession()
+	{
+		$this->checkAuth();
+
+		$session['session'] = $this->input->post('session');
+		$session['status']  = $this->input->post('status');
+		$id = $this->input->post('id');
+		$coachee_id = $this->input->post('coachee_id');
+
+		$this->AdminModel->updateSession($session, $id);
+		redirect('admin/coachee/session/list/' . $coachee_id);
 	}
 
 	public function deleteSession($sessionID, $coacheeID)

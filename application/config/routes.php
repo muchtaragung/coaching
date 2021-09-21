@@ -181,6 +181,8 @@ $route['admin/coachee/milestone/update'] = 'AdminController/updateMilestone';
 
 $route['admin/coachee/session/list/(:num)'] = 'AdminController/sessionList/$1';
 $route['admin/coachee/session/show/(:num)'] = 'AdminController/showSessionData/$1';
+$route['admin/coachee/session/edit/(:num)'] = 'AdminController/editSession/$1';
+$route['admin/coachee/session/update'] = 'AdminController/updateSession';
 $route['admin/coachee/session/laporan/delete/(:num)/(:num)'] = 'AdminController/deleteReport/$1/$2';
 $route['admin/coachee/session/penilaian/delete/(:num)/(:num)'] = 'AdminController/deletePenilaian/$1/$2';
 

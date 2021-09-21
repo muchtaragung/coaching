@@ -37,6 +37,13 @@ class AdminModel extends CI_Model
 		return $this->db->affected_rows();
 	}
 
+	public function updateSession($data, $id)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('session', $data);
+		return $this->db->affected_rows();
+	}
+
 	/**	
 	 * mengambil seluruh data coach
 	 * mengembalikan data dalam bentuk objek

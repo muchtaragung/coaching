@@ -148,12 +148,12 @@
 							$tanggal = strtotime($goal->due_date);
 							$sekarang    = time(); // Waktu sekarang
 							$diff   = $sekarang - $tanggal;
-							$hasil = floor($diff);
+							$hasil = $diff;
 							?>
 							<?php if ($hasil < 0) : ?>
-								<span class="badge badge-pill badge-secondary"><?= "Sisa Due Date  " . abs(ceil($hasil / (60 * 60 * 24))) . ' Hari' ?></span>
+								<span class="badge badge-pill badge-secondary"><?= "Sisa Due Date  " . abs(ceil($hasil / (60 * 60 * 24)) - 1) . ' Hari' ?></span>
 							<?php else : ?>
-								<span class="badge badge-pill badge-danger"><?= "Goal Terlewat " . ceil($hasil / (60 * 60 * 24)) . ' Hari'; ?></span>
+								<span class="badge badge-pill badge-danger"><?= "Goal Terlewat " . ceil($hasil / (60 * 60 * 24) + 1) . ' Hari'; ?></span>
 							<?php endif ?>
 							<br>
 							<?php if ($goal->status == 'selesai') : ?>
