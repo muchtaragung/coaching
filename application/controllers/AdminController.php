@@ -602,6 +602,28 @@ class AdminController extends CI_Controller
 		$this->load->view('admin/session/list', $data);
 	}
 
+	public function editSession($sessionID)
+	{
+		$this->checkAuth();
+		$data['page_name'] = 'Edit Sesi';
+
+		$data['session'] = $this->AdminModel->getSessionByID($sessionID);
+		$this->load->view('admin/session/edit', $data);
+	}
+
+	public function updateSession()
+	{
+		$this->checkAuth();
+
+		$session['session'] = $this->input->post('session');
+		$session['status']  = $this->input->post('status');
+		$id = $this->input->post('id');
+		$coachee_id = $this->input->post('coachee_id');
+
+		$this->AdminModel->updateSession($session, $id);
+		redirect('admin/coachee/session/list/' . $coachee_id);
+	}
+
 	public function deleteSession($sessionID, $coacheeID)
 	{
 		$this->checkAuth();

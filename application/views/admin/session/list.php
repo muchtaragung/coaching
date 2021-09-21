@@ -62,6 +62,7 @@
 												</td>
 												<td>
 													<a href="<?= site_url('admin/coachee/session/show/' . $session->id) ?>" class="btn btn-primary">Lihat</a>
+													<a href="<?= site_url('admin/coachee/session/edit/' . $session->id) ?>" class="btn btn-info">Edit</a>
 												</td>
 											</tr>
 										<?php endforeach ?>
