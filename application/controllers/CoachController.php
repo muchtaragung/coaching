@@ -94,8 +94,12 @@ class CoachController extends CI_Controller
 		$data['link'] = site_url('coach/coachee/show/' . $data['coachee']->id);
 
 		// pengecekkan apakah sesi terakhir sudah punya report
-		$sesi = end($data['sessions']);
-		$data['report_terakhir'] = $this->CoachModel->getReportBySessionID($sesi->id);
+		if (count($data['sessions']) > 0) {
+			$sesi = end($data['sessions']);
+			$data['report_terakhir'] = $this->CoachModel->getReportBySessionID($sesi->id);
+		} else {
+			$data['report_terakhir'] = 0; // jika sesi belum di mulai
+		}
 
 		$this->load->view('coach/coachee/sessions', $data, FALSE);
 	}
