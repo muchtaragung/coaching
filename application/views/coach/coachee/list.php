@@ -28,7 +28,7 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">List Peserta</h1>
+					<h1 class="h3 mb-4 text-gray-800">List Peserta <strong><?= $company->name ?></strong></h1>
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
@@ -117,7 +117,7 @@
 							<input type="password" name="password" required id="password" class="form-control">
 						</div>
 						<div class="form-group">
-							<input type="hidden" name="company_id" value="<?= $company_id ?>">
+							<input type="hidden" name="company_id" value="<?= $company->id ?>">
 						</div>
 					</div>
 					<div class="modal-footer">

@@ -27,8 +27,14 @@ class CoachController extends CI_Controller
 	public function showCoacheeByCompanyID($CompanyID)
 	{
 		$data['page_name'] = "Dashboard Coach";
+
+		// data coachee sesuai company id, dan coach yang login
 		$data['coachee'] = $this->CoachModel->getCoacheeByCompanyAndCoachID($CompanyID, $this->session->userdata('id'));
-		$data['company_id'] = $CompanyID;
+
+		// data dari company yang di pilih
+		$data['company'] = $this->CoachModel->getCompanyByID($CompanyID);
+
+		// link untuk kembali ke halaman yang sebelumnya
 		$data['link'] = site_url('coach');
 
 		$this->load->view('coach/coachee/list', $data, FALSE);
@@ -75,11 +81,25 @@ class CoachController extends CI_Controller
 
 	public function showCoacheeSessions($coacheeID)
 	{
-		$data['sessions'] = $this->CoachModel->getCoacheeSession($coacheeID);
+		// title halaman
 		$data['page_name'] = "Coachee Session";
-		$data['coachee_id'] = $coacheeID;
+
+		// data sesi
+		$data['sessions'] = $this->CoachModel->getCoacheeSession($coacheeID);
+
+		// sesi peserta
 		$data['coachee'] = $this->CoachModel->getCoacheeByID($coacheeID);
-		$data['link'] = site_url('coach/coachee/show/' . $data['coachee_id']);
+
+		// link untuk tombol back
+		$data['link'] = site_url('coach/coachee/show/' . $data['coachee']->id);
+
+		// pengecekkan apakah sesi terakhir sudah punya report
+		if (count($data['sessions']) > 0) {
+			$sesi = end($data['sessions']);
+			$data['report_terakhir'] = $this->CoachModel->getReportBySessionID($sesi->id);
+		} else {
+			$data['report_terakhir'] = 0; // jika sesi belum di mulai
+		}
 
 		$this->load->view('coach/coachee/sessions', $data, FALSE);
 	}
@@ -132,6 +152,16 @@ class CoachController extends CI_Controller
 		$data['coachee']   = $this->CoachModel->getCoacheeByID($data['session']->coachee_id);
 		$data['goals']     = $this->CoachModel->getGoalsByCoacheeID($coacheeID);
 		$data['link']      = site_url('/coach/coachee/session/' . $data['coachee']->id);
+
+		foreach ($data['goals'] as $goal) {
+			$where = [
+				'goals_id' => $goal->id,
+				'session_id' => $sessionID
+			];
+			$data['milestone'][] = $this->CoachModel->getMilestoneWhere($where);
+		}
+
+		$data['status_milestone'] = in_array(null, $data['milestone']);
 
 		$this->load->view('coach/coachee/show_session', $data);
 	}

@@ -77,7 +77,12 @@ class CoachModel extends CI_Model
 	 */
 	public function getCoacheeSession($coacheeID)
 	{
-		return $this->db->where('coachee_id', $coacheeID)->get('session')->result();
+		$this->db->select('*');
+		$this->db->from('session');
+		// $this->db->join('report', 'report.session_id = session.id');
+		$this->db->where('coachee_id', $coacheeID);
+		$query = $this->db->get()->result();
+		return $query;
 	}
 
 	public function getTotalSession($coacheeID, $coachID)
