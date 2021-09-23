@@ -81,6 +81,10 @@ class CoachController extends CI_Controller
 		$data['coachee'] = $this->CoachModel->getCoacheeByID($coacheeID);
 		$data['link'] = site_url('coach/coachee/show/' . $data['coachee_id']);
 
+		// pengecekkan apakah sesi terakhir sudah punya report
+		$sesi = end($data['sessions']);
+		$data['report_terakhir'] = $this->CoachModel->getReportBySessionID($sesi->id);
+		// var_dump($data);
 		$this->load->view('coach/coachee/sessions', $data, FALSE);
 	}
 
