@@ -81,62 +81,71 @@
 							<div class="card border-left-primary shadow h-100 py-2">
 								<div class="card-body">
 									<div class="row no-gutters align-items-center">
-										<div class="col mr-2">
-											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												<h4>
-													Data Hasil Penilaian Sesi
-												</h4>
-											</div>
-											<?php if (!isset($penilaian)) : ?>
-												<div class="h5 mb-0 font-weight-bold text-gray-800">Penilaian Belum Ada</div>
-												<a href="<?= site_url('coach/coachee/session/penilaian/' . $session->id . '/' . $coachee->id) ?>" class="btn btn-primary">Penilaian</a>
-											<?php else : ?>
-												<table class="">
-													<tr class="h5 mb-0 text-gray-800">
-														<td class="font-weight-bold">
-															Komunikasi Dan Respon
-														</td>
-														<td>:</td>
-														<td><?= $penilaian->komunikasi ?></td>
-													</tr>
-													<tr class="h5 mb-0 text-gray-800">
-														<td class="font-weight-bold">
-															Kehadiran Setiap Sesi
-														</td>
-														<td>:</td>
-														<td><?= $penilaian->kehadiran ?></td>
-													</tr>
-													<tr class="h5 mb-0 text-gray-800">
-														<td class="font-weight-bold">
-															Effort Proses Coaching
-														</td>
-														<td>:</td>
-														<td><?= $penilaian->effort ?></td>
-													</tr>
-													<tr class="h5 mb-0 text-gray-800">
-														<td class="font-weight-bold">
-															Komitment Melakukan Action Plan
-														</td>
-														<td>:</td>
-														<td><?= $penilaian->komitment ?></td>
-													</tr>
-												</table>
-												<br>
-												<?php if (!isset($report[0])) : ?>
-													<a href="<?= site_url('coach/coachee/session/report/create/' . $session->id . '/' . $coachee->id) ?>" class="btn btn-warning btn-icon-split float-right">
-														<span class="icon text-white-50">
-															<i class="fas fa-print"></i>
-														</span>
-														<span class="text">Buat Laporan</span>
-													</a>
+										<?php if ($status_milestone != 'true') : ?>
+											<div class="col mr-2">
+												<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+													<h4>
+														Data Hasil Penilaian Sesi
+													</h4>
+												</div>
+												<?php if (!isset($penilaian)) : ?>
+													<div class="h5 mb-0 font-weight-bold text-gray-800">Penilaian Belum Ada</div>
+													<a href="<?= site_url('coach/coachee/session/penilaian/' . $session->id . '/' . $coachee->id) ?>" class="btn btn-primary">Penilaian</a>
+												<?php else : ?>
+													<table class="">
+														<tr class="h5 mb-0 text-gray-800">
+															<td class="font-weight-bold">
+																Komunikasi Dan Respon
+															</td>
+															<td>:</td>
+															<td><?= $penilaian->komunikasi ?></td>
+														</tr>
+														<tr class="h5 mb-0 text-gray-800">
+															<td class="font-weight-bold">
+																Kehadiran Setiap Sesi
+															</td>
+															<td>:</td>
+															<td><?= $penilaian->kehadiran ?></td>
+														</tr>
+														<tr class="h5 mb-0 text-gray-800">
+															<td class="font-weight-bold">
+																Effort Proses Coaching
+															</td>
+															<td>:</td>
+															<td><?= $penilaian->effort ?></td>
+														</tr>
+														<tr class="h5 mb-0 text-gray-800">
+															<td class="font-weight-bold">
+																Komitment Melakukan Action Plan
+															</td>
+															<td>:</td>
+															<td><?= $penilaian->komitment ?></td>
+														</tr>
+													</table>
+													<br>
+													<?php if (!isset($report[0])) : ?>
+														<a href="<?= site_url('coach/coachee/session/report/create/' . $session->id . '/' . $coachee->id) ?>" class="btn btn-warning btn-icon-split float-right">
+															<span class="icon text-white-50">
+																<i class="fas fa-print"></i>
+															</span>
+															<span class="text">Buat Laporan</span>
+														</a>
+													<?php endif ?>
 												<?php endif ?>
-											<?php endif ?>
-										</div>
+											</div>
+										<?php else : ?>
+											<div class="col mr-2">
+												<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+													<h4>
+														Silahkan isi penilaian milestone sebelum mengisi penilaian sesi.
+													</h4>
+												</div>
+											</div>
+										<?php endif ?>
 									</div>
 								</div>
 							</div>
 						</div>
-
 					</div>
 
 				</div>

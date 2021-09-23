@@ -137,6 +137,16 @@ class CoachController extends CI_Controller
 		$data['goals']     = $this->CoachModel->getGoalsByCoacheeID($coacheeID);
 		$data['link']      = site_url('/coach/coachee/session/' . $data['coachee']->id);
 
+		foreach ($data['goals'] as $goal) {
+			$where = [
+				'goals_id' => $goal->id,
+				'session_id' => $sessionID
+			];
+			$data['milestone'][] = $this->CoachModel->getMilestoneWhere($where);
+		}
+
+		$data['status_milestone'] = in_array(null, $data['milestone']);
+
 		$this->load->view('coach/coachee/show_session', $data);
 	}
 
