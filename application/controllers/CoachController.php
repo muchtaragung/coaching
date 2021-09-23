@@ -75,16 +75,22 @@ class CoachController extends CI_Controller
 
 	public function showCoacheeSessions($coacheeID)
 	{
-		$data['sessions'] = $this->CoachModel->getCoacheeSession($coacheeID);
+		// title halaman
 		$data['page_name'] = "Coachee Session";
-		$data['coachee_id'] = $coacheeID;
+
+		// data sesi
+		$data['sessions'] = $this->CoachModel->getCoacheeSession($coacheeID);
+
+		// sesi peserta
 		$data['coachee'] = $this->CoachModel->getCoacheeByID($coacheeID);
-		$data['link'] = site_url('coach/coachee/show/' . $data['coachee_id']);
+
+		// link untuk tombol back
+		$data['link'] = site_url('coach/coachee/show/' . $data['coachee']->id);
 
 		// pengecekkan apakah sesi terakhir sudah punya report
 		$sesi = end($data['sessions']);
 		$data['report_terakhir'] = $this->CoachModel->getReportBySessionID($sesi->id);
-		// var_dump($data);
+
 		$this->load->view('coach/coachee/sessions', $data, FALSE);
 	}
 
