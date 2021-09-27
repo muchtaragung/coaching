@@ -107,10 +107,12 @@ $route['coach/coachee/update-action'] = 'CoachController/updateAction';
 $route['coachee']                 = 'CoacheeController';
 
 // goals
-$route['coachee/goals']           = 'CoacheeController/allGoals';
-$route['coachee/addgoal']         = 'CoacheeController/addGoal';
-$route['coachee/goal/(:num)']     = 'CoacheeController/showGoal/$1';
-$route['coachee/endGoal/(:num)']  = 'CoacheeController/endGoal/$1';
+$route['coachee/goals']            = 'CoacheeController/allGoals';
+$route['coachee/addgoal']          = 'CoacheeController/addGoal';
+$route['coachee/goal/(:num)']      = 'CoacheeController/showGoal/$1';
+$route['coachee/goal/edit/(:num)'] = 'CoacheeController/editGoal/$1';
+$route['coachee/goal/update']     = 'CoacheeController/updateGoal';
+$route['coachee/endGoal/(:num)']   = 'CoacheeController/endGoal/$1';
 
 // action plan
 $route['coachee/addaction']       = 'CoacheeController/addActionPlan';

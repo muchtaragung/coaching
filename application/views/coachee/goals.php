@@ -62,6 +62,7 @@
 												<td> <?= $goal->due_date ?> </td>
 												<td>
 													<a href="<?= site_url('coachee/goal/') . $goal->id ?>" class="btn btn-primary">Detail Goal</a>
+													<a href="<?= site_url('coachee/goal/edit/') . $goal->id ?>" class="btn btn-info">Edit</a>
 												</td>
 											</tr>
 										<?php endforeach ?>

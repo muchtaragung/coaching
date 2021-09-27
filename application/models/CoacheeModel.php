@@ -22,6 +22,26 @@ class CoacheeModel extends CI_Model
 			return array();
 		}
 	}
+
+	/**
+	 * mengambil data goal sesuai id
+	 * parameter pertama id dari goal
+	 */
+	public function getGoalByID($goalID)
+	{
+		return $this->db->where('id', $goalID)->get('goals')->row();
+	}
+
+	/**
+	 * mengupdate goal
+	 * parameter pertama id goal
+	 * parameter kedua data goal dalam bentuk array
+	 */
+	public function updateGoal($goalID, $goal)
+	{
+		return $this->db->where('id', $goalID)->update('goals', $goal);
+	}
+
 	public function update_password($data, $id)
 	{
 		$this->db->where('id', $id);
