@@ -38,14 +38,15 @@
 						$sekarang    = time(); // Waktu sekarang
 						$diff   = $sekarang - $tanggal;
 						$hasil = $diff;
+						$day = floor($hasil / (60 * 60 * 24));
 						?>
-						<?php if ($hasil < 0) : ?>
-							<span class="badge badge-pill badge-secondary"><?= "Sisa Due Date  " . abs(ceil($hasil / (60 * 60 * 24)) + 1) . ' Hari' ?></span>
-							<?php if ($hasil > 1) : ?>
-								<span class="badge badge-pill badge-danger"><?= "Goal Terlewat " . ceil($hasil / (60 * 60 * 24) - 1) . ' Hari'; ?></span>
-							<?php endif ?>
+
+						<?php if ($day < 0) : ?>
+							<span class="badge badge-pill badge-secondary">Goal Sisa <?= abs($day)  . ' Hari' ?></span>
+						<?php elseif ($day == 0) : ?>
+							<span class="badge badge-pill badge-danger">Hari Ini Adalah Batas Akhir Goal</span>
 						<?php else : ?>
-							<span class="badge badge-pill badge-secondary">Ini Adalah Batas Akhir Goal</span>
+							<span class="badge badge-pill badge-danger">Goal Lewat <?= $day  . ' Hari' ?></span>
 						<?php endif ?>
 						<br>
 						<?php if ($goal->status == 'selesai') : ?>

@@ -152,7 +152,7 @@
 							?>
 							<?php if ($hasil < 0) : ?>
 								<span class="badge badge-pill badge-secondary"><?= "Sisa Due Date  " . abs(ceil($hasil / (60 * 60 * 24)) + 1) . ' Hari' ?></span>
-								<?php if ($hasil > 1) : ?>
+								<?php if ($hasil == 1 && $hasil < 2) : ?>
 									<span class="badge badge-pill badge-danger"><?= "Goal Terlewat " . ceil($hasil / (60 * 60 * 24) - 1) . ' Hari'; ?></span>
 								<?php endif ?>
 							<?php else : ?>
