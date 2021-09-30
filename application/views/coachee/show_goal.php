@@ -151,9 +151,12 @@
 							$hasil = $diff;
 							?>
 							<?php if ($hasil < 0) : ?>
-								<span class="badge badge-pill badge-secondary"><?= "Sisa Due Date  " . abs(ceil($hasil / (60 * 60 * 24)) - 1) . ' Hari' ?></span>
+								<span class="badge badge-pill badge-secondary"><?= "Sisa Due Date  " . abs(ceil($hasil / (60 * 60 * 24)) + 1) . ' Hari' ?></span>
+								<?php if ($hasil > 1) : ?>
+									<span class="badge badge-pill badge-danger"><?= "Goal Terlewat " . ceil($hasil / (60 * 60 * 24) - 1) . ' Hari'; ?></span>
+								<?php endif ?>
 							<?php else : ?>
-								<span class="badge badge-pill badge-danger"><?= "Goal Terlewat " . ceil($hasil / (60 * 60 * 24) + 1) . ' Hari'; ?></span>
+								<span class="badge badge-pill badge-secondary">Ini Adalah Batas Akhir Goal</span>
 							<?php endif ?>
 							<br>
 							<?php if ($goal->status == 'selesai') : ?>
