@@ -175,6 +175,23 @@
             )
         </script>
     <?php endif ?>
+
+    <script>
+        function confirmDelete(link) {
+            Swal.fire({
+                title: 'Apakah Anda Ingin Menghapus milseton',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.replace(link)
+                }
+            })
+        }
+    </script>
 </body>
 
 
