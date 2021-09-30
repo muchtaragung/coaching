@@ -113,74 +113,74 @@
 					<?php if ($penilaian_sesi['komitment'] == '5') { ?> 5 <?php } ?>
 				</td>
 			</tr>
-
 		</table>
+
+		<h4>Rangkuman Penilaian :</h4>
+		<p><?= $penilaian_sesi['keterangan'] ?></p>
 	</div>
 
 	<br>
 	<hr>
-	<br>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<div class="row">
-		<h2>Goals</h2>
-	</div>
+
 
 	<?php for ($i = 0; $i < count($goals); $i++) : ?>
-		<div class="row d-flex">
-			<h4 class="float-left">Goal : <?= $goals[$i]['goal'] ?></h4>
-			<h4 class="float-right">Due Date : <?= $goals[$i]['due_date'] ?></h4>
-			<h4>Success Criteria : <?= $success_criteria[$i][0]['criteria'] ?></h4>
-		</div>
+		<div style="page-break-before: always;">
+			<h2>Goals</h2>
+			<div class="row d-flex">
+				<h4 class="float-left">Goal : <?= $goals[$i]['goal'] ?></h4>
+				<h4 class="float-right">Due Date : <?= $goals[$i]['due_date'] ?></h4>
+				<h4>Success Criteria : <?= $success_criteria[$i][0]['criteria'] ?></h4>
+			</div>
 
-		<table border="1">
-			<tr>
-				<th>Action Plan</th>
-				<th>Result</th>
-				<th>Keterangan</th>
-			</tr>
-
-			<?php
-			for ($j = 0; $j < count($action_plan[$i]); $j++) : ?>
-				<tr style="text-align: center;">
-					<td><?= $action_plan[$i][$j]['action'] ?></td>
-					<td>
-						<?= $action_plan[$i][$j]['result'] ?>
-					</td>
-					<td><?= $action_plan[$i][$j]['keterangan'] ?></td>
-				</tr>
-			<?php endfor ?>
-		</table>
-
-		<br>
-
-		<table border="1">
-			<tr>
-				<th>Komentar</th>
-				<th>Result</th>
-			</tr>
-			<?php for ($j = 0; $j < count($notes[$i]); $j++) : ?>
+			<table border="1">
 				<tr>
-					<td><?= $notes[$i][$j]['comment'] ?></td>
-					<td><?= $notes[$i][$j]['result'] ?></td>
+					<th>Action Plan</th>
+					<th>Result</th>
+					<th>Keterangan</th>
 				</tr>
-			<?php endfor ?>
-		</table>
 
-		<h4>Milestone</h4>
-		<table>
-			<tr>
-				<td>Milestone</td>
-				<td>:</td>
-				<td><?= $milestone[$i][0]['milestone'] ?></td>
-			</tr>
-			<tr>
-				<td>Keterangan</td>
-				<td>:</td>
-				<td><?= $milestone[$i][0]['keterangan'] ?></td>
-			</tr>
-		</table>
+				<?php
+				for ($j = 0; $j < count($action_plan[$i]); $j++) : ?>
+					<tr style="text-align: center;">
+						<td><?= $action_plan[$i][$j]['action'] ?></td>
+						<td>
+							<?= $action_plan[$i][$j]['result'] ?>
+						</td>
+						<td><?= $action_plan[$i][$j]['keterangan'] ?></td>
+					</tr>
+				<?php endfor ?>
+			</table>
+
+			<br>
+
+			<table border="1">
+				<tr>
+					<th>Komentar</th>
+					<th>Result</th>
+				</tr>
+				<?php for ($j = 0; $j < count($notes[$i]); $j++) : ?>
+					<tr>
+						<td><?= $notes[$i][$j]['comment'] ?></td>
+						<td><?= $notes[$i][$j]['result'] ?></td>
+					</tr>
+				<?php endfor ?>
+			</table>
+
+			<h4>Milestone</h4>
+			<table>
+				<tr>
+					<td>Milestone</td>
+					<td>:</td>
+					<td><?= $milestone[$i][0]['milestone'] ?></td>
+				</tr>
+				<tr>
+					<td>Keterangan</td>
+					<td>:</td>
+					<td><?= $milestone[$i][0]['keterangan'] ?></td>
+				</tr>
+			</table>
+		</div>
 	<?php endfor ?>
-
 </body>
 
 </html>

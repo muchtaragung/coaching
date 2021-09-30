@@ -129,6 +129,11 @@
 									</div>
 								</div>
 
+								<div class="form-group mt-5">
+									<label for="keterangan">Rangkuman Penilaian</label>
+									<textarea name="keterangan" id="keterangan" cols="30" rows="10" class="form-control"></textarea>
+								</div>
+
 								<div class="form-group">
 									<button type="submit" class="btn btn-primary float-right">Submit</button>
 								</div>

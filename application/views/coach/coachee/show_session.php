@@ -77,7 +77,7 @@
 						</div>
 
 						<!-- Earnings (Monthly) Card Example -->
-						<div class="col-xl-5 col-md-8 col-sm-12 mb-4">
+						<div class="col-md-8 col-sm-12 mb-4">
 							<div class="card border-left-primary shadow h-100 py-2">
 								<div class="card-body">
 									<div class="row no-gutters align-items-center">
@@ -120,6 +120,13 @@
 															</td>
 															<td>:</td>
 															<td><?= $penilaian->komitment ?></td>
+														</tr>
+														<tr class="h5 mb-0 text-gray-800">
+															<td class="font-weight-bold">
+																Rangkuman
+															</td>
+															<td>:</td>
+															<td><?= $penilaian->keterangan ?></td>
 														</tr>
 													</table>
 													<br>

@@ -151,7 +151,7 @@ class CoachController extends CI_Controller
 		$data['penilaian'] = $this->CoachModel->getPenilaianBySessionID($sessionID);
 		$data['report']    = $this->CoachModel->getReportBySessionID($sessionID);
 		$data['coachee']   = $this->CoachModel->getCoacheeByID($data['session']->coachee_id);
-		$data['goals']     = $this->CoachModel->getGoalsByCoacheeIDBelumSelesai($coacheeID);
+		$data['goals']     = $this->CoachModel->getGoalsByCoacheeID($coacheeID);
 		$data['link']      = site_url('/coach/coachee/session/' . $data['coachee']->id);
 
 		foreach ($data['goals'] as $goal) {
@@ -308,6 +308,7 @@ class CoachController extends CI_Controller
 		$penilaian['kehadiran']  = $this->input->post('kehadiran');
 		$penilaian['effort']     = $this->input->post('effort');
 		$penilaian['komitment']  = $this->input->post('komitment');
+		$penilaian['keterangan'] = $this->input->post('keterangan');
 
 		$this->session->set_flashdata('penilaian', 'berhasil');
 		$this->CoachModel->savePenilaian($penilaian);
