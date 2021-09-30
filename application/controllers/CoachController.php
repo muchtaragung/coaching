@@ -101,6 +101,7 @@ class CoachController extends CI_Controller
 			$data['report_terakhir'] = 0; // jika sesi belum di mulai
 		}
 
+		// var_dump($data);
 		$this->load->view('coach/coachee/sessions', $data, FALSE);
 	}
 
@@ -398,7 +399,7 @@ class CoachController extends CI_Controller
 		// die();
 		$this->session->set_flashdata('report', 'berhasil');
 		$this->CoachModel->saveReport($report);
-		redirect('coach/coachee/session/show/' . $report['session_id'] . '/' . $coacheeID, 'refresh');
+		redirect('coach/coachee/session/' . $coacheeID, 'refresh');
 	}
 
 

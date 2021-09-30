@@ -71,7 +71,23 @@
 													<?php elseif ($session->status == 'belum selesai') : ?>
 														<button onclick=" confirmEnd('<?= site_url('coach/coachee/session/end/' . $session->id . '/' . $session->coachee_id) ?>')" class="btn btn-primary">Selesaikan Sesi</button>
 													<?php elseif ($session->status == 'selesai') : ?>
-														<a href="<?= site_url('coach/coachee/session/show/' . $session->id . '/' . $session->coachee_id) ?>" class="btn btn-primary">Penilaian Dan Laporan</a>
+
+														<!-- menggunakan db di view karena gue ga tau cara lain lagi... -->
+														<?php $data_report = $this->db->where('session_id', $session->id)->get('report')->row(); ?>
+
+														<!-- jika $data_report tidak null maka report tersedia & siap hanya menampilkan create report -->
+														<?php if ($data_report != null) : ?>
+															<a href="<?= site_url('coach/coachee/session/report/show/' . $session->id . '/' . $coachee->id) ?>" class="btn btn-success btn-icon-split">
+																<span class="icon text-white-50">
+																	<i class="fas fa-print"></i>
+																</span>
+																<span class="text">Laporan PDF</span>
+															</a>
+														<?php else : ?>
+															<a href="<?= site_url('coach/coachee/session/show/' . $session->id . '/' . $session->coachee_id) ?>" class="btn btn-primary">Penilaian Dan Laporan</a>
+														<?php endif ?>
+
+
 													<?php endif ?>
 												</td>
 											</tr>
