@@ -133,6 +133,16 @@ class CoachModel extends CI_Model
 		}
 	}
 
+	public function getGoalsByCoacheeIDBelumSelesai($coacheeID, $type = '')
+	{
+		$where = ['coachee_id' => $coacheeID, 'status' => 'belum selesai'];
+		if ($type == 'array') {
+			return $this->db->where($where)->get('goals')->result_array();
+		} else {
+			return $this->db->where($where)->get('goals')->result();
+		}
+	}
+
 	public function cancelGoal($goalID, $goal)
 	{
 		return $this->db->where('id', $goalID)->update('goals', $goal);

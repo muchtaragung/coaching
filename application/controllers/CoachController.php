@@ -150,7 +150,7 @@ class CoachController extends CI_Controller
 		$data['penilaian'] = $this->CoachModel->getPenilaianBySessionID($sessionID);
 		$data['report']    = $this->CoachModel->getReportBySessionID($sessionID);
 		$data['coachee']   = $this->CoachModel->getCoacheeByID($data['session']->coachee_id);
-		$data['goals']     = $this->CoachModel->getGoalsByCoacheeID($coacheeID);
+		$data['goals']     = $this->CoachModel->getGoalsByCoacheeIDBelumSelesai($coacheeID);
 		$data['link']      = site_url('/coach/coachee/session/' . $data['coachee']->id);
 
 		foreach ($data['goals'] as $goal) {
