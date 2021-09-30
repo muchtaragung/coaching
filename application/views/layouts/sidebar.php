@@ -39,17 +39,17 @@
 				<i class="fas fa-table"></i>
 				<span>List Perusahaan</span></a>
 		</li>
-		<?php $perusahaan = $this->db->get('company')->result(); ?>
+		<?php $list_perusahaan = $this->db->get('company')->result(); ?>
 		<li class="nav-item">
-			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#list_perusahaan" aria-expanded="false" aria-controls="list_perusahaan">
 				<i class="fas fa-building"></i>
 				<span>Perusahaan</span>
 			</a>
-			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
+			<div id="list_perusahaan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">List Perusahaan:</h6>
-					<?php foreach ($perusahaan as $p) : ?>
-						<a class="collapse-item" href="<?= site_url('/coach/coachee/list/' . $p->id) ?>"><?= $p->name ?></a>
+					<?php foreach ($list_perusahaan as $compani) : ?>
+						<a class="collapse-item" href="<?= site_url('/coach/coachee/list/' . $compani->id) ?>"><?= $compani->name ?></a>
 					<?php endforeach ?>
 				</div>
 			</div>
