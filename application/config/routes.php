@@ -66,6 +66,8 @@ $route['coach/coachee/show/(:num)']               = 'CoachController/detailCoach
 
 $route['coach/coachee/(:num)']                    = 'CoachController/showCoacheeGoals/$1';
 $route['coach/coachee/goal/(:num)']               = 'CoachController/ShowCoacheGoal/$1';
+$route['coach/coachee/goal/edit/(:num)']          = 'CoachController/edit_goal/$1';
+$route['coach/coachee/goal/update']               = 'CoachController/updateGoal';
 $route['coach/coachee/note/add']                  = 'CoachController/addNotes';
 $route['coach/coachee/goal/milestone/add/(:num)'] = 'CoachController/addMilestone/$1';
 $route['coach/coachee/goal/milestone/save']       = 'CoachController/saveMilestone';
