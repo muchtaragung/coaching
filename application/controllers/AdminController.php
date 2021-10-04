@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Csv;
+
 class AdminController extends CI_Controller
 {
 
@@ -691,6 +694,132 @@ class AdminController extends CI_Controller
 		$this->pdf->load_view('laporan_coach', $data, $file_name);
 	}
 
+	public function report_csv($sessionID)
+	{
+		$report = $this->CoachModel->getReportBySessionID($sessionID);
+
+		$coach = json_decode($report[0]->coach, true);
+		$coachee = json_decode($report[0]->coachee, true);
+		$company = $this->db->where('id', $coachee['company_id'])->get('company')->row_array();
+		$session = json_decode($report[0]->session, true);
+		$penilaian_sesi = json_decode($report[0]->penilaian_sesi, true);
+		$goals = json_decode($report[0]->goals, true);
+		$success_criteria = json_decode($report[0]->success_criteria, true);
+		$action_plan = json_decode($report[0]->action_plan, true);
+		$notes = json_decode($report[0]->notes, true);
+		$milestone = json_decode($report[0]->milestone, true);
+		$session_id = json_decode($report[0]->session_id, true);
+
+		// var_dump($data);
+		// die();
+
+		// buat object spreadseet
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+
+		// bagian nama coachee
+		$sheet->setCellValue('A2', 'Nama Coachee');
+		$sheet->setCellValue('B2', $coachee['name']);
+		$sheet->setCellValue('A3', 'Email Coachee');
+		$sheet->setCellValue('B3', $coachee['email']);
+		$sheet->setCellValue('A4', "Perusahaan");
+		$sheet->setCellValue('B4', $company['name']);
+
+		// bagian coach
+		$sheet->setCellValue('A6', 'Nama Coach');
+		$sheet->setCellValue('B6', $coach['name']);
+		$sheet->setCellValue('A7', 'Email Coach');
+		$sheet->setCellValue('B7', $coach['email']);
+
+		// bagian sesi
+		$sheet->setCellValue('A9', 'Sesi Ke');
+		$sheet->setCellValue('B9', $session['session']);
+		$sheet->setCellValue('A10', 'Waktu Mulai');
+		$sheet->setCellValue('B10', $session['start_time']);
+		$sheet->setCellValue('A11', 'Waktu Selesai');
+		$sheet->setCellValue('B11', $session['end_time']);
+
+		// bagian penilaian
+		$sheet->setCellValue('A13', 'Komunikasi Dan Respon');
+		$sheet->setCellValue('B13', $penilaian_sesi['komunikasi']);
+		$sheet->setCellValue('A14', 'Kehadiran Tiap Sesi');
+		$sheet->setCellValue('B14', $penilaian_sesi['kehadiran']);
+		$sheet->setCellValue('A15', 'Effort Proses Coaching');
+		$sheet->setCellValue('B15', $penilaian_sesi['effort']);
+		$sheet->setCellValue('A16', 'Komitment Melakukan Action Plan');
+		$sheet->setCellValue('B16', $penilaian_sesi['komitment']);
+		if (isset($penilaian_sesi['keterangan'])) {
+			$sheet->setCellValue('A17', 'Rangkuman Penilaian');
+			$sheet->setCellValue('B17', $penilaian_sesi['keterangan']);
+		}
+
+		$row = 19;
+
+		// bagian goals
+		for ($i = 0; $i < count($goals); $i++) {
+			// goals
+			$sheet->setCellValue('A' . $row, 'Goal');
+			$sheet->setCellValue('B' . $row, $goals[$i]['goal']);
+			$row += 1;
+			$sheet->setCellValue('A' . $row, 'Due Date');
+			$sheet->setCellValue('B' . $row, $goals[$i]['due_date']);
+			$row += 1;
+			$sheet->setCellValue('A' . $row, 'Status Goal');
+			$sheet->setCellValue('B' . $row, $goals[$i]['status']);
+			$row += 1;
+			$sheet->setCellValue('A' . $row, 'Success Criteria');
+			if (isset($success_criteria[$i][0])) { // pengecekan status criteria
+				$sheet->setCellValue('B' . $row, $success_criteria[$i][0]['criteria']);
+			}
+			$row += 2;
+			$sheet->setCellValue('A' . $row, 'Action Plan');
+			$sheet->setCellValue('B' . $row, 'Result');
+			$sheet->setCellValue('C' . $row, 'Keterangan');
+			$row += 1;
+			// Bagian Action Plan
+			if (isset($action_plan[$i])) {
+				for ($j = 0; $j < count($action_plan[$i]); $j++) {
+					$sheet->setCellValue('A' . $row, $action_plan[$i][$j]['action']);
+					$sheet->setCellValue('B' . $row, $action_plan[$i][$j]['result']);
+					$sheet->setCellValue('C' . $row, $action_plan[$i][$j]['keterangan']);
+					$row += 1;
+				}
+			}
+			// Bagian notes
+			$row += 1;
+			$sheet->setCellValue('A' . $row, 'Komentar');
+			$sheet->setCellValue('B' . $row, 'Result');
+			$row += 1;
+			if (isset($notes[$i])) {
+				for ($j = 0; $j < count($notes[$i]); $j++) {
+					$sheet->setCellValue('A' . $row, $notes[$i][$j]['comment']);
+					$sheet->setCellValue('B' . $row, $notes[$i][$j]['result']);
+					$row += 1;
+				}
+			}
+
+			// bagian Milestone dan Keterangan
+			$row += 1;
+			$sheet->setCellValue('A' . $row, 'Milestone');
+			$sheet->setCellValue('B' . $row, $milestone[$i][0]['milestone']);
+			$row += 1;
+			$sheet->setCellValue('A' . $row, 'Keterangan');
+			$sheet->setCellValue('B' . $row, $milestone[$i][0]['keterangan']);
+			$row = $row + 2;
+		}
+
+		// set locale untuk filename dan waktu
+		setlocale(LC_TIME, 'id_ID');
+		date_default_timezone_set("Asia/Jakarta");
+
+		$filename = $coachee['name'] . '-' . 'Sesi ' . $session['session'] . '-' . date('d M Y H:i:s') . '.csv';
+		$foldername = 'csv' . DIRECTORY_SEPARATOR . $coach['name'] . DIRECTORY_SEPARATOR . $company['name'];
+
+		mkdir(FCPATH . $foldername, 0755, true);
+		$writer = new Csv($spreadsheet);
+		$writer->save(FCPATH . $foldername . DIRECTORY_SEPARATOR . $filename);
+		redirect($foldername . DIRECTORY_SEPARATOR . $filename);
+	}
 
 	//profile
 	public function profile()

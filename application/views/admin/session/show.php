@@ -123,6 +123,12 @@
 													</span>
 													<span class="text">Laporan PDF</span>
 												</a>
+												<a href="<?= site_url('AdminController/report_csv/' . $session->id) ?>" class="btn btn-info btn-icon-split">
+													<span class="icon text-white-50">
+														<i class="fas fa-print"></i>
+													</span>
+													<span class="text">Laporan Csv</span>
+												</a>
 											<?php endif ?>
 										</div>
 									</div>
