@@ -50,6 +50,7 @@
 											<th>id</th>
 											<th>Nama</th>
 											<th>email</th>
+											<th>coach</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -60,6 +61,12 @@
 												<td><?= $coachee->id ?></td>
 												<td> <?= $coachee->name ?> </td>
 												<td><?= $coachee->email ?></td>
+												<td>
+													<?php
+													$coach = $this->db->where('id', $coachee->coach_id)->get('coach')->row();
+													echo $coach->name;
+													?>
+												</td>
 												<td>
 													<a href="<?= site_url('admin/coachee/detail/') . $coachee->id ?>" class="btn btn-primary">Detail Coachee</a>
 												</td>
