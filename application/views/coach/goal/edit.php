@@ -80,5 +80,3 @@
 	</div>
 	<?php $this->load->view('layouts/script'); ?>
 </body>
-
-</

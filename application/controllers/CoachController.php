@@ -192,6 +192,26 @@ class CoachController extends CI_Controller
 		$this->load->view('coach/coachee/goal', $data, FALSE);
 	}
 
+	public function edit_goal($goalID)
+	{
+		$data['page_name'] = 'Edit Goal';
+		$data['goal']      = $this->CoachModel->goalByID($goalID);
+
+		$this->load->view('coach/goal/edit', $data);
+	}
+
+	public function updateGoal()
+	{
+		$goalID           = $this->input->post('id');
+		$coacheeID        = $this->input->post('coachee_id');
+		$goal['goal']     = $this->input->post('goal');
+		$goal['due_date'] = $this->input->post('due_date');
+
+		$this->session->set_flashdata('goal', 'Berhasil Mengupdate Goal');
+		$this->CoachModel->updateGoal($goalID, $goal);
+		redirect('coach/coachee/' . $coacheeID, 'refresh');
+	}
+
 	public function cancelGoal($goalID)
 	{
 		$goal['status'] = 'belum selesai';

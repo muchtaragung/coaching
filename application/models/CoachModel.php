@@ -100,6 +100,16 @@ class CoachModel extends CI_Model
 		return $this->db->insert('session', $session);
 	}
 
+	/**
+	 * mengupdate goal
+	 * parameter pertama id goal
+	 * parameter kedua data goal dalam bentuk array
+	 */
+	public function updateGoal($goalID, $goal)
+	{
+		return $this->db->where('id', $goalID)->update('goals', $goal);
+	}
+
 	public function startSession($sessionID, $session, $coacheeID)
 	{
 		$set = ['status' => 1];
