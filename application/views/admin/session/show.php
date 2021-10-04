@@ -117,6 +117,12 @@
 												<button onclick="confirmDelete('<?= site_url('admin/coachee/session/laporan/delete/' . $report->id . '/' . $session->id) ?>','Laporan')" class="btn btn-danger">
 													Hapus Laporan
 												</button>
+												<a href="<?= site_url('AdminController/showReport/' . $session->id) ?>" class="btn btn-success btn-icon-split">
+													<span class="icon text-white-50">
+														<i class="fas fa-print"></i>
+													</span>
+													<span class="text">Laporan PDF</span>
+												</a>
 											<?php endif ?>
 										</div>
 									</div>

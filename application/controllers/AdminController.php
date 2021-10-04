@@ -8,6 +8,8 @@ class AdminController extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('AdminModel');
+		$this->load->model('CoachModel');
+		$this->load->library('pdf');
 		$this->load->library('form_validation');
 	}
 
@@ -666,6 +668,29 @@ class AdminController extends CI_Controller
 		$this->AdminModel->deletePenilaian($id);
 		redirect('admin/coachee/session/show/' . $sessionID, 'refresh');
 	}
+
+	public function showReport($sessionID)
+	{
+		$report = $this->CoachModel->getReportBySessionID($sessionID);
+
+		$data['coach'] = json_decode($report[0]->coach, true);
+		$data['coachee'] = json_decode($report[0]->coachee, true);
+		$data['session'] = json_decode($report[0]->session, true);
+		$data['penilaian_sesi'] = json_decode($report[0]->penilaian_sesi, true);
+		$data['goals'] = json_decode($report[0]->goals, true);
+		$data['success_criteria'] = json_decode($report[0]->success_criteria, true);
+		$data['action_plan'] = json_decode($report[0]->action_plan, true);
+		$data['notes'] = json_decode($report[0]->notes, true);
+		$data['milestone'] = json_decode($report[0]->milestone, true);
+		$data['session_id'] = json_decode($report[0]->session_id, true);
+
+		// var_dump($data);
+		// die();
+		$this->pdf->setPaper('A4', 'potrait');
+		$file_name = 'Laporan Coaching-' . $data['coachee']['name'] . '-' .  $data['session']['start_time'];
+		$this->pdf->load_view('laporan_coach', $data, $file_name);
+	}
+
 
 	//profile
 	public function profile()
