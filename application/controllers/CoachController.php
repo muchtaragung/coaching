@@ -23,7 +23,8 @@ class CoachController extends CI_Controller
 	public function index()
 	{
 		$data['page_name'] = "Dashboard Coach";
-		$data['companies'] = $this->CoachModel->getCompany();
+		
+		$data['companies'] = $this->CoachModel->getCompany($this->session->userdata('company_id'));
 		$this->load->view('coach/index', $data, FALSE);
 	}
 
@@ -32,14 +33,20 @@ class CoachController extends CI_Controller
 		$data['page_name'] = "Dashboard Coach";
 
 		// data coachee sesuai company id, dan coach yang login
-		$data['coachee'] = $this->CoachModel->getCoacheeByCompanyAndCoachID($CompanyID, $this->session->userdata('id'));
+		if($this->session->userdata('switch')){
+			$data['coachee'] = $this->db->where('company_id', $CompanyID)->where('coach_id', $this->session->userdata('id'))->get('coachee')->result();
+		}else{
+			
+			$data['coachee'] = $this->db->where('company_id', $CompanyID)->get('coachee')->result();
+		}
 
 		// data dari company yang di pilih
 		$data['company'] = $this->CoachModel->getCompanyByID($CompanyID);
 
 		// link untuk kembali ke halaman yang sebelumnya
 		$data['link'] = site_url('coach');
-
+		$data['coachKorpora'] = $this->db->where('company_id is NULL', NULL, false)->get('coach')->result();
+		$data['coaches'] = $this->db->where('company_id', $CompanyID)->get('coach')->result();
 		$this->load->view('coach/coachee/list', $data, FALSE);
 	}
 
@@ -594,6 +601,102 @@ class CoachController extends CI_Controller
 				redirect('coach/profile', 'refresh');
 			}
 		}
+	}
+
+	public function prework ()
+	{
+		$this->load->view('coach/prework');
+		
+	}
+
+	// public function addPrewokk()
+	// {
+	// 	$count = count($_FILES['files']['name']);
+
+	// 	echo $count;
+	// }
+
+	function preworkStore(){
+		$path = "./assets/uploads/";
+		$this->load->model('Prework');
+
+		$prework['name'] = $this->input->post('name');
+		$prework['company_id'] = $this->input->post('company_id');
+		$prework['user_id'] = $this->session->userdata('id');
+		$prework['to'] = 'staff';
+
+		$prework = $this->Prework->insert_id($prework);
+
+        $data = [];
+   
+		$count = count($_FILES['files']['name']);
+		
+		for($i=0;$i<$count;$i++){
+		
+			if(!empty($_FILES['files']['name'][$i])){
+		
+				$_FILES['file']['name'] = $_FILES['files']['name'][$i];
+				$_FILES['file']['type'] = $_FILES['files']['type'][$i];
+				$_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+				$_FILES['file']['error'] = $_FILES['files']['error'][$i];
+				$_FILES['file']['size'] = $_FILES['files']['size'][$i];
+		
+				$config['upload_path'] = $path; 
+				$config['allowed_types'] = 'jpg|jpeg|png|gif|mp4|3gp|pdf|xls|csv';
+				$config['max_size'] = '10000';
+				$config['encrypt_name'] = TRUE; 
+		
+				$this->load->library('upload', $config); 
+			
+				if($this->upload->do_upload('file')){
+					$uploadData = $this->upload->data();
+					$filename = $uploadData['file_name'];
+					$data['totalFiles'][] = $filename;
+
+					$file_upload['path'] = $path . $filename ;
+					$file_upload['extension'] = pathinfo($filename, PATHINFO_EXTENSION);
+					$file_upload['created_at'] = date('Y-m-d h:i:s');
+					$file_upload['prework_id'] = $prework;
+
+					$this->load->model('file_upload');
+					$this->file_upload->insert($file_upload);
+				}
+			}
+	
+		}
+		$this->session->set_flashdata('success', "Berhasil menambahkan materi ke coachee");
+		echo true;
+	}
+
+	public function vApprove()
+	{	
+		$data['coachee'] = $this->db->where('coachee.coach_id', $this->session->userdata('id'))
+			->join('tugas', 'coachee.id = tugas.user_id')
+			->where('approve', '0')
+			->select('tugas.id, coachee.email, coachee.name')
+			->get('coachee')
+			->result();
+
+
+		$this->load->view('coach/vApprove', $data);
+	}
+
+	public function file_tugas($tugasId)
+	{
+		$data['files'] = $this->db->join('file_upload', 'tugas.id = file_upload.prework_id',)
+			->where('approve', '0')
+			->get('tugas')
+			->result();
+			
+		$this->load->view('coach/tugas_show', $data);	
+	}
+
+	public function Approve ($tugasId)
+	{
+		$this->db->set('approve', '1')->where('id', $tugasId)->update('tugas');
+		$this->session->set_flashdata('success', "Berhasil approve tugas");
+
+		redirect('coach/tugas');
 	}
 }
 

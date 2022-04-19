@@ -208,9 +208,13 @@ class CoachModel extends CI_Model
 		return $this->db->where($where)->get('milestone')->num_rows();
 	}
 
-	public function getCompany()
+	public function getCompany($companyId = false)
 	{
-		return $this->db->get('company')->result();
+		if($companyId){
+			return $this->db->where('id', $companyId)->get('company')->result();
+		}else{
+			return $this->db->get('company')->result();
+		}
 	}
 
 	public function getCompanyByID($CompanyID)

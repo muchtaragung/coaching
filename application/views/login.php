@@ -8,7 +8,7 @@
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="<?= base_url(); ?>assets/jswal/sweetalert2.all.min.js"></script>
+	<script src="<?= base_url(); ?>"></script>
 	<link href="<?= base_url('assets/') ?>css/sb-admin-2.min.css" rel="stylesheet">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">

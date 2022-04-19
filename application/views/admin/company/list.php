@@ -48,7 +48,7 @@
 									</thead>
 									<tbody>
 										<?php $i = 1;
-										foreach ($companies as $company) : ?>
+										foreach ($companies as $key => $company) : ?>
 											<tr>
 												<td><?= $company->id ?></td>
 												<td> <?= $company->name ?> </td>
@@ -56,8 +56,48 @@
 													<a href="<?= site_url('admin/company/edit/') . $company->id ?>" class="btn btn-primary">edit Perusahaan</a>
 													<button onclick=" confirmDelete('<?= site_url('admin/company/delete/') . $company->id ?>')" class="btn btn-danger">Hapus Perusahaan</button>
 													<a href="<?= site_url('admin/coachee/list/') . $company->id ?>" class="btn btn-primary">Lihat Peserta</a>
+													<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPrework<?= $key ?>">Tambah Materi/Prework</button>
+													<a href="<?= site_url('admin/company/tugas/' . $company->id) ?>" class="btn btn-success">Lihat Tugas</a>
 												</td>
 											</tr>
+											<div class="modal fade" id="addPrework<?= $key ?>" tabindex="-1" aria-labelledby="addPreworkLabel" aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<form action="<?= site_url('admincontroller/preworkstore') ?>" method="post">
+														<input type="hidden" name="company_id" value="<?= $company->id ?>">
+															<div class="modal-header">
+																<h5 class="modal-title" id="addPreworkLabel">Prework</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body">
+																<div class="form-group">
+																	<label for="name">Judul</label>
+																	<input type="text" name="name" id="name" class="form-control" required>
+																</div>
+																<div id="file-wrapper">
+																	<div class="form-group">
+																		<label for="">File</label>
+																		<input type="file" class="form-control-file" name="files[]" id="files" multiple required>
+																	</div>
+																</div>
+																<div class="form-group">
+																	<label for="">To</label>
+																	<select name="to" id="" required>
+																		<option value="all">Semua</option>
+																		<option value="manager" selected>Manager</option>
+																		<option value="staff">Staff</option>
+																	</select>
+																</div>
+															</div>
+															<div class="modal-footer">
+																<button type="submit" class="btn btn-success" id="submitPrework">Submit</button>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
 										<?php endforeach ?>
 									</tbody>
 								</table>
@@ -103,7 +143,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-primary" type="submit">Submit</button>
+						<button class="btn btn-primary" type="submit" id="submit">Submit</button>
 					</div>
 				</form>
 			</div>
@@ -121,6 +161,31 @@
 	<?php endif ?>
 
 	<script>
+		$('form').submit(function(){
+            event.preventDefault();
+            const data = new FormData(this);
+            $.ajax({
+                url: $(this).attr('action'),
+				beforeSend: function(){
+					$('#submit').html('Silahkan Tunggu..');
+				},
+                method: 'post',
+                processData:false,
+                contentType:false,
+                cache:false,
+                data,
+                success: function (res){
+                    if(res){
+                        location.reload();
+                    }
+                },
+                error: function(){
+                    Swal.fire('Server Error', '', 'error');
+                }
+
+            })
+        })
+		
 		function confirmDelete(link) {
 			Swal.fire({
 				title: 'Apakah Anda Ingin Menghapus Perusahaan',

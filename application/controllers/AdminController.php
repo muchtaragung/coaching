@@ -198,7 +198,8 @@ class AdminController extends CI_Controller
 
 		$this->session->set_flashdata('company', 'Berhasil Menyimpan Data Perusahaan');
 		$this->AdminModel->saveCompany($company);
-		redirect('admin/company/list', 'refresh');
+
+		echo true;
 	}
 
 	public function deleteCompany($id)
@@ -263,8 +264,10 @@ class AdminController extends CI_Controller
 		$data['coachees']  = $this->AdminModel->getCoacheeByCompanyID($companyID);
 		$data['company']   = $this->AdminModel->getCompanyByID($companyID);
 		$data['companies'] = $this->AdminModel->getAllCompany();
-		$data['coaches']   = $this->AdminModel->getAllCoach();
 
+		
+		$data['coaches']   = $this->AdminModel->getAllCoach($companyID);
+		$data['coachKorpora']   = $this->AdminModel->getAllCoach();
 		$this->load->view('admin/coachee/list', $data);
 	}
 
@@ -299,10 +302,21 @@ class AdminController extends CI_Controller
 			$coachee['name']       = $this->input->post('name');
 			$coachee['email']      = $this->input->post('email');
 			$coachee['password']   = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
-			$coachee['company_id'] = $this->input->post('company_id');
-			$coachee['coach_id']   = $this->input->post('coach_id');
+			$coachee['company_id'] = $this->input->post('id');
+			$coachee['coach_id']   = $this->input->post('manager_coach_id');
+			$coachee['role'] = 'staff';
 
-			$this->session->set_flashdata('coachee', 'Berhasil Menyimpan Data Coachee');
+			if($this->input->post('level') == 'manager'){
+				$coachee['role'] = 'manager';
+				$coachee['coach_id']   = $this->input->post('coach_id');
+				$coach['name']       = $this->input->post('name');
+				$coach['email']      = $this->input->post('email');
+				$coach['password']   = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+				$coach['company_id'] = $this->input->post('id');
+				$this->AdminModel->saveCoach($coach);
+			}
+
+			$this->session->set_flashdata('coachee', 'Berhasil menambah peserta');
 			$this->AdminModel->saveCoachee($coachee);
 			redirect('admin/coachee/list/' . $coachee['company_id'], 'refresh');
 		}
@@ -901,4 +915,79 @@ class AdminController extends CI_Controller
 			}
 		}
 	}
+
+	function preworkStore(){
+		$path = "./assets/uploads/";
+		$this->load->model('Prework');
+
+		$prework['name'] = $this->input->post('name');
+		$prework['company_id'] = $this->input->post('company_id');
+		$prework['to'] = $this->input->post('to');
+		$prework['user_id'] = $this->session->userdata('id');
+
+		$prework = $this->Prework->insert_id($prework);
+
+        $data = [];
+   
+		$count = count($_FILES['files']['name']);
+		
+		for($i=0;$i<$count;$i++){
+		
+			if(!empty($_FILES['files']['name'][$i])){
+		
+				$_FILES['file']['name'] = $_FILES['files']['name'][$i];
+				$_FILES['file']['type'] = $_FILES['files']['type'][$i];
+				$_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+				$_FILES['file']['error'] = $_FILES['files']['error'][$i];
+				$_FILES['file']['size'] = $_FILES['files']['size'][$i];
+		
+				$config['upload_path'] = $path; 
+				$config['allowed_types'] = 'jpg|jpeg|png|gif|mp4|3gp|pdf|xls|csv';
+				$config['max_size'] = '10000';
+				$config['encrypt_name'] = TRUE; 
+		
+				$this->load->library('upload', $config); 
+			
+				if($this->upload->do_upload('file')){
+					$uploadData = $this->upload->data();
+					$filename = $uploadData['file_name'];
+					$data['totalFiles'][] = $filename;
+
+					$file_upload['path'] = $path . $filename ;
+					$file_upload['extension'] = pathinfo($filename, PATHINFO_EXTENSION);
+					$file_upload['created_at'] = date('Y-m-d h:i:s');
+					$file_upload['prework_id'] = $prework;
+
+					$this->load->model('file_upload');
+					$this->file_upload->insert($file_upload);
+				}
+			}
+	
+		}
+		$this->session->set_flashdata('success', "Berhasil menambahkan materi ke coachee");
+		echo true;
+	}
+
+	public function list_tugas_by_company($companyId)
+	{	
+		$data['users'] = $this->db
+			->select('tugas.id, coachee.name, coachee.email, tugas.user_id, coachee.coach_id')
+			->where('coachee.company_id', $companyId)
+			->join('tugas', 'coachee.id = tugas.user_id')
+			->get('coachee')
+			->result();
+
+		$this->load->view('admin/list_tugas', $data);
+	}
+
+	public function list_file($tugasId)
+	{	
+		$data['files'] = $this->db->join('file_upload', 'tugas.id = file_upload.prework_id',)
+			->where('tugas.id', $tugasId)
+			->get('tugas')
+			->result();
+
+
+		$this->load->view('admin/list_file', $data);
+	}	
 }

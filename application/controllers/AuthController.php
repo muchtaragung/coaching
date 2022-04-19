@@ -42,12 +42,17 @@ class AuthController extends CI_Controller
 		if ($coachAuth > 0 && password_verify($password, $coach->password)) {
 
 			$sessionData = array(
-				'login'    => 'coach',
-				'id'       => $coach->id,
-				'name'     => $coach->name,
-				'email'    => $coach->email,
-				'password' => $coach->password,
+				'login'    		=> 'coach',
+				'id'       		=> $coach->id,
+				'company_id'	=> $coach->company_id,
+				'name'     		=> $coach->name,
+				'email'    		=> $coach->email,
+				'password' 		=> $coach->password,
 			);
+
+			if($coacheeAuth > 0){
+				$this->session->set_userdata('switch', true);
+			}
 
 			$this->session->set_userdata($sessionData);
 			$this->session->set_flashdata('status', 'login');
@@ -56,14 +61,17 @@ class AuthController extends CI_Controller
 
 
 			$data_session = array(
-				'login'    => 'coachee',
-				'id'       => $coachee->id,
-				'name'     => $coachee->name,
-				'email'    => $coachee->email,
-				'password' => $coachee->password,
+				'login'    	=> 'coachee',
+				'id'       	=> $coachee->id,
+				'company_id'=> $coachee->company_id,
+				'name'     	=> $coachee->name,
+				'email'    	=> $coachee->email,
+				'password' 	=> $coachee->password,
 			);
+			
 
 			$this->session->set_userdata($data_session);
+
 			$this->session->set_flashdata('status', 'login');
 			redirect(site_url('coachee'));
 		} else {
@@ -234,6 +242,23 @@ class AuthController extends CI_Controller
 			}
 		}
 	}
+
+	public function switch ()
+	{
+		if($this->session->userdata('login')  == 'coach'){
+			$this->session->set_userdata('login', 'coachee'); 
+			$this->session->set_userdata('id', $this->db->select('id')->where('email', $this->session->userdata('email'))->get('coachee')->row()->id);
+			redirect(site_url('coachee'));
+
+		}elseif($this->session->userdata('login')  == 'coachee'){
+			$this->session->set_userdata('login', 'coach');
+			$this->session->set_userdata('id', $this->db->select('id')->where('email', $this->session->userdata('email'))->get('coach')->row()->id);
+			redirect(site_url('coach'));
+		}else{
+			echo 'Anda tidak multirole User';
+		}
+	}
+	
 }
 
 /* End of file AuthController.php */

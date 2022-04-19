@@ -39,6 +39,7 @@
 									<?php echo $this->session->flashdata('error'); ?>
 								</div>
 							<?php } ?>
+							<a href="<?= site_url('pdf') ?>" class="">test pdf</a>
 							<a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addCoachee">Tambah Peserta</a>
 							<a href="" class="btn btn-info float-right mr-2" data-toggle="modal" data-target="#uploadCsv">Upload CSV</a>
 						</div>
@@ -51,6 +52,7 @@
 											<th>Nama</th>
 											<th>email</th>
 											<th>coach</th>
+											<th>Status</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -63,10 +65,11 @@
 												<td><?= $coachee->email ?></td>
 												<td>
 													<?php
-													$coach = $this->db->where('id', $coachee->coach_id)->get('coach')->row();
-													echo $coach->name;
+													$coach = $this->db->where('id', $coachee->coach_id)->get('coach')->row();									
+														echo $coach->name;
 													?>
 												</td>
+												<td><?= $coachee->role ?></td>
 												<td>
 													<a href="<?= site_url('admin/coachee/detail/') . $coachee->id ?>" class="btn btn-primary">Detail Coachee</a>
 												</td>
@@ -125,10 +128,25 @@
 							<input type="password" name="password" id="password" class="form-control" required>
 						</div>
 						<div class="form-group">
+							<label for="level">Level</label>
+							<select name="level" id="level" class="form-control" required>
+								<option value="manager">Manager</option>
+								<option value="staff">Staff</option>
+							</select>
+						</div>
+						<div class="form-group" id="coach_id">
 							<label for="">Coach</label>
-							<select id="select2" name="coach_id" id="" class="form-control" required>
+							<select name="coach_id" class="form-control select2">
+								<?php foreach($coachKorpora as $value): ?>
+									<option value="<?= $value->id ?>"><?= $value->name ?></option>
+								<?php endforeach; ?>
+							</select>
+						</div>
+						<div class="form-group d-none" id="manager_coach_id">
+							<label for="">Manager</label>
+							<select name="manager_coach_id" class="form-control select2">
+								<option disabled selected value=""></option>
 								<?php foreach ($coaches as $coach) : ?>
-									<option disabled selected value=""></option>
 									<option value="<?= $coach->id ?>"><?= $coach->name ?></option>
 								<?php endforeach ?>
 							</select>
@@ -187,7 +205,18 @@
 		</script>
 	<?php endif ?>
 
-
+	<script>
+		$('#level').change(function(){
+			if(this.value == 'staff'){
+				$('#manager_coach_id').removeClass(`d-none`)
+				$('#coach_id').addClass(`d-none`)
+				
+			}else{
+				$('#coach_id').removeClass(`d-none`)
+				$('#manager_coach_id').addClass('d-none');
+			}
+		})
+	</script>
 </body>
 
 </html>

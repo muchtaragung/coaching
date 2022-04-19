@@ -48,9 +48,13 @@ class AdminModel extends CI_Model
 	 * mengambil seluruh data coach
 	 * mengembalikan data dalam bentuk objek
 	 */
-	public function getAllCoach()
-	{
-		return $this->db->get('coach')->result();
+	public function getAllCoach($id = false)
+	{	
+		if(!$id){
+			return $this->db->where('company_id is NULL', NULL, false)->get('coach')->result();
+		}else{
+			return $this->db->where('company_id', $id)->get('coach')->result();
+		}
 	}
 
 	/**

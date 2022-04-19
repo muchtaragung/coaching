@@ -154,6 +154,25 @@ class CoacheeModel extends CI_Model
 	{
 		return $this->db->where('session_id', $sessionID)->get('report')->result();
 	}
+
+	public function prework ($role)
+	{
+		$coach_id = $this->db->select('coach_id')
+			->where('id', $this->session->userdata('id'))
+			->get('coachee')->row()->coach_id;
+
+		return $this->db->where_in('to', [$role, 'all'])
+			->where('company_id', $this->session->userdata('company_id'))
+			->get('prework')
+			->result();
+	}
+
+	public function filePrework($id)
+	{
+		return $this->db->where('prework_id', $id)->get('file_upload')->result();
+	}
+
+	 
 }
 
 /* End of file CoacheeModel.php */

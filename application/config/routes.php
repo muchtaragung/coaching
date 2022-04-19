@@ -60,6 +60,10 @@ $route['logout'] = 'AuthController/logout';
 
 // coach routes
 $route['coach']                                   = 'CoachController';
+$route['coach/prework']                           = 'CoachController/prework';
+$route['coach/tugas']                             = 'CoachController/vApprove';
+$route['coach/tugas/(:num)']                      = 'CoachController/file_tugas/$1';
+$route['coach/tugas/(:num)/approve']              = 'CoachController/approve/$1';
 $route['coach/addcoachee']                        = 'CoachController/addCoachee';
 $route['coach/coachee/list/(:num)']               = 'CoachController/showCoacheeByCompanyID/$1';
 $route['coach/coachee/show/(:num)']               = 'CoachController/detailCoachee/$1';
@@ -107,6 +111,8 @@ $route['coach/coachee/update-action'] = 'CoachController/updateAction';
 
 // coachee routes
 $route['coachee']                 = 'CoacheeController';
+$route['coachee/prework']                         = 'CoacheeController/prework';
+$route['coachee/prework/(:num)']                  = 'CoacheeController/list_file/$1';
 
 // goals
 $route['coachee/goals']            = 'CoacheeController/allGoals';
@@ -145,6 +151,8 @@ $route['admin/coach/edit/(:num)']  = 'AdminController/editCoach/$1';
 $route['admin/coach/update']  = 'AdminController/updateCoach';
 
 $route['admin/company/list'] = 'AdminController/companyList';
+$route['admin/company/tugas/(:num)']  = 'AdminController/list_tugas_by_company/$1';
+$route['admin/company/files/(:num)']  = 'AdminController/list_file/$1';
 $route['admin/company/save'] = 'AdminController/saveCompany';
 $route['admin/company/delete/(:num)'] = 'AdminController/deleteCompany/$1';
 $route['admin/company/edit/(:num)'] = 'AdminController/editCompany/$1';

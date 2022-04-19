@@ -268,6 +268,113 @@ class CoacheeController extends CI_Controller
 			}
 		}
 	}
+
+	public function prework ()
+	{	
+
+
+		if ($this->session->userdata('switch')) {
+			$data['preworks'] = $this->CoacheeModel->prework('manager');
+		}else{
+			$data['preworks'] = $this->CoacheeModel->prework('staff');
+		}
+			$data['user'] = $this->db->where('id', $this->session->userdata('id'))->get('coachee')->row();
+		$this->load->view('coachee/prework', $data);
+	}
+
+	public function list_file($preworkId)
+	{
+		$data['files'] = $this->CoacheeModel->filePrework($preworkId);
+
+		$this->load->view('coachee/prework_show', $data);
+	
+	}
+
+	public function submitTugas ()
+	{	
+		$path = './assets/uploads/';
+
+		$data['approve'] = '0';
+
+		if($this->session->userdata('switch')){
+			$data['approve'] = '1';
+		}
+		
+		$count = $this->db
+			->where('user_id', $this->session->userdata('id'))
+			->get('penilaian')
+			->result();
+			
+		$countPenilaian = count($count);
+		
+		$data['user_id'] = $this->session->userdata('id');
+		$data['company_id'] = $this->input->post('company_id');
+		$data['prework_id'] = $this->input->post('prework_id');
+		$this->load->model('Prework');
+		$tugas_id = $this->Prework->submitTugas($data);
+
+		$count = count($_FILES['files']['name']);
+		
+		for($i=0; $i < $count; $i++){
+		
+			if(!empty($_FILES['files']['name'][$i])){
+		
+				$_FILES['file']['name'] = $_FILES['files']['name'][$i];
+				$_FILES['file']['type'] = $_FILES['files']['type'][$i];
+				$_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+				$_FILES['file']['error'] = $_FILES['files']['error'][$i];
+				$_FILES['file']['size'] = $_FILES['files']['size'][$i];
+		
+				$config['upload_path'] = $path; 
+				$config['allowed_types'] = 'jpg|jpeg|png|gif|mp4|3gp|pdf|xls|csv';
+				$config['max_size'] = '10000';
+				$config['encrypt_name'] = TRUE; 
+		
+				$this->load->library('upload', $config); 
+			
+				if($this->upload->do_upload('file')){
+					$uploadData = $this->upload->data();
+					$filename = $uploadData['file_name'];
+					$data['totalFiles'][] = $filename;
+
+					$file_upload['path'] = $path . $filename ;
+					$file_upload['extension'] = pathinfo($filename, PATHINFO_EXTENSION);
+					$file_upload['created_at'] = date('Y-m-d h:i:s');
+					$file_upload['prework_id'] = $tugas_id;
+
+					$this->load->model('file_upload');
+					$this->file_upload->insert($file_upload);
+				}
+			}
+	
+		}
+		
+		$countNilai  = $this->db
+			->where('company_id', $this->session->userdata('company_id'))
+			->where('tugas_ke', $countPenilaian+1)
+			->get('penilaian')
+			->result();
+
+		$countNilai = count($countNilai);
+		
+		$nilai = 100 - ($countNilai * 2);
+
+		if($this->db->where('last_submit', date('Y-m-d'))->where('email', $this->session->userdata('email'))->get('coachee')->num_rows() > 0){
+			$nilai = 0;
+		}
+	
+		$this->db->insert('penilaian', [
+			'company_id' => $this->session->userdata('company_id'),
+			'user_id' => $this->session->userdata('id'),
+			'nilai' => $nilai,
+			'tugas_ke' => $countPenilaian+1,
+		]);
+		
+		$this->db->set('last_submit', date('Y-m-d'))->where('id', $this->session->userdata('id'))->update('coachee');
+		
+		$this->session->set_flashdata('success', "Berhasil menambahkan materi ke coachee");
+		echo true;
+	}
 }
 
 /* End of file CoacheeController.php */
